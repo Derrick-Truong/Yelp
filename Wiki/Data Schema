@@ -11,41 +11,42 @@
 | created_at  | datetime  | not null                  |
 | updated-at  | datetime  | not null                  |
 
-## `fauxtweets`
+## `restaurant`
 
 | column name | data type | details               |
 |-------------|-----------|-----------------------|
 | id          | integer   | not null, primary key |
-| content     | string    | not null              |
+| title       | string    | not null              |
+| description | string    | not null              |
+| price       | integer   | not null              |
 | userId      | integer   | not null, foreign key |
 | created_at  | datetime  | not null              |
 | updated-at  | datetime  | not null              |
 
 * `userId` references `users` table
 
-## `fauxcomments`
+## `reviews`
 
 | column name   | data type | details               |
 |---------------|-----------|-----------------------|
 | id            | integer   | not null, primary key |
 | content       | string    | not null              |
 | userId        | integer   | not null, foreign key |
-| fauxCommentId | integer   | not null, foreign key |
+| restaurantId | integer   | not null, foreign key |
 | created_at    | datetime  | not null              |
 | updated-at    | datetime  | not null              |
 
 * `userId` references `users` table
-* `fauxCommentId` references `fauxcomments` table
+* `restaurantId` references `restaurant` table
 
-## `fauxlikes`
+## `favorites`
 
 | column name   | data type | details                        |
 |---------------|-----------|--------------------------------|
 | id            | integer   | not null, primary key          |
 | userId        | integer   | not null, indexed, foreign key |
-| fauxTweetId   | integer   | indexed, foreign key           |
-| fauxCommentId | integer   | indexed, foreign key           |
+| restaurantsId | integer   | indexed, foreign key           |
 
 * `userId` references `users` table
-* `fauxTweetId` references `fauxtweets` table
-* `fauxCommentId` references `fauxcomments` table
+* `restaurantsId` references `restaurant` table
+
