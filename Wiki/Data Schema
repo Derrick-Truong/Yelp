@@ -1,26 +1,51 @@
-Table Users {
-  id int [PK]
-  user_profile_pic string
-  username string
-  password string
-  created_at datetime
-  updated_at datetime
-}
+# **Database Schema**
 
-Table Business {
-  id int [PK]
-  user_id int
-  title string
-  avg_rating int
-  description string
-  created_at datetime
-  updated_at datetime
-}
+## 'users
 
+| column name | data type | details                   |
+|-------------|-----------|---------------------------|
+| id          | integer   | not null, primary key     |
+| username    | string    | not null, unique          |
+| email       | string    | not null, indexed, unique |
+| password    | string    | not null                  |
+| created_at  | datetime  | not null                  |
+| updated-at  | datetime  | not null                  |
 
-Table Reviews {
-id int [PK]
-user_id int
-description string
-rating int
-}
+## `fauxtweets`
+
+| column name | data type | details               |
+|-------------|-----------|-----------------------|
+| id          | integer   | not null, primary key |
+| content     | string    | not null              |
+| userId      | integer   | not null, foreign key |
+| created_at  | datetime  | not null              |
+| updated-at  | datetime  | not null              |
+
+* `userId` references `users` table
+
+## `fauxcomments`
+
+| column name   | data type | details               |
+|---------------|-----------|-----------------------|
+| id            | integer   | not null, primary key |
+| content       | string    | not null              |
+| userId        | integer   | not null, foreign key |
+| fauxCommentId | integer   | not null, foreign key |
+| created_at    | datetime  | not null              |
+| updated-at    | datetime  | not null              |
+
+* `userId` references `users` table
+* `fauxCommentId` references `fauxcomments` table
+
+## `fauxlikes`
+
+| column name   | data type | details                        |
+|---------------|-----------|--------------------------------|
+| id            | integer   | not null, primary key          |
+| userId        | integer   | not null, indexed, foreign key |
+| fauxTweetId   | integer   | indexed, foreign key           |
+| fauxCommentId | integer   | indexed, foreign key           |
+
+* `userId` references `users` table
+* `fauxTweetId` references `fauxtweets` table
+* `fauxCommentId` references `fauxcomments` table
