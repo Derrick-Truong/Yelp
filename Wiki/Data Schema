@@ -1,0 +1,26 @@
+Table Users {
+  id int [PK]
+  user_profile_pic string
+  username string
+  password string
+  created_at datetime
+  updated_at datetime
+}
+
+Table Business {
+  id int [PK]
+  user_id int
+  title string
+  avg_rating int
+  description string
+  created_at datetime
+  updated_at datetime
+}
+
+
+Table Reviews {
+id int [PK]
+user_id int
+description string
+rating int
+}
