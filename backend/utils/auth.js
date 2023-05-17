@@ -1,4 +1,3 @@
-// backend/utils/auth.js
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
@@ -36,7 +35,6 @@ const restoreUser = (req, res, next) => {
     // token parsed from cookies
     const { token } = req.cookies;
     req.user = null;
-
     return jwt.verify(token, secret, null, async (err, jwtPayload) => {
         if (err) {
             return next();

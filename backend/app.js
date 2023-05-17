@@ -6,10 +6,17 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
+// backend/app.js
+const routes = require('./routes');
+
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
+
+// ...
+
+
 
 app.use(morgan('dev'));
 
@@ -40,17 +47,12 @@ app.use(
     })
 );
 
-
-// backend/app.js
-const routes = require('./routes');
-
-// ...
-
-app.use(routes); // Connect all the routes
+app.use(routes);
 
 // backend/app.js
 // ...
 // Catch unhandled requests and forward to error handler.
+ // Connect all the routes
 app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
     err.title = "Resource Not Found";

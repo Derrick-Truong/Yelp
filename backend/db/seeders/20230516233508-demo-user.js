@@ -1,5 +1,6 @@
 'use strict';
 
+const bcrypt = require("bcryptjs");
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
@@ -12,17 +13,17 @@ module.exports = {
       {
         email: 'demo@user.io',
         username: 'Demo',
-        password: 'password'
+        hashedPassword: bcrypt.hashSync('password')
       },
       {
         email: 'Kisha@user.io',
         username: 'Kisha',
-        password: 'password'
+        hashedPassword: bcrypt.hashSync('password')
       },
       {
         email: 'Derrick@user.io',
         username: 'Derrick',
-        password: 'password'
+        hashedPassword: bcrypt.hashSync('password')
       }
     ], {});
   },

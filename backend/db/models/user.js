@@ -1,6 +1,6 @@
 'use strict';
 const { Model, Validator } = require('sequelize');
-
+const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -33,15 +33,12 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true
       }
     },
-    password: {
-      type:DataTypes.STRING,
+    hashedPassword: {
+      type: DataTypes.STRING.BINARY,
       allowNull: false,
       validate: {
         len: [5, 60]
       },
-
-
-
 
     }
   }, {
@@ -49,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: "User",
     defaultScope: {
       attributes: {
-        exclude: ["password", "email", "createdAt", "updatedAt"]
+        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
       }
     }
   });
