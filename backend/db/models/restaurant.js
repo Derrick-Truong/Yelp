@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: 'restaurantId', onDelete: 'CASCADE', hooks: true }
       );
 
+      Restaurant.hasMany(
+        models.Review,
+        { foreignKey: 'restaurantId', onDelete: 'CASCADE', hooks: true }
+      );
+
       Restaurant.belongsTo(
         models.User,
         {
