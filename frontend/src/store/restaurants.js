@@ -1,14 +1,15 @@
 import { csrfFetch } from "./csrf";
 
 
-const ALL_RESTAURANTS = 'restaurants/ALL_RESTAURANTS';
+const ALL_RESTAURANTS = 'restaurants/allRestaurants';
 
 
-export const allRestaurants = restaurants => ({
+const homeRestaurants = (restaurants) => {
+return {
     type: ALL_RESTAURANTS,
     restaurants
-
-});
+}
+}
 
 
 
@@ -18,7 +19,7 @@ export const getRestaurants = () => async dispatch => {
     if (response.ok) {
         const list = await response.json();
 
-        dispatch(allRestaurants(list))
+        dispatch(homeRestaurants(list))
     }
 };
 
@@ -32,7 +33,7 @@ const restaurantReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case ALL_RESTAURANTS:
             newState = {}
-            action.restaurants.forEach(restaurant => {
+            action.restaurants.Restaurants.forEach(restaurant => {
                 newState[restaurant.id] = restaurant
             })
             return newState;
