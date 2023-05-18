@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
+const { sequelize, Op } = require('sequelize')
 const {Favorite, Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models')
 
 router.get('/', async (req, res, next) => {
 
     let restaurants = await Restaurant.findAll({
-       
+
         include: [
             {
                 model: Review
@@ -46,6 +47,6 @@ router.get('/', async (req, res, next) => {
     });
 
 
-    res.json({Restaurants })
+    res.json({Restaurants})
 })
 module.exports = router;

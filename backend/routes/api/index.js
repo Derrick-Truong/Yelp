@@ -5,6 +5,7 @@ const router = require('express').Router();
 
 const { restoreUser } = require("../../utils/auth.js");
 const { User } = require('../../db/models')
+const { Restaurant } = require('../../db/models')
 router.use(restoreUser);
 
 const sessionRouter = require('./session.js');
@@ -16,7 +17,7 @@ const { requireAuth } = require('../../utils/auth.js');
 const { setTokenCookie } = require('../../utils/auth.js');
 
 
-router.use('/restaurant', restaurantsRouter)
+router.use('/restaurants', restaurantsRouter)
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
