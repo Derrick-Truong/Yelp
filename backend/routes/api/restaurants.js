@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
+const { check } = require('express-validator');
+const { handleValidationErrors, validateRestaurant } = require('../../utils/validation.js')
 const { sequelize, Op } = require('sequelize')
 const {Favorite, Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models')
 
@@ -49,4 +51,14 @@ router.get('/', async (req, res, next) => {
 
     res.json({Restaurants})
 })
+
+router.post('/', [requireAuth, validateRestaurant],
+    async (req, res, next) => {
+        
+    }
+
+
+
+
+)
 module.exports = router;

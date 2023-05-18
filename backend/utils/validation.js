@@ -21,6 +21,40 @@ const handleValidationErrors = (req, _res, next) => {
     next();
 };
 
-module.exports = {
+const validateRestaurant = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Street address is required"),
+    check('city')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("City is required"),
+    check('state')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("State is required"),
+    check('country')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Country is required"),
+    check('title')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Title is required")
+        .isLength({ max: 49})
+        .withMessage("Title must be less than 50 characters"),
+    check('description')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Description is required"),
+    check('price')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Price per day is required"),
     handleValidationErrors
+];
+
+module.exports = {
+    handleValidationErrors, validateRestaurant
 };
