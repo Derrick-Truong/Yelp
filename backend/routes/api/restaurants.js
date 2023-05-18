@@ -54,7 +54,18 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', [requireAuth, validateRestaurant],
     async (req, res, next) => {
-        
+        const {address, city, state, description, title, price} = req.body;
+
+
+        const newRestaurant = await Restaurant.create({
+            userId: req.user.id,
+            country,
+            city,
+            address,
+            title,
+            description,
+            price
+        })
     }
 
 
