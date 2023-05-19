@@ -5,6 +5,7 @@ import LoginFormModal from "./components/User/LoginFormModal";
 import AllRestaurants from "./components/Restaurant/AllRestaurants";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import CreateRestaurant from "./components/Restaurant/CreateRestaurant";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <AllRestaurants/>
+        </Route>
+        <Route exact path="/create">
+          <CreateRestaurant/>
         </Route>
       </Switch>
     )

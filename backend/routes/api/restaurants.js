@@ -63,10 +63,9 @@ router.get('/', async (req, res, next) => {
 })
 
 //Create a Restaurant
-router.post('/', [validateRestaurant],
+router.post('/', [requireAuth, validateRestaurant],
     async (req, res, next) => {
         const {address, city, state, description, country, title, price} = req.body;
-
 
         const newRestaurant = await Restaurant.create({
             userId: req?.user?.id,
@@ -119,13 +118,65 @@ let newImage = await Restaurant.findOne({
 
 //Edit Restaurant
 router.put('/:id', requireAuth, validateRestaurant, async (req, res, next) => {
-    let editSpot = await Restaurant.findOne({
+    let editRestaurant = await Restaurant.findOne({
         where: {
-            
+            id: req.params.id
         }
     })
+    if (!editRestaurant) {
+        res.status(404);
+        return res.json({
+            message: "Restaurant couldn't be found",
+        })
+    }
+
+    if (editRestaurant.userId !== req.user.id) {
+        res.status(403);
+        return res.json({
+            message: "Forbidden/not allowed",
+        })
+    }
+    const { address, city, state, country, title, description, price } = req.body;
+
+    editRestaurant.update({
+        address,
+        city,
+        state,
+        country,
+        title,
+        description,
+        price
+    })
+    res.json(editRestaurant)
 })
 
+router.delete('/:id', requireAuth, async (req, res, next) => {
+    let deleteRestaurant = await Restaurant.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+
+    if (!deleteRestaurant) {
+        res.status(404);
+        return res.json({
+            message: "Restaurant couldn't be found",
+        })
+    }
+
+    if (deleteRestaurant.userId !== req.user.id) {
+        res.status(403);
+        return res.json({
+            message: "Forbidden/not allowed",
+        })
+    }
+
+    await deleteRestaurant.destroy()
+    res.json({
+        message: "Successfully deleted",
+        status: 200
+    })
+})
 
 
 module.exports = router;

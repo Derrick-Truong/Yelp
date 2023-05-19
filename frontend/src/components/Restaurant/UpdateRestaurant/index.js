@@ -1,0 +1,6 @@
+
+
+
+const UpdateRestaurant = ({restaurant}) => {
+
+}

@@ -4,38 +4,36 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../Context/Modal";
 import { useSelector } from "react-redux";
 import "./LoginFormModal.css";
+import * as sessionActions from "../../../store/session"
 import SignupFormModal from "../SignupFormModal";
 import OpenModalButton from "../../../OpenModalButton";
 
 
 function LoginFormModal() {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
+    const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
     const { closeModal } = useModal();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const data = await dispatch(login(email, password));
-        if (data) {
-            setErrors(data);
-        } else {
-            closeModal();
-        }
+        setErrors([]);
+        return dispatch(sessionActions.login({ credential, password }))
+            .then(closeModal)
+            .catch(
+                async (res) => {
+                    const data = await res?.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
     };
 
     const demoSignIn = async (e) => {
         e.preventDefault();
-        const password = "password"
-        const email = "Derrick"
-        const demoData = await dispatch(login(email, password));
-        if (demoData) {
-            setErrors(demoData);
-        } else {
-            closeModal();
-        }
+
+        return dispatch(sessionActions.login({ credential: "Derrick", password: "password" })).then(closeModal)
     }
 
     return (
@@ -64,7 +62,7 @@ function LoginFormModal() {
                 </video>
             </div> */}
             <div className="log-in-form-below-frog">
-                <h4>Enter your email to log in or register:</h4>
+                <h4>Enter your credential to log in or register:</h4>
                 <form className="form-log-in" onSubmit={handleSubmit}>
                     <ul>
                         {errors.map((error, idx) => (
@@ -72,17 +70,17 @@ function LoginFormModal() {
                         ))}
                     </ul>
                     <label>
-                        <input className="email-and-password-form"
+                        <input className="credential-and-password-form"
                             type="text"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="credential"
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
                             required
                         />
                     </label>
                     <label>
 
-                        <input className="email-and-password-form"
+                        <input className="credential-and-password-form"
                             type="password"
                             placeholder="password"
                             value={password}
