@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: 'restaurantId', onDelete: 'CASCADE', hooks: true }
       );
 
-      Restaurant.belongsTo(
+      Restaurant.belongsToMany(
         models.User,
         {
-          foreignKey: 'userId'
+          through: models.Favorite
         }
       )
       // define association here

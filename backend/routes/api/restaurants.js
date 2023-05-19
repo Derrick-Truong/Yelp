@@ -12,11 +12,15 @@ router.get('/', async (req, res, next) => {
 
         include: [
             {
-                model: Review
+                model: Review,
+                include: {
+                    model:ReviewImage
+                }
             },
             {
                 model: RestaurantImage
-            }
+            },
+
         ]
 
     }
@@ -37,6 +41,9 @@ router.get('/', async (req, res, next) => {
         restaurant.Reviews.forEach(review => {
             i++;
             adder = adder + review.rating
+            if (review.url) {
+        restaurant.Reviews.previewImage = review.url
+            }
         })
         restaurant.avgRating = adder / i;
         restaurant.RestaurantImages.forEach(image => {
@@ -44,6 +51,9 @@ router.get('/', async (req, res, next) => {
                 restaurant.previewImage = image.url
             }
         })
+
+
+
         delete restaurant.Reviews
         delete restaurant.RestaurantImages
     });
@@ -52,24 +62,70 @@ router.get('/', async (req, res, next) => {
     res.json({Restaurants})
 })
 
-router.post('/', [requireAuth, validateRestaurant],
+//Create a Restaurant
+router.post('/', [validateRestaurant],
     async (req, res, next) => {
-        const {address, city, state, description, title, price} = req.body;
+        const {address, city, state, description, country, title, price} = req.body;
 
 
         const newRestaurant = await Restaurant.create({
-            userId: req.user.id,
+            userId: req?.user?.id,
             country,
             city,
             address,
             title,
             description,
-            price
+            price,
+            state
         })
+
+        res.json(newRestaurant)
     }
 
 
-
-
 )
+
+//Create an Image for a Restaurant
+router.post('/:id/pictures', requireAuth, async(req,res, next) => {
+let picture;
+const {url, preview} = req.body
+let newImage = await Restaurant.findOne({
+    where: {
+        id: req.params.id
+    }
+})
+
+ if (!newImage) {
+    res.status(404);
+    return res.json({
+        message:"Restaurant could not be found"
+    })
+ }
+
+ if (newImage.userId !== req.user.id) {
+     res.status(403);
+     return res.json({
+         message: "Forbidden/not allowed"
+     })
+ }
+ picture = await newImage.createRestaurantImage({
+    restaurantId: req.user.id,
+    url,
+    preview
+ })
+ res.json(picture)
+})
+
+
+//Edit Restaurant
+router.put('/:id', requireAuth, validateRestaurant, async (req, res, next) => {
+    let editSpot = await Restaurant.findOne({
+        where: {
+            
+        }
+    })
+})
+
+
+
 module.exports = router;

@@ -11,7 +11,7 @@ import './AllRestaurants.css'
 const AllRestaurants = () => {
 const restaurants = useSelector(state => state?.restaurants)
 const restaurantsValues = Object?.values(restaurants)
-console.log('Restaurants', restaurants)
+
 const dispatch = useDispatch()
 
 useEffect(() => {

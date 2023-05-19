@@ -12,7 +12,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      
+
     },
       userId: {
       type: Sequelize.INTEGER,
@@ -27,7 +27,8 @@ module.exports = {
       references: {
         model: 'Restaurants',
         key: 'id'
-        }
+        },
+         onDelete: "CASCADE"
       },
       createdAt: {
         allowNull: false,
