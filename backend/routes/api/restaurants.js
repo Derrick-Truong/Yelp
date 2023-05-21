@@ -18,7 +18,8 @@ router.get('/', async (req, res, next) => {
                 model: Review,
                 include: [
                     {
-                    model:ReviewImage
+                    model:ReviewImage,
+                    attributes:['id', 'url']
                     },
                     {
                     model:User,
