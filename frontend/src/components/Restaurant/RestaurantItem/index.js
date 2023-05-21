@@ -80,9 +80,6 @@ const RestaurantItem = ({restaurant}) => {
                                                     <span>{review?.description}</span>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
                                     </div>
                                 </li>
