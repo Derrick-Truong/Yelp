@@ -5,22 +5,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import OpenModalButton from '../../../OpenModalButton';
+import { getReviews } from '../../../store/review';
+import { useParams } from 'react-router-dom';
 
 
 
 
 
 
-const RestaurantItem = ({ restaurant }) => {
+const RestaurantItem = ({restaurant}) => {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state?.session?.user)
 
+
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
     };
+
     useEffect(() => {
         if (!showMenu) return;
 
@@ -33,7 +37,7 @@ const RestaurantItem = ({ restaurant }) => {
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
-    }, [dispatch, showMenu]);
+    }, [showMenu]);
 
 
     const ulClassNameUpdateDelete = "list-for-update-delete" + (showMenu ? "" : " hidden");
@@ -62,19 +66,18 @@ const RestaurantItem = ({ restaurant }) => {
             </div>
             <div className="dropdown m-10">
                 <ul className={ulClassNameUpdateDelete} ref={ulRef}>
-                    {restaurant?.comments?.length ?
+                    {restaurant?.Reviews?.length ?
 
-                        restaurant?.comments?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((comment) => {
+                        restaurant?.Reviews?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
 
                             return (
-                                <li key={comment.id}>
+                                <li key={review.id}>
                                     <div className="list-for-update-delete">
                                         <div className="trash-comment">
                                             <div className="comment-text-bubble">
-                                                <span className="comment-owner">{comment.owner.username}</span>
+                                                <span className="comment-owner">{review.User.username}</span>
                                                 <div className="the-comments-commented">
-
-                                                    <span>{comment?.content}</span>
+                                                    <span>{review?.description}</span>
                                                 </div>
                                             </div>
 

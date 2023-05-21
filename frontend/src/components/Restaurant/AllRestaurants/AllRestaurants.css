@@ -1,3 +1,6 @@
-z#root {
-    background-color: #ee5fcd;
+.All-Restaurants-Feed {
+max-width: 600px;
+    margin: 0 auto;
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(244, 225, 194);
 }

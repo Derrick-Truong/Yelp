@@ -7,15 +7,17 @@
     height: 85px;
     position: sticky;
     box-sizing: border-box;
-    top: 0px;
-    background-color: white;
-    border-bottom: 1px solid rgba(165, 165, 165, 0.2);
-    border-top: 1px solid rgba(165, 165, 165, 0.2);
-    margin-left: 0px;
+    /* top: 0px; */
+    background-color: rgb(206, 122, 122);
+    border: 1px solid rgb(206, 122, 122);
+    border-radius: 70px;
+
+    /* border-bottom: 1px solid rgba(165, 165, 165, 0.2); */
+    /* border-top: 1px solid rgba(165, 165, 165, 0.2); */
+    /* margin-left: 0px;
     margin-right: 0px;
     margin-top: 0px;
-    margin-bottom: 0px;
-    padding: 3px 20px;
+    margin-bottom: 0px; */
 }
 
 .nav-innerdiv {

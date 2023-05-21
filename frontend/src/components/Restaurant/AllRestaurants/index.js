@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getRestaurants } from '../../../store/restaurants'
+import { getReviews } from '../../../store/review'
 import RestaurantItem from '../RestaurantItem'
 import './AllRestaurants.css'
 
@@ -21,11 +22,13 @@ dispatch(getRestaurants())
 
     return (
         <>
+    <div className = 'All-Restaurants-Feed'>
        {restaurantsValues?.map(restaurant =>
         <li key={restaurant?.id} className="restaurant">
             <RestaurantItem restaurant={restaurant}/>
         </li>
        )}
+     </div>
         </>
     )
 }

@@ -6,6 +6,9 @@ const { handleValidationErrors, validateRestaurant } = require('../../utils/vali
 const { sequelize, Op } = require('sequelize')
 const {Favorite, Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models')
 
+
+
+//Get all Restaurants
 router.get('/', async (req, res, next) => {
 
     let restaurants = await Restaurant.findAll({
@@ -13,9 +16,15 @@ router.get('/', async (req, res, next) => {
         include: [
             {
                 model: Review,
-                include: {
+                include: [
+                    {
                     model:ReviewImage
-                }
+                    },
+                    {
+                    model:User,
+                    attributes:['id', 'username']
+                    }
+                ]
             },
             {
                 model: RestaurantImage
@@ -26,8 +35,9 @@ router.get('/', async (req, res, next) => {
     }
     )
     if (!restaurants) {
+        res.status(404);
         return res.json({
-
+            message: "Restaurant couldn't be found",
         })
     }
     let Restaurants = [];
@@ -41,8 +51,8 @@ router.get('/', async (req, res, next) => {
         restaurant.Reviews.forEach(review => {
             i++;
             adder = adder + review.rating
-            if (review.url) {
-        restaurant.Reviews.previewImage = review.url
+            if (review.ReviewImage.url) {
+        restaurant.Reviews.previewImage = review.ReviewImage.url
             }
         })
         restaurant.avgRating = adder / i;
@@ -54,7 +64,7 @@ router.get('/', async (req, res, next) => {
 
 
 
-        delete restaurant.Reviews
+
         delete restaurant.RestaurantImages
     });
 
@@ -176,6 +186,85 @@ router.delete('/:id', requireAuth, async (req, res, next) => {
         message: "Successfully deleted",
         status: 200
     })
+})
+
+
+//Get reviews for a Restaurant
+
+router.get('/:id/reviews', async(req, res, next) => {
+    let restaurant = await Restaurant.findOne({
+        where: {
+            id: req.params.id
+        }
+
+    })
+
+    if (!restaurant) {
+        return res.json({
+            message: "Restaurant couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    let reviewList = await Review.findAll({
+        where: {
+            restaurantId: req.params.id
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'username']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    })
+
+    let Reviews = []
+    reviewList.forEach(review => {
+        Reviews.push(review.toJSON())
+    })
+
+    res.json({Reviews})
+})
+
+router.post('/:id/reviews', requireAuth, async(req, res, next) => {
+    const {rating, description} = req.body
+    let restaurant = await Restaurant.findOne({
+        where: {
+            id: req.params.id
+        }
+
+    })
+
+    if (!restaurant) {
+        return res.json({
+            message: "Restaurant couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    if (restaurant.userId === req.user.id) {
+        return res.json({
+            message: "Owners cannot write review on his/her own restaurant",
+            statusCode: 403
+        })
+    }
+
+
+    const createReview = await restaurant.createReview({
+        rating: rating,
+        description: description,
+        userId: req.user.id,
+        restaurantId: req.params.id
+
+    })
+
+    res.json(createReview)
+
+
 })
 
 

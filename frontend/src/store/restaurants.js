@@ -97,7 +97,7 @@ export const createRestaurant = (restaurant, restaurantPictures) => async dispat
 
 export const removeRestaurant = (restaurantId) => async dispatch => {
     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
-        method: 'POST',
+        method: 'DELETE',
     })
     if (res.ok) {
         dispatch(deleteRestaurant(restaurantId));

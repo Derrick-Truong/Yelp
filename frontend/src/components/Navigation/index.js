@@ -10,7 +10,6 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state?.session?.user);
-
     return (
         <div className='navigation-bar'>
             <div className='nav-innerdiv'>
@@ -19,22 +18,15 @@ function Navigation({ isLoaded }) {
                         <img src={please} height="60px" width="80px" alt="DrBnb"/>
                     </a> */}
                 </div>
-                <div className='navigation-bar-default'>
                     {isLoaded && (
-                        <div className='right-nav-div'>
                             <div className='right-nav-div'>
-
                                 <div className='profile-button'>
                                     <ProfileButton user={sessionUser} />
                                 </div>
                             </div>
-                        </div>
                     )}
-                </div>
-
             </div>
         </div>
-
     );
 
 }

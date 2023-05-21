@@ -1,7 +1,4 @@
-.profile-button-container {
-    display: flex;
-    align-items: center;
-}
+
 
 .profile-button {
     display: flex;
@@ -78,13 +75,14 @@
     background-color: #bbb;
 }
 
-.button-container {
+.profile-button-container {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 1000px;
     height: 30px;
-    background-color: rgb(212, 212, 228);
+    background-color: rgb(244, 225, 194);
     color: white;
     cursor: pointer;
     border-radius: 15px;
