@@ -30,8 +30,9 @@ const CreateReview = ({restaurantId}) => {
         const image = {
             url: url
         }
-        dispatch(createOneReview(review, image, restaurantId)).then(closeModal)
-
+        dispatch(createOneReview(review, image, restaurantId))
+        // dispatch(getReviews(restaurantId))
+        closeModal()
         // dispatch(getReviews(restaurantId))
 
     }

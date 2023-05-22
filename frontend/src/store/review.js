@@ -89,11 +89,13 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
             body: JSON.stringify(reviewImage)
         })
         response2['ReviewImages'] = []
-        if (successImage) {
-            response2.previewImage = reviewImage
+        if (successImage.ok) {
+            let newImage = await successImage.json()
+            response2.previewImage = newImage
         }
 
-        dispatch(createReview(response2))
+       await dispatch(createReview(response2))
+       return response2
 
     }
 

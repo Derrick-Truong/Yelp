@@ -41,7 +41,10 @@ router.post('/:id/pictures', requireAuth, async(req, res, next) => {
         where: {
             id: req.params.id
         },
-      
+        include:{
+            model:ReviewImage
+        }
+
     })
 
     if (!findReview) {
@@ -62,11 +65,13 @@ router.post('/:id/pictures', requireAuth, async(req, res, next) => {
         })
     }
 
-    let success = findReview.createReviewImage({
+    let success = await findReview.createReviewImage({
         reviewId: findReview.id,
         url: url
     })
-    res.json(success)
+    res.json({
+        success
+    })
 })
 
 router.delete('/:id', requireAuth, async(req, res, next) => {

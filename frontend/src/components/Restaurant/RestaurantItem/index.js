@@ -41,7 +41,7 @@ const RestaurantItem = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurantId)])
+    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(reviews)])
     // useEffect(() => {
     //     if (!showMenu) return;
 
@@ -86,7 +86,7 @@ const RestaurantItem = () => {
                 <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
             </div>
             <div className="dropdown m-10">
-                <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurant={restaurant?.id}/>}/>
+                <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurant?.id}/>}/>
                 {reviews.length ?
 
                     reviews.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
