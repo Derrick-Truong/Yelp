@@ -64,6 +64,7 @@ const RestaurantItem = () => {
         <div className='restaurant-item-content'>
             <div className="restaurant-title-header">
                 <h4 className="restaurant-item-restaurantTitle">{restaurant?.title}</h4>
+                <OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant}/>}/>
             </div>
             <div className='restaurant-item-images-container'>
                 <div>

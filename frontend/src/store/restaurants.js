@@ -62,7 +62,7 @@ export const restaurantDetails = (restaurantId) => async dispatch => {
         dispatch(getRestaurantDetails(res))
     }
 }
-export const updatedRestaurant = (restaurant, restaurantId) => async (dispatch) => {
+export const updateOneRestaurant = (restaurant, restaurantId) => async (dispatch) => {
     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

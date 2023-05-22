@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import { updateOneRestaurant } from "../../../store/restaurants";
+import { useModal } from "../../../Context/Modal";
 
 
 const UpdateRestaurant = ({restaurant}) => {
+    const {closeModal} = useModal()
     const restaurantId = restaurant?.id
     const history = useHistory();
     const dispatch = useDispatch();
@@ -12,7 +15,7 @@ const UpdateRestaurant = ({restaurant}) => {
     const [country, setCountry] = useState(restaurant?.country);
     const [title, setTitle] = useState(restaurant?.title);
     const [address, setAddress] = useState(restaurant?.address);
-    const [previewImage, setPreviewImage] = useState(restaurant?.previewImage);
+    const [previewImage, setPreviewImage] = useState(restaurant?.RestaurantImages[0].url);
     const [description, setDescription] = useState(restaurant?.description);
     const [price, setPrice] = useState(restaurant?.price);
     const [image2Url, setImage2Url] = useState(restaurant?.image2Url);
@@ -43,7 +46,7 @@ const UpdateRestaurant = ({restaurant}) => {
             }
             restaurantImage.push(secondImage)
         }
-
+    dispatch(updateOneRestaurant(newListing, restaurantImage, restaurantId)).then(closeModal)
 
 
 
