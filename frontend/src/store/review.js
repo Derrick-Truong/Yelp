@@ -42,7 +42,34 @@ export const getReviews = (restaurantId) => async dispatch => {
     }
 }
 
+export const updateOneReview = (review, reviewImage, reviewId ) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(review)
+    })
 
+    if (response.ok) {
+        const response2 = await response.json()
+        const successImage = await csrfFetch(`/api/reviews/${reviewId}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(reviewImage)
+        })
+
+        if (successImage) {
+            review.previewImage = reviewImage.url
+        }
+
+        dispatch(updateReview(response2))
+
+        return response2
+    }
+}
 export const createOneReview = (review, reviewImage, restaurantId) => async dispatch => {
     const response = await csrfFetch(`/api/restaurants/${restaurantId}/reviews`, {
         method: 'POST',
@@ -54,30 +81,34 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
 
     if (response.ok) {
         const response2 = await response.json()
-        const successImage = await csrfFetch(`/api/reviews/${review.id}/pictures`, {
+        const successImage = await csrfFetch(`/api/reviews/${response2.id}/pictures`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(reviewImage)
         })
-
+        response2['ReviewImages'] = []
         if (successImage) {
-            review.previewImage = reviewImage.url
+            response2.ReviewImages.push(reviewImage)
         }
 
         dispatch(createReview(response2))
 
-        return response2
     }
-
 
 }
 
+export const deleteOneReview = (reviewId) => async dispatch => {
+const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method:'DELETE'
+})
 
+if (response.ok) {
+    dispatch(deleteReview(reviewId))
+}
 
-
-
+}
 
 
 

@@ -16,6 +16,7 @@ router.get('/', async (req, res, next) => {
         include: [
             {
                 model: Review,
+                attributes:['id', 'description', 'rating'],
                 include: [
                     {
                     model:ReviewImage,
@@ -23,8 +24,9 @@ router.get('/', async (req, res, next) => {
                     },
                     {
                     model:User,
-                    attributes:['id', 'username']
-                    }
+                    attributes:['id', 'username', 'firstName', 'lastName']
+                    },
+
                 ]
             },
             {
@@ -52,9 +54,7 @@ router.get('/', async (req, res, next) => {
         restaurant.Reviews.forEach(review => {
             i++;
             adder = adder + review.rating
-            if (review.ReviewImage.url) {
-        restaurant.Reviews.previewImage = review.ReviewImage.url
-            }
+
         })
         restaurant.avgRating = adder / i;
         restaurant.RestaurantImages.forEach(image => {
@@ -65,13 +65,84 @@ router.get('/', async (req, res, next) => {
 
 
 
-
+        delete restaurant.Reviews
         delete restaurant.RestaurantImages
     });
 
 
     res.json({Restaurants})
 })
+
+
+
+
+
+//get details of a spot
+
+router.get('/:id', async(req, res, next) => {
+    let oneRestaurant = await Restaurant.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [
+            {
+            model:Review,
+            attributes:['id', 'description', 'rating'],
+            include:{
+                model:ReviewImage,
+                attributes:['id', 'url']
+            }
+            },
+            {
+                model:User,
+                attributes:['id', 'firstName', 'lastName', 'username']
+            },
+            {
+                model:RestaurantImage,
+                attributes:['id', 'preview', 'url']
+            }
+        ],
+
+
+        }
+    )
+
+
+
+    if (!oneRestaurant) {
+        return res.json({
+            message: "Restaurant couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    let adder = 0;
+    let restaurantDetails = oneRestaurant.toJSON()
+    restaurantDetails.numReviews = oneRestaurant.Reviews.length
+    restaurantDetails.Reviews.forEach(review => {
+
+        adder = adder + review.rating
+    })
+    restaurantDetails.avgRating = adder / restaurantDetails.numReviews
+    delete restaurantDetails.Reviews
+    if (restaurantDetails.RestaurantImages.length > 1) {
+        if (restaurantDetails.RestaurantImages[0].id !== restaurantDetails.RestaurantImages[1].id) {
+            for (let i = 1; i < restaurantDetails.RestaurantImages.length; i++) {
+                restaurantDetails.RestaurantImages[i].preview = false
+            }
+        }
+    }
+
+
+    res.json(restaurantDetails)
+    }
+
+    )
+
+
+
+
+
 
 //Create a Restaurant
 router.post('/', [requireAuth, validateRestaurant],
@@ -196,7 +267,8 @@ router.get('/:id/reviews', async(req, res, next) => {
     let restaurant = await Restaurant.findOne({
         where: {
             id: req.params.id
-        }
+        },
+
 
     })
 
@@ -214,7 +286,7 @@ router.get('/:id/reviews', async(req, res, next) => {
         include: [
             {
                 model: User,
-                attributes: ['id', 'username']
+                attributes: ['id', 'username', 'firstName', 'lastName']
             },
             {
                 model: ReviewImage,

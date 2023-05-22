@@ -21,6 +21,12 @@ textarea {
     text-align: center;
     color: rgb(6, 6, 6);
 }
+span .fa-solid.fa-thumbs-up{
+    margin-left: -5px;
+}
+.create-review-photo-url-input{
+    width: 29%;
+}
 .create-review-rating{
     display: flex;
     font-size: 40px;
@@ -30,8 +36,26 @@ textarea {
     align-items: center;
 
 }
+.create-review-thumbs-up-down{
+    display: flex;
+    justify-content: center;
+}
 
+.create-review-thumbs-up-down span .fa-solid.fa-thumbs-up{
+  margin-right: 130px;
+  font-size: 50px;
+  cursor:pointer
 
+}
+
+.create-review-thumbs-up-down span .fa-solid.fa-thumbs-down{
+font-size: 50px;
+cursor:pointer;
+}
+.create-review-upload-pic{
+    text-align: center;
+
+}
 /* .fa-solid.fa-ice-cream{
     color: #fff;
 }

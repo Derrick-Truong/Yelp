@@ -3,27 +3,101 @@
 
 .All-Restaurants-Feed {
 display: flex;
-max-width: 600px;
-margin: 0 auto;
+margin: 0px;
+padding: 0px;
 font-family: Helvetica, Arial, sans-serif;
-background-color: rgb(244, 225, 194);
 align-items: center;
+height: 110vh;
 justify-content: center;
 }
-.home-page-restaurant-list{
-
-    padding: 16px;
-}
-.home-page-restaurant {
-margin-bottom: 20px;
 
 
+
+.home-page-restaurant-container {
+display: flex;
+background-color: #E8E0C5;
 }
 
+.home-page-restaurant-card {
+    height: 275px;
+    margin: 27px;
+    overflow: hidden;
 
-
-.all-restaurants-preview-image{
-height: 50%;
-width: 50%
 }
 
+/* .home-page-restaurant-card{
+    height: 300px;
+    margin: 30px;
+    overflow: hidden;
+
+} */
+.all-restaurants-preview-image {
+    height: 275px;
+    width: 192.5px;
+    border-radius: 3px;
+}
+/* .all-restaurants-preview-image {
+    height: 300px;
+    width: 210px;
+    border-radius: 3px;
+} */
+.home-page-restaurant-card-content {
+
+    height: 46px;
+    width: 192.5px;
+    padding: 6px;
+    box-sizing: border-box;
+    position: absolute;
+    background: rgb(27, 27, 27, .5);
+    color: white;
+    bottom: 96.6px;
+
+}
+
+/* .home-page-restaurant-card-content{
+    height: 50px;
+    width: 210px;
+    padding: 6px;
+    box-sizing: border-box;
+    position: absolute;
+    background:rgb(27, 27, 27, .5);
+    color: white;
+    bottom: 105px;
+
+} */
+
+.home-page-restaurant-card:hover{
+    cursor:pointer;
+}
+.home-page-restaurant-card:hover .home-page-restaurant-card-content {
+    height: 110.4px;
+    bottom: 96.6px;
+
+}
+/* .home-page-restaurant-card:hover .home-page-restaurant-card-content{
+    height: 120px;
+    bottom: 105px;
+
+} */
+
+.home-page-restaurant-card-content h3 {
+    margin: 5px;
+    font-size: 17px;
+}
+
+.home-page-restaurant-card-content p {
+    margin: 10px;
+    font-size: 8px;
+    visibility:hidden;
+    opacity: 0;
+}
+
+.home-page-restaurant-card:hover .home-page-restaurant-card-content p{
+    opacity: 1;
+    visibility: visible;
+    font-weight: bold;
+}
+
+.home-page-restaurant-card{
+    cursor: pointer;
+}

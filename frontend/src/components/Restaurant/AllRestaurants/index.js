@@ -10,33 +10,46 @@ import CreateRestaurant from '../CreateRestaurant'
 import OpenModalButton from '../../../OpenModalButton'
 import './AllRestaurants.css'
 import CreateReview from '../../Reviews/CreateReview'
+import { NavLink } from 'react-router-dom'
 
 
 const AllRestaurants = () => {
-const restaurants = useSelector(state => state?.restaurants)
-const restaurantsValues = Object?.values(restaurants)
+    const history = useHistory()
+    const restaurants = useSelector(state => state?.restaurants)
+    const restaurantsValues = Object?.values(restaurants)
 
-const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-useEffect(() => {
-dispatch(getRestaurants())
-}, [dispatch, JSON.stringify(restaurantsValues)])
+    useEffect(() => {
+        dispatch(getRestaurants())
+    }, [dispatch, JSON.stringify(restaurantsValues)])
 
+    const clickSub = (restaurant) => {
+        history.push(`/restaurants/${restaurant?.id}`)
+    }
 
     return (
         <>
-    <div className = 'All-Restaurants-Feed'>
-        <OpenModalButton buttonText='review' modalComponent={<CreateReview/>}/>
-        <div className='home-page-restaurant-list'>
-       {restaurantsValues?.sort((a, b) => b.avgRating - a.rating)?.map(restaurant =>
-       <div>
-       <img className ='all-restaurants-preview-image' src={restaurant?.previewImage} alt='preview-image'/>
-        <h3>{restaurant?.title}</h3>
-        <p>{restaurant?.description}</p>
-        </div>
-       )}
-        </div>
-     </div>
+            <div className='All-Restaurants-Feed'>
+                {restaurantsValues?.sort((a, b) => b.avgRating - a.avgRating)?.map(restaurant => {
+                    return(
+                <nav key={restaurant?.id}>
+                    <NavLink exact to={`/restaurants/${restaurant?.id}`} onClick={() => clickSub(restaurant)}>
+                    <div className='home-page-restaurant-container'>
+                        <span className='home-page-restaurant-card'>
+                            <img className='all-restaurants-preview-image' src={restaurant?.previewImage} alt='preview-image' />
+                            <div className='home-page-restaurant-card-content'>
+                                <h3>{restaurant?.title}</h3>
+                                <p>{restaurant?.description}</p>
+                            </div>
+                        </span>
+                    </div>
+                    </NavLink>
+                    </nav>
+                    )
+                }
+                )}
+            </div>
         </>
     )
 }

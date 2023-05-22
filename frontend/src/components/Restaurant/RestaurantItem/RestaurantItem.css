@@ -3,10 +3,26 @@
 }
 
 
-.restaurant-preview-image{
+.restaurant-photos{
     height: 200px;
     width: 200px;
 }
+
+.restaurant-item-images-container{
+    width: 1000px;
+    display: flex;
+}
+
+/* .restaurant-item-images-container div{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+} */
+
+/* .restaurant-item-images-container div img{
+    width: 100%;
+} */
 
 /* .restaurant-item-content{
     position: relative;

@@ -5,6 +5,7 @@ const ALL_RESTAURANTS = 'restaurants/allRestaurants';
 const CREATE_RESTAURANT = 'restaurants/createRestaurant'
 const UPDATE_RESTAURANT = 'restaurants/updateRestaurants'
 const DELETE_RESTAURANT = 'restaurants/deleteRestaurant'
+const ONE_RESTAURANT = 'restaurants/oneRestaurant'
 
 
 const homeRestaurants = (restaurants) => {
@@ -35,6 +36,12 @@ const createOneRestaurant = (restaurant) => {
     }
 }
 
+const getRestaurantDetails = (restaurant) => {
+    return {
+        type: ONE_RESTAURANT,
+        restaurant
+    }
+}
 
 
 export const getRestaurants = () => async dispatch => {
@@ -46,6 +53,15 @@ export const getRestaurants = () => async dispatch => {
         dispatch(homeRestaurants(list))
     }
 };
+
+export const restaurantDetails = (restaurantId) => async dispatch => {
+    const response = await fetch(`/api/restaurants/${restaurantId}`)
+
+    if (response.ok) {
+        const res = await response.json()
+        dispatch(getRestaurantDetails(res))
+    }
+}
 export const updatedRestaurant = (restaurant, restaurantId) => async (dispatch) => {
     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
         method: 'PUT',
@@ -118,6 +134,10 @@ const restaurantReducer = (prevState = initialState, action) => {
                 newState[restaurant.id] = restaurant
             })
             return newState;
+        case ONE_RESTAURANT:
+            newState = {...prevState}
+            newState[action.restaurant.id] = action.restaurant
+            return newState
          case CREATE_RESTAURANT:
             newState = {...prevState}
             newState[action.restaurant.id] = action.restaurant

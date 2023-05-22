@@ -7,6 +7,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import CreateRestaurant from "./components/Restaurant/CreateRestaurant";
 import CreateReview from "./components/Reviews/CreateReview";
+import RestaurantItem from "./components/Restaurant/RestaurantItem";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +28,9 @@ function App() {
         </Route>
         <Route exact path='/createreview'>
           <CreateReview/>
+        </Route>
+        <Route exact path='/restaurants/:restaurantId'>
+        <RestaurantItem/>
         </Route>
         <Route exact path="/create">
           <CreateRestaurant/>

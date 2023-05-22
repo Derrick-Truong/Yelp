@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         models.Review,
         { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true }
       );
-     
+
       // define association here
     }
   }
@@ -35,6 +35,14 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,

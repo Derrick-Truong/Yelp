@@ -12,6 +12,7 @@ router.get("/api/csrf/restore", (req, res) => {
         'XSRF-Token': csrfToken
     });
 });
+
 // Static routes
 // Serve React build files in production
 if (process.env.NODE_ENV === 'production') {
