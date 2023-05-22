@@ -280,7 +280,8 @@ router.get('/:id/reviews', async(req, res, next) => {
                 attributes: ['id', 'username', 'firstName', 'lastName']
             },
             {
-                model: ReviewImage
+                model: ReviewImage,
+                attributes:['id', 'url']
 
             }
         ]
@@ -290,7 +291,14 @@ router.get('/:id/reviews', async(req, res, next) => {
     reviewList.forEach(review => {
         Reviews.push(review.toJSON())
     })
-
+    Reviews.forEach(review => {
+        review.ReviewImages.forEach(image => {
+            if (image.url) {
+                review.previewImage = image.url
+            }
+        })
+        delete review.ReviewImages
+    })
 
 
     res.json({Reviews})
