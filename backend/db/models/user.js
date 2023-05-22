@@ -9,11 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.belongsToMany(
+      User.hasMany(
         models.Restaurant,
-        {
-          through: models.Favorite
-        }
+        { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true }
       )
       User.hasMany(
         models.Review,

@@ -4,7 +4,7 @@ const { requireAuth } = require('../../utils/auth.js');
 const { check } = require('express-validator');
 const { handleValidationErrors, validateRestaurant } = require('../../utils/validation.js')
 const { sequelize, Op } = require('sequelize')
-const { Favorite, Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models')
+const { Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models')
 
 
 
