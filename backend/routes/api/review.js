@@ -40,7 +40,8 @@ router.post('/:id/pictures', requireAuth, async(req, res, next) => {
     let findReview = await Review.findOne({
         where: {
             id: req.params.id
-        }
+        },
+      
     })
 
     if (!findReview) {
@@ -62,7 +63,7 @@ router.post('/:id/pictures', requireAuth, async(req, res, next) => {
     }
 
     let success = findReview.createReviewImage({
-        reviewId: req.params.id,
+        reviewId: findReview.id,
         url: url
     })
     res.json(success)

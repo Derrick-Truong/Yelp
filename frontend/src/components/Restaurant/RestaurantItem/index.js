@@ -30,7 +30,7 @@ const RestaurantItem = () => {
     const selectRestaurant = useSelector(state => state?.restaurants)
     const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
-    
+
 
 
     const openMenu = () => {
@@ -86,7 +86,7 @@ const RestaurantItem = () => {
                 <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
             </div>
             <div className="dropdown m-10">
-                <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurant?.id}/>}/>
+                <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurant={restaurant?.id}/>}/>
                 {reviews.length ?
 
                     reviews.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {

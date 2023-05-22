@@ -8,6 +8,7 @@ import { getReviews } from "../../../store/review"
 import './CreateReview.css'
 
 const CreateReview = ({restaurantId}) => {
+
     const dispatch = useDispatch()
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState('');
