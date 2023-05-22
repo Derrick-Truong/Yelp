@@ -254,14 +254,7 @@ router.delete('/:id', requireAuth, async (req, res, next) => {
 //Get reviews for a Restaurant
 
 router.get('/:id/reviews', async(req, res, next) => {
-    let restaurant = await Restaurant.findOne({
-        where: {
-            id: req.params.id
-        },
-
-
-
-    })
+    let restaurant = await Restaurant.findByPk(req.params.id)
 
     if (!restaurant) {
         return res.json({
@@ -272,7 +265,7 @@ router.get('/:id/reviews', async(req, res, next) => {
 
     let reviewList = await Review.findAll({
         where: {
-            restaurantId: req.params.id
+            restaurantId: restaurant.id
         },
         include: [
             {
@@ -280,28 +273,30 @@ router.get('/:id/reviews', async(req, res, next) => {
                 attributes: ['id', 'username', 'firstName', 'lastName']
             },
             {
-                model: ReviewImage,
-                attributes:['id', 'url']
+                model: ReviewImage
+
 
             }
         ]
     })
 
-    let Reviews = []
-    reviewList.forEach(review => {
-        Reviews.push(review.toJSON())
-    })
-    Reviews.forEach(review => {
-        review.ReviewImages.forEach(image => {
-            if (image.url) {
-                review.previewImage = image.url
-            }
-        })
-        delete review.ReviewImages
-    })
+    // let Reviews = []
+    // reviewList.forEach(review => {
+    //     Reviews.push(review.toJSON())
+    // })
+    // Reviews.forEach(review => {
+    //     review.ReviewImages.forEach(image => {
+    //         if (image.url) {
+    //             review.previewImage = image.url
+    //         }
+    //     })
+
+    // })
 
 
-    res.json({Reviews})
+    return res.json({
+        'Reviews': reviewList
+    })
 })
 
 router.post('/:id/reviews', requireAuth, async(req, res, next) => {
