@@ -14,9 +14,7 @@ function Navigation({ isLoaded }) {
         <div className='navigation-bar'>
             <div className='nav-innerdiv'>
                 <div className='left-nav-div'>
-                    {/* <a href="/">
-                        <img src={please} height="60px" width="80px" alt="DrBnb"/>
-                    </a> */}
+                    Ice Cream Delight
                 </div>
                     {isLoaded && (
                             <div className='right-nav-div'>

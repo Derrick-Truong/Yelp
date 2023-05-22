@@ -43,8 +43,8 @@ export const getReviews = (restaurantId) => async dispatch => {
 }
 
 
-export const createOneReview = (review, reviewImage) => async dispatch => {
-    const response = await csrfFetch(`/api/restaurants/${review.id}/reviews`, {
+export const createOneReview = (review, reviewImage, restaurantId) => async dispatch => {
+    const response = await csrfFetch(`/api/restaurants/${restaurantId}/reviews`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -86,12 +86,12 @@ export const createOneReview = (review, reviewImage) => async dispatch => {
 const reviewReducer = (prevState = {}, action) => {
 let newState;
     switch(action.type){
-        // case GET_REVIEWS_FOR_RESTAURANT:
-        // newState={}
-        // action?.reviews?.Reviews?.forEach(review => {
-        //     newState[review.id] = review
-        // })
-        // return newState
+        case GET_REVIEWS_FOR_RESTAURANT:
+        newState={}
+        action?.reviews?.Reviews?.forEach(review => {
+            newState[review.id] = review
+        })
+        return newState
         case CREATE_REVIEW:
         newState={...prevState}
         newState[action.review.id] = action.review

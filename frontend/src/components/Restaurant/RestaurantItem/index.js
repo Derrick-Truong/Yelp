@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom';
 import OpenModalButton from '../../../OpenModalButton';
 import { getReviews } from '../../../store/review';
 import { useParams } from 'react-router-dom';
+import DeleteRestaurant from '../DeleteRestaurant';
+import './RestaurantItem.css'
 
 
 
@@ -44,25 +46,18 @@ const RestaurantItem = ({restaurant}) => {
 
 
     return (
-        <div>
-            <div className="restaurant-header">
 
-                <div className="username-unfollow-follow">
-                </div>
+            <div className='restaurant-item-content'>
+            <div className="restaurant-title-header">
+                <h4 className="restaurant-item-restaurantTitle">{restaurant?.title}</h4>
             </div>
-            <h4 className="restaurant-item-restaurantTitle">{restaurant?.title}</h4>
+            <img className='restaurant-preview-image' src={restaurant?.previewImage} alt='preview-image'/>
             <p className="restaurant-content">
                 {restaurant?.description}
             </p>
             <div className="restaurant-footer">
-
-
-
-
-
-
-                <span></span><span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
-
+                {currentUser?.id === restaurant?.userId ? <span><OpenModalButton modalComponent={<DeleteRestaurant restaurantId={restaurant?.id}/>}  buttonText={<><i className="fa-solid fa-trash"></i></>}/></span>:<></>}
+                <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
             </div>
             <div className="dropdown m-10">
                 <ul className={ulClassNameUpdateDelete} ref={ulRef}>
@@ -88,7 +83,8 @@ const RestaurantItem = ({restaurant}) => {
                     }
                 </ul>
             </div>
-        </div >
+            </div>
+
     )
 }
 

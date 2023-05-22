@@ -1,0 +1,43 @@
+
+
+.create-review-container{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 15px;
+background-color: pink;
+border-radius: 20px;
+}
+
+
+textarea {
+    resize: none;
+    border: 1px solid;
+    border-color: rgb(19, 19, 19);
+}
+
+.create-review-title{
+    text-align: center;
+    color: rgb(6, 6, 6);
+}
+.create-review-rating{
+    display: flex;
+    font-size: 40px;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+/* .fa-solid.fa-ice-cream{
+    color: #fff;
+}
+
+
+
+.fa-solid.fa-ice-cream:hover {
+    color: #FFC107;
+} */

@@ -1,0 +1,18 @@
+.restaurant-title-header{
+    text-align: center;
+}
+
+
+.restaurant-preview-image{
+    height: 200px;
+    width: 200px;
+}
+
+/* .restaurant-item-content{
+    position: relative;
+    border-width: 20px;
+    border-style: solid;
+    border-image-source: url('https://i.pinimg.com/736x/23/c1/77/23c177e07bf0e870863ae27812a08901.jpg');
+    border-image-slice: 40;
+    border-image-repeat:round;
+} */

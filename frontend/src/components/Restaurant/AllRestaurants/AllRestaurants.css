@@ -1,6 +1,29 @@
+
+
+
 .All-Restaurants-Feed {
+display: flex;
 max-width: 600px;
-    margin: 0 auto;
-    font-family: Helvetica, Arial, sans-serif;
-    background-color: rgb(244, 225, 194);
+margin: 0 auto;
+font-family: Helvetica, Arial, sans-serif;
+background-color: rgb(244, 225, 194);
+align-items: center;
+justify-content: center;
 }
+.home-page-restaurant-list{
+
+    padding: 16px;
+}
+.home-page-restaurant {
+margin-bottom: 20px;
+
+
+}
+
+
+
+.all-restaurants-preview-image{
+height: 50%;
+width: 50%
+}
+

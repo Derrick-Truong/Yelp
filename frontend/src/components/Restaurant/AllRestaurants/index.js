@@ -6,7 +6,10 @@ import { useDispatch } from 'react-redux'
 import { getRestaurants } from '../../../store/restaurants'
 import { getReviews } from '../../../store/review'
 import RestaurantItem from '../RestaurantItem'
+import CreateRestaurant from '../CreateRestaurant'
+import OpenModalButton from '../../../OpenModalButton'
 import './AllRestaurants.css'
+import CreateReview from '../../Reviews/CreateReview'
 
 
 const AllRestaurants = () => {
@@ -23,11 +26,16 @@ dispatch(getRestaurants())
     return (
         <>
     <div className = 'All-Restaurants-Feed'>
-       {restaurantsValues?.map(restaurant =>
-        <li key={restaurant?.id} className="restaurant">
-            <RestaurantItem restaurant={restaurant}/>
-        </li>
+        <OpenModalButton buttonText='review' modalComponent={<CreateReview/>}/>
+        <div className='home-page-restaurant-list'>
+       {restaurantsValues?.sort((a, b) => b.avgRating - a.rating)?.map(restaurant =>
+       <div>
+       <img className ='all-restaurants-preview-image' src={restaurant?.previewImage} alt='preview-image'/>
+        <h3>{restaurant?.title}</h3>
+        <p>{restaurant?.description}</p>
+        </div>
        )}
+        </div>
      </div>
         </>
     )

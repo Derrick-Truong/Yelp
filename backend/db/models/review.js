@@ -27,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       Review.hasOne(
         models.ReviewImage,
         {
-          foreignKey: 'reviewId'
+          foreignKey: 'reviewId',
+          onDelete: 'CASCADE',
+          hooks: true
         }
       )
 
