@@ -16,23 +16,12 @@ router.get('/', async (req, res, next) => {
         include: [
             {
                 model: Review,
-                attributes:['id', 'description', 'rating'],
-                include: [
-                    {
-                    model:ReviewImage,
-                    attributes:['id', 'url']
-                    },
 
-
-                ]
             },
             {
                 model: RestaurantImage
             },
-            {
-                model: User,
-                attributes: ['id', 'username', 'firstName', 'lastName']
-            },
+
 
         ]
 
@@ -52,6 +41,7 @@ router.get('/', async (req, res, next) => {
     Restaurants.forEach(restaurant => {
         let adder = 0;
         let i = 0;
+
         restaurant.Reviews.forEach(review => {
             i++;
             adder = adder + review.rating
@@ -65,13 +55,12 @@ router.get('/', async (req, res, next) => {
         })
 
 
-
         delete restaurant.Reviews
         delete restaurant.RestaurantImages
     });
 
 
-    res.json({Restaurants})
+    res.json(Restaurants)
 })
 
 
