@@ -90,7 +90,7 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
         })
         response2['ReviewImages'] = []
         if (successImage) {
-            response2.ReviewImages.push(reviewImage)
+            response2.previewImage = reviewImage
         }
 
         dispatch(createReview(response2))

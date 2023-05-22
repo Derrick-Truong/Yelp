@@ -24,9 +24,6 @@ const AllRestaurants = () => {
         dispatch(getRestaurants())
     }, [dispatch, JSON.stringify(restaurantsValues)])
 
-    const clickSub = (restaurant) => {
-        history.push(`/restaurants/${restaurant?.id}`)
-    }
 
     return (
         <>
@@ -34,7 +31,7 @@ const AllRestaurants = () => {
                 {restaurantsValues?.sort((a, b) => b.avgRating - a.avgRating)?.map(restaurant => {
                     return(
                 <nav key={restaurant?.id}>
-                    <NavLink exact to={`/restaurants/${restaurant?.id}`} onClick={() => clickSub(restaurant)}>
+                    <NavLink exact to={`/restaurants/${restaurant?.id}`}>
                     <div className='home-page-restaurant-container'>
                         <span className='home-page-restaurant-card'>
                             <img className='all-restaurants-preview-image' src={restaurant?.previewImage} alt='preview-image' />

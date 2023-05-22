@@ -2,16 +2,18 @@
 import { useModal } from "../../../Context/Modal"
 import { createOneReview } from "../../../store/review"
 import { useState } from "react"
+import { updateOneReview } from "../../../store/review"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { getReviews } from "../../../store/review"
-import './CreateReview.css'
+import './UpdateReview.css'
 
-const CreateReview = ({restaurantId}) => {
+
+const UpdateReview = ({review}) => {
+    const reviewId = review?.id
     const dispatch = useDispatch()
-    const [description, setDescription] = useState('');
-    const [rating, setRating] = useState('');
-    const [url, setUrl] = useState('')
+    const [description, setDescription] = useState(review?.description);
+    const [rating, setRating] = useState(review?.rating);
+    const [url, setUrl] = useState(review?.ReviewImage?.url)
     const { closeModal } = useModal();
 
     const handleCancel = (e) => {
@@ -29,7 +31,7 @@ const CreateReview = ({restaurantId}) => {
         const image = {
             url: url
         }
-        dispatch(createOneReview(review, image, restaurantId)).then(closeModal)
+        dispatch(updateOneReview(review, image, reviewId)).then(closeModal)
 
         // dispatch(getReviews(restaurantId))
 
@@ -47,13 +49,13 @@ const CreateReview = ({restaurantId}) => {
                 </div>
                 <br></br>
                 <div>
-                <textarea
-                    rows="10" cols="60"
-                    placeholder='Write down any thoughts...'
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
+                    <textarea
+                        rows="10" cols="60"
+                        placeholder='Write down any thoughts...'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
                 </div>
                 <h3 className='create-review-upload-pic'>Any Picture You Want To Upload?</h3>
                 <input className='create-review-photo-url-input' placeholder='Pic pls...' value={url} onChange={(e) => setUrl(e.target.value)} />
@@ -63,8 +65,6 @@ const CreateReview = ({restaurantId}) => {
             {/* <div className='create-review-thumbs-up-down'><span><i className="fa-solid fa-thumbs-up"></i></span><span><i className="fa-solid fa-thumbs-down"></i></span></div> */}
         </section>
     )
-
 }
 
-export default CreateReview
-
+export default UpdateReview

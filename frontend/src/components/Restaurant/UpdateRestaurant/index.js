@@ -1,23 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updatedRestaurant } from "../../../store/restaurants";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import './CreateRestaurant.css'
 
-const UpdateRestaurant = () => {
+
+const UpdateRestaurant = ({restaurant}) => {
+    const restaurantId = restaurant?.id
     const history = useHistory();
     const dispatch = useDispatch();
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [title, setTitle] = useState("");
-    const [address, setAddress] = useState("");
-    const [previewImage, setPreviewImage] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [image2Url, setImage2Url] = useState("");
+    const [city, setCity] = useState(restaurant?.city);
+    const [state, setState] = useState(restaurant?.state);
+    const [country, setCountry] = useState(restaurant?.country);
+    const [title, setTitle] = useState(restaurant?.title);
+    const [address, setAddress] = useState(restaurant?.address);
+    const [previewImage, setPreviewImage] = useState(restaurant?.previewImage);
+    const [description, setDescription] = useState(restaurant?.description);
+    const [price, setPrice] = useState(restaurant?.price);
+    const [image2Url, setImage2Url] = useState(restaurant?.image2Url);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
+        e.preventDefault()
         const newListing = {
             country: country,
             description: description,
@@ -45,10 +46,7 @@ const UpdateRestaurant = () => {
 
 
 
-        const createdRestaurant = dispatch(createRestaurant(newListing, restaurantImage))
-        if (createdRestaurant) {
-            history.push('/')
-        }
+
     }
     return (
         <section className="create-restaurant-page">

@@ -9,7 +9,10 @@ import { getReviews } from '../../../store/review';
 import DeleteRestaurant from '../DeleteRestaurant';
 import { useParams } from 'react-router-dom';
 import { restaurantDetails } from '../../../store/restaurants';
+import DeleteReview from '../../Reviews/DeleteReview';
+import UpdateReview from '../../Reviews/UpdateReview';
 import CreateReview from '../../Reviews/CreateReview';
+import UpdateRestaurant from '../UpdateRestaurant';
 import './RestaurantItem.css'
 
 
@@ -92,6 +95,16 @@ const RestaurantItem = () => {
                                 <span className="comment-owner">{review?.User?.username}</span>
                                 <div className="the-comments-commented">
                                     <span>{review?.description}</span>
+                                    {currentUser?.id === review?.User?.id ?
+                                    <span>
+                                    <span>
+                                    <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review}/>}/>
+                                    </span>
+                                    <span>
+                                    <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id}/>}/>
+                                    </span>
+                                        </span>
+                                    :<></>}
                                 </div>
                             </li>
                         )

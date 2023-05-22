@@ -120,8 +120,8 @@ router.get('/:id', async(req, res, next) => {
     let restaurantDetails = oneRestaurant.toJSON()
     restaurantDetails.numReviews = oneRestaurant.Reviews.length
     restaurantDetails.Reviews.forEach(review => {
-
         adder = adder + review.rating
+
     })
     restaurantDetails.avgRating = adder / restaurantDetails.numReviews
     delete restaurantDetails.Reviews
@@ -270,6 +270,7 @@ router.get('/:id/reviews', async(req, res, next) => {
         },
 
 
+
     })
 
     if (!restaurant) {
@@ -289,8 +290,8 @@ router.get('/:id/reviews', async(req, res, next) => {
                 attributes: ['id', 'username', 'firstName', 'lastName']
             },
             {
-                model: ReviewImage,
-                attributes: ['id', 'url']
+                model: ReviewImage
+
             }
         ]
     })
@@ -299,6 +300,8 @@ router.get('/:id/reviews', async(req, res, next) => {
     reviewList.forEach(review => {
         Reviews.push(review.toJSON())
     })
+
+
 
     res.json({Reviews})
 })
