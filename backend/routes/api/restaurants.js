@@ -273,8 +273,8 @@ router.get('/:id/reviews', async(req, res, next) => {
                 attributes: ['id', 'username', 'firstName', 'lastName']
             },
             {
-                model: ReviewImage
-
+                model: ReviewImage,
+                attributes: ['id', 'url']
 
             }
         ]
