@@ -16,19 +16,13 @@ module.exports = {
     },
       userId: {
       type: Sequelize.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id'
+     allowNull: false,
+     references: {model: 'Users'}
       },
-      onDelete: "CASCADE"
-    },
       restaurantId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Restaurants',
-        key: 'id'
-        },
-         onDelete: "CASCADE"
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Restaurants' }
       },
       createdAt: {
         allowNull: false,
