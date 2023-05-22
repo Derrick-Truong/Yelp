@@ -30,6 +30,7 @@ const RestaurantItem = () => {
     const selectRestaurant = useSelector(state => state?.restaurants)
     const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
+    
 
 
     const openMenu = () => {
@@ -40,7 +41,7 @@ const RestaurantItem = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)])
+    }, [dispatch, JSON.stringify(restaurantId)])
     // useEffect(() => {
     //     if (!showMenu) return;
 

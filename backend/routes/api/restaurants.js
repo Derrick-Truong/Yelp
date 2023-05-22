@@ -22,15 +22,16 @@ router.get('/', async (req, res, next) => {
                     model:ReviewImage,
                     attributes:['id', 'url']
                     },
-                    {
-                    model:User,
-                    attributes:['id', 'username', 'firstName', 'lastName']
-                    },
+
 
                 ]
             },
             {
                 model: RestaurantImage
+            },
+            {
+                model: User,
+                attributes: ['id', 'username', 'firstName', 'lastName']
             },
 
         ]
