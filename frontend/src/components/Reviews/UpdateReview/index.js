@@ -13,7 +13,7 @@ const UpdateReview = ({review}) => {
     const dispatch = useDispatch()
     const [description, setDescription] = useState(review?.description);
     const [rating, setRating] = useState(review?.rating);
-    const [url, setUrl] = useState(review?.ReviewImage?.url)
+    const [url, setUrl] = useState(review?.previewImage)
     const { closeModal } = useModal();
 
     const handleCancel = (e) => {
