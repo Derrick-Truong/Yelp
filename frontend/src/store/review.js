@@ -60,10 +60,10 @@ export const updateOneReview = (review, reviewImage, reviewId ) => async dispatc
             },
             body: JSON.stringify(reviewImage)
         })
-        response2['ReviewImages'] = []
+        response2['ReviewImage'] = []
         if (successImage) {
             const previewImage = await successImage.json()
-            response2.ReviewImages.push(previewImage)
+            response2.ReviewImage.push(previewImage)
         }
 
         dispatch(updateReview(response2))
@@ -89,10 +89,10 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
             },
             body: JSON.stringify(reviewImage)
         })
-        response2['ReviewImages'] = []
+        response2['ReviewImage'] = []
         if (successImage.ok) {
             let newImage = await successImage.json()
-            response2.ReviewImages.push(newImage)
+            response2.ReviewImage.push(newImage)
         }
 
        await dispatch(createReview(response2))

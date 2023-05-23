@@ -93,7 +93,7 @@ const RestaurantItem = () => {
                         const reviewDate = new Date(review.createdAt);
                         const formattedDate = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(reviewDate);
                         return (
-                            <li key={review.id}>
+                            <li key={review?.id}>
                                 <span className="comment-owner">{review?.User?.username}</span>
                                 <div className="the-comments-commented">
                                     <span>{review?.description}</span>
