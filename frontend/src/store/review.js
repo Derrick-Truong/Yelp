@@ -53,17 +53,17 @@ export const updateOneReview = (review, reviewImage, reviewId ) => async dispatc
 
     if (response.ok) {
         const response2 = await response.json()
-        const successImage = await csrfFetch(`/api/reviews/${reviewId}`, {
+        const successImage = await csrfFetch(`/api/reviews/${reviewId}/pictures`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(reviewImage)
         })
-        response2['ReviewImage'] = []
+
         if (successImage) {
             const previewImage = await successImage.json()
-            response2.ReviewImage.push(previewImage)
+            response2.previewImage = previewImage.url
         }
 
        await dispatch(updateReview(response2))

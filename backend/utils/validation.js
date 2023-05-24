@@ -39,18 +39,18 @@ const handleValidationErrors = (req, _res, next) => {
 
 const validateReviewImage =[
     check('url')
-    .isURL({checkfalsy: true})
+    .isURL({checkFalsy: true})
     .notEmpty()
     .withMessage('Url must be a url'),
     handleValidationErrors
 ]
 const validateReview = [
     check('description')
-    .exists({checkfalsy: true})
+    .exists({checkFalsy: true})
     .notEmpty()
     .withMessage('Description is required'),
     check('rating')
-    .exists({checkfalsey: true})
+    .exists({checkFalsy: true})
     .notEmpty()
     .withMessage('Rating between 1 and 5 is required.'),
     handleValidationErrors

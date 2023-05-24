@@ -7,7 +7,7 @@
     padding: 0px;
     font-family: Helvetica, Arial, sans-serif;
     align-items: center;
-    height: 70vh;
+    height: 100%;
     justify-content: center;
     flex-direction: column;
 
@@ -24,6 +24,7 @@
 
 
     }
+
 
     .home-page-restaurant-card {
         height: 275px;
@@ -121,12 +122,11 @@ display: flex;
 justify-content: center;
 padding-top: 130px;
 
-
 }
 
 .filler-information {
     margin: 20px;
-    padding: 20px;
+    padding-top: 20px;
     background-color: #f5f5f5;
   }
 
@@ -135,7 +135,7 @@ padding-top: 130px;
   .our-passion-filler {
     margin-bottom: 20px;
     text-align: center;
-    padding: 19px;
+    padding-top: 19px;
   }
 
   .title-filler {
@@ -148,7 +148,8 @@ padding-top: 130px;
 
   .banner-welcome-2{
     margin-top: -100px;
-    height: 865px;
-    width: 1686px;
-    padding: 120px;
+    height: 800px;
+    width: 1800px;
+    padding-top: 120px;
+    padding-bottom: 170px;
   }

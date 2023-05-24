@@ -109,7 +109,7 @@ const RestaurantItem = () => {
                     <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
                 </div> */}
 
-                {/* <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurantId} />} /> */}
+              { currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurantId} />}/>:<></>}
                 <div className='restaurant-item-reviews-feed'>
                     {/* <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurantId} />} /> */}
                     {reviews.length ?

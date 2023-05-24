@@ -78,6 +78,50 @@ router.post('/:id/pictures', requireAuth, validateReviewImage, async(req, res, n
     })
 })
 
+
+//edit a picture that belongs to a review
+router.put('/:id/pictures', requireAuth, validateReviewImage, async (req, res, next) => {
+    const { url } = req.body
+    let findReview = await Review.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: {
+            model: ReviewImage
+        }
+
+    })
+
+    if (!findReview) {
+        return res.json({
+            message: "Review could not be found"
+        })
+    }
+    if (req.user.id !== findReview.userId) {
+        res.json({
+            message: "Forbidden/not allowed"
+        })
+    }
+    let findImage = await ReviewImage.findOne({
+        where: {
+            reviewId: req.params.id
+        }
+    })
+
+    if (findImage) {
+     let updatedImage = await findImage.update({
+        url
+      })
+
+        res.json({
+            updatedImage
+        })
+
+    }
+
+
+})
+
 router.delete('/:id', requireAuth, async(req, res, next) => {
     let deleteReview = await Review.findOne({
         where: {

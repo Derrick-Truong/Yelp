@@ -36,7 +36,7 @@ const AllRestaurants = () => {
 
     return (
         <>
-          <div className='banner-welcome'><img className="banner-welcome-2" src={banner} /></div>
+          {/* <div className='banner-welcome'><img className="banner-welcome-2" src={banner} /></div> */}
             <div className='All-Restaurants-Feed'>
 
 

@@ -6,36 +6,34 @@ import { updateOneReview } from "../../../store/review"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { restaurantDetails } from "../../../store/restaurants"
+import { getReviews } from "../../../store/review"
 import './UpdateReview.css'
 
 
 const UpdateReview = ({review}) => {
     const reviewId = review?.id
     const dispatch = useDispatch()
-    const [description, setDescription] = useState('');
-    const [rating, setRating] = useState(1);
-    const [url, setUrl] = useState('')
+    const [description, setDescription] = useState(review?.description);
+    const [rating, setRating] = useState(review?.rating);
+    const [url, setUrl] = useState(review?.previewImage)
     const [errors, setErrors] = useState({})
     const { closeModal } = useModal();
 
 useEffect(() => {
-   setDescription(review.description)
-   setRating(review.rating)
-   setUrl(review.previewImage)
+   setDescription(review?.description)
+   setRating(review?.rating)
+   setUrl(review?.previewImage)
 
-},[JSON.stringify(reviewId), JSON.stringify(review.previewImage), JSON.stringify(review.rating), JSON.stringify(review.description)])
+},[JSON.stringify(review)])
 
-    function checkURL(url) {
-        return /(.*)(\.png|.jpg|.jpeg)/.test(url);
-    }
 
     const valid = () => {
         let newErrors = {};
-        if (!description) {
+        if (!description.length) {
             newErrors.description = 'Description is required'
         }
         if (rating > 5 || rating < 1) {
-            newErrors.description = 'Rating must be between 1 and 5'
+            newErrors.rating = 'Rating must be between 1 and 5'
         }
         if (url) {
             if (!
@@ -59,8 +57,8 @@ const handleCancel = (e) => {
         e.preventDefault()
 
         valid()
-        if (errors?.length) {
-           return setErrors({})
+        if (errors?.length > 9) {
+           setErrors({})
         }
         const review = {
             rating: rating,
@@ -101,7 +99,7 @@ const handleCancel = (e) => {
                 <br></br>
                 <h3 className='create-review-upload-pic'>Didn't Like the Pic You Took Huh?</h3>
                 <br></br>
-                <input className='create-review-photo-url-input' placeholder={review?.previewImage} value={url} onChange={(e) => setUrl(e.target.value)} required/>
+                <input className='create-review-photo-url-input' placeholder={review?.previewImage || ''} value={url} onChange={(e) => setUrl(e.target.value)}/>
 
                 <h4>{errors?.url && <span className="error">{errors?.url}</span>}</h4>
 
