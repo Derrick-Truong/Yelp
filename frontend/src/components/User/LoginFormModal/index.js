@@ -17,6 +17,9 @@ function LoginFormModal() {
 
     const { closeModal } = useModal();
 
+    var docs = document.getElementById('img');
+    docs?.setAttribute('src', 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQ2OGY0MDEwYWY3NGU0MGUyMmZiMDZiMzg4M2E4ZWNhZmNhN2VkMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oz8xwKBsHNlZ6UvMA/giphy.gif')
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -38,46 +41,36 @@ function LoginFormModal() {
 
     return (
         <>
-            {/* <div className="frog-login-video">
-                <video
+            <div className="frog-login-video">
+            </div>
+            <div className="log-in-form-below-frog">
+                <img
+
                     autoPlay
                     muted
                     loop
                     playsInline
-                    width="600"
-                    height="277"
-                >
-                    <source
-                        src="https://assets.tumblr.com/pop/src/assets/images/login-wall/art_v2-004010f0.webm"
-                        type="video/webm;codec=vp9"
-                    />
-                    <source
-                        src="https://assets.tumblr.com/pop/src/assets/images/login-wall/art_v2-5c3eb22e.mp4"
-                        type="video/mp4"
-                    />
-                    <img
-                        src="https://assets.tumblr.com/pop/src/assets/images/login-wall/art_v2-3f0f7a0b.gif"
-                        alt=""
-                    />
-                </video>
-            </div> */}
-            <div className="log-in-form-below-frog">
-                <h4>Enter your credential to log in or register:</h4>
+                    src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQ2OGY0MDEwYWY3NGU0MGUyMmZiMDZiMzg4M2E4ZWNhZmNhN2VkMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oz8xwKBsHNlZ6UvMA/giphy.gif'
+                    width="200"
+                    height="170"
+                />
+                <h5 className='log-in-form-title'>Enter Credentials And Password</h5>
                 <form className="form-log-in" onSubmit={handleSubmit}>
                     <ul>
-                        {errors.map((error, idx) => (
+                        {errors?.map((error, idx) => (
                             <li key={idx}>{error}</li>
                         ))}
                     </ul>
                     <label>
                         <input className="credential-and-password-form"
                             type="text"
-                            placeholder="credential"
+                            placeholder="credentials"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
                             required
                         />
                     </label>
+                    <h4></h4>
                     <label>
 
                         <input className="credential-and-password-form"
@@ -88,18 +81,17 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-                    <button type="submit">Log In</button>
+
+                    <button className='login-log-in-button' type="submit">Log In</button>
+
                     <div className="signup-link-in-login-form">
                         Don't have an account yet?
                         <br></br>
                         <div className="submit-button-log-in">
-                            <button className="loginform-sign-in-button">
+                            <span className='sign-up-modal-button'>
                                 <OpenModalButton
                                     buttonText="Sign Up"
-                                    modalComponent={<SignupFormModal />}
-                                />
-                            </button>
-                            <button className="sign-up-button" />
+                                    modalComponent={<SignupFormModal/>}/></span>
                             <button onClick={demoSignIn} className="demo-sign-in-button" id='demo-user-button'>
                                 Demo User
                             </button>

@@ -13,16 +13,19 @@ function SignupFormPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors([]);
         if (password === confirmPassword) {
-            const data = await dispatch(signup(username, email, password));
-            if (data) {
-                setErrors(data)
+            const data = await dispatch(signup(firstName, lastName, username, email, password));
+            if (data && data.errors) {
+                setErrors(data.errors)
             }
         } else {
             setErrors(['Confirm Password field must be the same as the Password field']);
@@ -31,42 +34,62 @@ function SignupFormPage() {
 
     return (
         <>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+
+            <form className='sign-up-form-container' onSubmit={handleSubmit}>
+                <h1>Sign Up</h1>
+                <br></br>
                 <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    {errors?.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
                 <label>
-                    Email
                     <input
                         type="text"
+                        placeholder='               Email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </label>
                 <label>
-                    Username
                     <input
                         type="text"
+                        placeholder='            Username'
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </label>
                 <label>
-                    Password
+                    <input
+                        type="text"
+                        placeholder='            First Name'
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <input
+                        type="text"
+                        placeholder='            Last Name'
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
                     <input
                         type="password"
+                        placeholder='            Password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </label>
                 <label>
-                    Confirm Password
                     <input
                         type="password"
+                        placeholder='     Confirm Password'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required

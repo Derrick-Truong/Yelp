@@ -66,7 +66,7 @@ export const updateOneReview = (review, reviewImage, reviewId ) => async dispatc
             response2.ReviewImage.push(previewImage)
         }
 
-        dispatch(updateReview(response2))
+       await dispatch(updateReview(response2))
 
         return response2
     }
@@ -96,9 +96,9 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
         }
 
        await dispatch(createReview(response2))
-       return response2
-
+        return response2
     }
+
 
 }
 

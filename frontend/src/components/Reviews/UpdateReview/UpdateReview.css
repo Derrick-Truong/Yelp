@@ -5,7 +5,7 @@
     align-items: center;
     padding: 15px;
     background-color: pink;
-    border-radius: 20px;
+
 }
 
 
@@ -25,7 +25,7 @@ span .fa-solid.fa-thumbs-up {
 }
 
 .create-review-photo-url-input {
-    width: 29%;
+    width: 100%
 }
 
 .create-review-rating {
@@ -37,8 +37,13 @@ span .fa-solid.fa-thumbs-up {
     align-items: center;
 
 }
-
+.update-review-outer-container{
+    background-color: pink;
+    border-radius: 20px;
+    padding: 15px;
+}
 .create-review-thumbs-up-down {
+    background-color: pink;
     display: flex;
     justify-content: center;
 }

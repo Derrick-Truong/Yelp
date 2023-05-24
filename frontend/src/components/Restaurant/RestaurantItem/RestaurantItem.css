@@ -1,34 +1,178 @@
+
+
+
+
 .restaurant-title-header{
     text-align: center;
 }
 
 
-.restaurant-photos{
+/* .restaurant-photos{
     height: 200px;
     width: 200px;
-}
+} */
 
 .restaurant-item-images-container{
-    width: 1000px;
-    display: flex;
+    position:relative;
+    /* min-height: 70vh;
+    display: grid;
+    place-items: center; */
+    overflow: hidden;
+  place-items: center;
+  display: grid;
+  height: 120vh;
+
+
 }
 
-/* .restaurant-item-images-container div{
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
 
-} */
 
-/* .restaurant-item-images-container div img{
-    width: 100%;
-} */
 
-/* .restaurant-item-content{
+
+/* .restaurant-item-images-container-slider{
+    height: 400px;
+    margin:auto;
     position: relative;
-    border-width: 20px;
-    border-style: solid;
-    border-image-source: url('https://i.pinimg.com/736x/23/c1/77/23c177e07bf0e870863ae27812a08901.jpg');
-    border-image-slice: 40;
-    border-image-repeat:round;
+    width: 99%;
+    display: grid;
+    place-items: center;
+    overflow:hidden;
+    white-space: nowrap;
+
 } */
+
+.restaurant-item-images-container-slider {
+    /* height: 400px; */
+    margin: auto;
+    /* position: relative;
+    display: grid; */
+    place-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+.restaurant-item-restaurant-photos{
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-color: black;
+}
+
+.restaurant-item-images-container-slider-track{
+    display: inline-block;
+
+}
+
+.restaurant-item-images-container-slider-track img{
+    height: 370px;
+        width: 400px;
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+.restaurant-item-reviews-feed {
+    height: 100vh;
+    display: flex;
+
+    justify-content: center;
+}
+
+.reviews-card .reviews-card-image {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    padding: 3px;
+    background:mediumaquamarine;
+}
+
+*{
+    font-family:'Poppins',
+        Helvetica, 'Neue',
+        Arial,
+        sans-serif;
+}
+.restaurant-item-restaurant-photos{
+    height: auto;
+    max-width: 100%;
+}
+.restaurant-items-photo-text{
+    position: absolute;
+    bottom: 0;
+    font-weight: 700;
+    color: white;
+}
+
+.reviews-card .reviews-card-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ffff;
+}
+.reviews-card{
+    position: relative;
+    height: 280px;
+    background: white;
+    border-radius: 20px;
+    margin: 20px 10px;
+    width: 240px;
+}
+.reviews-card::before{
+    content:'';
+    height: 40%;
+    width: 100%;
+    position:absolute;
+    border-radius: 20px;
+    background: mediumaquamarine;
+    border-radius: 20px 20px 0 0;
+
+
+}
+
+.reviews-card .reviews-card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+    z-index: 100;
+}
+
+.reviews-card .reviews-rating{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.reviews-card .reviews-description{
+    font-size: 12px;
+    margin-top: 10px;
+}
+.reviews-card .reviews-update-delete-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.reviews-card .reviews-update-delete-buttons button{
+    outline: none;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 20px;
+}
+/* .reviews-card .reviews-rating{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+} */
+

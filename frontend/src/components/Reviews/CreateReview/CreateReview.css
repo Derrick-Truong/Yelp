@@ -25,7 +25,7 @@ span .fa-solid.fa-thumbs-up{
     margin-left: -5px;
 }
 .create-review-photo-url-input{
-    width: 29%;
+    width: 100%
 }
 .create-review-rating{
     display: flex;

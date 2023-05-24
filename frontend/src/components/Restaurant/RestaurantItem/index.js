@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from 'react';
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,8 +31,7 @@ const RestaurantItem = () => {
     const selectRestaurant = useSelector(state => state?.restaurants)
     const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
-
-
+    const restaurantImagesLength = restaurant?.RestaurantImages?.length
 
     const openMenu = () => {
         if (showMenu) return;
@@ -61,14 +61,37 @@ const RestaurantItem = () => {
 
 
     return (
+        <>
+            <div className='restaurant-item-images-container'>
+                {currentUser?.id === restaurant?.userId ? <OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /> : <></>}
+                <div className='restaurant-items-photo-text'>
+                    <h1>{restaurant?.title}</h1>
+                </div>
+                <div className='restaurant-item-images-container-slider'>
 
-        <div className='restaurant-item-content'>
-            <div className="restaurant-title-header">
+                    <div className='restaurant-item-images-container-slider-track'>
+
+                        {restaurant?.RestaurantImages?.map(image => {
+                            return (
+
+
+                                image && <img key={image?.id} className="restaurant-item-restaurant-photos" src={image?.url} alt="restaurant-pic" />
+                            )
+
+
+                        })}
+
+                    </div>
+                </div>
+            </div>
+            <div className='restaurant-item-content'>
+
+                {/* <div className="restaurant-title-header">
                 <h4 className="restaurant-item-restaurantTitle">{restaurant?.title}</h4>
                 <OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant}/>}/>
-            </div>
-            <div className='restaurant-item-images-container'>
-                <div>
+            </div> */}
+                {/* <div className='restaurant-item-images-container'>
+
                 {restaurant?.RestaurantImages?.map(image => {
                     return (
 
@@ -76,47 +99,79 @@ const RestaurantItem = () => {
                     )
 
                 })}
+
+            </div> */}
+                {/* <p className="restaurant-content">
+                    {restaurant?.description}
+                </p> */}
+                {/* <div className="restaurant-footer">
+                    {currentUser?.id === restaurant?.userId ? <span><OpenModalButton modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} buttonText={<><i className="fa-solid fa-trash"></i></>} /></span> : <></>}
+                    <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
+                </div> */}
+
+                {/* <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurantId} />} /> */}
+                <div className='restaurant-item-reviews-feed'>
+                    {/* <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurantId} />} /> */}
+                    {reviews.length ?
+
+                        reviews.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
+                            const rating = review?.rating
+
+
+                            return (
+                                <>
+
+
+                                    {/* <div className='restaurant-item-reviews-card-container'> */}
+
+                                        <div key={review?.id} className='item'>
+                                            <div className=' reviews-card'>
+                                                <div className='reviews-card-content'>
+                                                    <div className='reviews-card-image'>
+                                                        <img src={review?.previewImage} alt='preview-unavailable' />
+                                                    </div>
+                                                    <div className='reviews-rating'>
+                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
+                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                        <i style={(rating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                    </div>
+                                                    <p className='reviews-description'>{review?.description}</p>
+                                                {currentUser?.id === review?.userId ?
+                                                    <div className='reviews-update-delete-buttons'>
+
+                                                        <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id}/>}/>
+                                                        <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review}/>}/>
+
+
+                                                    </div>:<></>}
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    {/* </div> */}
+
+                           </>
+
+                            )
+                        }) : null
+
+                    }
                 </div>
             </div>
-            <p className="restaurant-content">
-                {restaurant?.description}
-            </p>
-            <div className="restaurant-footer">
-                {currentUser?.id === restaurant?.userId ? <span><OpenModalButton modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} buttonText={<><i className="fa-solid fa-trash"></i></>} /></span> : <></>}
-                <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
-            </div>
-            <div className="dropdown m-10">
-                <OpenModalButton buttonText="Write a review" modalComponent={<CreateReview restaurantId={restaurant?.id}/>}/>
-                {reviews.length ?
 
-                    reviews.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
-                        const reviewDate = new Date(review.createdAt);
-                        const formattedDate = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(reviewDate);
-                        return (
-                            <li key={review?.id}>
-                                <span className="comment-owner">{review?.User?.username}</span>
-                                <div className="the-comments-commented">
-                                    <span>{review?.description}</span>
-                                    {currentUser?.id === review?.User?.id ?
-                                    <span>
-                                    <span>
-                                    <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review}/>}/>
-                                    </span>
-                                    <span>
-                                    <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id}/>}/>
-                                    </span>
-                                        </span>
-                                    :<></>}
-                                </div>
-                            </li>
-                        )
-                    }) : null
-                }
 
-            </div>
-        </div>
+        </>
 
     )
+
 }
 
+
+
 export default RestaurantItem
+

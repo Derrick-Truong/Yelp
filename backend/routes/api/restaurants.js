@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
 const { check } = require('express-validator');
-const { handleValidationErrors, validateRestaurant } = require('../../utils/validation.js')
+const { handleValidationErrors, validateReview, validateRestaurant } = require('../../utils/validation.js')
 const { sequelize, Op } = require('sequelize')
 const {Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models');
 const review = require('../../db/models/review.js');
@@ -158,7 +158,7 @@ router.post('/', [requireAuth, validateRestaurant],
 )
 
 //Create an Image for a Restaurant
-router.post('/:id/pictures', requireAuth, async(req,res, next) => {
+router.post('/:id/pictures', requireAuth, validateReview, async(req,res, next) => {
 let picture;
 const {url, preview} = req.body
 let newImage = await Restaurant.findOne({
@@ -277,6 +277,7 @@ router.get('/:id/reviews', async(req, res, next) => {
                 model: ReviewImage
 
 
+
             }
         ]
     })
@@ -284,9 +285,15 @@ router.get('/:id/reviews', async(req, res, next) => {
     reviewList.forEach(review => {
         Reviews.push(review.toJSON())
     })
+
     Reviews.forEach(review => {
         review.previewImage = review.ReviewImage.url
+
+
+
+        delete review.ReviewImage
     })
+
 
 
 //    reviewList.ReviewImage.forEach(image => {
@@ -307,7 +314,7 @@ router.get('/:id/reviews', async(req, res, next) => {
 
     // })
     // delete Reviews.ReviewImaged
-    delete Review.ReviewImage
+
   res.json({Reviews})
 
 })

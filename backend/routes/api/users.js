@@ -24,20 +24,30 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
+    check('firstName')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('Last name is required.'),
+    check('firstName')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('First name is required'),
     handleValidationErrors
 ];
 // Sign up
 router.post(
     '/', validateSignup,
     async (req, res) => {
-        const { email, username, password } = req.body;
+        const { email, username, password, firstName, lastName } = req.body;
         const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, username, hashedPassword });
+        const user = await User.create({ firstName, lastName, email, username, hashedPassword });
 
         const safeUser = {
             id: user.id,
             email: user.email,
             username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
         };
 
         await setTokenCookie(res, safeUser);

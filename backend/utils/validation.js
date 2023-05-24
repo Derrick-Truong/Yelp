@@ -7,20 +7,54 @@ const handleValidationErrors = (req, _res, next) => {
     const validationErrors = validationResult(req);
 
     if (!validationErrors.isEmpty()) {
-        const errors = {};
-        validationErrors
+        const errors = validationErrors
             .array()
-            .forEach(error => errors[error.param] = error.msg);
+            .map((error) => `${error.msg}`);
 
-        const err = Error("Bad request.");
+        const err = Error('Validation error');
         err.errors = errors;
+        err.title = 'Bad Request';
         err.status = 400;
-        err.title = "Bad request.";
         next(err);
-    }
+  }
+    // if (!validationErrors.isEmpty()) {
+    //     const errors = {};
+    //     validationErrors
+    //         .array()
+    //         .forEach(error => errors[error.param] = error.msg);
+
+    //     const err = Error("Bad request.");
+    //     err.errors = errors;
+    //     err.status = 400;
+    //     err.title = "Bad request.";
+    //     next(err);
+    // }
     next();
 };
 
+
+
+
+
+
+const validateReviewImage =[
+    check('url')
+    .isURL({checkfalsy: true})
+    .notEmpty()
+    .withMessage('Url must be a url'),
+    handleValidationErrors
+]
+const validateReview = [
+    check('description')
+    .exists({checkfalsy: true})
+    .notEmpty()
+    .withMessage('Description is required'),
+    check('rating')
+    .exists({checkfalsey: true})
+    .notEmpty()
+    .withMessage('Rating between 1 and 5 is required.'),
+    handleValidationErrors
+]
 const validateRestaurant = [
     check('address')
         .exists({ checkFalsy: true })
@@ -56,5 +90,5 @@ const validateRestaurant = [
 ];
 
 module.exports = {
-    handleValidationErrors, validateRestaurant
+    handleValidationErrors, validateReviewImage, validateRestaurant, validateReview
 };

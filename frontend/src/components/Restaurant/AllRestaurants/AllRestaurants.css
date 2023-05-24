@@ -2,102 +2,153 @@
 
 
 .All-Restaurants-Feed {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    font-family: Helvetica, Arial, sans-serif;
+    align-items: center;
+    height: 70vh;
+    justify-content: center;
+    flex-direction: column;
+
+    }
+
+
+
+    .home-page-restaurant-container {
+        background-color: #E8E0C5;
+        display: flex;
+        justify-content: space-around;
+
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5); /* Add this line for box shadow */
+
+
+    }
+
+    .home-page-restaurant-card {
+        height: 275px;
+        margin: 27px;
+        overflow: hidden;
+
+    }
+
+    /* .home-page-restaurant-card{
+        height: 300px;
+        margin: 30px;
+        overflow: hidden;
+
+    } */
+
+.home-page-restaurant-card-content h4 span+span{
+padding: 60px;
+}
+    .all-restaurants-preview-image {
+        height: 275px;
+        /* width: 192.5px; */
+        border-radius: 3px;
+        width: 352px;
+    }
+    /* .all-restaurants-preview-image {
+        height: 300px;
+        width: 210px;
+        border-radius: 3px;
+    } */
+    .home-page-restaurant-card-content {
+        padding: 6px;
+        box-sizing: border-box;
+        position: absolute;
+        background: rgb(27, 27, 27, .5);
+        color: white;
+        bottom: 96.6px;
+        bottom: 27px;
+        height: 40px;
+        width: 352px;
+
+
+    }
+
+    /* .home-page-restaurant-card-content{
+        height: 50px;
+        width: 210px;
+        padding: 6px;
+        box-sizing: border-box;
+        position: absolute;
+        background:rgb(27, 27, 27, .5);
+        color: white;
+        bottom: 105px;
+
+    } */
+
+    .home-page-restaurant-card:hover{
+        cursor:pointer;
+    }
+    .home-page-restaurant-card:hover .home-page-restaurant-card-content {
+        height: 110.4px;
+        bottom: 27px;
+
+    }
+    /* .home-page-restaurant-card:hover .home-page-restaurant-card-content{
+        height: 120px;
+        bottom: 105px;
+
+    } */
+
+    .home-page-restaurant-card-content h3 {
+        margin: 5px;
+        font-size: 17px;
+    }
+
+    .home-page-restaurant-card-content p {
+        margin: 10px;
+        font-size: 15px;
+        visibility:hidden;
+        opacity: 0;
+    }
+
+    .home-page-restaurant-card:hover .home-page-restaurant-card-content p{
+        opacity: 1;
+        visibility: visible;
+        font-weight: bold;
+    }
+
+    .home-page-restaurant-card{
+        cursor: pointer;
+    }
+
+    .container-swipe{
+width: 80%;
 display: flex;
-margin: 0px;
-padding: 0px;
-font-family: Helvetica, Arial, sans-serif;
-align-items: center;
-height: 130vh;
 justify-content: center;
-}
+padding-top: 130px;
 
-
-
-.home-page-restaurant-container {
-display: flex;
-background-color: #E8E0C5;
-}
-
-.home-page-restaurant-card {
-    height: 275px;
-    margin: 27px;
-    overflow: hidden;
 
 }
 
-/* .home-page-restaurant-card{
-    height: 300px;
-    margin: 30px;
-    overflow: hidden;
+.filler-information {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
 
-} */
-.all-restaurants-preview-image {
-    height: 275px;
-    width: 192.5px;
-    border-radius: 3px;
-}
-/* .all-restaurants-preview-image {
-    height: 300px;
-    width: 210px;
-    border-radius: 3px;
-} */
-.home-page-restaurant-card-content {
+  .our-dairy-filler,
+  .ingredients-filler,
+  .our-passion-filler {
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 19px;
+  }
 
-    height: 46px;
-    width: 192.5px;
-    padding: 6px;
-    box-sizing: border-box;
-    position: absolute;
-    background: rgb(27, 27, 27, .5);
-    color: white;
-    bottom: 96.6px;
+  .title-filler {
+    color: #333;
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
 
-}
 
-/* .home-page-restaurant-card-content{
-    height: 50px;
-    width: 210px;
-    padding: 6px;
-    box-sizing: border-box;
-    position: absolute;
-    background:rgb(27, 27, 27, .5);
-    color: white;
-    bottom: 105px;
-
-} */
-
-.home-page-restaurant-card:hover{
-    cursor:pointer;
-}
-.home-page-restaurant-card:hover .home-page-restaurant-card-content {
-    height: 110.4px;
-    bottom: 96.6px;
-
-}
-/* .home-page-restaurant-card:hover .home-page-restaurant-card-content{
-    height: 120px;
-    bottom: 105px;
-
-} */
-
-.home-page-restaurant-card-content h3 {
-    margin: 5px;
-    font-size: 17px;
-}
-
-.home-page-restaurant-card-content p {
-    margin: 10px;
-    font-size: 8px;
-    visibility:hidden;
-    opacity: 0;
-}
-
-.home-page-restaurant-card:hover .home-page-restaurant-card-content p{
-    opacity: 1;
-    visibility: visible;
-    font-weight: bold;
-}
-
-.home-page-restaurant-card{
-    cursor: pointer;
-}
+  .banner-welcome-2{
+    margin-top: -100px;
+    height: 865px;
+    width: 1686px;
+    padding: 120px;
+  }

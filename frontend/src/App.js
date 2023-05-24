@@ -11,6 +11,7 @@ import RestaurantItem from "./components/Restaurant/RestaurantItem";
 
 
 
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
