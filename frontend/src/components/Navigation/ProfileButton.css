@@ -14,9 +14,7 @@
 
 }
 
-.modal-backdrop{
-    z-index: 0;
-}
+
 /* .no-spots #ManageSpots {
     display: none;
 } */
@@ -31,12 +29,12 @@
         border-radius: 12px;
         box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
-        z-index: 2;
+        z-index: 2000;
         list-style-type: none;
         text-align: center;
         font-family: "Arial", sans-serif;
         color: #FF5E8E;
-        z-index: 1500
+
       }
 
 /* .profile-dropdown::before,
@@ -72,13 +70,16 @@
     color: #333;
     border: none;
     border-radius: 20px;
+    position: relative;
     padding: 10px 20px;
+    z-index: 2;
     font-size: 15px;
     cursor: pointer;
 }
 
 .sign-out-button:hover {
     background-color: #bbb;
+    cursor: pointer;
 }
 
 .profile-button-container {

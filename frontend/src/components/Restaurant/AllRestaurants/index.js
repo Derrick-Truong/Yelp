@@ -14,6 +14,7 @@ import { NavLink } from 'react-router-dom'
 import SwiperCore, { EffectCoverflow, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import {Navigation} from 'swiper';
 import banner from '../../../assets/banner-derrick.jpg'
 
 SwiperCore.use([EffectCoverflow, Pagination]);
@@ -46,6 +47,8 @@ const AllRestaurants = () => {
                         grabCursor={true}
                         centeredSlides={true}
                         slidesPerView={3}
+                        pagination={true}
+                        spaceBetween={5}
                         coverflowEffect={{
                             rotate: 50,
                             stretch: 0,
@@ -53,11 +56,11 @@ const AllRestaurants = () => {
                             modifier: 1,
                             slideShadows: true,
                         }}
-                        pagination={true}
-                        spaceBetween={5}
                         className="mySwiper"
                     >
                         <div className='swiping-corner'>
+                            <>
+                        <mySwiper>
                             {restaurantsValues?.sort((a, b) => b.avgRating - a.avgRating)?.map(restaurant => {
                                 const rating = restaurant?.avgRating;
                                 return (
@@ -88,20 +91,23 @@ const AllRestaurants = () => {
                                     </SwiperSlide>
 
                                 );
-                            })}</div>
+                            })}
+                                </mySwiper>
+                            </>
+                            </div>
                     </Swiper>
                 </div>
 
                 <div className='filler-information'>
                           <div className='our-dairy-filler'>
                             <h4 className='title-filler'>Our Mission</h4>
-                          Welcome to Ice Cream Delight, a heavenly oasis for ice cream enthusiasts, created by the visionary artisan Derrick Truong. Step into a world where every scoop is a delightful journey of flavors and textures, crafted with the utmost care and devotionAt Ice Cream Delight, we believe that exceptional ice cream begins with the finest dairy ingredients. TFrom classics like creamy vanilla and decadent chocolate to tantalizing twists like caramel swirl and fresh fruit sorbets, every scoop at Ice Cream Delight is a moment of pure bliss. Each batch is meticulously handcrafted by Derrick himself, ensuring that every spoonful delivers a burst of pure delight.
-We invite you to embark on a magical ice cream adventure at Ice Cream Delight. Discover the harmonious fusion of exceptional dairy, passion-infused craftsmanship, and an unrelenting pursuit of frozen perfection. Your taste buds will thank you as you experience the captivating allure of our extraordinary ice cream flavors. Welcome to a world where dreams are transformed into frozen realities—welcome to Ice Cream Delight by Derrick Truong.
+                          Welcome to Ice Cream Delight, a heavenly oasis for ice cream enthusiasts, created by the visionary artisan Derrick Truong. Step into a world where every scoop is a delightful journey of flavors and textures, crafted with the utmost care and at various stores helped ranked by other fellow members. From classics like creamy vanilla and decadent chocolate to tantalizing twists like caramel swirl and fresh fruit sorbets, we will help you find the flavor that will give you a sense of euphoria. Each batch is meticulously handcrafted by highly regarded chefs, ensuring that every spoonful delivers a burst of pure delight.
+We invite you to embark on a magical ice cream adventure. Discover the harmonious fusion of exceptional dairy, passion-infused craftsmanship, and an unrelenting pursuit of frozen perfection. Your taste buds will thank you as you experience the captivating allure of our extraordinary ice cream flavors. Welcome to a world where dreams are transformed into frozen realities—welcome to Ice Cream Delight by Derrick Truong.
                           </div>
-                          <div className='ingredients-filler'><h4 className='title-filler'>Our Users</h4>
+                          {/* <div className='ingredients-filler'><h4 className='title-filler'>Our Users</h4>
                           At Ice Cream Delight by Derrick Truong, we take pride in complementing our high-quality dairy with the very best ingredients. From scratch, we cook and bake an array of delectable treats in-house, ensuring that every guest is served the freshest and most exceptional ingredients. Our commitment to quality shines through in every scoop, creating an unforgettable ice cream experience.
                           </div>
-                          <div className='our-passion-filler'><h4 className='title-filler'>Our Passion</h4>Rooted in a shared love for ice cream and the cherished memories it invokes, Through meticulous ingredient selection, refined processes, and a passionate team, their aim was not just to craft delightful flavors but to foster togetherness. Whether it's a family outing, a moment of solace, a reunion, or simply indulging your sweet cravings, we believe that any occasion is perfect for savoring our creations and hope you find the same joy in our flavors as we do in creating them.</div>
+                          <div className='our-passion-filler'><h4 className='title-filler'>Our Passion</h4>Rooted in a shared love for ice cream and the cherished memories it invokes, Through meticulous ingredient selection, refined processes, and a passionate team, their aim was not just to craft delightful flavors but to foster togetherness. Whether it's a family outing, a moment of solace, a reunion, or simply indulging your sweet cravings, we believe that any occasion is perfect for savoring our creations and hope you find the same joy in our flavors as we do in creating them.</div> */}
                 </div>
             </div>
         </>

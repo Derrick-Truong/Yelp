@@ -1,0 +1,9 @@
+.delete-restaurant-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: pink;
+    border-radius: 20px;
+}

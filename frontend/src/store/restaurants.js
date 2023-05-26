@@ -50,7 +50,7 @@ export const getRestaurants = () => async dispatch => {
     if (response.ok) {
         const list = await response.json();
 
-        dispatch(homeRestaurants(list))
+     await  dispatch(homeRestaurants(list))
     }
 };
 
@@ -59,10 +59,10 @@ export const restaurantDetails = (restaurantId) => async dispatch => {
 
     if (response.ok) {
         const res = await response.json()
-        dispatch(getRestaurantDetails(res))
+       await dispatch(getRestaurantDetails(res))
     }
 }
-export const updateOneRestaurant = (restaurant, restaurantId) => async (dispatch) => {
+export const updateOneRestaurant = (restaurant, restaurantPictures,  restaurantId) => async (dispatch) => {
     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -70,15 +70,29 @@ export const updateOneRestaurant = (restaurant, restaurantId) => async (dispatch
     })
     if (res.ok) {
         const newRestaurant = await res.json()
-        // const data = {};
-        // data[spot.id] = updateSpot;
-        await dispatch(updateRestaurant(newRestaurant));
+        newRestaurant['RestaurantImages'] = []
+        for (let i = 0; i < restaurantPictures.length; i++) {
+            const response2 = await csrfFetch(`/api/restaurants/${restaurantId}/pictures`, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(restaurantPictures[i])
+            })
+
+            const newPicture = await response2.json()
+            if (response2.ok) {
+                newRestaurant.RestaurantImages.push(newPicture)
+            }
+        }
+        await dispatch(updateRestaurant(newRestaurant))
         return newRestaurant
-        // return updateSpot
     }
 
 
 };
+
+
 export const createRestaurant = (restaurant, restaurantPictures) => async dispatch => {
     const response = await csrfFetch('/api/restaurants', {
         method: 'POST',

@@ -3,16 +3,19 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteOneReview } from "../../../store/review";
+import './DeleteReview.css'
 
 
 
 const DeleteReview = ({reviewId}) => {
 const dispatch = useDispatch()
 const {closeModal} = useModal()
+const history = useHistory()
 
 const handleDelete = async(e) => {
     e.preventDefault()
     dispatch(deleteOneReview(reviewId)).then(closeModal)
+    history.push('/')
 }
 
 const handleCancel = (e) => {

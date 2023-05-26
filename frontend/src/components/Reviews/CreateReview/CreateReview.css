@@ -10,7 +10,9 @@ background-color: pink;
 border-radius: 20px;
 }
 
-
+.error{
+    color: red;
+}
 textarea {
     resize: none;
     border: 1px solid;

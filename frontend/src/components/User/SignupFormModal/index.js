@@ -18,14 +18,14 @@ function SignupFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
-
+  
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
         if (password === confirmPassword) {
             const data = await dispatch(signup(firstName, lastName, username, email, password));
             if (data && data.errors) {
-                setErrors(data.errors)
+               setErrors()
             }
         } else {
             setErrors(['Confirm Password field must be the same as the Password field']);

@@ -19,18 +19,22 @@ function LoginFormModal() {
 
     var docs = document.getElementById('img');
     docs?.setAttribute('src', 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQ2OGY0MDEwYWY3NGU0MGUyMmZiMDZiMzg4M2E4ZWNhZmNhN2VkMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oz8xwKBsHNlZ6UvMA/giphy.gif')
-
-    const handleSubmit = (e) => {
+   
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential, password }))
-            .then(closeModal)
-            .catch(
-                async (res) => {
-                    const data = await res?.json();
-                    if (data && data.errors) setErrors(data.errors);
-                }
-            );
+        try {
+            await dispatch(sessionActions.login({ credential, password }));
+            closeModal();
+
+        } catch (res) {
+            if (res.status === 401) {
+                setErrors(["User not found. Please check your credentials."]);
+            } else {
+                const data = await res?.json();
+                if (data && data.errors) setErrors(data.errors);
+            }
+        }
     };
 
     const demoSignIn = async (e) => {
@@ -56,11 +60,13 @@ function LoginFormModal() {
                 />
                 <h5 className='log-in-form-title'>Enter Credentials And Password</h5>
                 <form className="form-log-in" onSubmit={handleSubmit}>
-                    <ul>
-                        {errors?.map((error, idx) => (
-                            <li key={idx}>{error}</li>
-                        ))}
-                    </ul>
+                    {errors.length > 0 && (
+                        <ul className="error-messages">
+                            {errors.map((error, idx) => (
+                                <li key={idx}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                     <label>
                         <input className="credential-and-password-form"
                             type="text"

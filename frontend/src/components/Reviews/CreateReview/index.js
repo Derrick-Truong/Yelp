@@ -5,43 +5,52 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { getReviews } from "../../../store/review"
+import { createOneReviewNoPic } from "../../../store/review"
+
 import './CreateReview.css'
 
-const CreateReview = ({restaurantId}) => {
+const CreateReview = ({ restaurantId }) => {
 
     const dispatch = useDispatch()
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState('');
     const [url, setUrl] = useState('')
     const { closeModal } = useModal();
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState([])
 
     const handleCancel = (e) => {
         e.preventDefault();
         closeModal();
     };
-    function checkURL(url) {
-        return /(.*)(\.png|.jpg|.jpeg)/.test(url);
-    }
+
 
     const valid = () => {
-        let newErrors = {};
-        if (description.length < 1){
-            newErrors.description='Description is required'
+        let newErrors = [];
+        if (description.length < 1) {
+            newErrors.description = 'Description is required'
         }
-        if (rating > 5 || rating < 1){
-            newErrors.rating='Rating must be between 1 and 5'
+        if (!rating) {
+            newErrors.rating = 'Rating is required'
         }
-        if (url && !checkURL(url)){
-            newErrors.url = 'Url must end in jpegm jpg, gif, or png'
+        if (url) {
+            if (!
+                (
+                    url.endsWith(".png") ||
+                    url.endsWith(".jpg") ||
+                    url.endsWith(".jpeg")
+                )
+            ) {
+                newErrors.url = "Image URL must end in .png, .jpg, or .jpeg";
+            }
         }
         setErrors(newErrors)
+        console.log('NewErrors', newErrors)
     }
     const onSubmit = async (e) => {
         e.preventDefault()
         valid()
-        if (errors?.length) {
-            return setErrors({})
+        if (errors?.length > 0) {
+            return setErrors([])
         }
         const review = {
             rating: rating,
@@ -51,8 +60,15 @@ const CreateReview = ({restaurantId}) => {
         const image = {
             url: url
         }
-        dispatch(createOneReview(review, image, restaurantId))
-        closeModal()
+
+        if (!url){
+            dispatch(createOneReviewNoPic(review, restaurantId)).then(closeModal)
+        }
+        else {
+        dispatch(createOneReview(review, image, restaurantId)).then(closeModal)
+
+        }
+
         // dispatch(getReviews(restaurantId))
 
     }
@@ -84,7 +100,7 @@ const CreateReview = ({restaurantId}) => {
                 <br></br>
                 <h3 className='create-review-upload-pic'>Any Picture You Want To Upload?</h3>
                 <br></br>
-                <input className='create-review-photo-url-input' placeholder='                           Pic please!' value={url} onChange={(e) => setUrl(e.target.value)}/>
+                <input className='create-review-photo-url-input' placeholder='                           Pic please!' value={url} onChange={(e) => setUrl(e.target.value)} />
 
                 <h4></h4>
                 {errors?.url && <span className="error">{errors?.url}</span>}

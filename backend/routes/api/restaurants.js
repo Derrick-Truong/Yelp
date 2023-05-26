@@ -158,7 +158,7 @@ router.post('/', [requireAuth, validateRestaurant],
 )
 
 //Create an Image for a Restaurant
-router.post('/:id/pictures', requireAuth, validateReview, async(req,res, next) => {
+router.post('/:id/pictures', requireAuth, async(req,res, next) => {
 let picture;
 const {url, preview} = req.body
 let newImage = await Restaurant.findOne({
@@ -186,6 +186,50 @@ let newImage = await Restaurant.findOne({
     preview
  })
  res.json(picture)
+})
+
+//edit restaurant image
+
+router.put('/:id/pictures', requireAuth, async (req, res, next) => {
+
+    const { url} = req.body
+    let newImage = await Restaurant.findOne({
+        where: {
+            id: req.params.id
+        },
+        inckude:{
+            model:RestaurantImage
+        }
+    })
+
+    if (!newImage) {
+        res.status(404);
+        return res.json({
+            message: "Restaurant could not be found"
+        })
+    }
+
+    if (newImage.userId !== req.user.id) {
+        res.status(403);
+        return res.json({
+            message: "Forbidden/not allowed"
+        })
+    }
+    let findImage = await RestaurantImage.findOne({
+        where: {
+            restaurantId: req.params.id
+        }
+    })
+   if (findImage){
+    let updateRestImage = await findImage.update({
+        url
+    })
+
+    res.json({
+        updateRestImage
+    })
+   }
+
 })
 
 
@@ -274,7 +318,8 @@ router.get('/:id/reviews', async(req, res, next) => {
                 attributes: ['id', 'username', 'firstName', 'lastName']
             },
             {
-                model: ReviewImage
+                model: ReviewImage,
+                attributes:['id','url']
 
 
 
@@ -287,11 +332,12 @@ router.get('/:id/reviews', async(req, res, next) => {
     })
 
     Reviews.forEach(review => {
+        if(review.ReviewImage){
         review.previewImage = review.ReviewImage.url
-
-
-
         delete review.ReviewImage
+        }
+
+
     })
 
 

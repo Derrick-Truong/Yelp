@@ -38,7 +38,7 @@ export const getReviews = (restaurantId) => async dispatch => {
 
     if (response.ok) {
         const list = await response.json()
-        dispatch(getReviewsForRestaurant(list))
+      await  dispatch(getReviewsForRestaurant(list))
     }
 }
 
@@ -61,7 +61,7 @@ export const updateOneReview = (review, reviewImage, reviewId ) => async dispatc
             body: JSON.stringify(reviewImage)
         })
 
-        if (successImage) {
+        if (successImage.ok) {
             const previewImage = await successImage.json()
             response2.previewImage = previewImage.url
         }
@@ -100,6 +100,22 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
     }
 
 
+}
+
+export const createOneReviewNoPic = (review, restaurantId) => async dispatch => {
+    const response = await csrfFetch(`/api/restaurants/${restaurantId}/reviews`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(review)
+    })
+
+    if (response.ok){
+        const newReview = await response.json()
+        dispatch(createReview(newReview))
+        return newReview
+    }
 }
 
 export const deleteOneReview = (reviewId) => async dispatch => {

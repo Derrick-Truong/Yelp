@@ -17,6 +17,11 @@ const CreateRestaurant = () => {
     const [price, setPrice] = useState("");
     const [errors, setErrors] = useState([]);
     const [image2Url, setImage2Url] = useState("");
+    const [im3, setIm3] = useState('')
+    const [im4, setIm4] = useState('')
+    const [im5, setIm5] = useState('')
+    const [im6, setIm6] = useState('')
+
 
 
     const valid = () => {
@@ -69,6 +74,53 @@ const CreateRestaurant = () => {
                 newErrors.image2Url = "Image URL must end in .png, .jpg, or .jpeg";
             }
         }
+
+        if(im3){
+            if (
+                !(
+                    im3.endsWith('.png') ||
+                    im3.endsWith('.jpg') ||
+                    im3.endsWith('.jpeg')
+                )
+            ) {
+                newErrors.im2 = "Image URL must end in .png, .jpg, or .jpeg";
+            }
+        }
+        if (im4) {
+            if (
+                !(
+                    im4.endsWith('.png') ||
+                    im4.endsWith('.jpg') ||
+                    im4.endsWith('.jpeg')
+                )
+            ) {
+                newErrors.im4 = "Image URL must end in .png, .jpg, or .jpeg";
+            }
+        }
+        if (im5) {
+            if (
+                !(
+                    im5.endsWith('.png') ||
+                    im5.endsWith('.jpg') ||
+                    im5.endsWith('.jpeg')
+                )
+            ) {
+                newErrors.im5 = "Image URL must end in .png, .jpg, or .jpeg";
+            }
+        }
+        if (im6) {
+            if (
+                !(
+                    im6.endsWith('.png') ||
+                    im6.endsWith('.jpg') ||
+                    im6.endsWith('.jpeg')
+                )
+            ) {
+                newErrors.im6 = "Image URL must end in .png, .jpg, or .jpeg";
+            }
+        }
+
+
         setErrors(newErrors)
         console.log('NewErrors', newErrors)
     }
@@ -105,13 +157,43 @@ const handleSubmit = async(e) => {
         }
         restaurantImage.push(secondImage)
     }
-
-
-
-    const createdRestaurant = dispatch(createRestaurant(newListing, restaurantImage))
-    if (createdRestaurant.ok) {
-        history.push('/')
+    if (im3) {
+        const image3 = {
+            preview: false,
+            url: im3
+        }
+        restaurantImage.push(image3)
     }
+    if (im4) {
+        const image4 = {
+            preview: false,
+            url: im4
+        }
+        restaurantImage.push(image4)
+    }
+    if (im5) {
+        const image5 = {
+            preview: false,
+            url: im5
+        }
+        restaurantImage.push(image5)
+    }
+    if (im6) {
+        const image6 = {
+            preview: false,
+            url: im6
+        }
+        restaurantImage.push(image6)
+    }
+
+    
+
+
+
+dispatch(createRestaurant(newListing, restaurantImage))
+
+        history.push('/')
+
 }
     return (
         <section className="create-restaurant-page">
@@ -182,6 +264,7 @@ const handleSubmit = async(e) => {
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
+                <h4></h4>
                 {errors?.description && <span className="error">{errors?.description}</span>}
                 <br></br>
                 <input
@@ -199,8 +282,44 @@ const handleSubmit = async(e) => {
                     value={image2Url}
                     onChange={e => setImage2Url(e.target.value)}
                 />
-
+                <h4></h4>
                 {errors?.image2url && <span className="error">{errors?.image2url}</span>}
+                <br></br>
+                <input
+                    type="text"
+                    placeholder="Image 3 Url"
+                    value={im3}
+                    onChange={e => setIm3(e.target.value)}
+                />
+                <h4></h4>
+                {errors?.im3url && <span className="error">{errors?.im3}</span>}
+                <br></br>
+                <input
+                    type="text"
+                    placeholder="Image 4 Url"
+                    value={im4}
+                    onChange={e => setIm4(e.target.value)}
+                />
+                <h4></h4>
+                {errors?.im4 && <span className="error">{errors?.im4}</span>}
+                <br></br>
+                <input
+                    type="text"
+                    placeholder="Image 5 Url"
+                    value={im5}
+                    onChange={e => setIm5(e.target.value)}
+                />
+                <h4></h4>
+                {errors?.im5 && <span className="error">{errors?.im5}</span>}
+                <br></br>
+                <input
+                    type="text"
+                    placeholder="Image 6 Url"
+                    value={im6}
+                    onChange={e => setIm6(e.target.value)}
+                />
+                <h4></h4>
+                {errors?.im6 && <span className="error">{errors?.im6}</span>}
                 <br></br>
             <button type='submit' className="create-button">Create Restaurant</button>
 </form>
