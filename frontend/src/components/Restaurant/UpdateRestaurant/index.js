@@ -198,7 +198,7 @@ const UpdateRestaurant = ({restaurant}) => {
 
         dispatch(updateOneRestaurant(newListing, restaurantImage, restaurantId)).then(closeModal)
 
-       
+
 
     }
     return (
@@ -327,7 +327,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <h4></h4>
                 {errors?.im6 && <span className="error">{errors?.im6}</span>}
                 <br></br>
-                <button type='submit' className="create-button">Update Restaurant</button>
+                <button type='submit' className="create-button">Update Shop</button>
             </form>
         </section>
     )

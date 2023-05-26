@@ -14,10 +14,9 @@ function Navigation({ isLoaded }) {
     return (
         <div className='navigation-bar'>
             <div className='nav-innerdiv'>
+                <a href="/"><img src={Yelp} height='70px' width='80px' alt='Ice Cream' /></a>
             <div className="left-nav-bar">
-        <a href="/"><img src={Yelp} height='70px' width='80px' alt='Ice Cream'/></a>
-          {/* <img src={Yelp} height="100px" width="300px" alt="Logo" /> */}
-
+                    <button className='nav-create-shop-button'><NavLink exact to='/create'>Create a Shop</NavLink></button>
       </div>
                     {isLoaded && (
                             <div className='right-nav-div'>

@@ -186,7 +186,7 @@ const handleSubmit = async(e) => {
         restaurantImage.push(image6)
     }
 
-    
+
 
 
 
@@ -321,7 +321,7 @@ dispatch(createRestaurant(newListing, restaurantImage))
                 <h4></h4>
                 {errors?.im6 && <span className="error">{errors?.im6}</span>}
                 <br></br>
-            <button type='submit' className="create-button">Create Restaurant</button>
+            <button type='submit' className="create-button">Create Shop</button>
 </form>
 </section>
     )

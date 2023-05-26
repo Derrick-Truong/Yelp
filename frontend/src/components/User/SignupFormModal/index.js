@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import './SignupFormModal.css'
-import { signup } from "../../../store/session";
-
+import * as sessionActions from "../../../store/session";
+import { useModal } from "../../../Context/Modal";
+import { useHistory } from "react-router-dom";
 
 
 function SignupFormPage() {
+    const history = useHistory()
+    const {closeModal} = useModal()
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState("");
@@ -18,29 +21,49 @@ function SignupFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
-  
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (password.length < 6) {
+            setErrors(["Password should be longer than 6 characters."]);
+            return;
+        }
+
+        if (username.length < 4) {
+            setErrors(["Username should be longer than 4 characters."]);
+            return;
+        }
         setErrors([]);
         if (password === confirmPassword) {
-            const data = await dispatch(signup(firstName, lastName, username, email, password));
-            if (data && data.errors) {
-               setErrors()
-            }
-        } else {
-            setErrors(['Confirm Password field must be the same as the Password field']);
+            setErrors([]);
+            return dispatch(
+                sessionActions.signup({
+                    email,
+                    username,
+                    firstName,
+                    lastName,
+                    password,
+                })
+            )
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                })
+                .then(history.push("/"));
         }
+        setErrors(["Confirm Password field must be the same as the Password field."]);
+
     };
 
     return (
         <>
-
             <form className='sign-up-form-container' onSubmit={handleSubmit}>
+                {errors?.map((error, idx) => (
+                    <li key={idx}>{error}</li>
+                ))}
                 <h1>Sign Up</h1>
                 <br></br>
-                <ul>
-                    {errors?.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
                 <label>
                     <input
                         type="text"
@@ -95,7 +118,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                <button type="submit">Sign Up</button>
+                <button disabled={(password.length < 6 || username.length < 4 || password !== confirmPassword || !lastName || !firstName || !email) ? true : false} type="submit">Sign Up</button>
             </form>
         </>
     );

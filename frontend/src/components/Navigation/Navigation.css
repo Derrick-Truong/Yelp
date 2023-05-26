@@ -37,6 +37,11 @@
     box-sizing: border-box;
 }
 
+.nav-create-shop-button{
+    display: flex;
+    margin-top: 10px;
+    text-decoration: none;
+}
 /* .create-spot-2 {
     color: #0d0d0d;
     font-size: 15px;
