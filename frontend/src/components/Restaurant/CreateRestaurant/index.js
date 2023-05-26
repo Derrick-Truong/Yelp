@@ -190,9 +190,11 @@ const handleSubmit = async(e) => {
 
 
 
-dispatch(createRestaurant(newListing, restaurantImage))
+const successStore = await dispatch(createRestaurant(newListing, restaurantImage))
 
+       if(successStore){
         history.push('/')
+       }
 
 }
     return (

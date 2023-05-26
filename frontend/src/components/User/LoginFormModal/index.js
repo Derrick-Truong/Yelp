@@ -19,7 +19,7 @@ function LoginFormModal() {
 
     var docs = document.getElementById('img');
     docs?.setAttribute('src', 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQ2OGY0MDEwYWY3NGU0MGUyMmZiMDZiMzg4M2E4ZWNhZmNhN2VkMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oz8xwKBsHNlZ6UvMA/giphy.gif')
-   
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         setErrors([]);
@@ -67,6 +67,7 @@ function LoginFormModal() {
                             ))}
                         </ul>
                     )}
+                    <br></br>
                     <label>
                         <input className="credential-and-password-form"
                             type="text"
@@ -76,7 +77,7 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-                    <h4></h4>
+                   <br></br>
                     <label>
 
                         <input className="credential-and-password-form"

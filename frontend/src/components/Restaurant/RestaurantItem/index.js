@@ -161,7 +161,7 @@ const RestaurantItem = () => {
                 <div className='restaurant-item-reviews-feed'>
                     <div>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
 
-                    {reviews.length === 0 ? <><h1>Be The First To Write a Hopefully Nice Review</h1></> : <></>}
+                    
                     <div className='container-swipe'>
                         <Swiper
 
