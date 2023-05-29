@@ -86,7 +86,7 @@ const RestaurantItem = () => {
                 <div className='restaurant-item-images-container-slider'>
 
                     <div className='restaurant-item-images-container-slider-track'>
-                        {restaurant?.RestaurantImages?.slice(1)?.reverse()?.map((image) => {
+                        {restaurant?.RestaurantImages?.slice(0)?.reverse()?.map((image) => {
                          return (
                           image && <img key={image?.id} className="restaurant-item-restaurant-photos" src={image?.url} alt="restaurant-pic" />
                                 )})}

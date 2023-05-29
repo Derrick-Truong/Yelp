@@ -166,35 +166,35 @@ const UpdateRestaurant = ({restaurant}) => {
         if (image2Url) {
             const secondImage = {
 
-                url: image2Url || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
+                url: image2Url || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
             }
             restaurantImage.push(secondImage)
         }
         if (im3) {
             const image3 = {
 
-                url: im3 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
+                url: im3 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
             }
             restaurantImage.push(image3)
         }
         if (im4) {
             const image4 = {
 
-                url: im4 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
+                url: im4 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
             }
             restaurantImage.push(image4)
         }
         if (im5) {
             const image5 = {
 
-                url: im5 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
+                url: im5 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
             }
             restaurantImage.push(image5)
         }
         if (im6) {
             const image6 = {
 
-                url: im6 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
+                url: im6 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
             }
             restaurantImage.push(image6)
         }
