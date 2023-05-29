@@ -24,13 +24,13 @@ function SignupFormPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password.length < 6) {
-            setErrors(["Password should be longer than 6 characters."]);
+        if (password.length < 1) {
+            setErrors(["Password is required."]);
             return;
         }
 
-        if (username.length < 4) {
-            setErrors(["Username should be longer than 4 characters."]);
+        if (username.length < 1) {
+            setErrors(["Username is required"]);
             return;
         }
         setErrors([]);
@@ -73,6 +73,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
+                <br></br>
                 <label>
                     <input
                         type="text"
@@ -82,6 +83,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
+                <br></br>
                 <label>
                     <input
                         type="text"
@@ -91,6 +93,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
+                <br></br>
                 <label>
                     <input
                         type="text"
@@ -100,6 +103,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
+                <br></br>
                 <label>
                     <input
                         type="password"
@@ -109,6 +113,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
+                <br></br>
                 <label>
                     <input
                         type="password"
@@ -118,7 +123,8 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                <button disabled={(password.length < 6 || username.length < 4 || password !== confirmPassword || !lastName || !firstName || !email) ? true : false} type="submit">Sign Up</button>
+                <br></br>
+                <button type="submit">Sign Up</button>
             </form>
         </>
     );

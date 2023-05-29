@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
             <div className='nav-innerdiv'>
                 <a href="/"><img src={Yelp} height='70px' width='80px' alt='Ice Cream' /></a>
             <div className="left-nav-bar">
-                    <button className='nav-create-shop-button'><NavLink exact to='/create'>Create a Shop</NavLink></button>
+                   {sessionUser ? <button className='nav-create-shop'><NavLink  className='nav-create-shop-button' exact to='/create'>Create a Shop</NavLink></button>:<></>}
       </div>
                     {isLoaded && (
                             <div className='right-nav-div'>

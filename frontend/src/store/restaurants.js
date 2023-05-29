@@ -106,7 +106,7 @@ export const createRestaurant = (restaurant, restaurantPictures) => async dispat
         const newRestaurant = await response.json()
         newRestaurant['RestaurantImages'] = []
     for (let i=0; i < restaurantPictures.length; i++) {
-        const response2 = await csrfFetch(`/api/restaurants/${newRestaurant.id}/pictures`, {
+        const response2 = await csrfFetch(`/api/restaurants/${newRestaurant?.id}/pictures`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -119,9 +119,10 @@ export const createRestaurant = (restaurant, restaurantPictures) => async dispat
             newRestaurant.RestaurantImages.push(newPicture)
         }
     }
-   await dispatch(createOneRestaurant(newRestaurant))
-    return newRestaurant
+        await dispatch(createOneRestaurant(newRestaurant))
+        return newRestaurant
     }
+   
 
 }
 

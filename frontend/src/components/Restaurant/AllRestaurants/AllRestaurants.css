@@ -19,8 +19,11 @@
         background-color: #E8E0C5;
         display: flex;
         justify-content: space-around;
-
-        box-shadow: 0 0 5px rgba(0, 0, 0, .5); /* Add this line for box shadow */
+        /* box-shadow: 0 0 5px rgba(0, 0, 0, .5); */
+        /* min-width: 275px;
+        min-height: 275px */
+        min-width: 275px;
+    min-height: 275px;
 
 
     }
@@ -29,7 +32,7 @@
     .home-page-restaurant-card {
         height: 275px;
         margin: 27px;
-        overflow: hidden;
+        /* overflow: auto; */
 
     }
 
@@ -40,14 +43,16 @@
 
     } */
 
-.home-page-restaurant-card-content h4 span+span{
+/* .home-page-restaurant-card-content h4 span+span{
 padding: 60px;
-}
+} */
     .all-restaurants-preview-image {
         height: 275px;
+        width: 275px;
         /* width: 192.5px; */
+
         border-radius: 3px;
-        width: 352px;
+        /* width: 352px; */
     }
     /* .all-restaurants-preview-image {
         height: 300px;
@@ -62,10 +67,12 @@ padding: 60px;
         color: white;
         bottom: 96.6px;
         bottom: 27px;
-        height: 40px;
-        width: 352px;
+        height: 59px;
+    }
 
-
+    .hidden-message-home{
+        height: 30px;
+        width: 262px;
     }
 
     /* .home-page-restaurant-card-content{
@@ -100,7 +107,7 @@ padding: 60px;
     }
 
     .home-page-restaurant-card-content p {
-        margin: 10px;
+        /* margin: 10px; */
         font-size: 15px;
         visibility:hidden;
         opacity: 0;
@@ -117,7 +124,7 @@ padding: 60px;
     }
 
     .container-swipe{
-width: 80%;
+width: 65%;
 display: flex;
 justify-content: center;
 padding-top: 130px;
@@ -125,14 +132,19 @@ padding-top: 130px;
 }
 
 .filler-information {
-    margin: 20px;
-    padding-top: 20px;
-    background-color: #f5f5f5;
-  }
+    padding-top: 102px;
+    /* background-color: #f5f5f5; */
+    /* background: linear-gradient(to top, rgba(239, 189, 189, 0), rgba(239, 189, 189, 1), rgba(239, 189, 189, 1), rgba(239, 189, 189, 0)); */
+    padding-bottom: 97px;
+    padding-left: 76px;
+    width: 600px;
+}
+
 
   .our-dairy-filler{
-    width: 600px;
+
     padding: 16px;
+
 
   }
 
@@ -142,6 +154,9 @@ padding-top: 130px;
     font-size: 30px;
     margin-bottom: 10px;
     text-align: center;
+    font-family: 'Lasting Sketch', sans-serif;
+    font-size: 45px;
+
   }
 
 
@@ -152,3 +167,19 @@ padding-top: 130px;
     padding-top: 120px;
     padding-bottom: 170px;
   }
+
+  .inside-text-filler{
+    line-height: 1.8;
+    font-family: 'TT Nooks Script Trial', sans-serif;
+    font-size: 20px;
+    color: rgb(59 57 57);
+    text-align: center;
+}
+
+.home-page-restaurant-title{
+    font-size: 25px;
+    font-family: 'Analisa', sans-serif;
+    font-weight: bold;
+
+
+}

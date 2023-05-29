@@ -90,7 +90,7 @@ router.get('/:id', async(req, res, next) => {
             },
             {
                 model:RestaurantImage,
-                attributes:['id', 'preview', 'url']
+
             }
         ],
 
@@ -159,11 +159,14 @@ router.post('/', [requireAuth, validateRestaurant],
 
 //Create an Image for a Restaurant
 router.post('/:id/pictures', requireAuth, async(req,res, next) => {
-let picture;
+
 const {url, preview} = req.body
 let newImage = await Restaurant.findOne({
     where: {
         id: req.params.id
+    },
+    include:{
+        model: RestaurantImage
     }
 })
 
@@ -180,12 +183,12 @@ let newImage = await Restaurant.findOne({
          message: "Forbidden/not allowed"
      })
  }
- picture = await newImage.createRestaurantImage({
-    restaurantId: req.user.id,
+ let picture = await newImage.createRestaurantImage({
+    restaurantId: newImage.id,
     url,
     preview
  })
- res.json(picture)
+ res.json({picture})
 })
 
 //edit restaurant image

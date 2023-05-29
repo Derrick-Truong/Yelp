@@ -102,6 +102,22 @@ export const createOneReview = (review, reviewImage, restaurantId) => async disp
 
 }
 
+export const updateOneReviewNoPic = (review, reviewId) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(review)
+    })
+
+    if (response.ok) {
+        const newReview = await response.json()
+        dispatch(updateReview(newReview))
+        return newReview
+    }
+}
+
 export const createOneReviewNoPic = (review, restaurantId) => async dispatch => {
     const response = await csrfFetch(`/api/restaurants/${restaurantId}/reviews`, {
         method: 'POST',

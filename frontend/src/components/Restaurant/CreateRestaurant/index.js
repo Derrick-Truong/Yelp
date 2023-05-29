@@ -16,13 +16,18 @@ const CreateRestaurant = () => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [errors, setErrors] = useState([]);
-    const [image2Url, setImage2Url] = useState("");
-    const [im3, setIm3] = useState('')
-    const [im4, setIm4] = useState('')
-    const [im5, setIm5] = useState('')
-    const [im6, setIm6] = useState('')
+    const [image2Url, setImage2Url] = useState('');
+    const [im3, setIm3] = useState("")
+    const [im4, setIm4] = useState("")
+    const [im5, setIm5] = useState("")
+    const [im6, setIm6] = useState("")
 
+    const [isPhotosOpen, setIsPhotosOpen] = useState(false);
+    const [images, setImages] = useState([]);
 
+    const togglePhotosDropdown = () => {
+        setIsPhotosOpen(!isPhotosOpen);
+      };
 
     const valid = () => {
         let newErrors = []
@@ -44,7 +49,12 @@ const CreateRestaurant = () => {
         if (!price) {
             newErrors.price = "Price per night is required."
         }
-
+        if (!description) {
+            newErrors.description = "Description is required."
+        }
+        if (!title) {
+            newErrors.title = "Title is required."
+        }
         if (price && !(parseInt(price))) {
             newErrors.price = "Price is required needs to be a number."
         }
@@ -124,6 +134,15 @@ const CreateRestaurant = () => {
         setErrors(newErrors)
         console.log('NewErrors', newErrors)
     }
+    const handleAddPhoto = () => {
+        setImages((prevImages) => [...prevImages, ""]);
+      };
+
+      const handlePhotoChange = (index, event) => {
+        const newImages = [...images];
+        newImages[index] = event.target.value;
+        setImages(newImages);
+      };
 
 const handleSubmit = async(e) => {
 
@@ -143,50 +162,46 @@ const handleSubmit = async(e) => {
         state: state
     }
     let restaurantImage = [];
-    if (previewImage){
+
         const firstImage = {
             preview: true,
             url: previewImage
         }
         restaurantImage.push(firstImage)
-    }
-    if (image2Url) {
+
         const secondImage = {
             preview: false,
-            url: image2Url
+            url: image2Url || 'https://images-ext-2.discordapp.net/external/ugB5ZrnkEUSqYhqH4Q_wCODFhiIp6Z1xDA6hyt_rpkM/%3Fresponse-content-disposition%3Dinline%26X-Amz-Security-Token%3DIQoJb3JpZ2luX2VjEDkaCXVzLXdlc3QtMSJHMEUCICKcx9PUIheRs3wbqUk2TI4lmcfuyQSzMCePv0ro6aMLAiEAoaxlthjkrAbccwKRqd%252F7iF2gre0M1GGv0vepF%252FvNRA4q5AIIchAAGgw5ODIzNTQ1NTY4ODIiDKOl2hUqIP%252BAaNcZWCrBAuprwcwkDttZyHCsMPkrq3%252BuFDYm1rNggigq%252Bz7oIfVkY3Jahte3JSbbpkdZ5ANDXWWMwLJSpbCd%252FUaVA%252BSke8Jr2AZbdkcYZE5ynW5i23eFTQmjCtrreFZ6Lu6DBcGG1wLloGIfYROz3jJ5figpUYJ4P6J3Ns0odGLkpcnCwpa%252F4PuvT%252Fu6juRdvd5lVFpDXQS1brMiLGiOR4eqMAaj0kQBNzd24ObNqTMZPNSn8mIABV11Dj4ACFg7FLkq8VsujBZQQtMhcd8O1lHOvGtxkWeeTuX863iC4YAlwOb3Zp0VqBW0n4cG0YO%252FL8vPp3VVAYwx%252Bxazd8eBotBOvN8wc%252Bd1fMi6iRrga%252BLkQ8BrfY0cwwLBjhXU87VGKPdl4igIGDZeKD0kam%252FaTSZiBLnDV0mXF65l28MwpCR4o0gpNMMrATD2xtGjBjqzAtEJEbTGdg1w65CtlSpTTJEK4WIJMXAHGZraGZe%252F3x4UcmAYCHyQyYxZuig%252F6hFn6CKHu6Sfr5buvSeqDb%252BYM3FT9LhFC8s4KZRTH%252FToKLGs%252FWGXH4pz1pzA0iudP8CKPi0FUEDzY5B0szrT1poiZNKD3IoSR0QvHTLiONjAuCB7ZhomXUPL7g8fdLxBiXY7iEN%252Fmd1t93HZaELPxoBAUyJmx6IIBr1PW%252FnsLh%252FhOT36xlKaIeIbqh2TzhM64T5UTUfAeXpPpxVge00GEJF3t2rEm9v%252F7vsjqgWVJYAfS0ZJhI9YqhggbkHltVfRUPi7yVhDoFUXiWXG9zO%252BsgKSdsdy9cUfrGzYPllY1RuoILEGgNEoGMm%252F%252FBE5lTjv8mvuL8QV0w%252BF4S7fbAw6EarDWx4eEAs%253D%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Date%3D20230529T125940Z%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Expires%3D300%26X-Amz-Credential%3DASIA6JOHE67JEJWL7MNQ%252F20230529%252Fus-west-1%252Fs3%252Faws4_request%26X-Amz-Signature%3D4aaa8b2f8df5c196bd19199a2d52b4df7125ce4ec9cdca16532f0f51db028917/https/d-yelp.s3.us-west-1.amazonaws.com/no-photo.jpg?width=753&height=675'
         }
         restaurantImage.push(secondImage)
-    }
-    if (im3) {
+
+
         const image3 = {
             preview: false,
-            url: im3
+            url: im3 || 'https://images-ext-2.discordapp.net/external/ugB5ZrnkEUSqYhqH4Q_wCODFhiIp6Z1xDA6hyt_rpkM/%3Fresponse-content-disposition%3Dinline%26X-Amz-Security-Token%3DIQoJb3JpZ2luX2VjEDkaCXVzLXdlc3QtMSJHMEUCICKcx9PUIheRs3wbqUk2TI4lmcfuyQSzMCePv0ro6aMLAiEAoaxlthjkrAbccwKRqd%252F7iF2gre0M1GGv0vepF%252FvNRA4q5AIIchAAGgw5ODIzNTQ1NTY4ODIiDKOl2hUqIP%252BAaNcZWCrBAuprwcwkDttZyHCsMPkrq3%252BuFDYm1rNggigq%252Bz7oIfVkY3Jahte3JSbbpkdZ5ANDXWWMwLJSpbCd%252FUaVA%252BSke8Jr2AZbdkcYZE5ynW5i23eFTQmjCtrreFZ6Lu6DBcGG1wLloGIfYROz3jJ5figpUYJ4P6J3Ns0odGLkpcnCwpa%252F4PuvT%252Fu6juRdvd5lVFpDXQS1brMiLGiOR4eqMAaj0kQBNzd24ObNqTMZPNSn8mIABV11Dj4ACFg7FLkq8VsujBZQQtMhcd8O1lHOvGtxkWeeTuX863iC4YAlwOb3Zp0VqBW0n4cG0YO%252FL8vPp3VVAYwx%252Bxazd8eBotBOvN8wc%252Bd1fMi6iRrga%252BLkQ8BrfY0cwwLBjhXU87VGKPdl4igIGDZeKD0kam%252FaTSZiBLnDV0mXF65l28MwpCR4o0gpNMMrATD2xtGjBjqzAtEJEbTGdg1w65CtlSpTTJEK4WIJMXAHGZraGZe%252F3x4UcmAYCHyQyYxZuig%252F6hFn6CKHu6Sfr5buvSeqDb%252BYM3FT9LhFC8s4KZRTH%252FToKLGs%252FWGXH4pz1pzA0iudP8CKPi0FUEDzY5B0szrT1poiZNKD3IoSR0QvHTLiONjAuCB7ZhomXUPL7g8fdLxBiXY7iEN%252Fmd1t93HZaELPxoBAUyJmx6IIBr1PW%252FnsLh%252FhOT36xlKaIeIbqh2TzhM64T5UTUfAeXpPpxVge00GEJF3t2rEm9v%252F7vsjqgWVJYAfS0ZJhI9YqhggbkHltVfRUPi7yVhDoFUXiWXG9zO%252BsgKSdsdy9cUfrGzYPllY1RuoILEGgNEoGMm%252F%252FBE5lTjv8mvuL8QV0w%252BF4S7fbAw6EarDWx4eEAs%253D%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Date%3D20230529T125940Z%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Expires%3D300%26X-Amz-Credential%3DASIA6JOHE67JEJWL7MNQ%252F20230529%252Fus-west-1%252Fs3%252Faws4_request%26X-Amz-Signature%3D4aaa8b2f8df5c196bd19199a2d52b4df7125ce4ec9cdca16532f0f51db028917/https/d-yelp.s3.us-west-1.amazonaws.com/no-photo.jpg?width=753&height=675'
         }
         restaurantImage.push(image3)
-    }
-    if (im4) {
+
+
         const image4 = {
             preview: false,
-            url: im4
+            url: im4 || 'https://images-ext-2.discordapp.net/external/ugB5ZrnkEUSqYhqH4Q_wCODFhiIp6Z1xDA6hyt_rpkM/%3Fresponse-content-disposition%3Dinline%26X-Amz-Security-Token%3DIQoJb3JpZ2luX2VjEDkaCXVzLXdlc3QtMSJHMEUCICKcx9PUIheRs3wbqUk2TI4lmcfuyQSzMCePv0ro6aMLAiEAoaxlthjkrAbccwKRqd%252F7iF2gre0M1GGv0vepF%252FvNRA4q5AIIchAAGgw5ODIzNTQ1NTY4ODIiDKOl2hUqIP%252BAaNcZWCrBAuprwcwkDttZyHCsMPkrq3%252BuFDYm1rNggigq%252Bz7oIfVkY3Jahte3JSbbpkdZ5ANDXWWMwLJSpbCd%252FUaVA%252BSke8Jr2AZbdkcYZE5ynW5i23eFTQmjCtrreFZ6Lu6DBcGG1wLloGIfYROz3jJ5figpUYJ4P6J3Ns0odGLkpcnCwpa%252F4PuvT%252Fu6juRdvd5lVFpDXQS1brMiLGiOR4eqMAaj0kQBNzd24ObNqTMZPNSn8mIABV11Dj4ACFg7FLkq8VsujBZQQtMhcd8O1lHOvGtxkWeeTuX863iC4YAlwOb3Zp0VqBW0n4cG0YO%252FL8vPp3VVAYwx%252Bxazd8eBotBOvN8wc%252Bd1fMi6iRrga%252BLkQ8BrfY0cwwLBjhXU87VGKPdl4igIGDZeKD0kam%252FaTSZiBLnDV0mXF65l28MwpCR4o0gpNMMrATD2xtGjBjqzAtEJEbTGdg1w65CtlSpTTJEK4WIJMXAHGZraGZe%252F3x4UcmAYCHyQyYxZuig%252F6hFn6CKHu6Sfr5buvSeqDb%252BYM3FT9LhFC8s4KZRTH%252FToKLGs%252FWGXH4pz1pzA0iudP8CKPi0FUEDzY5B0szrT1poiZNKD3IoSR0QvHTLiONjAuCB7ZhomXUPL7g8fdLxBiXY7iEN%252Fmd1t93HZaELPxoBAUyJmx6IIBr1PW%252FnsLh%252FhOT36xlKaIeIbqh2TzhM64T5UTUfAeXpPpxVge00GEJF3t2rEm9v%252F7vsjqgWVJYAfS0ZJhI9YqhggbkHltVfRUPi7yVhDoFUXiWXG9zO%252BsgKSdsdy9cUfrGzYPllY1RuoILEGgNEoGMm%252F%252FBE5lTjv8mvuL8QV0w%252BF4S7fbAw6EarDWx4eEAs%253D%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Date%3D20230529T125940Z%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Expires%3D300%26X-Amz-Credential%3DASIA6JOHE67JEJWL7MNQ%252F20230529%252Fus-west-1%252Fs3%252Faws4_request%26X-Amz-Signature%3D4aaa8b2f8df5c196bd19199a2d52b4df7125ce4ec9cdca16532f0f51db028917/https/d-yelp.s3.us-west-1.amazonaws.com/no-photo.jpg?width=753&height=675'
         }
         restaurantImage.push(image4)
-    }
-    if (im5) {
+
+
         const image5 = {
             preview: false,
-            url: im5
+            url: im5 || 'https://images-ext-2.discordapp.net/external/ugB5ZrnkEUSqYhqH4Q_wCODFhiIp6Z1xDA6hyt_rpkM/%3Fresponse-content-disposition%3Dinline%26X-Amz-Security-Token%3DIQoJb3JpZ2luX2VjEDkaCXVzLXdlc3QtMSJHMEUCICKcx9PUIheRs3wbqUk2TI4lmcfuyQSzMCePv0ro6aMLAiEAoaxlthjkrAbccwKRqd%252F7iF2gre0M1GGv0vepF%252FvNRA4q5AIIchAAGgw5ODIzNTQ1NTY4ODIiDKOl2hUqIP%252BAaNcZWCrBAuprwcwkDttZyHCsMPkrq3%252BuFDYm1rNggigq%252Bz7oIfVkY3Jahte3JSbbpkdZ5ANDXWWMwLJSpbCd%252FUaVA%252BSke8Jr2AZbdkcYZE5ynW5i23eFTQmjCtrreFZ6Lu6DBcGG1wLloGIfYROz3jJ5figpUYJ4P6J3Ns0odGLkpcnCwpa%252F4PuvT%252Fu6juRdvd5lVFpDXQS1brMiLGiOR4eqMAaj0kQBNzd24ObNqTMZPNSn8mIABV11Dj4ACFg7FLkq8VsujBZQQtMhcd8O1lHOvGtxkWeeTuX863iC4YAlwOb3Zp0VqBW0n4cG0YO%252FL8vPp3VVAYwx%252Bxazd8eBotBOvN8wc%252Bd1fMi6iRrga%252BLkQ8BrfY0cwwLBjhXU87VGKPdl4igIGDZeKD0kam%252FaTSZiBLnDV0mXF65l28MwpCR4o0gpNMMrATD2xtGjBjqzAtEJEbTGdg1w65CtlSpTTJEK4WIJMXAHGZraGZe%252F3x4UcmAYCHyQyYxZuig%252F6hFn6CKHu6Sfr5buvSeqDb%252BYM3FT9LhFC8s4KZRTH%252FToKLGs%252FWGXH4pz1pzA0iudP8CKPi0FUEDzY5B0szrT1poiZNKD3IoSR0QvHTLiONjAuCB7ZhomXUPL7g8fdLxBiXY7iEN%252Fmd1t93HZaELPxoBAUyJmx6IIBr1PW%252FnsLh%252FhOT36xlKaIeIbqh2TzhM64T5UTUfAeXpPpxVge00GEJF3t2rEm9v%252F7vsjqgWVJYAfS0ZJhI9YqhggbkHltVfRUPi7yVhDoFUXiWXG9zO%252BsgKSdsdy9cUfrGzYPllY1RuoILEGgNEoGMm%252F%252FBE5lTjv8mvuL8QV0w%252BF4S7fbAw6EarDWx4eEAs%253D%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Date%3D20230529T125940Z%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Expires%3D300%26X-Amz-Credential%3DASIA6JOHE67JEJWL7MNQ%252F20230529%252Fus-west-1%252Fs3%252Faws4_request%26X-Amz-Signature%3D4aaa8b2f8df5c196bd19199a2d52b4df7125ce4ec9cdca16532f0f51db028917/https/d-yelp.s3.us-west-1.amazonaws.com/no-photo.jpg?width=753&height=675'
         }
         restaurantImage.push(image5)
-    }
-    if (im6) {
+
+
         const image6 = {
             preview: false,
-            url: im6
+            url: im6 || 'https://images-ext-2.discordapp.net/external/ugB5ZrnkEUSqYhqH4Q_wCODFhiIp6Z1xDA6hyt_rpkM/%3Fresponse-content-disposition%3Dinline%26X-Amz-Security-Token%3DIQoJb3JpZ2luX2VjEDkaCXVzLXdlc3QtMSJHMEUCICKcx9PUIheRs3wbqUk2TI4lmcfuyQSzMCePv0ro6aMLAiEAoaxlthjkrAbccwKRqd%252F7iF2gre0M1GGv0vepF%252FvNRA4q5AIIchAAGgw5ODIzNTQ1NTY4ODIiDKOl2hUqIP%252BAaNcZWCrBAuprwcwkDttZyHCsMPkrq3%252BuFDYm1rNggigq%252Bz7oIfVkY3Jahte3JSbbpkdZ5ANDXWWMwLJSpbCd%252FUaVA%252BSke8Jr2AZbdkcYZE5ynW5i23eFTQmjCtrreFZ6Lu6DBcGG1wLloGIfYROz3jJ5figpUYJ4P6J3Ns0odGLkpcnCwpa%252F4PuvT%252Fu6juRdvd5lVFpDXQS1brMiLGiOR4eqMAaj0kQBNzd24ObNqTMZPNSn8mIABV11Dj4ACFg7FLkq8VsujBZQQtMhcd8O1lHOvGtxkWeeTuX863iC4YAlwOb3Zp0VqBW0n4cG0YO%252FL8vPp3VVAYwx%252Bxazd8eBotBOvN8wc%252Bd1fMi6iRrga%252BLkQ8BrfY0cwwLBjhXU87VGKPdl4igIGDZeKD0kam%252FaTSZiBLnDV0mXF65l28MwpCR4o0gpNMMrATD2xtGjBjqzAtEJEbTGdg1w65CtlSpTTJEK4WIJMXAHGZraGZe%252F3x4UcmAYCHyQyYxZuig%252F6hFn6CKHu6Sfr5buvSeqDb%252BYM3FT9LhFC8s4KZRTH%252FToKLGs%252FWGXH4pz1pzA0iudP8CKPi0FUEDzY5B0szrT1poiZNKD3IoSR0QvHTLiONjAuCB7ZhomXUPL7g8fdLxBiXY7iEN%252Fmd1t93HZaELPxoBAUyJmx6IIBr1PW%252FnsLh%252FhOT36xlKaIeIbqh2TzhM64T5UTUfAeXpPpxVge00GEJF3t2rEm9v%252F7vsjqgWVJYAfS0ZJhI9YqhggbkHltVfRUPi7yVhDoFUXiWXG9zO%252BsgKSdsdy9cUfrGzYPllY1RuoILEGgNEoGMm%252F%252FBE5lTjv8mvuL8QV0w%252BF4S7fbAw6EarDWx4eEAs%253D%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Date%3D20230529T125940Z%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Expires%3D300%26X-Amz-Credential%3DASIA6JOHE67JEJWL7MNQ%252F20230529%252Fus-west-1%252Fs3%252Faws4_request%26X-Amz-Signature%3D4aaa8b2f8df5c196bd19199a2d52b4df7125ce4ec9cdca16532f0f51db028917/https/d-yelp.s3.us-west-1.amazonaws.com/no-photo.jpg?width=753&height=675'
         }
         restaurantImage.push(image6)
-    }
-
-
 
 
 
@@ -262,7 +277,7 @@ const successStore = await dispatch(createRestaurant(newListing, restaurantImage
                 <textarea
                     rows="10" cols="60"
                     type="text"
-                    placeholder="Description"
+                    placeholder="Write a summary of your wonderful ice cream shop..."
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
@@ -273,56 +288,68 @@ const successStore = await dispatch(createRestaurant(newListing, restaurantImage
                     type="text"
                     placeholder="Preview Image"
                     value={previewImage}
-                    onChange={e => setPreviewImage(e.target.value)}
+                    onChange={(e) => setPreviewImage(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.previewImage && <span className="error">{errors?.previewImage}</span>}
                 <br></br>
+                <div
+          className="DropdownPhotos"
+          onClick={togglePhotosDropdown}
+        >
+          Add more photos!
+        </div>
+        {isPhotosOpen && (
+  <>
                 <input
                     type="text"
                     placeholder="Image 2 Url"
                     value={image2Url}
-                    onChange={e => setImage2Url(e.target.value)}
+                    onChange={(e) => setImage2Url(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.image2url && <span className="error">{errors?.image2url}</span>}
                 <br></br>
-                <input
-                    type="text"
-                    placeholder="Image 3 Url"
-                    value={im3}
-                    onChange={e => setIm3(e.target.value)}
-                />
-                <h4></h4>
-                {errors?.im3url && <span className="error">{errors?.im3}</span>}
-                <br></br>
-                <input
-                    type="text"
-                    placeholder="Image 4 Url"
-                    value={im4}
-                    onChange={e => setIm4(e.target.value)}
-                />
-                <h4></h4>
-                {errors?.im4 && <span className="error">{errors?.im4}</span>}
-                <br></br>
-                <input
-                    type="text"
-                    placeholder="Image 5 Url"
-                    value={im5}
-                    onChange={e => setIm5(e.target.value)}
-                />
-                <h4></h4>
-                {errors?.im5 && <span className="error">{errors?.im5}</span>}
-                <br></br>
-                <input
-                    type="text"
-                    placeholder="Image 6 Url"
-                    value={im6}
-                    onChange={e => setIm6(e.target.value)}
-                />
-                <h4></h4>
-                {errors?.im6 && <span className="error">{errors?.im6}</span>}
-                <br></br>
+
+    <input
+      type="text"
+      placeholder="Image 3 Url"
+      value={im3}
+      onChange={(e) => setIm3(e.target.value)}
+    />
+    <h4></h4>
+    {errors?.im3url && <span className="error">{errors?.im3}</span>}
+    <br></br>
+    <input
+      type="text"
+      placeholder="Image 4 Url"
+      value={im4}
+      onChange={(e) => setIm4(e.target.value)}
+    />
+    <h4></h4>
+    {errors?.im4 && <span className="error">{errors?.im4}</span>}
+    <br></br>
+    <input
+      type="text"
+      placeholder="Image 5 Url"
+      value={im5}
+      onChange={(e) => setIm5(e.target.value)}
+    />
+    <h4></h4>
+    {errors?.im5 && <span className="error">{errors?.im5}</span>}
+    <br></br>
+    <input
+      type="text"
+      placeholder="Image 6 Url"
+      value={im6}
+      onChange={(e) => setIm6(e.target.value)}
+    />
+    <h4></h4>
+    {errors?.im6 && <span className="error">{errors?.im6}</span>}
+    <br></br>
+  </>
+)}
+
             <button type='submit' className="create-button">Create Shop</button>
 </form>
 </section>
@@ -330,3 +357,5 @@ const successStore = await dispatch(createRestaurant(newListing, restaurantImage
 }
 
 export default CreateRestaurant
+
+

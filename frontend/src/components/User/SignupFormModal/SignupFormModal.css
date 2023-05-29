@@ -6,10 +6,21 @@ margin: auto;
     text-align: center;
     align-items: center;
     width: 350px;
-    height: 400px;
+    height: 520px;
+    background-image: url('https: //cdn.dribbble.com/users/7854/screenshots/15330807/media/bf124c1c799e852a4d260cf9fce92e7a.gif'); background-repeat:repeat
 }
 
 .errors{
     list-style: none;
     color: red
+}
+
+#myImage{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }

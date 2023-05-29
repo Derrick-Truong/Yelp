@@ -1,7 +1,4 @@
 
-
-
-
 import { useState, useEffect } from 'react';
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -40,7 +37,7 @@ const RestaurantItem = () => {
     const selectRestaurant = useSelector(state => state?.restaurants)
     const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
-    const restaurantImagesLength = restaurant?.RestaurantImages?.length
+    const restaurantImages= restaurant?.RestaurantImages
     const avgRating = restaurant?.avgRating
     const starRating = Number(avgRating).toFixed(1)
 
@@ -52,7 +49,7 @@ const RestaurantItem = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(reviews)])
+    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(restaurantImages), JSON.stringify(reviews)])
     // useEffect(() => {
     //     if (!showMenu) return;
 
@@ -89,20 +86,15 @@ const RestaurantItem = () => {
                 <div className='restaurant-item-images-container-slider'>
 
                     <div className='restaurant-item-images-container-slider-track'>
+                        {restaurant?.RestaurantImages?.slice(0).reverse()?.map((image) => {
+                         return (
+                          image && <img key={image?.id} className="restaurant-item-restaurant-photos" src={image?.url} alt="restaurant-pic" />
+                                )})}
 
-                        {restaurant?.RestaurantImages?.map(image => {
-                            return (
-
-
-                                image && <img key={image?.id} className="restaurant-item-restaurant-photos" src={image?.url} alt="restaurant-pic" />
-                            )
-
-
-                        })}
                         <div className='restaurant-item-info-container'>
                             <div>
                             <h1>{restaurant?.title}</h1>
-                                {currentUser && (currentUser.id === restaurant.userId) ?
+                                {currentUser && (currentUser?.id === restaurant?.userId) ?
                                 <span>
                                     <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant}/>}/></span>
                                 <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />}/></span></span>
@@ -161,7 +153,7 @@ const RestaurantItem = () => {
                 <div className='restaurant-item-reviews-feed'>
                     <div>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
 
-                    
+
                     <div className='container-swipe'>
                         <Swiper
 
@@ -187,7 +179,7 @@ const RestaurantItem = () => {
                                                             <div className=' reviews-card'>
                                                                 <div className='reviews-card-content'>
                                                                     <div className='reviews-card-image'>
-                                                                        {review?.previewImage ? <img src={review?.previewImage} alt='preview-unavailable' /> : <img src={Yelp} alt='logo' />}
+                                                                    <img src={review?.previewImage} alt='preview-unavailable' />
                                                                     </div>
                                                                     <div className='reviews-rating'>
 

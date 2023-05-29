@@ -6,17 +6,20 @@ import { updateOneReview } from "../../../store/review"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { restaurantDetails } from "../../../store/restaurants"
+import { updateOneReviewNoPic } from "../../../store/review"
 import { getReviews } from "../../../store/review"
+import Yelp from "../../../assets/Yelp.jpg"
 import './UpdateReview.css'
+
 
 
 const UpdateReview = ({review}) => {
     const reviewId = review?.id
     const dispatch = useDispatch()
-    const [description, setDescription] = useState(review?.description);
-    const [rating, setRating] = useState(review?.rating);
-    const [url, setUrl] = useState(review?.previewImage)
-    const [errors, setErrors] = useState({})
+    const [description, setDescription] = useState('');
+    const [rating, setRating] = useState('');
+    const [url, setUrl] = useState('')
+    const [errors, setErrors] = useState([])
     const { closeModal } = useModal();
 
 useEffect(() => {
@@ -28,7 +31,7 @@ useEffect(() => {
 
 
     const valid = () => {
-        let newErrors = {};
+        let newErrors = [];
         if (!description.length) {
             newErrors.description = 'Description is required'
         }
@@ -57,8 +60,8 @@ const handleCancel = (e) => {
         e.preventDefault()
 
         valid()
-        if (errors?.length > 9) {
-           setErrors({})
+        if (errors?.length > 0) {
+           setErrors([])
         }
         const review = {
             rating: rating,
@@ -66,9 +69,11 @@ const handleCancel = (e) => {
         }
 
         const image = {
-            url: url
+            url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
         }
-        dispatch(updateOneReview(review, image, reviewId)).then(closeModal)
+
+
+          await dispatch(updateOneReview(review, image, reviewId)).then(closeModal)
 
 
 
@@ -96,14 +101,14 @@ const handleCancel = (e) => {
                     />
                 </div>
                 {errors?.description && <span className="error">{errors?.description}</span>}
-                <br></br>
+               
                 <h3 className='create-review-upload-pic'>Didn't Like the Pic You Took Huh?</h3>
-                <br></br>
-                <input className='create-review-photo-url-input' placeholder={review?.previewImage || ''} value={url} onChange={(e) => setUrl(e.target.value)}/>
+
+                <input className='create-review-photo-url-input' placeholder={review?.previewImage} value={url} onChange={(e) => setUrl(e.target.value)}/>
 
                 <h4>{errors?.url && <span className="error">{errors?.url}</span>}</h4>
 
-                <br></br>
+
                 <div className='create-review-thumbs-up-down'><span><i onClick={onSubmit} style={{ color: '#05e13c' }} className="fa-solid fa-thumbs-up"></i></span><span><i onClick={handleCancel} style={{ color: '#e10505' }} className="fa-solid fa-thumbs-down"></i></span></div>
             </form>
             {/* <div className='create-review-thumbs-up-down'><span><i className="fa-solid fa-thumbs-up"></i></span><span><i className="fa-solid fa-thumbs-down"></i></span></div> */}

@@ -15,7 +15,7 @@ const history = useHistory()
 const handleDelete = async(e) => {
     e.preventDefault()
     dispatch(deleteOneReview(reviewId)).then(closeModal)
-    history.push('/')
+   
 }
 
 const handleCancel = (e) => {

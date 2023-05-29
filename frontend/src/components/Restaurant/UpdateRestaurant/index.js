@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { updateOneRestaurant } from "../../../store/restaurants";
 import { useModal } from "../../../Context/Modal";
+import { useEffect } from "react";
 import './UpdateRestaurant.css'
 
 
@@ -25,9 +26,13 @@ const UpdateRestaurant = ({restaurant}) => {
     const [im4, setIm4] = useState(restaurant?.im4)
     const [im5, setIm5] = useState(restaurant?.im5)
     const [im6, setIm6] = useState(restaurant?.im6)
+    const [isPhotosOpen, setIsPhotosOpen] = useState(false);
 
 
 
+    const togglePhotosDropdown = () => {
+        setIsPhotosOpen(!isPhotosOpen);
+      };
 
 
 
@@ -161,54 +166,56 @@ const UpdateRestaurant = ({restaurant}) => {
         if (image2Url) {
             const secondImage = {
 
-                url: image2Url
+                url: image2Url || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
             }
             restaurantImage.push(secondImage)
         }
         if (im3) {
             const image3 = {
 
-                url: im3
+                url: im3 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
             }
             restaurantImage.push(image3)
         }
         if (im4) {
             const image4 = {
 
-                url: im4
+                url: im4 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
             }
             restaurantImage.push(image4)
         }
         if (im5) {
             const image5 = {
 
-                url: im5
+                url: im5 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
             }
             restaurantImage.push(image5)
         }
         if (im6) {
             const image6 = {
 
-                url: im6
+                url: im6 || 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
             }
             restaurantImage.push(image6)
         }
-
-
 
         dispatch(updateOneRestaurant(newListing, restaurantImage, restaurantId)).then(closeModal)
 
 
 
     }
+
+    useEffect(() => {
+
+    })
     return (
-        <section className="create-restaurant-page">
-            <form className="create-restaurant-form" onSubmit={handleSubmit}>
+        <section className="update-restaurant-page">
+            <form className="update-restaurant-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Country"
                     value={country}
-                    onChange={e => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(e.target.value)}
                 />
                 <h4></h4>
                 <br></br>
@@ -219,7 +226,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="State"
                     value={state}
-                    onChange={e => setState(e.target.value)}
+                    onChange={(e) => setState(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.state && <span className="error">{errors?.state}</span>}
@@ -229,7 +236,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Address"
                     value={address}
-                    onChange={e => setAddress(e.target.value)}
+                    onChange={(e) => setAddress(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.address && <span className="error">{errors?.address}</span>}
@@ -239,7 +246,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="City"
                     value={city}
-                    onChange={e => setCity(e.target.value)}
+                    onChange={(e) => setCity(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.city && <span className="error">{errors?.city}</span>}
@@ -248,7 +255,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Price"
                     value={price}
-                    onChange={e => setPrice(e.target.value)}
+                    onChange={(e) => setPrice(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.price && <span className="error">{errors?.price}</span>}
@@ -258,7 +265,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Title"
                     value={title}
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.title && <span className="error">{errors?.title}</span>}
@@ -268,7 +275,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Description"
                     value={description}
-                    onChange={e => setDescription(e.target.value)}
+                    onChange={(e) => setDescription(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.description && <span className="error">{errors?.description}</span>}
@@ -277,16 +284,24 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Preview Image"
                     value={previewImage}
-                    onChange={e => setPreviewImage(e.target.value)}
+                    onChange={(e) => setPreviewImage(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.previewImage && <span className="error">{errors?.previewImage}</span>}
                 <br></br>
+                <div
+          className="DropdownPhotos"
+          onClick={togglePhotosDropdown}
+        >
+          Update Photos!
+        </div>
+        {isPhotosOpen && (
+  <>
                 <input
                     type="text"
                     placeholder="Image 2 Url"
                     value={image2Url}
-                    onChange={e => setImage2Url(e.target.value)}
+                            onChange={(e) => setImage2Url(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.image2url && <span className="error">{errors?.image2url}</span>}
@@ -295,7 +310,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Image 3 Url"
                     value={im3}
-                    onChange={e => setIm3(e.target.value)}
+                            onChange={(e) => setIm3(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.im3url && <span className="error">{errors?.im3}</span>}
@@ -304,7 +319,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Image 4 Url"
                     value={im4}
-                    onChange={e => setIm4(e.target.value)}
+                            onChange={(e) => setIm4(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.im4 && <span className="error">{errors?.im4}</span>}
@@ -313,7 +328,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Image 5 Url"
                     value={im5}
-                    onChange={e => setIm5(e.target.value)}
+                            onChange={(e) => setIm5(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.im5 && <span className="error">{errors?.im5}</span>}
@@ -322,11 +337,13 @@ const UpdateRestaurant = ({restaurant}) => {
                     type="text"
                     placeholder="Image 6 Url"
                     value={im6}
-                    onChange={e => setIm6(e.target.value)}
+                            onChange={(e) => setIm6(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.im6 && <span className="error">{errors?.im6}</span>}
                 <br></br>
+                </>
+)}
                 <button type='submit' className="create-button">Update Shop</button>
             </form>
         </section>

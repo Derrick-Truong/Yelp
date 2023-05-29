@@ -79,7 +79,7 @@ router.post('/:id/pictures', requireAuth, validateReviewImage, async(req, res, n
 })
 
 
-//edit a picture that belongs to a review
+//edit a picture that belongs to a review or add a picture to an existing review
 router.put('/:id/pictures', requireAuth, validateReviewImage, async (req, res, next) => {
     const { url } = req.body
     let findReview = await Review.findOne({
@@ -118,6 +118,7 @@ router.put('/:id/pictures', requireAuth, validateReviewImage, async (req, res, n
         })
 
     }
+
 
 
 })

@@ -72,7 +72,7 @@ const AllRestaurants = () => {
 
                                                     <div className='home-page-restaurant-card-content'>
                                                         <h4>
-                                                            <span className='home-page-restaurant-title'>{restaurant?.title}</span>
+                                                            <span className='home-page-restaurant-title'>{restaurant?.title}</span> </h4>
                                                             <span>  <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
                                                                 <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
                                                                 <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
@@ -81,9 +81,10 @@ const AllRestaurants = () => {
 
 
 
+                                                        <div className='hidden-message-home'>
+                                                        <p className='hidden-message-home'>{restaurant?.description}</p>
+                                                        </div>
 
-                                                        <p>{restaurant?.description}</p>
-                                                        </h4>
                                                     </div>
                                                 </span>
                                             </div>
@@ -101,8 +102,9 @@ const AllRestaurants = () => {
                 <div className='filler-information'>
                           <div className='our-dairy-filler'>
                             <h4 className='title-filler'>Our Mission</h4>
+<div className="inside-text-filler">
                           Welcome to Ice Cream Delight, a heavenly oasis for ice cream enthusiasts, created by the visionary artisan Derrick Truong. Step into a world where every scoop is a delightful journey of flavors and textures, crafted with the utmost care and at various stores helped ranked by other fellow members. From classics like creamy vanilla and decadent chocolate to tantalizing twists like caramel swirl and fresh fruit sorbets, we will help you find the flavor that will give you a sense of euphoria. Each batch is meticulously handcrafted by highly regarded chefs, ensuring that every spoonful delivers a burst of pure delight.
-We invite you to embark on a magical ice cream adventure. Discover the harmonious fusion of exceptional dairy, passion-infused craftsmanship, and an unrelenting pursuit of frozen perfection. Your taste buds will thank you as you experience the captivating allure of our extraordinary ice cream flavors. Welcome to a world where dreams are transformed into frozen realities—welcome to Ice Cream Delight by Derrick Truong.
+We invite you to embark on a magical ice cream adventure. Discover the harmonious fusion of exceptional dairy, passion-infused craftsmanship, and an unrelenting pursuit of frozen perfection. Your taste buds will thank you as you experience the captivating allure of our extraordinary ice cream flavors. Welcome to a world where dreams are transformed into frozen realities—welcome to Ice Cream Delight by Derrick Truong.</div>
                           </div>
                           {/* <div className='ingredients-filler'><h4 className='title-filler'>Our Users</h4>
                           At Ice Cream Delight by Derrick Truong, we take pride in complementing our high-quality dairy with the very best ingredients. From scratch, we cook and bake an array of delectable treats in-house, ensuring that every guest is served the freshest and most exceptional ingredients. Our commitment to quality shines through in every scoop, creating an unforgettable ice cream experience.

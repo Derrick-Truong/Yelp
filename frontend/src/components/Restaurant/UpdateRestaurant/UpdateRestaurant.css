@@ -5,3 +5,51 @@ textarea {
     border-radius: 10px;
     padding: 10px;
 }
+.update-restaurant-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    height: 830px;
+    overflow-y: auto;
+
+
+}
+
+.update-restaurant-form {
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    text-align: center;
+
+}
+
+.update-restaurant-page button {
+    margin: 13px;
+}
+
+.update-restaurant-form input {
+    width: 95%;
+    margin: 13px;
+    height: 20px;
+    padding: 20px;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.DropdownPhotos {
+    color: rgb(186, 80, 215);
+    cursor: pointer;
+    padding-bottom: 20px;
+}
+
+.DropdownPhotos:hover {
+    color: rgb(78, 78, 113);
+    cursor: pointer;
+}

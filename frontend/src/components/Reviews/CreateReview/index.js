@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { getReviews } from "../../../store/review"
 import { createOneReviewNoPic } from "../../../store/review"
-
+import Yelp from "../../../assets/Yelp.jpg"
 import './CreateReview.css'
 
 const CreateReview = ({ restaurantId }) => {
@@ -58,16 +58,13 @@ const CreateReview = ({ restaurantId }) => {
         }
 
         const image = {
-            url: url
+            url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
         }
 
-        if (!url){
-            dispatch(createOneReviewNoPic(review, restaurantId)).then(closeModal)
-        }
-        else {
+
         dispatch(createOneReview(review, image, restaurantId)).then(closeModal)
 
-        }
+
 
         // dispatch(getReviews(restaurantId))
 
