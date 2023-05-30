@@ -13,6 +13,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const reviewRouter = require('./review.js')
 const restaurantsRouter = require('./restaurants.js')
+// const restaurantImagesRouter = require('./restaurantImage.js')
 
 const { requireAuth } = require('../../utils/auth.js');
 
@@ -20,7 +21,7 @@ const { setTokenCookie } = require('../../utils/auth.js');
 
 router.use(restoreUser);
 
-
+// router.use('/pictures', restaurantImagesRouter)
 router.use('/reviews', reviewRouter)
 router.use('/restaurants', restaurantsRouter)
 router.use('/session', sessionRouter);

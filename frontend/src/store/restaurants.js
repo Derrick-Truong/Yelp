@@ -68,9 +68,10 @@ export const updateOneRestaurant = (restaurant, restaurantPictures,  restaurantI
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(restaurant)
     })
+
     if (res.ok) {
         const newRestaurant = await res.json()
-        newRestaurant['RestaurantImages'] = []
+        newRestaurant.RestaurantImages = []
         for (let i = 0; i < restaurantPictures.length; i++) {
             const response2 = await csrfFetch(`/api/restaurants/${restaurantId}/pictures`, {
                 method: 'PUT',
@@ -80,13 +81,18 @@ export const updateOneRestaurant = (restaurant, restaurantPictures,  restaurantI
                 body: JSON.stringify(restaurantPictures[i])
             })
 
-            const newPicture = await response2.json()
+
             if (response2.ok) {
+                const newPicture = await response2.json()
                 newRestaurant.RestaurantImages.push(newPicture)
+
             }
+
+
         }
         await dispatch(updateRestaurant(newRestaurant))
         return newRestaurant
+
     }
 
 
@@ -122,7 +128,7 @@ export const createRestaurant = (restaurant, restaurantPictures) => async dispat
         await dispatch(createOneRestaurant(newRestaurant))
         return newRestaurant
     }
-   
+
 
 }
 

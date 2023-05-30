@@ -1,4 +1,4 @@
-.create-review-container {
+.update-review-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +15,7 @@ textarea {
     border-color: rgb(19, 19, 19);
 }
 
-.create-review-title {
+.update-review-title {
     text-align: center;
     color: rgb(6, 6, 6);
 }
@@ -24,11 +24,11 @@ span .fa-solid.fa-thumbs-up {
     margin-left: -5px;
 }
 
-.create-review-photo-url-input {
+.update-review-photo-url-input {
     width: 100%
 }
 
-.create-review-rating {
+.update-review-rating {
     display: flex;
     font-size: 40px;
     text-align: center;
@@ -42,24 +42,24 @@ span .fa-solid.fa-thumbs-up {
     border-radius: 20px;
     padding: 15px;
 }
-.create-review-thumbs-up-down {
+.update-review-thumbs-up-down {
     background-color: pink;
     display: flex;
     justify-content: center;
 }
 
-.create-review-thumbs-up-down span .fa-solid.fa-thumbs-up {
+.update-review-thumbs-up-down span .fa-solid.fa-thumbs-up {
     margin-right: 130px;
     font-size: 50px;
     cursor: pointer
 }
 
-.create-review-thumbs-up-down span .fa-solid.fa-thumbs-down {
+.update-review-thumbs-up-down span .fa-solid.fa-thumbs-down {
     font-size: 50px;
     cursor: pointer;
 }
 
-.create-review-upload-pic {
+.update-review-upload-pic {
     text-align: center;
 
 }

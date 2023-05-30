@@ -20,7 +20,8 @@ router.get('/', async (req, res, next) => {
 
             },
             {
-                model: RestaurantImage
+                model: RestaurantImage,
+                attributes:['id', 'preview', 'url']
             },
 
 
@@ -49,15 +50,12 @@ router.get('/', async (req, res, next) => {
 
         })
         restaurant.avgRating = adder / i;
-        restaurant.RestaurantImages.forEach(image => {
-            if (image.url) {
-                restaurant.previewImage = image.url
-            }
-        })
+       restaurant.previewImage = restaurant.RestaurantImages[0].url
 
 
         delete restaurant.Reviews
         delete restaurant.RestaurantImages
+
     });
 
 
@@ -89,7 +87,8 @@ router.get('/:id', async(req, res, next) => {
                 attributes:['id', 'firstName', 'lastName', 'username']
             },
             {
-                model:RestaurantImage,
+                model:RestaurantImage
+
 
             }
         ],
@@ -116,13 +115,15 @@ router.get('/:id', async(req, res, next) => {
     })
     restaurantDetails.avgRating = adder / restaurantDetails.numReviews
     delete restaurantDetails.Reviews
-    if (restaurantDetails.RestaurantImages.length > 1) {
-        if (restaurantDetails.RestaurantImages[0].id !== restaurantDetails.RestaurantImages[1].id) {
-            for (let i = 1; i < restaurantDetails.RestaurantImages.length; i++) {
-                restaurantDetails.RestaurantImages[i].preview = false
-            }
-        }
-    }
+    restaurantDetails.previewImage = restaurantDetails.RestaurantImages[0].url
+
+    // if (restaurantDetails.RestaurantImages.length > 1) {
+    //     if (restaurantDetails.RestaurantImages[0].id !== restaurantDetails.RestaurantImages[1].id) {
+    //         for (let i = 1; i < restaurantDetails.RestaurantImages.length; i++) {
+    //             restaurantDetails.RestaurantImages[i].preview = false
+    //         }
+    //     }
+    // }
 
 
     res.json(restaurantDetails)
@@ -188,49 +189,44 @@ let newImage = await Restaurant.findOne({
     url,
     preview
  })
- res.json({picture})
+ res.json(picture)
 })
 
 //edit restaurant image
 
 router.put('/:id/pictures', requireAuth, async (req, res, next) => {
 
-    const { url} = req.body
+    const { preview, url} = req.body
     let newImage = await Restaurant.findOne({
         where: {
             id: req.params.id
-        },
-        inckude:{
-            model:RestaurantImage
         }
+
+
     })
 
     if (!newImage) {
         res.status(404);
         return res.json({
-            message: "Restaurant could not be found"
+            message: "Restaurant image could not be found"
         })
     }
 
-    if (newImage.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "Forbidden/not allowed"
-        })
-    }
+
     let findImage = await RestaurantImage.findOne({
         where: {
-            restaurantId: req.params.id
+            id: newImage.id
         }
     })
    if (findImage){
     let updateRestImage = await findImage.update({
+        preview,
         url
     })
 
-    res.json({
+    res.json(
         updateRestImage
-    })
+    )
    }
 
 })

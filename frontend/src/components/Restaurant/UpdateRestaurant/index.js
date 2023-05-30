@@ -4,7 +4,9 @@ import { useState } from "react";
 import { updateOneRestaurant } from "../../../store/restaurants";
 import { useModal } from "../../../Context/Modal";
 import { useEffect } from "react";
-import './UpdateRestaurant.css'
+import { useParams } from "react-router-dom";
+import './UpdateRestaurant.css';
+import { restaurantDetails } from "../../../store/restaurants";
 
 
 const UpdateRestaurant = ({restaurant}) => {
@@ -18,14 +20,28 @@ const UpdateRestaurant = ({restaurant}) => {
     const [title, setTitle] = useState(restaurant?.title);
     const [address, setAddress] = useState(restaurant?.address);
     const [errors, setErrors] = useState({})
-    const [previewImage, setPreviewImage] = useState(restaurant?.RestaurantImages[0].url);
+    const [previewImage, setPreviewImage] = useState(restaurant?.RestaurantImages[0]?.url);
     const [description, setDescription] = useState(restaurant?.description);
     const [price, setPrice] = useState(restaurant?.price);
-    const [image2Url, setImage2Url] = useState(restaurant?.image2Url);
-    const [im3, setIm3] = useState(restaurant?.im3)
-    const [im4, setIm4] = useState(restaurant?.im4)
-    const [im5, setIm5] = useState(restaurant?.im5)
-    const [im6, setIm6] = useState(restaurant?.im6)
+    const [image2Url, setImage2Url] = useState(restaurant?.RestaurantImages[1].url)
+    const [im3, setIm3] = useState(restaurant?.RestaurantImages[2]?.url)
+    const [im4, setIm4] = useState(restaurant?.RestaurantImages[3]?.url)
+    const [im5, setIm5] = useState(restaurant?.RestaurantImages[4]?.url)
+    const [im6, setIm6] = useState(restaurant?.RestaurantImages[5]?.url)
+    // const [city, setCity] = useState('');
+    // const [state, setState] = useState('');
+    // const [country, setCountry] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [address, setAddress] = useState('');
+    // const [errors, setErrors] = useState({})
+    // const [previewImage, setPreviewImage] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [price, setPrice] = useState('');
+    // const [image2Url, setImage2Url] = useState('');
+    // const [im3, setIm3] = useState('')
+    // const [im4, setIm4] = useState('')
+    // const [im5, setIm5] = useState('')
+    // const [im6, setIm6] = useState('')
     const [isPhotosOpen, setIsPhotosOpen] = useState(false);
 
 
@@ -96,7 +112,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     im3.endsWith('.jpeg')
                 )
             ) {
-                newErrors.im2 = "Image URL must end in .png, .jpg, or .jpeg";
+                newErrors.im3 = "Image URL must end in .png, .jpg, or .jpeg";
             }
         }
         if (im4) {
@@ -155,59 +171,84 @@ const UpdateRestaurant = ({restaurant}) => {
             city: city,
             state: state
         }
+
+
+
         let restaurantImage = [];
-        if (previewImage) {
-            const firstImage = {
-
-                url: previewImage
-            }
-            restaurantImage.push(firstImage)
+        if (previewImage){
+        const firstImage = {
+            key:'1',
+            preview: true,
+            url: previewImage
         }
-        if (image2Url) {
-            const secondImage = {
-
-                url: image2Url || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
-            }
-            restaurantImage.push(secondImage)
+        restaurantImage.push(firstImage)
+    }
+        if (image2Url){
+        const secondImage = {
+            key:'2',
+            preview: false,
+            url: image2Url
         }
-        if (im3) {
-            const image3 = {
-
-                url: im3 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
-            }
-            restaurantImage.push(image3)
+        restaurantImage.push(secondImage)
+    }
+        if (im3){
+        const image3 = {
+            key:'3',
+            preview: false,
+            url: im3
         }
+        restaurantImage.push(image3)
+        }
+
         if (im4) {
-            const image4 = {
-
-                url: im4 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
-            }
-            restaurantImage.push(image4)
+        const image4 = {
+            key:'4',
+            preview: false,
+            url: im4
         }
-        if (im5) {
-            const image5 = {
+        restaurantImage.push(image4)
+    }
 
-                url: im5 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
-            }
-            restaurantImage.push(image5)
+    if (im5){
+        const image5 = {
+            key:'5',
+            preview: false,
+            url: im5
         }
-        if (im6) {
-            const image6 = {
+        restaurantImage.push(image5)
 
-                url: im6 || 'https://yelp-capstone.s3.us-west-1.amazonaws.com/no-photo-image.jpg'
-            }
-            restaurantImage.push(image6)
+    }
+
+    if (im6) {
+        const image6 = {
+            key:'6',
+            preview: false,
+            url: im6
         }
+        restaurantImage.push(image6)
+    }
 
-        dispatch(updateOneRestaurant(newListing, restaurantImage, restaurantId)).then(closeModal)
-
+     await dispatch(updateOneRestaurant(newListing, restaurantImage, restaurantId)).then(closeModal)
 
 
     }
 
-    useEffect(() => {
 
-    })
+    // useEffect(() => {
+    //    setCity(restaurant?.city);
+    //   setState(restaurant?.state);
+    //    setCountry(restaurant?.country);
+    //    setTitle(restaurant?.title);
+    //    setAddress(restaurant?.address);
+    //    setPreviewImage(restaurant?.RestaurantImages[0]?.url);
+    //    setDescription(restaurant?.description);
+    //    setPrice(restaurant?.price);
+    //     setImage2Url(restaurant?.RestaurantImages[1]?.url);
+    //     setIm3(restaurant?.RestaurantImages[2]?.url)
+    //     setIm4(restaurant?.RestaurantImages[3]?.url)
+    //     setIm5(restaurant?.RestaurantImages[4]?.url)
+    //     setIm6(restaurant?.RestaurantImages[5]?.url)
+    // }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant.previewImage), JSON.stringify(restaurant.image2Url), JSON.stringify(restaurant.im3), JSON.stringify(restaurant.im4), JSON.stringify(restaurant.im5), JSON.stringify(restaurant.im6) ])
     return (
         <section className="update-restaurant-page">
             <form className="update-restaurant-form" onSubmit={handleSubmit}>
@@ -300,8 +341,8 @@ const UpdateRestaurant = ({restaurant}) => {
                 <input
                     type="text"
                     placeholder="Image 2 Url"
-                    value={image2Url}
-                            onChange={(e) => setImage2Url(e.target.value)}
+                            value={image2Url}
+                    onChange={(e) => setImage2Url(e.target.value)}
                 />
                 <h4></h4>
                 {errors?.image2url && <span className="error">{errors?.image2url}</span>}
@@ -309,7 +350,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <input
                     type="text"
                     placeholder="Image 3 Url"
-                    value={im3}
+                            value={im3}
                             onChange={(e) => setIm3(e.target.value)}
                 />
                 <h4></h4>
@@ -318,7 +359,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <input
                     type="text"
                     placeholder="Image 4 Url"
-                    value={im4}
+                            value={im4}
                             onChange={(e) => setIm4(e.target.value)}
                 />
                 <h4></h4>
@@ -327,7 +368,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <input
                     type="text"
                     placeholder="Image 5 Url"
-                    value={im5}
+                            value={im5}
                             onChange={(e) => setIm5(e.target.value)}
                 />
                 <h4></h4>
@@ -336,7 +377,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <input
                     type="text"
                     placeholder="Image 6 Url"
-                    value={im6}
+                            value={im6}
                             onChange={(e) => setIm6(e.target.value)}
                 />
                 <h4></h4>

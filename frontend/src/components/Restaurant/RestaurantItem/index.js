@@ -36,6 +36,7 @@ const RestaurantItem = () => {
     const reviews = Object?.values(reviewsSelect)
     const selectRestaurant = useSelector(state => state?.restaurants)
     const restaurant = selectRestaurant[restaurantId]
+
     const currentUser = useSelector(state => state?.session?.user)
     const restaurantImages= restaurant?.RestaurantImages
     const avgRating = restaurant?.avgRating
@@ -49,7 +50,7 @@ const RestaurantItem = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(restaurantImages), JSON.stringify(reviews)])
+    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(reviews)])
     // useEffect(() => {
     //     if (!showMenu) return;
 
@@ -86,9 +87,10 @@ const RestaurantItem = () => {
                 <div className='restaurant-item-images-container-slider'>
 
                     <div className='restaurant-item-images-container-slider-track'>
-                        {restaurant?.RestaurantImages?.slice(0)?.reverse()?.map((image) => {
+                        {restaurant?.RestaurantImages?.map(image => {
                          return (
-                          image && <img key={image?.id} className="restaurant-item-restaurant-photos" src={image?.url} alt="restaurant-pic" />
+
+                          image && <img key={image.key} className="restaurant-item-restaurant-photos" src={image?.url} />
                                 )})}
 
                         <div className='restaurant-item-info-container'>

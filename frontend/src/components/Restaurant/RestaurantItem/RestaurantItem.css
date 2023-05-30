@@ -196,9 +196,9 @@ body {
         Helvetica, 'Neue',
         Arial,
         sans-serif;
-       
+
 }
-.restaurant-item-restaurant-photos{
+.restaurant-item-restaurant-photos img{
     height: auto;
     max-width: 100%;
 }
