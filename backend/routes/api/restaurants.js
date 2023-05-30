@@ -54,7 +54,7 @@ router.get('/', async (req, res, next) => {
 
 
         delete restaurant.Reviews
-       
+
 
     });
 
@@ -325,6 +325,12 @@ router.get('/:id/reviews', async(req, res, next) => {
             }
         ]
     })
+    if (!reviewList){
+        return res.json({
+            message: "Reviews couldn't be found",
+            statusCode: 404
+        })
+    }
     let Reviews = []
     reviewList.forEach(review => {
         Reviews.push(review.toJSON())
