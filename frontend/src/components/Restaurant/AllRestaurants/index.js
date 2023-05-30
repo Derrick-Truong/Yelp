@@ -27,12 +27,13 @@ const AllRestaurants = () => {
     const history = useHistory()
     const restaurants = useSelector(state => state?.restaurants)
     const restaurantsValues = Object?.values(restaurants)
+    const restaurantImage = restaurantsValues?.previewImage
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getRestaurants())
-    }, [dispatch, JSON.stringify(restaurantsValues)])
+    }, [dispatch, JSON.stringify(restaurantsValues), JSON.stringify(restaurantImage)])
 
 
     return (
@@ -68,7 +69,7 @@ const AllRestaurants = () => {
                                         <NavLink exact to={`/restaurants/${restaurant?.id}`}>
                                             <div className='home-page-restaurant-container'>
                                                 <span className='home-page-restaurant-card'>
-                                                    <img className="all-restaurants-preview-image" src={restaurant?.RestaurantImages[0]?.url} alt="preview-image" />
+                                                    <img className="all-restaurants-preview-image" src={restaurant?.previewImage} alt="preview-image" />
 
                                                     <div className='home-page-restaurant-card-content'>
                                                         <h4>
