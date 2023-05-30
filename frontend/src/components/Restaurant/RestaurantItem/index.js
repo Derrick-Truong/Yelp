@@ -113,7 +113,7 @@ const RestaurantItem = () => {
                                     <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
                                     <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
                                     <span className='restaurant-star-rating'><span>  {starRating}</span>
-                                        <span>{reviews?.length ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
+                                        <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
                                         <div className='rest-address'>{restaurant?.address}</div>
                                         <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
                                     </span>
