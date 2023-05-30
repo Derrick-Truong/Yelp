@@ -54,7 +54,7 @@ router.get('/', async (req, res, next) => {
 
 
         delete restaurant.Reviews
-        delete restaurant.RestaurantImages
+       
 
     });
 
