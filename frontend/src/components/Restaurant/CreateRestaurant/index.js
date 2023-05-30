@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { createRestaurant } from "../../../store/restaurants";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import { useModal } from "../../../Context/Modal";
 import './CreateRestaurant.css'
 
 const CreateRestaurant = () => {
+    const {closeModal} = useModal()
     const history = useHistory();
     const dispatch = useDispatch();
     const [city, setCity] = useState("");
@@ -51,6 +53,10 @@ const CreateRestaurant = () => {
         }
         if (!description) {
             newErrors.description = "Description is required."
+        }
+
+        if (description.length > 70) {
+            newErrors.description = 'Description must be less than 70 characters.'
         }
         if (!title) {
             newErrors.title = "Title is required."
@@ -303,11 +309,8 @@ const handleSubmit = async(e) => {
 
 
 
-const successStore = await dispatch(createRestaurant(newListing, restaurantImage))
+dispatch(createRestaurant(newListing, restaurantImage)).then(closeModal).then(history.push('/'))
 
-       if(successStore){
-        history.push('/')
-       }
 
 }
     return (
