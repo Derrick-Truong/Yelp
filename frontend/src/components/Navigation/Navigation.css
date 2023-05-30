@@ -37,10 +37,15 @@
     box-sizing: border-box;
 }
 
-.nav-create-shop{
-    display: flex;
-    margin-top: 10px;
-    text-decoration: none;
+.nav-create-shop button{
+
+    width: 84px;
+        font-size: 10px;
+        height: 31px;
+        padding-top: 4px;
+        margin-top: 10px;
+        margin-right: 10px;
+        text-decoration: none;
 }
 /* .create-spot-2 {
     color: #0d0d0d;
@@ -56,6 +61,9 @@
     box-sizing: border-box;
 }
 
+.nav-innerdiv a img {
+    padding-bottom: 13px;
+}
 /* .create-spot {
     list-style: none;
     padding-left: 5px;

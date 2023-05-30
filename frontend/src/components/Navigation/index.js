@@ -2,9 +2,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import OpenModalButton from '../../OpenModalButton';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import Yelp from "../../assets/Yelp.jpg"
+import CreateRestaurant from '../Restaurant/CreateRestaurant';
 
 
 
@@ -16,13 +18,16 @@ function Navigation({ isLoaded }) {
             <div className='nav-innerdiv'>
                 <a href="/"><img src={Yelp} height='70px' width='80px' alt='Ice Cream' /></a>
             <div className="left-nav-bar">
-                   {sessionUser ? <button className='nav-create-shop'><NavLink  className='nav-create-shop-button' exact to='/create'>Create a Shop</NavLink></button>:<></>}
+
       </div>
                     {isLoaded && (
                             <div className='right-nav-div'>
-                                <div className='profile-button'>
+                                <span>
+                            {sessionUser ? <span className='nav-create-shop'><OpenModalButton  buttonText='Create Shop' modalComponent={<CreateRestaurant />} /></span> : <></>}
+                                </span>
+                                <span className='profile-button'>
                                     <ProfileButton user={sessionUser} />
-                                </div>
+                                </span>
                             </div>
                     )}
             </div>

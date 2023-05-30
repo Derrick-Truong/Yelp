@@ -1,7 +1,11 @@
 .create-restaurant-page{
     max-width: 800px;
-        margin: 0 auto;
-        padding: 50px 20px;
+    margin: 0 auto;
+    padding: 30px;
+    height: 752px;
+    overflow-y: auto;
+    background-color: #c0e6ff4a;
+    border-radius: 20px;
 }
 
 .create-restaurant-form{
@@ -17,12 +21,14 @@ flex-direction: column;
 .create-restaurant-form input {
     width: 95%;
     margin: 13px;
-        height: 20px;
-        padding: 20px;
-        border: 1px solid #ebebeb;
-        border-radius: 5px;
-        font-size: 16px;
-        text-align: center;
+    height: 20px;
+    padding: 20px;
+    border: 1px solid #ebebeb;
+    border-radius: 25px;
+    font-size: 16px;
+    text-align: center;
+    color: #453c3c;
+    font-family: 'Anonymous Pro', sans-serif;
 }
 
 a{
@@ -30,12 +36,22 @@ a{
 }
 
 .DropdownPhotos{
-color: rgb(186, 80, 215);
-cursor: pointer;
-padding-bottom: 20px;
+    color: rgb(80 121 215);
+    cursor: pointer;
+    padding-bottom: 20px;
+    font-family: 'DAYSANS', sans-serif;
 }
 
 .DropdownPhotos:hover{
     color: rgb(78, 78, 113);
     cursor: pointer;
+    }
+
+    .title-update-form{
+        margin-top: 21px;
+        margin-bottom: 15px;
+        font-family: 'DAYSANS', sans-serif;
+        font-size: 25px;
+        text-align: center;
+        color: #68a5da;
     }

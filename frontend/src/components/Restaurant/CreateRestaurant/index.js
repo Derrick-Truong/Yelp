@@ -312,6 +312,7 @@ const successStore = await dispatch(createRestaurant(newListing, restaurantImage
 }
     return (
         <section className="create-restaurant-page">
+<div className="title-update-form">Create Shop</div>
 <form className="create-restaurant-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -373,7 +374,7 @@ const successStore = await dispatch(createRestaurant(newListing, restaurantImage
                 {errors?.title && <span className="error">{errors?.title}</span>}
                 <br></br>
                 <textarea
-                    rows="10" cols="60"
+                    rows="8" cols="60"
                     type="text"
                     placeholder="Write a summary of your wonderful ice cream shop..."
                     value={description}

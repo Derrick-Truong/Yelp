@@ -59,9 +59,13 @@ function SignupFormPage() {
     return (
         <>
             <form className='sign-up-form-container' onSubmit={handleSubmit}>
-                {errors?.map((error, idx) => (
-                    <li key={idx}>{error}</li>
-                ))}
+                {errors.length > 0 && (
+                    <ul className="error-messages-signup">
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <h1>Sign Up</h1>
                 <br></br>
                 <label>

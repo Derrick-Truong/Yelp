@@ -86,7 +86,7 @@ const CreateReview = ({ restaurantId }) => {
                 <br></br>
                 <div>
                     <textarea
-                        rows="10" cols="60"
+                        rows="8" cols="60"
                         placeholder='Write down any thoughts...'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}

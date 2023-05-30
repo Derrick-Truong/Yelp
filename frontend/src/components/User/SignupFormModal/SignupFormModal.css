@@ -6,13 +6,17 @@ margin: auto;
     text-align: center;
     align-items: center;
     width: 350px;
-    height: 520px;
+    height: 550px;
     background-image: url('https: //cdn.dribbble.com/users/7854/screenshots/15330807/media/bf124c1c799e852a4d260cf9fce92e7a.gif'); background-repeat:repeat
 }
+.sign-up-form-container button {
+    margin-bottom: 10px;
+}
 
-.errors{
+.error-messages-signup{
     list-style: none;
-    color: red
+    color: red;
+    padding: 5px;
 }
 
 #myImage{

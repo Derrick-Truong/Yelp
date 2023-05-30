@@ -251,6 +251,7 @@ const UpdateRestaurant = ({restaurant}) => {
     // }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant.previewImage), JSON.stringify(restaurant.image2Url), JSON.stringify(restaurant.im3), JSON.stringify(restaurant.im4), JSON.stringify(restaurant.im5), JSON.stringify(restaurant.im6) ])
     return (
         <section className="update-restaurant-page">
+                <div className="title-update-form">Update Your Review</div>
             <form className="update-restaurant-form" onSubmit={handleSubmit}>
                 <input
                     type="text"

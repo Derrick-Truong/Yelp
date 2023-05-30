@@ -28,10 +28,10 @@
 
 
 
-        .container-swipe {
-            width: 100%;
+        .container-swipe-feed {
             display: flex;
-            justify-content: center;
+            padding-left: 254px;
+            justify-content: space-around;
 
 
         }
@@ -135,9 +135,8 @@ font-family: 'NRT Reg', sans-serif;
 }
 
 .restaurant-star-rating .rest-address, .restaurant-star-rating .rest-city{
-    font-weight: 900px;
-    color: white;
-    font-size: 20px;
+    color: #d0cbcb;
+    font-size: 17px;
     font-family: 'NRT Reg', sans-serif;
 }
 .restaurant-item-info-content{
@@ -156,8 +155,18 @@ font-family: 'NRT Reg', sans-serif;
 
 }
 
+.restaurant-item-reviews-feed{
+padding: 10px;
 
-.restaurant-teim-info-content .restaurant-item-content-space{
+}
+
+/* .restaurant-item-content{
+display: flex;
+} */
+.write-a-review{
+text-align: center;
+}
+.restaurant-item-info-content .restaurant-item-content-space{
     border-color: white;
     border-collapse: initial;
     border-spacing: 16px 0;
@@ -286,3 +295,10 @@ body {
     align-items: center
 } */
 
+.item-feed{
+    display: flex;
+}
+
+.pictures-slide-feed{
+    display: flex;
+}

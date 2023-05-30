@@ -90,7 +90,7 @@ const RestaurantItem = () => {
                         {restaurant?.RestaurantImages?.map(image => {
                          return (
 
-                          image && <img key={image.key} className="restaurant-item-restaurant-photos" src={image?.url} />
+                          image && <img key={image.key} className="restaurant-item-restaurant-photos" src={image?.url} alt='image' />
                                 )})}
 
                         <div className='restaurant-item-info-container'>
@@ -153,10 +153,10 @@ const RestaurantItem = () => {
                     <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
                 </div> */}
                 <div className='restaurant-item-reviews-feed'>
-                    <div>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
+                    <div className='write-a-review'>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
 
 
-                    <div className='container-swipe'>
+                    <div className='container-swipe-feed'>
                         <Swiper
 
                             grabCursor={true}
@@ -165,7 +165,7 @@ const RestaurantItem = () => {
                             spaceBetween={0}
                             className="mySwiper"
                         >
-                            <div className='swiping-corner'>
+                            <div className='swiping-corner-feed'>
                                 <>
                                     <mySwiper>
 
@@ -176,8 +176,8 @@ const RestaurantItem = () => {
 
 
                                                     {/* <div className='restaurant-item-reviews-card-container'> */}
-                                                    <SwiperSlide className='pictures-slide' key={review?.id} >
-                                                        <div key={review?.id} className='item'>
+                                                    <SwiperSlide className='pictures-slide-feed' key={review?.id} >
+                                                        <div key={review?.id} className='item-feed'>
                                                             <div className=' reviews-card'>
                                                                 <div className='reviews-card-content'>
                                                                     <div className='reviews-card-image'>

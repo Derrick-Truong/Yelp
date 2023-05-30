@@ -27,7 +27,7 @@ useEffect(() => {
    setRating(review?.rating)
    setUrl(review?.previewImage)
 
-},[JSON.stringify(review)])
+},[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description), JSON.stringify(review?.previewImage)])
 
 
     const valid = () => {
@@ -93,7 +93,7 @@ const handleCancel = (e) => {
                 <br></br>
                 <div>
                     <textarea
-                        rows="10" cols="60"
+                        rows="8" cols="60"
                         placeholder={review?.description}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
