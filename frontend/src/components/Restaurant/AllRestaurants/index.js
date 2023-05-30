@@ -69,7 +69,7 @@ const AllRestaurants = () => {
                                         <NavLink exact to={`/restaurants/${restaurant?.id}`}>
                                             <div className='home-page-restaurant-container'>
                                                 <span className='home-page-restaurant-card'>
-                                                    <img className="all-restaurants-preview-image" src={restaurant?.previewImage} alt="preview-image" />
+                                                    <img className="all-restaurants-preview-image" src={restaurant?.RestaurantImages[0]?.url} alt="preview-image" />
 
                                                     <div className='home-page-restaurant-card-content'>
                                                         <h4>
