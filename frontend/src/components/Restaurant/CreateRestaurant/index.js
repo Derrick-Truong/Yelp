@@ -309,7 +309,12 @@ const handleSubmit = async(e) => {
 
 
 
-dispatch(createRestaurant(newListing, restaurantImage)).then(closeModal).then(history.push('/'))
+const success= await dispatch(createRestaurant(newListing, restaurantImage))
+
+if (success.ok) {
+    closeModal()
+    history.push('/')
+}
 
 
 }
