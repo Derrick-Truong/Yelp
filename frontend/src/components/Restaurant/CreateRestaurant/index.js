@@ -55,9 +55,7 @@ const CreateRestaurant = () => {
             newErrors.description = "Description is required."
         }
 
-        if (description.length > 105) {
-            newErrors.description = 'Description must be less than 105 characters and spaces.'
-        }
+
         if (!title) {
             newErrors.title = "Title is required."
         }
@@ -99,7 +97,7 @@ const CreateRestaurant = () => {
                     im3.endsWith('.jpeg')
                 )
             ) {
-                newErrors.im2 = "Image URL must end in .png, .jpg, or .jpeg";
+                newErrors.im3 = "Image URL must end in .png, .jpg, or .jpeg";
             }
         }
         if (im4) {
@@ -135,8 +133,6 @@ const CreateRestaurant = () => {
                 newErrors.im6 = "Image URL must end in .png, .jpg, or .jpeg";
             }
         }
-
-
         setErrors(newErrors)
         console.log('NewErrors', newErrors)
     }
@@ -383,8 +379,9 @@ if (success.ok) {
                 <br></br>
                 <textarea
                     rows="8" cols="60"
+                    maxLength={105}
                     type="text"
-                    placeholder="Write a summary of your wonderful ice cream shop..."
+                    placeholder="Write a summary of your wonderful ice cream shop...(105 characters max)"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
@@ -425,7 +422,7 @@ if (success.ok) {
       onChange={e => setIm3(e.target.value)}
     />
     <h4></h4>
-    {errors?.im3url && <span className="error">{errors?.im3}</span>}
+    {errors?.im3 && <span className="error">{errors?.im3}</span>}
     <br></br>
     <input
       type="text"

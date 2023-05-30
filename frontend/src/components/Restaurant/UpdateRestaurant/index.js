@@ -73,9 +73,7 @@ const UpdateRestaurant = ({restaurant}) => {
         if (!price) {
             newErrors.price = "Price per night is required."
         }
-        if (description.length > 105) {
-            newErrors.description = 'Description must be less than 105 characters and spaces.'
-        }
+
         if (!description) {
             newErrors.description = "Description is required."
         }
@@ -319,6 +317,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <br></br>
                 <textarea
                     rows="10" cols="60"
+                    maxLength={105}
                     type="text"
                     placeholder="Description"
                     value={description}
