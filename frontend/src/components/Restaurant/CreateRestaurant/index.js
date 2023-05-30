@@ -55,8 +55,8 @@ const CreateRestaurant = () => {
             newErrors.description = "Description is required."
         }
 
-        if (description.length > 70) {
-            newErrors.description = 'Description must be less than 70 characters.'
+        if (description.length > 105) {
+            newErrors.description = 'Description must be less than 105 characters and spaces.'
         }
         if (!title) {
             newErrors.title = "Title is required."

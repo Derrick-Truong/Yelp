@@ -73,7 +73,12 @@ const UpdateRestaurant = ({restaurant}) => {
         if (!price) {
             newErrors.price = "Price per night is required."
         }
-
+        if (description.length > 105) {
+            newErrors.description = 'Description must be less than 105 characters and spaces.'
+        }
+        if (!description) {
+            newErrors.description = "Description is required."
+        }
         if (price && !(parseInt(price))) {
             newErrors.price = "Price is required needs to be a number."
         }
