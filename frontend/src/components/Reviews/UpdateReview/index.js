@@ -72,9 +72,9 @@ const handleCancel = (e) => {
             url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
         }
 
-
+if(!errors.length){
           await dispatch(updateOneReview(review, image, reviewId)).then(closeModal)
-
+}
 
 
     }

@@ -230,9 +230,9 @@ const UpdateRestaurant = ({restaurant}) => {
         }
         restaurantImage.push(image6)
     }
-
+if(!errors.length){
      await dispatch(updateOneRestaurant(newListing, restaurantImage, restaurantId)).then(closeModal)
-
+}
 
     }
 
