@@ -317,7 +317,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <br></br>
                 <textarea
                     rows="10" cols="60"
-                    maxLength={105}
+                    maxLength={100}
                     type="text"
                     placeholder="Description"
                     value={description}

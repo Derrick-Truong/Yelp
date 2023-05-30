@@ -50,7 +50,7 @@ const RestaurantItem = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(reviews)])
+    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(reviews)])
     // useEffect(() => {
     //     if (!showMenu) return;
 

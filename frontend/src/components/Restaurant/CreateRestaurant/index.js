@@ -376,9 +376,9 @@ dispatch(createRestaurant(newListing, restaurantImage)).then(closeModal).then(hi
                 <br></br>
                 <textarea
                     rows="8" cols="60"
-                    maxLength={105}
+                    maxLength={100}
                     type="text"
-                    placeholder="Write a summary of your wonderful ice cream shop...(105 characters max)"
+                    placeholder="Write a summary of your wonderful ice cream shop...(100 characters max)"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />

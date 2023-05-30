@@ -27,13 +27,13 @@ const AllRestaurants = () => {
     const history = useHistory()
     const restaurants = useSelector(state => state?.restaurants)
     const restaurantsValues = Object?.values(restaurants)
-    const restaurantImage = restaurantsValues?.previewImage
+    const restaurantImage = restaurantsValues?.RestaurantImages
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getRestaurants())
-    }, [dispatch, JSON.stringify(restaurantsValues), JSON.stringify(restaurantImage)])
+    }, [dispatch, JSON.stringify(restaurantsValues)])
 
 
     return (
