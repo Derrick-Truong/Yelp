@@ -1,8 +1,4 @@
-
-
-
-
-.restaurant-title-header{
+.restaurant-title-header {
     text-align: center;
 }
 
@@ -12,15 +8,15 @@
     width: 200px;
 } */
 
-.restaurant-item-images-container{
+.restaurant-item-images-container {
 
     /* min-height: 70vh;
     display: grid;
     place-items: center; */
     overflow: hidden;
-  place-items: center;
-  display: grid;
-  /* height: 100vh; */
+    place-items: center;
+    display: grid;
+    /* height: 100vh; */
 
 
 
@@ -28,13 +24,13 @@
 
 
 
-        .container-swipe-feed {
-            display: flex;
-            padding-left: 254px;
-            justify-content: space-around;
+.container-swipe-feed {
+    display: flex;
+    padding-left: 254px;
+    justify-content: space-around;
 
 
-        }
+}
 
 /* .restaurant-item-images-container-slider{
     height: 400px;
@@ -60,34 +56,32 @@
 
 }
 
-.restaurant-item-restaurant-photos{
+.restaurant-item-restaurant-photos {
     height: 110vh;
     border-bottom: 2px solid;
     border-top: 2px solid;
     border-color: black;
 }
 
-.restaurant-item-images-container-slider-track{
+.restaurant-item-images-container-slider-track {
     display: inline-block;
     vertical-align: baseline;
     /* position:relative; */
 
 }
 
-.restaurant-item-images-container-slider-track img{
+/* .restaurant-item-images-container-slider-track img {
     height: 370px;
-        width: 400px;
-}
+    width: 400px;
+} */
 
-*{
+* {
     margin: 0;
-    box-sizing: border-box;
     padding: 0;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
-.restaurant-item-info-container{
+.restaurant-item-info-container {
     align-items: flex-end;
     bottom: 0;
     box-sizing: border-box;
@@ -111,32 +105,34 @@
 
 }
 
-.restaurant-item-info-container h1{
-font-size:42px;
-font-weight: 800;
-color: white;
-line-height: 56px;
-/* font-family: 'NRT Reg', sans-serif; */
+.restaurant-item-info-container h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+    line-height: 56px;
+    /* font-family: 'NRT Reg', sans-serif; */
 
 
 }
 
-.restaurant-star-rating{
+.restaurant-star-rating {
     font-weight: 700px;
     color: white;
 }
 
-.restaurant-star-rating span{
+.restaurant-star-rating span {
     font-size: 27px;
-font-weight: 900px;
-color: white;
+    font-weight: 900px;
+    color: white;
 }
 
-.restaurant-star-rating .rest-address, .restaurant-star-rating .rest-city{
+.restaurant-star-rating .rest-address,
+.restaurant-star-rating .rest-city {
     color: #d0cbcb;
     font-size: 17px;
 }
-.restaurant-item-info-content{
+
+.restaurant-item-info-content {
     flex: 1 auto;
     pointer-events: none;
     position: relative;
@@ -152,18 +148,19 @@ color: white;
 
 }
 
-.restaurant-item-reviews-feed{
-padding: 10px;
+.restaurant-item-reviews-feed {
+    padding: 10px;
 
 }
 
 /* .restaurant-item-content{
 display: flex;
 } */
-.write-a-review{
-text-align: center;
+.write-a-review {
+    text-align: center;
 }
-.restaurant-item-info-content .restaurant-item-content-space{
+
+.restaurant-item-info-content .restaurant-item-content-space {
     border-color: white;
     border-collapse: initial;
     border-spacing: 16px 0;
@@ -175,7 +172,7 @@ text-align: center;
     vertical-align: baseline;
 }
 
-.restaurant-item-content-units{
+.restaurant-item-content-units {
     border-collapse: collapse;
     border-spacing: 0;
     margin-left: 8px;
@@ -194,15 +191,16 @@ text-align: center;
     width: 130px;
     border-radius: 50%;
     padding: 3px;
-    background:mediumaquamarine;
+    background: mediumaquamarine;
 }
 
 
-.restaurant-item-restaurant-photos img{
+.restaurant-item-restaurant-photos img {
     height: auto;
     max-width: 100%;
 }
-.restaurant-items-photo-text{
+
+.restaurant-items-photo-text {
     position: absolute;
     bottom: 0;
     font-weight: 700;
@@ -210,7 +208,7 @@ text-align: center;
 }
 
 
-.reviews-card .reviews-card-image img{
+.reviews-card .reviews-card-image img {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -219,7 +217,7 @@ text-align: center;
 }
 
 
-.reviews-card{
+.reviews-card {
     position: relative;
     height: 280px;
     background: white;
@@ -227,11 +225,12 @@ text-align: center;
     margin: 20px 10px;
     width: 240px;
 }
-.reviews-card::before{
-    content:'';
+
+.reviews-card::before {
+    content: '';
     height: 40%;
     width: 100%;
-    position:absolute;
+    position: absolute;
     border-radius: 20px;
     background: mediumaquamarine;
     border-radius: 20px 20px 0 0;
@@ -239,7 +238,7 @@ text-align: center;
 
 }
 
-.reviews-card .reviews-card-content{
+.reviews-card .reviews-card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -248,30 +247,32 @@ text-align: center;
     z-index: 100;
 }
 
-.reviews-card .reviews-rating{
+.reviews-card .reviews-rating {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
-.reviews-card .reviews-description{
+
+.reviews-card .reviews-description {
     font-size: 12px;
     margin-top: 10px;
 }
-.reviews-card .reviews-update-delete-buttons{
+
+.reviews-card .reviews-update-delete-buttons {
     width: 100%;
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-.reviews-card .reviews-update-delete-buttons button{
+.reviews-card .reviews-update-delete-buttons button {
     outline: none;
     border: none;
     padding: 8px 22px;
     border-radius: 20px;
 }
 
-.swiper{
+.swiper {
     height: 100%;
     width: 100%;
 }
@@ -286,10 +287,10 @@ text-align: center;
     align-items: center
 } */
 
-.item-feed{
+.item-feed {
     display: flex;
 }
 
-.pictures-slide-feed{
+.pictures-slide-feed {
     display: flex;
 }

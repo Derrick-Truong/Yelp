@@ -1,12 +1,11 @@
 import { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getRestaurants } from '../../../store/restaurants'
 import { getReviews } from '../../../store/review'
 import RestaurantItem from '../RestaurantItem'
-import CreateRestaurant from '../CreateRestaurant'
 import OpenModalButton from '../../../OpenModalButton'
 import './AllRestaurants.css'
 import CreateReview from '../../Reviews/CreateReview'
@@ -24,16 +23,19 @@ SwiperCore.use([EffectCoverflow, Pagination]);
 
 
 const AllRestaurants = () => {
+    const dispatch = useDispatch()
     const history = useHistory()
     const restaurants = useSelector(state => state?.restaurants)
     const restaurantsValues = Object?.values(restaurants)
-    const restaurantImage = restaurantsValues?.RestaurantImages
-
-    const dispatch = useDispatch()
+    console.log('Restaurants', restaurantsValues)
 
     useEffect(() => {
         dispatch(getRestaurants())
     }, [dispatch, JSON.stringify(restaurantsValues)])
+
+    if (!restaurants) {
+        return <div>Loading...</div>;
+    }
 
 
     return (
@@ -64,13 +66,19 @@ const AllRestaurants = () => {
                         <mySwiper>
                             {restaurantsValues?.sort((a, b) => b.avgRating - a.avgRating)?.map(restaurant => {
                                 const rating = restaurant?.avgRating;
+                                const imageUrl =
+                                        'https://yelp-capstone.s3.us-west-1.amazonaws.com/'+ restaurant?.previewImage
+                                // const url = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + restaurant?.objects[0]?.key
                                 return (
-                                    <SwiperSlide className='pictures-slide' key={restaurant?.id} >
-                                        <NavLink exact to={`/restaurants/${restaurant?.id}`}>
+                                    <SwiperSlide className='pictures-slide'>
+                                        <NavLink key={restaurant} exact to={`/restaurants/${restaurant?.id}`}>
                                             <div className='home-page-restaurant-container'>
                                                 <span className='home-page-restaurant-card'>
-                                                    <img className="all-restaurants-preview-image" src={restaurant?.RestaurantImages[5]?.url} alt="preview-image" />
-
+                                                    <img
+                                                        className='all-restaurants-preview-image'
+                                                        src={imageUrl}
+                                                        alt='preview-image'
+                                                    />
                                                     <div className='home-page-restaurant-card-content'>
                                                         <h4>
                                                             <span className='home-page-restaurant-title'>{restaurant?.title}</span> </h4>

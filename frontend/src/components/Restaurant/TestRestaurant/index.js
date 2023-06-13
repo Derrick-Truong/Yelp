@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,9 +12,8 @@ import DeleteReview from '../../Reviews/DeleteReview';
 import UpdateReview from '../../Reviews/UpdateReview';
 import CreateReview from '../../Reviews/CreateReview';
 import SwiperCore, { EffectCoverflow, Navigation } from 'swiper';
-import {Grid, Pagination} from "swiper";
+import { Grid, Pagination } from "swiper";
 import UpdateRestaurant from '../UpdateRestaurant';
-import UploadPic from '../../Images';
 import Yelp from "../../../assets/Yelp.jpg"
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -23,35 +21,35 @@ import 'swiper/swiper-bundle.min.css';
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import './RestaurantItem.css'
+import './TestRestaurant.css'
 
 SwiperCore.use([EffectCoverflow, Pagination]);
 
-
-
-
-const RestaurantItem = () => {
-
+const TestRestaurant = () => {
     const { restaurantId } = useParams()
+    const restaurantVal = useSelector(state => state.restaurants)
+    const restaurant = restaurantVal[restaurantId]
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const dispatch = useDispatch();
     const reviewsSelect = useSelector(state => state?.reviews)
     const reviews = Object?.values(reviewsSelect)
-    const selectRestaurant = useSelector(state => state?.restaurants)
-    const restaurant = selectRestaurant[restaurantId]
-
+    // const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
-    const restaurantImages= restaurant?.RestaurantImages
+    const restaurantImages = restaurant?.RestaurantImages
     const avgRating = restaurant?.avgRating
     const starRating = Number(avgRating).toFixed(1)
-
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
     };
 
     useEffect(() => {
+        // async function getRestaurantDetails(){
+        // const result = await axios.get(`/api/restaurants/${restaurantId}`)
+        // setRestaurant(result.restaurantDetails)
+        // }
+        // getRestaurantDetails()
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
     }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(reviews)])
@@ -75,13 +73,9 @@ const RestaurantItem = () => {
     if (!restaurant) {
         return null
     }
-
     return (
         <>
             <div className='restaurant-item-images-container'>
-                <div className='restaurant-items-photo-text'>
-            <UploadPic/>
-                </div>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -91,20 +85,22 @@ const RestaurantItem = () => {
                 <div className='restaurant-item-images-container-slider'>
 
                     <div className='restaurant-item-images-container-slider-track'>
-                        {restaurant?.RestaurantImages?.map(image => {
-                         return (
+                        {restaurant?.objects?.map(image => {
+                            const url = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + image?.key
+                            return (
 
-                          image && <img key={image.key} className="restaurant-item-restaurant-photos" src={image?.url} alt='image' />
-                                )})}
+                                image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
+                            )
+                        })}
 
                         <div className='restaurant-item-info-container'>
                             <div>
-                            <h1>{restaurant?.title}</h1>
+                                <h1>{restaurant?.title}</h1>
                                 {currentUser && (currentUser?.id === restaurant?.userId) ?
-                                <span>
-                                    <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant}/>}/></span>
-                                <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />}/></span></span>
-                                :<></>}
+                                    <span>
+                                        <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
+                                        <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
+                                    : <></>}
 
 
                             </div>
@@ -173,7 +169,7 @@ const RestaurantItem = () => {
                                 <>
                                     <mySwiper>
 
-                                        {reviews.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
+                                        {reviews?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
                                             const rating = review?.rating
                                             return (
                                                 <>
@@ -185,7 +181,7 @@ const RestaurantItem = () => {
                                                             <div className=' reviews-card'>
                                                                 <div className='reviews-card-content'>
                                                                     <div className='reviews-card-image'>
-                                                                    <img src={review?.previewImage} alt='preview-unavailable' />
+                                                                        <img src={review?.previewImage} alt='preview-unavailable' />
                                                                     </div>
                                                                     <div className='reviews-rating'>
 
@@ -310,5 +306,4 @@ const RestaurantItem = () => {
 
 
 
-export default RestaurantItem
-
+export default TestRestaurant

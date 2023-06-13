@@ -15,6 +15,11 @@ flex-direction: column;
     text-align: center;
 
 }
+
+.create-restaurant-form textarea{
+    background-color: #FDE0E6;
+    font-weight: 600;
+}
 .create-restaurant-page button {
     margin: 13px;
 }
@@ -24,10 +29,12 @@ flex-direction: column;
     height: 20px;
     padding: 20px;
     border: 1px solid #ebebeb;
+    background-color: #FDE0E6;
     border-radius: 25px;
     font-size: 16px;
     text-align: center;
     color: #453c3c;
+    font-weight: 600;
     font-family: 'Anonymous Pro', sans-serif;
 }
 

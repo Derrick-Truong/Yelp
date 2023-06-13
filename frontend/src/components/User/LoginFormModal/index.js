@@ -40,7 +40,7 @@ function LoginFormModal() {
     const demoSignIn = async (e) => {
         e.preventDefault();
 
-        return dispatch(sessionActions.login({ credential: "Derrick", password: "password" })).then(closeModal)
+        return dispatch(sessionActions.login({ credential: "Bill", password: "password" })).then(closeModal)
     }
 
     return (
@@ -71,7 +71,7 @@ function LoginFormModal() {
                     <label>
                         <input className="credential-and-password-form"
                             type="text"
-                            placeholder="          credentials"
+                            placeholder="credentials"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
                             required
@@ -82,7 +82,7 @@ function LoginFormModal() {
 
                         <input className="credential-and-password-form"
                             type="password"
-                            placeholder="           password"
+                            placeholder="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required

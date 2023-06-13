@@ -36,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     country: DataTypes.STRING,
     description: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    randomNum: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Restaurant',

@@ -15,14 +15,14 @@ return {
 }
 }
 
-const updateRestaurant = (restaurant) => {
+export const updateRestaurant = (restaurant) => {
     return {
         type: UPDATE_RESTAURANT,
         restaurant
     }
 }
 
-const deleteRestaurant = (restaurantId) => {
+export const deleteRestaurant = (restaurantId) => {
     return {
         type: DELETE_RESTAURANT,
         restaurantId
@@ -46,11 +46,9 @@ const getRestaurantDetails = (restaurant) => {
 
 export const getRestaurants = () => async dispatch => {
     const response = await fetch('/api/restaurants')
-
     if (response.ok) {
         const list = await response.json();
-
-     await  dispatch(homeRestaurants(list))
+     dispatch(homeRestaurants(list))
     }
 };
 
@@ -59,78 +57,97 @@ export const restaurantDetails = (restaurantId) => async dispatch => {
 
     if (response.ok) {
         const res = await response.json()
-       await dispatch(getRestaurantDetails(res))
+       dispatch(getRestaurantDetails(res))
     }
 }
-export const updateOneRestaurant = (restaurant, restaurantPictures,  restaurantId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(restaurant)
-    })
+// export const updateOneRestaurant = (restaurant, restaurantId) => async (dispatch) => {
+//     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'multipart/form-data'},
+//         body: JSON.stringify(restaurant)
+//     })
 
-    if (res.ok) {
-        const newRestaurant = await res.json()
-        newRestaurant.RestaurantImages = []
-        for (let i = 0; i < restaurantPictures.length; i++) {
-            const response2 = await csrfFetch(`/api/restaurants/${restaurantId}/pictures`, {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(restaurantPictures[i])
-            })
-
-
-            if (response2.ok) {
-                const newPicture = await response2.json()
-                newRestaurant.RestaurantImages.push(newPicture)
-
-            }
+    // if (res.ok) {
+    //     const newRestaurant = await res.json()
+    //     newRestaurant.RestaurantImages = []
+    //     for (let i = 0; i < restaurantPictures.length; i++) {
+    //         const response2 = await csrfFetch(`/api/restaurants/${restaurantId}/pictures`, {
+    //             method: 'PUT',
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify(restaurantPictures[i])
+    //         })
 
 
+    //         if (response2.ok) {
+    //             const newPicture = await response2.json()
+    //             newRestaurant.RestaurantImages.push(newPicture)
+
+    //         }
+
+
+    //     }
+    //     await dispatch(updateRestaurant(newRestaurant))
+    //     return newRestaurant
+
+//     if (res.ok){
+//     const newRestaurant = await res.json()
+//     await dispatch(updateRestaurant(newRestaurant))
+//     return newRestaurant
+//     }
+// };
+
+// export const submitData = (data) => async dispatch => {
+//     const maxChunkSize = 1024; // Specify the maximum chunk size in bytes
+//     const totalChunks = Math.ceil(data.length / maxChunkSize);
+
+//     for (let i = 0; i < totalChunks; i++) {
+//         const start = i * maxChunkSize;
+//         const end = start + maxChunkSize;
+//         const chunk = data.slice(start, end);
+
+//         dispatch(createRestaurant(chunk));
+//     }
+// };
+// export const createNewRestaurant = (formData) => async (dispatch) => {
+//     console.log('Data backend', formData);
+//     try {
+//         const response = await csrfFetch('/api/restaurants/upload', {
+//             method: 'POST',
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Request failed with status ' + response.status);
+//         }
+
+//         const data = await response.json();
+//         console.log('Response back end', data);
+//         await dispatch(createOneRestaurant(data));
+//     } catch (error) {
+//         console.error('Error:', error);
+//         // Handle the error as needed
+//     }
+// };
+export const createNewRestaurant = (formData) => async (dispatch) => {
+    try {
+        const response = await csrfFetch('/api/restaurants/upload', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+        const data = await response.json();
+        dispatch(createOneRestaurant(data));
+        return data
         }
-        await dispatch(updateRestaurant(newRestaurant))
-        return newRestaurant
-
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle the error as needed
     }
-
-
 };
 
-
-export const createRestaurant = (restaurant, restaurantPictures) => async dispatch => {
-    const response = await csrfFetch('/api/restaurants', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(restaurant)
-    })
-
-    if (response.ok) {
-        const newRestaurant = await response.json()
-        newRestaurant['RestaurantImages'] = []
-    for (let i=0; i < restaurantPictures.length; i++) {
-        const response2 = await csrfFetch(`/api/restaurants/${newRestaurant?.id}/pictures`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(restaurantPictures[i])
-        })
-
-        const newPicture = await response2.json()
-        if (response2.ok) {
-            newRestaurant.RestaurantImages.push(newPicture)
-        }
-    }
-        await dispatch(createOneRestaurant(newRestaurant))
-        return newRestaurant
-    }
-
-
-}
 
 export const removeRestaurant = (restaurantId) => async dispatch => {
     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
@@ -151,10 +168,10 @@ const restaurantReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case ALL_RESTAURANTS:
             newState = {}
-            action.restaurants.Restaurants.forEach(restaurant => {
-                newState[restaurant.id] = restaurant
-            })
-            return newState;
+           action.restaurants.Restaurants.forEach(restaurant => {
+            newState[restaurant.id] = restaurant
+           })
+           return newState
         case ONE_RESTAURANT:
             newState = {...prevState}
             newState[action.restaurant.id] = action.restaurant

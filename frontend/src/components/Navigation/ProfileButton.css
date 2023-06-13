@@ -1,6 +1,6 @@
 
 
-.profile-button {
+/* .profile-button {
     display: flex;
     justify-content: end;
     cursor: pointer;
@@ -13,7 +13,7 @@
     size-adjust: 1.5%;
 
 
-}
+} */
 
 
 /* .no-spots #ManageSpots {
@@ -88,7 +88,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: 50px;
     height: 30px;
     background-color: rgb(244, 225, 194);
     color: white;

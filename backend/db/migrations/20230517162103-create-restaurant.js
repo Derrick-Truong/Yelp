@@ -43,6 +43,9 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
+      randomNum: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

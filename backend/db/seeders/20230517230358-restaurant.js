@@ -18,7 +18,8 @@ module.exports = {
         country: "United States of America",
         title: "Fun Land",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
-        price: 3
+        price: 3,
+        randomNum:'2b4e7d6a8f9c1e50c3f0b2d1895a6e7f'
       },
       {
         userId: 2,
@@ -28,7 +29,8 @@ module.exports = {
         country: "United States of America",
         title: "Candy House",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
-        price: 2
+        price: 2,
+        randomNum: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7'
       },
       {
         userId: 3,
@@ -38,7 +40,8 @@ module.exports = {
         country: "United States of America",
         title: "Mid",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
-        price: 3
+        price: 3,
+        randomNum:'7e83f92d5a1c6b8f4d0e97b65c32a1f7'
       },
       {
         userId: 1,
@@ -48,7 +51,8 @@ module.exports = {
         country: "United States of America",
         title: "Not My Cup of Tea",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
-        price: 2
+        price: 2,
+        randomNum:'f1a0c8b7e9d4621530b46d34e62ef9c2'
       },
       {
         userId: 2,
@@ -58,7 +62,8 @@ module.exports = {
         country: "United States of America",
         title: "Perfect Land",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
-        price: 2
+        price: 2,
+        randomNum:'8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5'
       }
     ], options);
 

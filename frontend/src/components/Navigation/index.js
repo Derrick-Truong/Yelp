@@ -6,7 +6,7 @@ import OpenModalButton from '../../OpenModalButton';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import Yelp from "../../assets/Yelp.jpg"
-import CreateRestaurant from '../Restaurant/CreateRestaurant';
+import Test1 from '../Aws/Test1';
 
 
 
@@ -23,7 +23,7 @@ function Navigation({ isLoaded }) {
                     {isLoaded && (
                             <div className='right-nav-div'>
                                 <span>
-                            {sessionUser ? <span className='nav-create-shop'><OpenModalButton  buttonText='Create Shop' modalComponent={<CreateRestaurant />} /></span> : <></>}
+                            {sessionUser ? <span className='nav-create-shop'><OpenModalButton  buttonText='Create Shop' modalComponent={<Test1 />} /></span> : <></>}
                                 </span>
                                 <span className='profile-button'>
                                     <ProfileButton user={sessionUser} />

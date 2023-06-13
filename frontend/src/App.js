@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
@@ -5,11 +6,10 @@ import LoginFormModal from "./components/User/LoginFormModal";
 import AllRestaurants from "./components/Restaurant/AllRestaurants";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import CreateRestaurant from "./components/Restaurant/CreateRestaurant";
 import CreateReview from "./components/Reviews/CreateReview";
 import RestaurantItem from "./components/Restaurant/RestaurantItem";
-
-
+import Test1 from "./components/Aws/Test1";
+import TestRestaurant from "./components/Restaurant/TestRestaurant";
 
 
 function App() {
@@ -27,14 +27,14 @@ function App() {
         <Route exact path="/">
           <AllRestaurants/>
         </Route>
+        <Route exact path="/Test1">
+          <Test1/>
+        </Route>
+          <Route exact path="/restaurants/:restaurantId">
+            <TestRestaurant/>
+          </Route>
         <Route exact path='/createreview'>
           <CreateReview/>
-        </Route>
-        <Route exact path='/restaurants/:restaurantId'>
-        <RestaurantItem/>
-        </Route>
-        <Route exact path="/create">
-          <CreateRestaurant/>
         </Route>
       </Switch>
     )
