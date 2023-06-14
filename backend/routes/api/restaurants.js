@@ -44,14 +44,7 @@ const s3 = new S3Client({
     },
     region: region
 })
-const storage = multer.memoryStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'upload/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname);
-    },
-});
+const storage = multer.memoryStorage();
 // const storage = multer.memoryStorage()
 const upload = multer({ storage: storage,
     limits: { fileSize: 10 * 1024 * 1024 }, // Increase the limit to 10MB
@@ -180,81 +173,7 @@ const upload = multer({ storage: storage,
 //     }
 
 //     )
-router.get('/:id', async(req, res, next) => {
-    try {
-        let oneRestaurant = await Restaurant.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: [
-                {
-                    model: Review,
-                    attributes: ['id', 'description', 'rating'],
-                    include: {
-                        model: ReviewImage,
-                        attributes: ['id', 'url']
-                    }
-                },
-                {
-                    model: User,
-                    attributes: ['id', 'firstName', 'lastName', 'username']
-                }
-            ]
-        });
 
-        if (!oneRestaurant) {
-            return res.json({
-                message: "Restaurant couldn't be found",
-                statusCode: 404
-            });
-        }
-
-        let adder = 0;
-        let restaurantDetails = oneRestaurant.toJSON();
-        restaurantDetails.numReviews = oneRestaurant.Reviews.length;
-
-        restaurantDetails.Reviews.forEach(review => {
-            adder = adder + review.rating;
-        });
-
-        restaurantDetails.avgRating = adder / restaurantDetails.numReviews;
-
-        const params4 = {
-            Bucket: process.env.BUCKET,
-            MaxKeys: 6,
-            Prefix: restaurantDetails.randomNum
-        };
-
-        const getObjectPromises = [];
-        const { Contents } = await s3.send(new ListObjectsV2Command(params4));
-
-        if (Contents && Contents.length > 0) {
-            const sortedKeys = Contents.sort((a, b) => b.LastModified.getTime() - a.LastModified.getTime());
-            const lastModifiedKeys = sortedKeys.slice(0, 6).map(obj => obj.Key);
-
-            for (const object of lastModifiedKeys) {
-                const getObjectParams = {
-                    Bucket: params4.Bucket,
-                    Key: object
-                };
-
-                const response = await s3.send(new GetObjectCommand(getObjectParams));
-
-                getObjectPromises.push({
-                    key: object,
-                    data: response.Body.toString('utf-8')
-                });
-            }
-
-            restaurantDetails.objects = await Promise.all(getObjectPromises);
-        }
-
-        res.json({restaurantDetails});
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: 'An error occurred' });
-    }
-});
 
 
 //Create a Restaurant
@@ -306,6 +225,9 @@ router.get('/', async (req, res, next) => {
                 {
                     model: Review,
                 },
+                {
+                    model: RestaurantImage
+                }
             ],
         });
 
@@ -317,62 +239,178 @@ router.get('/', async (req, res, next) => {
         }
 
         let Restaurants = [];
+        restaurants.forEach(restaurant => {
+            Restaurants.push(restaurant.toJSON())
+        });
 
-        for (const restaurant of restaurants) {
-            let restaurantDetails = restaurant.toJSON();
-
+        Restaurants.forEach(restaurant => {
             let adder = 0;
             let i = 0;
 
-            restaurantDetails.Reviews.forEach((review) => {
+            restaurant.Reviews.forEach(review => {
                 i++;
                 adder = adder + review.rating;
             });
 
-            restaurantDetails.avgRating = adder / i;
-            delete restaurantDetails.Reviews;
+            restaurant.avgRating = adder / i;
 
-           const params4 = {
-  Bucket: process.env.BUCKET,
-  MaxKeys: 6,
-  Prefix: restaurantDetails.randomNum,
-};
+            if (restaurant.RestaurantImages.length > 0) {
+                const mostRecentImage = restaurant.RestaurantImages.reduce((prevImage, currImage) => {
+                    if (new Date(currImage.createdAt) > new Date(prevImage.createdAt)) {
+                        return currImage;
+                    } else {
+                        return prevImage;
+                    }
+                });
 
-const getObjectPromises = [];
-const { Contents } = await s3.send(new ListObjectsV2Command(params4));
+                restaurant.previewImage = mostRecentImage.url;
+            }
 
-if (Contents && Contents.length > 0) {
-  const sortedKeys = Contents.sort(
-    (a, b) => b.LastModified.getTime() - a.LastModified.getTime()
-  );
-  const lastModifiedKeys = sortedKeys.slice(0, 6).map((obj) => obj.Key);
+            delete restaurant.Reviews;
+            delete restaurant.RestaurantImages;
+        });
 
-  for (const object of lastModifiedKeys) {
-    const getObjectParams = {
-      Bucket: params4.Bucket,
-      Key: object,
-    };
+        res.json({Restaurants});
+    } catch (error) {
+        next(error);
+    }
+});
+//         delete restaurant.Reviews
+        // for (const restaurant of restaurants) {
+        //     let restaurantDetails = restaurant.toJSON();
 
-    const response = await s3.send(new GetObjectCommand(getObjectParams));
+        //     let adder = 0;
+        //     let i = 0;
 
-    getObjectPromises.push({
-      key: object,
-      data: response.Body.toString('utf-8'),
-    });
-  }
+        //     restaurantDetails.Reviews.forEach((review) => {
+        //         i++;
+        //         adder = adder + review.rating;
+        //     });
 
-  restaurantDetails.objects = await Promise.all(getObjectPromises);
-  restaurantDetails.previewImage = restaurantDetails.objects[0].key
-  delete restaurantDetails.objects
-}
+        //     restaurantDetails.avgRating = adder / i;
+        //     delete restaurantDetails.Reviews;
 
-Restaurants.push(restaurantDetails);
+//            const params4 = {
+//   Bucket: process.env.BUCKET,
+//   MaxKeys: 6,
+//   Prefix: restaurantDetails.randomNum,
+// };
+
+// const getObjectPromises = [];
+// const { Contents } = await s3.send(new ListObjectsV2Command(params4));
+
+// if (Contents && Contents.length > 0) {
+//   const sortedKeys = Contents.sort(
+//     (a, b) => b.LastModified.getTime() - a.LastModified.getTime()
+//   );
+//   const lastModifiedKeys = sortedKeys.slice(0, 6).map((obj) => obj.Key);
+
+//   for (const object of lastModifiedKeys) {
+//     const getObjectParams = {
+//       Bucket: params4.Bucket,
+//       Key: object,
+//     };
+
+//     const response = await s3.send(new GetObjectCommand(getObjectParams));
+
+//     getObjectPromises.push({
+//       key: object,
+//       data: response.Body.toString('utf-8'),
+//     });
+//   }
+
+//   restaurantDetails.objects = await Promise.all(getObjectPromises);
+//   restaurantDetails.previewImage = restaurantDetails.objects[0].key
+//   delete restaurantDetails.objects
+// }
+
+// Restaurants.push(restaurantDetails);
+//         }
+
+    
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        let oneRestaurant = await Restaurant.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [
+                {
+                    model: Review,
+                    attributes: ['id', 'description', 'rating'],
+                    include: {
+                        model: ReviewImage,
+                        attributes: ['id', 'url']
+                    }
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName', 'username']
+                },
+                {
+                    model:RestaurantImage
+                }
+            ]
+        });
+
+        if (!oneRestaurant) {
+            return res.json({
+                message: "Restaurant couldn't be found",
+                statusCode: 404
+            });
         }
 
-        res.json({ Restaurants });
+        let adder = 0;
+        let restaurantDetails = oneRestaurant.toJSON();
+        restaurantDetails.numReviews = oneRestaurant.Reviews.length;
+
+        restaurantDetails.Reviews.forEach(review => {
+            adder = adder + review.rating;
+        });
+
+        restaurantDetails.avgRating = adder / restaurantDetails.numReviews;
+
+        // const params4 = {
+        //     Bucket: process.env.BUCKET,
+        //     MaxKeys: 6,
+        //     Prefix: restaurantDetails.randomNum
+        // };
+
+        // const getObjectPromises = [];
+        // const { Contents } = await s3.send(new ListObjectsV2Command(params4));
+
+        // if (Contents && Contents.length > 0) {
+        //     const sortedKeys = Contents.sort((a, b) => b.LastModified.getTime() - a.LastModified.getTime());
+        //     const lastModifiedKeys = sortedKeys.slice(0, 6).map(obj => obj.Key);
+
+        //     for (const object of lastModifiedKeys) {
+        //         const getObjectParams = {
+        //             Bucket: params4.Bucket,
+        //             Key: object
+        //         };
+
+        //         const response = await s3.send(new GetObjectCommand(getObjectParams));
+
+        //         getObjectPromises.push({
+        //             key: object,
+        //             data: response.Body.toString('utf-8')
+        //         });
+
+        //         restaurantDetails.objects = await Promise.all(getObjectPromises);
+
+        //     }
+        //     // restaurantDetails.objects = await Promise.all(getObjectPromises);
+        //     // restaurantDetails.objects = await Promise.all(getObjectPromises);
+        //     // res.json(restaurantDetails );
+        //     // res.json(restaurantDetails);
+        // }
+        // restaurantDetails.objects = await Promise.all(getObjectPromises);
+
+        res.json(restaurantDetails);
     } catch (error) {
         console.log(error);
-        res.json({ error: 'An error occurred' });
+        res.status(500).json({ error: 'An error occurred' });
     }
 });
 // router.post('/upload', upload.array('image', 6), async (req, res) => {
@@ -452,6 +490,7 @@ router.post('/upload', requireAuth, upload.fields([
         if(images && images.length > 0){
             for (let i = 0; i < images.length; i++) {
                 const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
+
                 if (file) {
                     const fileBuffer = await sharp(file.buffer).resize({ width: 400, height: 370, fit: 'cover' }).toBuffer();
 
@@ -464,10 +503,20 @@ router.post('/upload', requireAuth, upload.fields([
 
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
+                    console.log('Successfully loaded images');
+
+                    // res.json(success);
+                    await RestaurantImage.create({
+                        restaurantId: success.id,
+                        url: success.randomNum + file.originalname
+                    })
+
                 }
+
+
             }
 
-            console.log('Successfully loaded images');
+            // console.log('Successfully loaded images');
             res.json(success);
         }
     } catch (error) {
@@ -544,67 +593,81 @@ router.post('/upload', requireAuth, upload.fields([
 
 
 //Edit Restaurant
-router.put('/uploads/:id', requireAuth, validateRestaurant, async (req, res, next) => {
-    let editRestaurant = await Restaurant.findOne({
-        where: {
-            id: req.params.id
+router.put('/:id', requireAuth, upload.fields([
+    { name: 'image1', maxCount: 1 },
+    { name: 'image2', maxCount: 1 },
+    { name: 'image3', maxCount: 1 },
+    { name: 'image4', maxCount: 1 },
+    { name: 'image5', maxCount: 1 },
+    { name: 'image6', maxCount: 1 },
+]), async (req, res) => {
+    try {
+        let success = await Restaurant.findOne({
+            where: {
+                id: req.params.id
+            },
+            inclde:[
+                {
+                    model: RestaurantImage
+                }
+            ]
+        })
+        if (!req.files) {
+            return res.status(400).json({ error: 'No files were uploaded' });
         }
-    })
-    if (!editRestaurant) {
-        res.status(404);
-        return res.json({
-            message: "Restaurant couldn't be found",
-        })
-    }
 
-    if (editRestaurant.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "Forbidden/not allowed",
-        })
-    }
-    const { address, description, price, title, city, state, country } = req.body
+        const { image1, image2, image3, image4, image5, image6 } = req.files;
+        const { address, description, price, title, city, state, country } = req.body;
 
-    const success = editRestaurant.update({
-        address,
-        city,
-        state,
-        country,
-        title,
-        description,
-        price
-    })
-    if (success) {
-        try {
-            for (let i = 0; i < req.files.length; i++) {
-                const file = req.files[i];
+        success.update({
+            country,
+            state,
+            address,
+            city,
+            price,
+            title,
+            description
+        });
+        const images = [image1, image2, image3, image4, image5, image6];
+        if (images && images.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
 
-                const fileBuffer = await sharp(file.buffer).resize({ width: 400, height: 370, fit: "cover" }).toBuffer();
+                if (file) {
+                    const fileBuffer = await sharp(file.buffer).resize({ width: 400, height: 370, fit: 'cover' }).toBuffer();
 
+                    const params = {
+                        Bucket: process.env.BUCKET,
+                        Key: success.randomNum + file.originalname,
+                        Body: fileBuffer,
+                        ContentType: file.mimetype
+                    };
 
-                const params = {
-                    Bucket: process.env.BUCKET,
-                    Key: success.randomNum + file.originalname,
-                    Body: fileBuffer,
-                    ContentType: file.mimetype
-                };
-                const command = new PutObjectCommand(params)
-                // Upload the file to S3
-                await s3.send(command)
+                    const command = new PutObjectCommand(params);
+                    await s3.send(command);
+                    console.log('Successfully loaded images');
+
+                    // res.json(success);
+                    await RestaurantImage.create({
+                        restaurantId: success.id,
+                        url: success.randomNum + file.originalname
+                    })
+
+                }
+
 
             }
 
-            res.json(success)
-
-        }catch(error) {
-            console.error(error);
-            res.status(500).json({ "error": "Upload failed" });
+            // console.log('Successfully loaded images');
         }
+        res.json(success)
+    } catch (error) {
+        console.error('Error occurred:', error);
+        return res.status(500).json({ error: 'An error occurred during image upload' });
     }
+});
 
-})
-
-router.delete('/uploads/:id', requireAuth, async (req, res, next) => {
+router.delete('/:id', requireAuth, async (req, res, next) => {
     let deleteRestaurant = await Restaurant.findOne({
         where: {
             id: req.params.id

@@ -102,27 +102,27 @@ const Test1 = () => {
         form.append('title', title)
         form.append('description', description)
     if(files1){
-        form.append('image1', files1, files1.name)
+        form.append('image1', files1)
     }
 
     if(files2){
-        form.append('image2', files2, files2.name)
+        form.append('image2', files2)
     }
 
     if(files3){
-        form.append('image3', files3, files3.name)
+        form.append('image3', files3)
     }
 
     if(files4){
-        form.append('image4', files4, files4.name)
+        form.append('image4', files4)
     }
 
     if(files5){
-        form.append('image5', files5, files5.name)
+        form.append('image5', files5)
     }
 
     if(files6){
-        form.append('image6', files6, files6.name)
+        form.append('image6', files6)
     }
         // const newListing = {
         //     country: country,
@@ -138,8 +138,12 @@ const Test1 = () => {
         console.log('Entries', Object.fromEntries(form))
 
 
-    await dispatch(createNewRestaurant(form)).then(closeModal).then(history.push('/'))
-
+        await dispatch(createNewRestaurant(form))
+            .then(history.push('/'))
+            .catch((error) => {
+                // Handle the error here
+                console.error(error);
+            });
 
         // console.log('Front end data part 2', form)
 

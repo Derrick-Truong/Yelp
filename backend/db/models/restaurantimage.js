@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
   RestaurantImage.init({
     restaurantId: DataTypes.INTEGER,
     url: DataTypes.STRING,
-    preview: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'RestaurantImage',

@@ -13,166 +13,138 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         restaurantId: 1,
-        url: "https://images.unsplash.com/photo-1625758600922-4085dd859395?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGljZSUyMGNyZWFtfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60.jpg",
-        preview: false,
+        url: "2b4e7d6a8f9c1e50c3f0b2d1895a6e7falex-robert-Xpt4_HgZSjw-unsplash.jpg"
       },
       {
         restaurantId: 1,
-        url: 'https://images.unsplash.com/photo-1563589173312-476d8c36b242?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGljZSUyMGNyZWFtfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60.jpg',
-        preview: false
+        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7falp-allen-altiner-gdUSE2gJx14-unsplash.jpg',
+
       },
       {
         restaurantId: 1,
-        url: 'https://billypenn.com/wp-content/uploads/2022/07/vanderwendes-icecream-03.jpg',
-        preview: true,
+        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7fbrianna-tucker-zPWnbj_xXE8-unsplash.jpg',
+
       },
       {
         restaurantId: 1,
-        preview: false,
-        url: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGljZSUyMGNyZWFtfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60.jpg'
+        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7fdylan-ferreira-0cv08T71zL0-unsplash.jpg'
       },
       {
         restaurantId: 1,
-        preview: false,
-        url: 'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGljZSUyMGNyZWFtfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60.jpg'
+        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7ferwan-hesry-kwrOLRHjxZc-unsplash.jpg'
       },
       {
         restaurantId: 1,
-        preview: false,
-        url: 'https://images.unsplash.com/photo-1623595119708-26b1f7300075?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=683&q=80.jpg'
+        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7feugene-zhyvchik-oieodYZhMEQ-unsplash.jpg'
       },
       {
         restaurantId: 2,
-        url: "https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg",
-        preview: true
+        url: "d2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7alex-robert-Xpt4_HgZSjw-unsplash (1).jpg",
+
       },
       {
         restaurantId: 2,
-        preview: false,
-        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/ELKw_li71X4eKv8L35YoNA/348s.jpg'
+        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7handy-wicaksono-grFOVo_kEEQ-unsplash.jpg'
       },
       {
         restaurantId: 2,
-        preview: false,
-        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/gEVXQKtYrjNJpnt9MhhAMA/348s.jpg'
+        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7jeswin-thomas-x2iJB6i4u0A-unsplash.jpg'
       },
       {
         restaurantId: 2,
-        preview: false,
-        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/r5LHwjdD2paRtofMavBy2w/348s.jpg'
+        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7katie-smetherman-etr1gzkVpuQ-unsplash.jpg'
       },
       {
         restaurantId: 2,
-        preview: false,
-        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/_9QksFLuDTwupmz3v58ZfA/348s.jpg'
+        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7nick-karvounis-7sf0vmckvz4-unsplash (1).jpg'
       },
       {
         restaurantId: 2,
-        preview: false,
-        url: 'https://images.squarespace-cdn.com/content/v1/60a43c2e57b5c705f28324d3/1662178227173-FBLXL65O5XEZFYVM05NO/image-asset.jpeg'
+        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7sincerely-media-udbcIP_f6kA-unsplash (1).jpg'
       },
       {
         restaurantId: 3,
-        url: "https://thumbor.forbes.com/thumbor/fit-in/x/https://www.forbes.com/advisor/wp-content/uploads/2021/08/download-7.jpg",
-        preview: false,
+        url: "7e83f92d5a1c6b8f4d0e97b65c32a1f7mister-james-_5VeIJiqFK4-unsplash.jpg",
       },
       {
         restaurantId: 3,
-        preview: false,
-        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/BXZ9Zs8F7rJcamsBv1fDDw/348s.jpg'
+        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7najlacam-f8TajCVv4s8-unsplash.jpg'
       },
       {
         restaurantId: 3,
-        preview: false,
-        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/l08axLF2oSJNpQkkV6PWAA/l.jpg'
+        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7paulina-ponce-Z0ZvJwk8ZoY-unsplash.jpg'
       },
       {
         restaurantId: 3,
-        preview: false,
-        url: 'https://www.islandtimefrozenyogurt.com/wp-content/uploads/2022/12/ice-cream-fernandina-beach-fl-1-640-520.jpg'
+        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7photo-1473213110592-19430a217c0e.avif'
 
       },
       {
 
         restaurantId: 3,
-        preview: false,
-        url: 'https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_800,h_400/https://discoverrichmondtours.com/wp-content/uploads/2021/06/Charm-School-2-e1624907204420.jpg'
+        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7photo-1560008581-09826d1de69e.avif'
 
       },
       {
 
         restaurantId: 3,
-        preview: true,
-        url: 'https://everylittlename.com/wp-content/uploads/2023/01/three-scoops-ice-cream.jpg'
+        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7photo-1560269507-9495cdfcadca.avif'
 
       },
       {
         restaurantId: 4,
-        url: "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_24/1448814/how-size-doesnt-make-you-happier-today-main-190614.jpg",
-        preview: true,
+        url: "f1a0c8b7e9d4621530b46d34e62ef9c2photo-1560801530-34efebfecba8.avif",
       },
       {
         restaurantId: 4,
-        preview: false,
-        url: 'https://portsoyicecream.co.uk/site/wp-content/uploads/ice-cream-collection-1600x1067.jpg'
+        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1582076653774-5476ea5db60e.avif'
 
       },
       {
         restaurantId: 4,
-        preview: false,
-        url: 'https://www.thedailymeal.com/img/gallery/what-is-the-oldest-ice-cream-parlor-in-the-us/l-intro-1664213487.jpg'
+        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1597041505347-26a27f87b914.avif'
       },
       {
         restaurantId: 4,
-        preview: false,
-        url: 'https://portsoyicecream.co.uk/site/wp-content/uploads/ice-cream-collection-1600x1067.jpg'
+        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1602296750425-f025b045f355.avif'
 
       },
       {
         restaurantId: 4,
-        preview: false,
-        url: 'https://portsoyicecream.co.uk/site/wp-content/uploads/ice-cream-collection-1600x1067.jpg'
+        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1602296751203-b9aa27fe9426.avif'
 
       },
       {
         restaurantId: 4,
-        preview: false,
-        url: 'https://www.stayincocoabeach.com/wp-content/uploads/2019/03/Sweeties-1.jpg'
+        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1602296751259-edfb8274b682.avif'
 
       },
       {
         restaurantId: 5,
-        url: "https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/Stock-Modern-House-With-Large-Pool-AdobeStock-127770833-Copy.jpg",
-        preview: false,
+        url: "8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1637695282790-ddfb2d7c90b9.avif",
       },
       {
         restaurantId: 5,
-        preview: false,
-        url: 'https://restaurantdesign360.com/assets/static/content-img-63@2x.f71e539.b58a1943bb0b98c1835ca8c9254b0249.jpg'
+        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1640184713819-69d3195f0b92.avif'
 
       },
       {
         restaurantId: 5,
-        preview: false,
-        url: 'https://i.pinimg.com/originals/5a/ca/83/5aca83cf0eee16747dfc8e6683623b36.jpg'
+        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1641417670713-1a0023152194.avif'
 
       },
       {
         restaurantId: 5,
-        preview: true,
-        url: 'https://cdn.mos.cms.futurecdn.net/ManNov2ntFvFZNwVnbMJ3f.jpg'
+        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1650155585218-ee113644a333.avif'
+      },
+      {
+        restaurantId: 5,
+        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1656218505247-4fa1f2a6684a.avif'
 
       },
       {
         restaurantId: 5,
-        preview: false,
-        url: 'https://retaildesignblog.net/wp-content/uploads/2020/08/1-4-780x520.jpg'
-
-      },
-      {
-        restaurantId: 5,
-        preview: false,
-        url: 'https://www.islandtimefrozenyogurt.com/wp-content/uploads/2020/08/ice-cream-shop-fernandina-beach-fl-3-scaled.jpg'
+        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1680448934566-f3021ce20c91.avif'
 
       },
 

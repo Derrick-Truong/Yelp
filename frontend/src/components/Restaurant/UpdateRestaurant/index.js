@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useModal } from "../../../Context/Modal";
+import { updateOneRestaurant } from "../../../store/restaurants";
 import { updateRestaurant } from "../../../store/restaurants";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -23,16 +24,33 @@ const UpdateRestaurant = ({restaurant}) => {
     const [errors, setErrors] = useState({})
     const [description, setDescription] = useState(restaurant?.description);
     const [price, setPrice] = useState(restaurant?.price);
-    const [randomNum, setRandomNum] = useState(restaurant?.randomNum)
+    const [files1, setFile1] = useState(null);
+    const [files2, setFile2] = useState(null);
+    const [files3, setFile3] = useState(null);
+    const [files4, setFile4] = useState(null);
+    const [files5, setFile5] = useState(null);
+    const [files6, setFile6] = useState(null);
 
-    const filesPicked = e => {
-        const selectedFiles = Array.from(e.target.files);
-        setFiles(selectedFiles);
+    const handleFile1Change = (e) => {
+        setFile1(e.target.files[0]);
     };
-
-
+    const handleFile2Change = (e) => {
+        setFile2(e.target.files[0]);
+    };
+    const handleFile3Change = (e) => {
+        setFile3(e.target.files[0]);
+    };
+    const handleFile4Change = (e) => {
+        setFile4(e.target.files[0]);
+    };
+    const handleFile5Change = (e) => {
+        setFile5(e.target.files[0]);
+    };
+    const handleFile6Change = (e) => {
+        setFile6(e.target.files[0]);
+    };
     const valid = () => {
-        let newErrors = []
+        let newErrors = {}
         if (!address) {
             newErrors.address = "Address is required."
         }
@@ -51,37 +69,64 @@ const UpdateRestaurant = ({restaurant}) => {
         if (!price) {
             newErrors.price = "Price per night is required."
         }
-
         if (!description) {
             newErrors.description = "Description is required."
+        }
+
+
+        if (!title) {
+            newErrors.title = "Title is required."
         }
         if (price && !(parseInt(price))) {
             newErrors.price = "Price is required needs to be a number."
         }
-
         setErrors(newErrors)
         console.log('NewErrors', newErrors)
     }
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         valid()
-        if (errors.length > 0) {
-            return setErrors([])
+        if (Object.keys(errors).length > 0) {
+            return
         }
-        const formData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('image', files[i])
-        }
-        formData.append('address', address)
-        formData.append('description', description)
-        formData.append('country', country)
-        formData.append('price', price.toString())
-        formData.append('title', title)
-        formData.append('city', city)
-        formData.append('state', state)
-        formData.append('randomNum', randomNum)
+        const form = new FormData();
 
+        //     if(files && files.length > 0){
+        //     for (let i = 0; i < files.length; i++) {
+        //         form.append('image', files[i])
+        //     }
+        // }
+        form.append('country', country)
+        form.append('state', state)
+        form.append('address', address)
+        form.append('city', city)
+        form.append('price', price.toString())
+        form.append('title', title)
+        form.append('description', description)
+        if (files1) {
+            form.append('image1', files1)
+        }
+
+        if (files2) {
+            form.append('image2', files2)
+        }
+
+        if (files3) {
+            form.append('image3', files3)
+        }
+
+        if (files4) {
+            form.append('image4', files4)
+        }
+
+        if (files5) {
+            form.append('image5', files5)
+        }
+
+        if (files6) {
+            form.append('image6', files6)
+        }
         // const newListing = {
         //     country: country,
         //     description: description,
@@ -93,12 +138,19 @@ const UpdateRestaurant = ({restaurant}) => {
         // }
         // formData.append('newlisting', newListing)
 
-        // const success = await dispatch(updateOneRestaurant(formData, restaurantId))
-        // if (success.status === 200) {
-        //     const success2 = success.data;
-        //     dispatch(updateRestaurant(success2))
-        //     closeModal()
-        // }
+        console.log('Entries', Object.fromEntries(form))
+
+
+        await dispatch(updateOneRestaurant(form, restaurantId))
+            .then(closeModal)
+            .catch((error) => {
+                // Handle the error here
+                console.error(error);
+            });
+
+        // console.log('Front end data part 2', form)
+
+
     }
     return (
         <section className="create-restaurant-page">
@@ -183,8 +235,13 @@ const UpdateRestaurant = ({restaurant}) => {
                 <br></br>
                 <br></br>
                 Don't like the displayed photos huh?
-                <input className="file-upload-button" onChange={filesPicked} accept="image/*" type="file" multiple/>
-                <button onSubmit={handleSubmit} className="create-button">Create Shop</button>
+                <input onChange={handleFile1Change} name='image1' accept="image/*" type="file" />
+                <input onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
+                <input onChange={handleFile3Change} name='image3' accept="image/*" type="file" />
+                <input onChange={handleFile4Change} name='image4' accept="image/*" type="file" />
+                <input onChange={handleFile5Change} name='image5' accept="image/*" type="file" />
+                <input onChange={handleFile6Change} name='image6' accept="image/*" type="file" />
+                <button type="submit" className="create-button">Create Shop</button>
             </form>
         </section>
     )

@@ -29,7 +29,7 @@ const TestRestaurant = () => {
     const { restaurantId } = useParams()
     const restaurantVal = useSelector(state => state.restaurants)
     const restaurant = restaurantVal[restaurantId];
-    console.log(restaurant)
+    console.log("restuarnat details", restaurant)
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const TestRestaurant = () => {
 
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(reviews)])
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)])
 
     if (!restaurant) {
         return <div>Loading...</div>;
@@ -56,19 +56,18 @@ const TestRestaurant = () => {
     return (
         <>
             <div className='restaurant-item-images-container'>
+                {/* <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
-                <br></br>
-                <br></br>
+                <br></br> */}
                 <div className='restaurant-item-images-container-slider'>
 
                     <div className='restaurant-item-images-container-slider-track'>
-                        {restaurant?.objects?.map(image => {
-                            const url = 'https://yelp-capstone.s3.us-west-1.amazonaws.com/' + image?.key
+                        {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                            const url = 'https://yelp-capstone.s3.us-west-1.amazonaws.com/' + image?.url
                             return (
-
                                 image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                             )
                         })}

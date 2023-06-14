@@ -16,7 +16,7 @@
     overflow: hidden;
     place-items: center;
     display: grid;
-    /* height: 100vh; */
+    height: 75vh;
 
 
 
@@ -47,7 +47,7 @@
 .restaurant-item-images-container-slider {
     /* height: 400px; */
     margin: auto;
-    position: relative;
+    /* position: relative; */
     display: grid;
     place-items: center;
     max-width: 1900px;
@@ -66,14 +66,13 @@
 .restaurant-item-images-container-slider-track {
     display: inline-block;
     vertical-align: baseline;
-    /* position:relative; */
 
 }
 
-/* .restaurant-item-images-container-slider-track img {
+.restaurant-item-images-container-slider-track img {
     height: 370px;
     width: 400px;
-} */
+}
 
 * {
     margin: 0;
@@ -135,11 +134,10 @@
 .restaurant-item-info-content {
     flex: 1 auto;
     pointer-events: none;
-    position: relative;
     z-index: 1;
     padding-right: 16px;
     border: 0px;
-
+    height: 25vh;
     border-color: white;
     vertical-align: baseline;
     margin: 0px;

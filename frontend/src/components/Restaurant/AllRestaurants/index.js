@@ -67,7 +67,7 @@ const AllRestaurants = () => {
                                 const rating = restaurant?.avgRating;
                                 const imageUrl =
                                         'https://yelp-capstone.s3.us-west-1.amazonaws.com/'+ restaurant?.previewImage
-                                // const url = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + restaurant?.objects[0]?.key
+                                // const imageUrl = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + restaurant?.objects[0]?.key
                                 return (
                                     <SwiperSlide className='pictures-slide' key={restaurant.id}>
                                         <NavLink exact to={`/restaurants/${restaurant?.id}`}>

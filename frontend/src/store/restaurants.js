@@ -15,7 +15,7 @@ return {
 }
 }
 
-export const updateRestaurant = (restaurant) => {
+const updateRestaurant = (restaurant) => {
     return {
         type: UPDATE_RESTAURANT,
         restaurant
@@ -130,7 +130,26 @@ export const restaurantDetails = (restaurantId) => async dispatch => {
 //         // Handle the error as needed
 //     }
 // };
+export const updateOneRestaurant = (formData, restaurantId) => async (dispatch) => {
+    console.log('Data store', formData)
+    try {
+        const response = await csrfFetch(`/api/restaurants/${restaurantId}`, {
+            method: 'PUT',
+            body: formData,
+        });
+
+        if (response.ok) {
+        const data = await response.json();
+        dispatch(updateRestaurant(data));
+        return data
+        }
+    } catch (error) {
+        console.error('Error:Upload unsccessful', error);
+        // Handle the error as needed
+    }
+};
 export const createNewRestaurant = (formData) => async (dispatch) => {
+    console.log('Data store', formData)
     try {
         const response = await csrfFetch('/api/restaurants/upload', {
             method: 'POST',
@@ -138,16 +157,15 @@ export const createNewRestaurant = (formData) => async (dispatch) => {
         });
 
         if (response.ok) {
-        const data = await response.json();
-        dispatch(createOneRestaurant(data));
-        return data
+            const data = await response.json();
+            dispatch(createOneRestaurant(data));
+            return data
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:Upload unsccessful', error);
         // Handle the error as needed
     }
 };
-
 
 export const removeRestaurant = (restaurantId) => async dispatch => {
     const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
