@@ -7,7 +7,6 @@ import AllRestaurants from "./components/Restaurant/AllRestaurants";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import CreateReview from "./components/Reviews/CreateReview";
-import RestaurantItem from "./components/Restaurant/RestaurantItem";
 import Test1 from "./components/Aws/Test1";
 import TestRestaurant from "./components/Restaurant/TestRestaurant";
 

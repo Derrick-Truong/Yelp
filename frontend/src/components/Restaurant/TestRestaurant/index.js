@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import React, { useRef } from "react";
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -28,15 +28,15 @@ SwiperCore.use([EffectCoverflow, Pagination]);
 const TestRestaurant = () => {
     const { restaurantId } = useParams()
     const restaurantVal = useSelector(state => state.restaurants)
-    const restaurant = restaurantVal[restaurantId]
+    const restaurant = restaurantVal[restaurantId];
+    console.log(restaurant)
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const dispatch = useDispatch();
-    const reviewsSelect = useSelector(state => state?.reviews)
+    const reviewsSelect = useSelector(state => state.reviews)
     const reviews = Object?.values(reviewsSelect)
     // const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
-    const restaurantImages = restaurant?.RestaurantImages
     const avgRating = restaurant?.avgRating
     const starRating = Number(avgRating).toFixed(1)
     const openMenu = () => {
@@ -45,33 +45,13 @@ const TestRestaurant = () => {
     };
 
     useEffect(() => {
-        // async function getRestaurantDetails(){
-        // const result = await axios.get(`/api/restaurants/${restaurantId}`)
-        // setRestaurant(result.restaurantDetails)
-        // }
-        // getRestaurantDetails()
+
         dispatch(restaurantDetails(restaurantId))
         dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(reviews)])
-    // useEffect(() => {
-    //     if (!showMenu) return;
-
-    //     const closeMenu = (e) => {
-    //         if (!ulRef?.current?.contains(e?.target)) {
-    //             setShowMenu(false);
-    //         }
-    //     };
-
-    //     document.addEventListener('click', closeMenu);
-
-    //     return () => document.removeEventListener("click", closeMenu);
-    // }, [showMenu]);
-
-
-    // const ulClassNameUpdateDelete = "list-for-update-delete" + (showMenu ? "" : " hidden");
+    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(reviews)])
 
     if (!restaurant) {
-        return null
+        return <div>Loading...</div>;
     }
     return (
         <>
@@ -86,7 +66,7 @@ const TestRestaurant = () => {
 
                     <div className='restaurant-item-images-container-slider-track'>
                         {restaurant?.objects?.map(image => {
-                            const url = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + image?.key
+                            const url = 'https://yelp-capstone.s3.us-west-1.amazonaws.com/' + image?.key
                             return (
 
                                 image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
@@ -129,29 +109,6 @@ const TestRestaurant = () => {
                 </div>
             </div>
             <div className='restaurant-item-content'>
-
-                {/* <div className="restaurant-title-header">
-                <h4 className="restaurant-item-restaurantTitle">{restaurant?.title}</h4>
-                <OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant}/>}/>
-            </div> */}
-                {/* <div className='restaurant-item-images-container'>
-
-                {restaurant?.RestaurantImages?.map(image => {
-                    return (
-
-                        image && <img key={image?.id} className="restaurant-photos" src={image?.url} alt="restaurant-pic" />
-                    )
-
-                })}
-
-            </div> */}
-                {/* <p className="restaurant-content">
-                    {restaurant?.description}
-                </p> */}
-                {/* <div className="restaurant-footer">
-                    {currentUser?.id === restaurant?.userId ? <span><OpenModalButton modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} buttonText={<><i className="fa-solid fa-trash"></i></>} /></span> : <></>}
-                    <span><button type='click' onClick={openMenu}>{<><i className="fas fa-comment-dots"></i></>}</button></span>
-                </div> */}
                 <div className='restaurant-item-reviews-feed'>
                     <div className='write-a-review'>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
 
@@ -173,9 +130,6 @@ const TestRestaurant = () => {
                                             const rating = review?.rating
                                             return (
                                                 <>
-
-
-                                                    {/* <div className='restaurant-item-reviews-card-container'> */}
                                                     <SwiperSlide className='pictures-slide-feed' key={review?.id} >
                                                         <div key={review?.id} className='item-feed'>
                                                             <div className=' reviews-card'>
@@ -224,75 +178,6 @@ const TestRestaurant = () => {
                             </div>
                         </Swiper>
                     </div>
-                    {/* <div className='container-swipe-feed'>
-                        <Swiper
-
-                            grabCursor={true}
-                            slidesPerView={5}
-                            pagination={true}
-                            spaceBetween={0}
-                            className="mySwiper"
-                        >
-                            <div className='swiping-corner-feed'>
-                                <>
-                                    <mySwiper>
-
-                                        {reviews.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
-                                            const rating = review?.rating
-                                            return (
-                                                <>
-
-
-
-                                                    <SwiperSlide className='pictures-slide-feed' key={review?.id} >
-                                                        <div key={review?.id} className='item-feed'>
-                                                            <div className=' reviews-card'>
-                                                                <div className='reviews-card-content'>
-                                                                    <div className='reviews-card-image'>
-                                                                        <img src={review?.previewImage} alt='preview-unavailable' />
-                                                                    </div>
-                                                                    <div className='reviews-rating'>
-
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <span>{review?.User?.username}</span>
-                                                                    </div>
-
-                                                                    <p className='reviews-description'>{review?.description}</p>
-                                                                    {currentUser?.id === review?.userId ?
-                                                                        <div className='reviews-update-delete-buttons'>
-
-                                                                            <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id} />} />
-                                                                            <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review} />} />
-
-
-                                                                        </div> : <></>}
-                                                                </div>
-
-                                                            </div>
-
-
-                                                        </div>
-                                                    </SwiperSlide>
-
-                                                </>
-
-                                            )
-
-                                        }
-
-                                        )
-
-                                        }
-                                    </mySwiper>
-                                </>
-                            </div>
-                        </Swiper>
-                    </div> */}
-
 
                 </div>
             </div>

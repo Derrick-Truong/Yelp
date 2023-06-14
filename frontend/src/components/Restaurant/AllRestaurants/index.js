@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getRestaurants } from '../../../store/restaurants'
 import { getReviews } from '../../../store/review'
-import RestaurantItem from '../RestaurantItem'
 import OpenModalButton from '../../../OpenModalButton'
 import './AllRestaurants.css'
 import CreateReview from '../../Reviews/CreateReview'
@@ -70,8 +69,8 @@ const AllRestaurants = () => {
                                         'https://yelp-capstone.s3.us-west-1.amazonaws.com/'+ restaurant?.previewImage
                                 // const url = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + restaurant?.objects[0]?.key
                                 return (
-                                    <SwiperSlide className='pictures-slide'>
-                                        <NavLink key={restaurant} exact to={`/restaurants/${restaurant?.id}`}>
+                                    <SwiperSlide className='pictures-slide' key={restaurant.id}>
+                                        <NavLink exact to={`/restaurants/${restaurant?.id}`}>
                                             <div className='home-page-restaurant-container'>
                                                 <span className='home-page-restaurant-card'>
                                                     <img

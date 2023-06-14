@@ -180,87 +180,81 @@ const upload = multer({ storage: storage,
 //     }
 
 //     )
-router.get('/:id', async (req, res, next) => {
-    let oneRestaurant = await Restaurant.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: [
-            {
-                model: Review,
-                attributes: ['id', 'description', 'rating'],
-                include: {
-                    model: ReviewImage,
-                    attributes: ['id', 'url']
-                }
+router.get('/:id', async(req, res, next) => {
+    try {
+        let oneRestaurant = await Restaurant.findOne({
+            where: {
+                id: req.params.id
             },
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName', 'username']
-            }
+            include: [
+                {
+                    model: Review,
+                    attributes: ['id', 'description', 'rating'],
+                    include: {
+                        model: ReviewImage,
+                        attributes: ['id', 'url']
+                    }
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName', 'username']
+                }
+            ]
+        });
 
-        ],
+        if (!oneRestaurant) {
+            return res.json({
+                message: "Restaurant couldn't be found",
+                statusCode: 404
+            });
+        }
 
+        let adder = 0;
+        let restaurantDetails = oneRestaurant.toJSON();
+        restaurantDetails.numReviews = oneRestaurant.Reviews.length;
 
-    }
-    )
+        restaurantDetails.Reviews.forEach(review => {
+            adder = adder + review.rating;
+        });
 
+        restaurantDetails.avgRating = adder / restaurantDetails.numReviews;
 
+        const params4 = {
+            Bucket: process.env.BUCKET,
+            MaxKeys: 6,
+            Prefix: restaurantDetails.randomNum
+        };
 
-    if (!oneRestaurant) {
-        return res.json({
-            message: "Restaurant couldn't be found",
-            statusCode: 404
-        })
-    }
+        const getObjectPromises = [];
+        const { Contents } = await s3.send(new ListObjectsV2Command(params4));
 
-    let adder = 0;
-    let restaurantDetails = oneRestaurant.toJSON()
-    restaurantDetails.numReviews = oneRestaurant.Reviews.length
-    restaurantDetails.Reviews.forEach(review => {
-        adder = adder + review.rating
+        if (Contents && Contents.length > 0) {
+            const sortedKeys = Contents.sort((a, b) => b.LastModified.getTime() - a.LastModified.getTime());
+            const lastModifiedKeys = sortedKeys.slice(0, 6).map(obj => obj.Key);
 
-    })
-    restaurantDetails.avgRating = adder / restaurantDetails.numReviews
-
-    const params4 = {
-        Bucket: process.env.BUCKET,
-        MaxKeys: 6,
-        Prefix: restaurantDetails.randomNum
-    };
-
-    const getObjectPromises = [];
-
-    s3.send(new ListObjectsV2Command(params4))
-        .then(({ Contents }) => {
-            const sortedKeys = Contents.sort((a, b) => b.LastModified - a.LastModified);
-            const lastModifiedKeys = sortedKeys.slice(0, 6);
-            getObjectPromises.push(...lastModifiedKeys.map(object => {
+            for (const object of lastModifiedKeys) {
                 const getObjectParams = {
                     Bucket: params4.Bucket,
                     Key: object
                 };
 
-                return s3.send(new GetObjectCommand(getObjectParams))
-                    .then(response => ({
-                        key: object,
-                        data: response.Body.toString('utf-8')
-                    }));
-            }));
+                const response = await s3.send(new GetObjectCommand(getObjectParams));
 
-            return Promise.all(getObjectPromises);
-        })
-        .then(dataList => {
-            restaurantDetails.objects = dataList;
-            res.json(restaurantDetails);
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: 'An error occurred' });
-        });
-}
+                getObjectPromises.push({
+                    key: object,
+                    data: response.Body.toString('utf-8')
+                });
+            }
 
-)
+            restaurantDetails.objects = await Promise.all(getObjectPromises);
+        }
+
+        res.json({restaurantDetails});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred' });
+    }
+});
 
 
 //Create a Restaurant
@@ -550,7 +544,7 @@ router.post('/upload', requireAuth, upload.fields([
 
 
 //Edit Restaurant
-router.put('/:id', requireAuth, validateRestaurant, async (req, res, next) => {
+router.put('/uploads/:id', requireAuth, validateRestaurant, async (req, res, next) => {
     let editRestaurant = await Restaurant.findOne({
         where: {
             id: req.params.id
@@ -610,7 +604,7 @@ router.put('/:id', requireAuth, validateRestaurant, async (req, res, next) => {
 
 })
 
-router.delete('/:id', requireAuth, async (req, res, next) => {
+router.delete('/uploads/:id', requireAuth, async (req, res, next) => {
     let deleteRestaurant = await Restaurant.findOne({
         where: {
             id: req.params.id
