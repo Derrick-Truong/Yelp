@@ -1,3 +1,4 @@
+import React from "react";
 import { createNewRestaurant } from "../../store/restaurants";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -139,6 +140,7 @@ const Test1 = () => {
 
 
         await dispatch(createNewRestaurant(form))
+            .then(closeModal)
             .then(history.push('/'))
             .catch((error) => {
                 // Handle the error here

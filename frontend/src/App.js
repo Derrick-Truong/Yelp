@@ -10,7 +10,6 @@ import CreateReview from "./components/Reviews/CreateReview";
 import Test1 from "./components/Aws/Test1";
 import TestRestaurant from "./components/Restaurant/TestRestaurant";
 
-
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);

@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
+import { useMemo } from "react";
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PacmanLoader from "react-spinners/PacmanLoader";
+// import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import OpenModalButton from '../../../OpenModalButton';
@@ -23,13 +26,20 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import './TestRestaurant.css'
 
+
 SwiperCore.use([EffectCoverflow, Pagination]);
 
 const TestRestaurant = () => {
+
+    // const [selected, setSelected] = useState(null)
+    // const { isLoaded } = useLoadScript({
+    //     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_KEY,
+    //     libraries: ["places"]
+    // })
+    const [loading, setLoading] = useState(false)
     const { restaurantId } = useParams()
     const restaurantVal = useSelector(state => state.restaurants)
     const restaurant = restaurantVal[restaurantId];
-    console.log("restuarnat details", restaurant)
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const dispatch = useDispatch();
@@ -38,153 +48,262 @@ const TestRestaurant = () => {
     // const restaurant = selectRestaurant[restaurantId]
     const currentUser = useSelector(state => state?.session?.user)
     const avgRating = restaurant?.avgRating
+    const addressVal = restaurant?.address
+    const cityVal = restaurant?.city
+    const stateVal = restaurant?.state
     const starRating = Number(avgRating).toFixed(1)
+    var address = `${addressVal} ${cityVal} ${stateVal}`
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
     };
+    var map;
+    var marker;
+
+
+    function directions(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
+        }
+        else {
+           console.log("Geolocation not supported");
+        }
+    }
+   async function initMap() {
+        var geocoder = new window.google.maps.Geocoder();
+        var address = `${addressVal} ${cityVal} ${stateVal}`;
+
+        try {
+
+            const { results, status } = await geocodeAddress(geocoder, address);
+
+            if (status === "OK" && results.length > 0) {
+                const location = results[0].geometry.location;
+                const position = { lat: location.lat(), lng: location.lng() };
+
+                // The map, centered at the restaurant location
+                const mapElement = document.getElementById("map");
+                const map = new window.google.maps.Map(mapElement, {
+                    zoom: 12,
+                    center: position,
+
+                });
+
+                // The marker, positioned at the restaurant location
+                const marker = new window.google.maps.Marker({
+                    map: map,
+                    position: position,
+                    title: "Restaurant",
+                });
+            }
+
+        } catch (error) {
+            console.log("An error occurred during geocoding:", error);
+        }
+    }
+    function geocodeAddress(geocoder, address) {
+        return new Promise((resolve, reject) => {
+            geocoder.geocode({ address }, (results, status) => {
+                if (status === "OK") {
+                    resolve({ results, status });
+                } else {
+                    reject(new Error("Geocode was not successful for the following reason: " + status));
+                }
+            });
+        });
+    }
+async function allArguments (){
+initMap();
+}
+allArguments()
+    function routeSuccess(position){
+        var directionsService = new window.google.maps.DirectionsService();
+        var directionsDisplay = new window.google.maps.DirectionsRenderer();
+        var trafficLayer = new window.google.maps.TrafficLayer()
+        var myLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+        const iceCreamShop = `${addressVal} ${cityVal} ${stateVal}`;
+        const mapElement = document.getElementById("map");
+        const routeOptions = {
+            zoom:12,
+            center: { lat: 37.8272, lng: 122.2913 },
+
+        }
+        const map = new window.google.maps.Map(mapElement, routeOptions);
+        directionsDisplay.setMap(map);
+        trafficLayer.setMap(map)
+
+        map.setCenter(myLocation);
+
+        var routeRequest = {
+            origin: myLocation,
+            destination: iceCreamShop,
+            travelMode: 'DRIVING'
+        }
+        directionsService.route(routeRequest, function(result, status){
+            if (status == window.google.maps.DirectionsStatus.OK)
+            directionsDisplay.setDirections(result)
+        })
+
+    }
+    function routeError() {
+        alert("Couldn't get location");
+    }
 
     useEffect(() => {
 
-        dispatch(restaurantDetails(restaurantId))
-        dispatch(getReviews(restaurantId))
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)])
 
-    if (!restaurant) {
-        return <div>Loading...</div>;
-    }
+        setLoading(true);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 2500);
+
+        dispatch(restaurantDetails(restaurantId));
+        dispatch(getReviews(restaurantId));
+
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+
     return (
         <>
-            <div className='restaurant-item-images-container'>
-                {/* <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br> */}
-                <div className='restaurant-item-images-container-slider'>
 
-                    <div className='restaurant-item-images-container-slider-track'>
-                        {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
-                            const url = 'https://yelp-capstone.s3.us-west-1.amazonaws.com/' + image?.url
-                            return (
-                                image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
-                            )
-                        })}
+            {loading ?
+                <div className='loading-icon'>
+                    <PacmanLoader color={'#fdd541'} loading={loading} size={100} />
+                </div>
+                :
+                <section>
+                    <div className='restaurant-item-images-container'>
 
-                        <div className='restaurant-item-info-container'>
-                            <div>
-                                <h1>{restaurant?.title}</h1>
-                                {currentUser && (currentUser?.id === restaurant?.userId) ?
-                                    <span>
-                                        <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
-                                        <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
-                                    : <></>}
+                        <div className='restaurant-item-images-container-slider'>
 
+                            <div className='restaurant-item-images-container-slider-track'>
+                                {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                                    const url = 'https://yelp-capstone.s3.us-west-1.amazonaws.com/' + image?.url
+                                    return (
+                                        image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
+                                    )
+                                })}
+
+                                <div className='restaurant-item-info-container'>
+                                    <div>
+                                        <h1>{restaurant?.title}</h1>
+                                        {currentUser && (currentUser?.id === restaurant?.userId) ?
+                                            <span>
+                                                <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
+                                                <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
+                                            : <></>}
+
+
+                                    </div>
+                                    <h3></h3>
+                                    <div className='restaurant-avgRating'>
+                                        <h2>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : (2 > avgRating && avgRating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <span className='restaurant-star-rating'><span>  {starRating}</span>
+                                                <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
+                                                <div className='rest-address'>{restaurant?.address}</div>
+                                                <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
+                                            </span>
+
+                                        </h2>
+
+
+                                    </div>
+                                </div>
 
                             </div>
-                            <h3></h3>
-                            <div className='restaurant-avgRating'>
-                                <h2>
-                                    <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : (2 > avgRating && avgRating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
-                                    <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                    <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                    <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                    <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                    <span className='restaurant-star-rating'><span>  {starRating}</span>
-                                        <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
-                                        <div className='rest-address'>{restaurant?.address}</div>
-                                        <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
-                                    </span>
 
-                                </h2>
-
-
-                            </div>
                         </div>
-
                     </div>
+                    <div id="map-container">
+                        <div style={{ width: '50%', height: '50%' }}>
+                            <div id="map"></div>
+                            <button onClick={routeSuccess}>Directions</button>
+                        </div>
+                    </div>
+                    <div className='restaurant-item-content'>
+                        <div className='restaurant-item-reviews-feed'>
+                            <div className='write-a-review'>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
 
-                </div>
-            </div>
-            <div className='restaurant-item-content'>
-                <div className='restaurant-item-reviews-feed'>
-                    <div className='write-a-review'>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
+
+                            <div className='container-swipe-feed'>
+                                <Swiper
+
+                                    grabCursor={true}
+                                    slidesPerView={5}
+                                    pagination={true}
+                                    spaceBetween={0}
+                                    className="mySwiper"
+                                >
+                                    <div className='swiping-corner-feed'>
+                                        <>
+                                            <mySwiper>
+
+                                                {reviews?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
+                                                    const rating = review?.rating
+                                                    return (
+                                                        <>
+                                                            <SwiperSlide className='pictures-slide-feed' key={review?.id} >
+                                                                <div key={review?.id} className='item-feed'>
+                                                                    <div className=' reviews-card'>
+                                                                        <div className='reviews-card-content'>
+                                                                            <div className='reviews-card-image'>
+                                                                                <img src={review?.previewImage} alt='preview-unavailable' />
+                                                                            </div>
+                                                                            <div className='reviews-rating'>
+
+                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
+                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                                                <span>{review?.User?.username}</span>
+                                                                            </div>
+
+                                                                            <p className='reviews-description'>{review?.description}</p>
+                                                                            {currentUser?.id === review?.userId ?
+                                                                                <div className='reviews-update-delete-buttons'>
+
+                                                                                    <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id} />} />
+                                                                                    <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review} />} />
 
 
-                    <div className='container-swipe-feed'>
-                        <Swiper
+                                                                                </div> : <></>}
+                                                                        </div>
 
-                            grabCursor={true}
-                            slidesPerView={5}
-                            pagination={true}
-                            spaceBetween={0}
-                            className="mySwiper"
-                        >
-                            <div className='swiping-corner-feed'>
-                                <>
-                                    <mySwiper>
-
-                                        {reviews?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
-                                            const rating = review?.rating
-                                            return (
-                                                <>
-                                                    <SwiperSlide className='pictures-slide-feed' key={review?.id} >
-                                                        <div key={review?.id} className='item-feed'>
-                                                            <div className=' reviews-card'>
-                                                                <div className='reviews-card-content'>
-                                                                    <div className='reviews-card-image'>
-                                                                        <img src={review?.previewImage} alt='preview-unavailable' />
                                                                     </div>
-                                                                    <div className='reviews-rating'>
-
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <i style={(rating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                        <span>{review?.User?.username}</span>
-                                                                    </div>
-
-                                                                    <p className='reviews-description'>{review?.description}</p>
-                                                                    {currentUser?.id === review?.userId ?
-                                                                        <div className='reviews-update-delete-buttons'>
-
-                                                                            <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id} />} />
-                                                                            <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review} />} />
 
 
-                                                                        </div> : <></>}
                                                                 </div>
+                                                            </SwiperSlide>
 
-                                                            </div>
+                                                        </>
 
+                                                    )
 
-                                                        </div>
-                                                    </SwiperSlide>
+                                                }
 
-                                                </>
+                                                )
 
-                                            )
-
-                                        }
-
-                                        )
-
-                                        }
-                                    </mySwiper>
-                                </>
+                                                }
+                                            </mySwiper>
+                                        </>
+                                    </div>
+                                </Swiper>
                             </div>
-                        </Swiper>
+
+                        </div>
                     </div>
-
-                </div>
-            </div>
-
-
+                </section>
+            }
         </>
 
     )
+
 
 }
 

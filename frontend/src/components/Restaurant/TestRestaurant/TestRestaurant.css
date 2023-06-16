@@ -1,3 +1,10 @@
+.loading-icon{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100vh;
+}
 .restaurant-title-header {
     text-align: center;
 }
@@ -9,19 +16,13 @@
 } */
 
 .restaurant-item-images-container {
-
-    /* min-height: 70vh;
-    display: grid;
-    place-items: center; */
     overflow: hidden;
     place-items: center;
-    display: grid;
-    height: 75vh;
+    height: 370px;
 
 
 
 }
-
 
 
 .container-swipe-feed {
@@ -47,7 +48,7 @@
 .restaurant-item-images-container-slider {
     /* height: 400px; */
     margin: auto;
-    /* position: relative; */
+    position: relative;
     display: grid;
     place-items: center;
     max-width: 1900px;
@@ -292,3 +293,16 @@ display: flex;
 .pictures-slide-feed {
     display: flex;
 }
+
+
+  #map {
+      width: 100%;
+      height: 100%;
+  }
+  #map-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
