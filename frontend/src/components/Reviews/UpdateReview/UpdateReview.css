@@ -1,0 +1,65 @@
+.update-review-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: pink;
+
+}
+
+
+textarea {
+    resize: none;
+    border: 1px solid;
+    border-color: rgb(19, 19, 19);
+}
+
+.update-review-title {
+    text-align: center;
+    color: rgb(6, 6, 6);
+}
+
+span .fa-solid.fa-thumbs-up {
+    margin-left: -5px;
+}
+
+.update-review-photo-url-input {
+    width: 100%
+}
+
+.update-review-rating {
+    display: flex;
+    font-size: 40px;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+}
+.update-review-outer-container{
+    background-color: pink;
+    border-radius: 20px;
+    padding: 15px;
+}
+.update-review-thumbs-up-down {
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+}
+
+.update-review-thumbs-up-down span .fa-solid.fa-thumbs-up {
+    margin-right: 130px;
+    font-size: 50px;
+    cursor: pointer
+}
+
+.update-review-thumbs-up-down span .fa-solid.fa-thumbs-down {
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.update-review-upload-pic {
+    text-align: center;
+
+}
