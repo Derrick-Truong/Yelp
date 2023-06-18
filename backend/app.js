@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const csurf = require('csurf');
 const { environment } = require('./config');
@@ -43,8 +42,7 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-app.use(bodyParser.json({ limit: '100mb' }));
-app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+
 
 // app.post("/api/restaurants", upload.single('image'), async (req, res) => {
 //     console.log("req.body", req.body)
