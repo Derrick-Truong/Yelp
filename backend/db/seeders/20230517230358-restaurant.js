@@ -30,7 +30,7 @@ module.exports = {
         title: "Candy House",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
         price: 2,
-        randomNum: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7'
+        randomNum: "d2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7"
       },
       {
         userId: 3,
@@ -41,7 +41,7 @@ module.exports = {
         title: "Mid",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
         price: 3,
-        randomNum:'7e83f92d5a1c6b8f4d0e97b65c32a1f7'
+        randomNum:"7e83f92d5a1c6b8f4d0e97b65c32a1f7"
       },
       {
         userId: 1,
@@ -52,7 +52,7 @@ module.exports = {
         title: "Not My Cup of Tea",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
         price: 2,
-        randomNum:'f1a0c8b7e9d4621530b46d34e62ef9c2'
+        randomNum:"f1a0c8b7e9d4621530b46d34e62ef9c2"
       },
       {
         userId: 2,
@@ -63,7 +63,7 @@ module.exports = {
         title: "Perfect Land",
         description: "Happiness place on Earth, might be the go to spot if I am being honest. Nice get away from your children",
         price: 2,
-        randomNum:'8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5'
+        randomNum:"8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5"
       }
     ], options);
 
@@ -73,7 +73,7 @@ module.exports = {
     options.tableName = 'Restaurants';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      title: { [Op.in]: ["Candy House", "Not My Cup of Tea", "Perfect Land", 'Fun Land', 'Mid'] }
+      randomNum: { [Op.in]: ["d2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7", "d2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7", "7e83f92d5a1c6b8f4d0e97b65c32a1f7", "f1a0c8b7e9d4621530b46d34e62ef9c2", "f1a0c8b7e9d4621530b46d34e62ef9c2", "8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5"] }
     }, options);
 
   }
