@@ -1,3 +1,4 @@
+
 .loading-icon{
    display: flex;
    justify-content: center;
@@ -97,7 +98,7 @@
     /* margin-right: -70px; */
     background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
     /* text-align: center; */
-    padding-left: 451px;
+    padding-left: 305px;
     padding-top: 238px;
 
 
@@ -152,12 +153,8 @@
 
 }
 
-/* .restaurant-item-content{
-display: flex;
-} */
-.write-a-review {
-    text-align: center;
-}
+
+
 
 .restaurant-item-info-content .restaurant-item-content-space {
     border-color: white;
@@ -276,7 +273,16 @@ display: flex;
     width: 100%;
 }
 
-
+.location-title{
+    padding-bottom: 10px;
+    font-size: 30px;
+    font-weight:600;
+}
+.restaurant-info-inner-container{
+    margin-bottom: 20px;
+    display:inline-block;
+    margin-left:10px;
+}
 /* .reviews-card .reviews-rating{
     position: absolute;
     top: 10px;
@@ -298,11 +304,214 @@ display: flex;
   #map {
       width: 100%;
       height: 100%;
+      padding-bottom:10px;
   }
   #map-container {
-      width: 100%;
-      height: 100vh;
+    box-sizing: border-box;
+    width: calc(100% / 2 * 2);
+      padding-top:10px;
+      margin-top:32px;
+    /* padding-bottom:50px; */
       display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+justify-content: center;
+}
+
+.page-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    position: relative;
+    width: 100px;
+    margin: 50px;
+}
+
+.loader .jelly {
+    -webkit-animation: jumping 1s infinite;
+    animation: jumping 1s infinite;
+}
+
+.loader .stick {
+    width: 30px;
+    height: 50px;
+    background-color: #c59b6c;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loader .body {
+    width: 100px;
+    height: 190px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: rgb(133, 59, 59);
+    -webkit-animation: body 1s infinite;
+    animation: body 1s infinite;
+    z-index: 1;
+}
+
+.loader .mouth {
+    position: absolute;
+    top: 105px;
+    left: 32px;
+    width: 30px;
+    height: 20px;
+    border: 3px solid #2a333b;
+    border-radius: 0 0 40px 40px;
+    background-color: #2a333b;
+    overflow: hidden;
+    z-index: 1;
+}
+.directions-reset-container{
+border-color: #ebebeb;
+border-top: 1px solid #ebebeb;
+padding-top: 10px;
+}
+.loader .mouth:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 40px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ff4081;
+}
+
+.loader .eye {
+    position: absolute;
+    top: 85px;
+    width: 10px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #2a333b;
+    -webkit-animation: eye 6s infinite;
+    animation: eye 6s infinite;
+}
+
+.loader .eye:nth-child(even) {
+    left: 20px;
+}
+
+.loader .eye:nth-child(odd) {
+    right: 20px;
+}
+
+.loader .shadow {
+    position: absolute;
+    bottom: -10px;
+    z-index: -1;
+    width: 100px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(42, 51, 59, 0.2);
+    -webkit-animation: shadow 1s infinite;
+    animation: shadow 1s infinite;
+}
+
+@-webkit-keyframes jumping {
+    0% {
+        transform: translateY(-40px);
+    }
+
+    70% {
+        transform: scale(1.02, 0.9) translateY(10px);
+    }
+
+    100% {
+        transform: translateY(-40px);
+    }
+}
+
+@keyframes jumping {
+    0% {
+        transform: translateY(-40px);
+    }
+
+    70% {
+        transform: scale(1.02, 0.9) translateY(10px);
+    }
+
+    100% {
+        transform: translateY(-40px);
+    }
+}
+
+@-webkit-keyframes eye {
+    0% {
+        transform: scale(1);
+    }
+
+    2% {
+        transform: scale(2, 0.2);
+    }
+
+    4% {
+        transform: scale(1);
+    }
+
+    6% {
+        transform: scale(2, 0.2);
+    }
+
+    8% {
+        transform: scale(1);
+    }
+}
+
+@keyframes eye {
+    0% {
+        transform: scale(1);
+    }
+
+    2% {
+        transform: scale(2, 0.2);
+    }
+
+    4% {
+        transform: scale(1);
+    }
+
+    6% {
+        transform: scale(2, 0.2);
+    }
+
+    8% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes shadow {
+    0% {
+        transform: scaleX(0.9);
+    }
+
+    70% {
+        transform: scaleX(1);
+    }
+
+    100% {
+        transform: scaleX(0.9);
+    }
+}
+
+@keyframes shadow {
+    0% {
+        transform: scaleX(0.9);
+    }
+
+    70% {
+        transform: scaleX(1);
+    }
+
+    100% {
+        transform: scaleX(0.9);
+    }
+}

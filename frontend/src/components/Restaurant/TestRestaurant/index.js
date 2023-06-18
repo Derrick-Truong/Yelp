@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useMemo } from "react";
+import Directions from "./Directions";
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PacmanLoader from "react-spinners/PacmanLoader";
@@ -20,6 +21,7 @@ import UpdateRestaurant from '../UpdateRestaurant';
 import Yelp from "../../../assets/Yelp.jpg"
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import 'swiper/swiper-bundle.min.css';
 import "swiper/css";
 import "swiper/css/grid";
@@ -51,8 +53,9 @@ const TestRestaurant = () => {
     const addressVal = restaurant?.address
     const cityVal = restaurant?.city
     const stateVal = restaurant?.state
-    const starRating = Number(avgRating).toFixed(1)
-    var address = `${addressVal} ${cityVal} ${stateVal}`
+    var starRating = Number(avgRating)?.toFixed(1)
+    var geocoder = new window.google.maps.Geocoder();
+    var address = `${addressVal} ${cityVal} ${stateVal}`;
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -60,19 +63,29 @@ const TestRestaurant = () => {
     var map;
     var marker;
 
+    // async function directions(){
+    //     try{
+    //     if (navigator.geolocation) {
+    //        navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
+    //     }
+    // }
+    // catch(error){
+    //        console.log("Geolocation not supported", error);
+    //     }
+    // }
 
-    function directions(){
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
-        }
-        else {
-           console.log("Geolocation not supported");
-        }
+    async function geocodeAddress(geocoder, address) {
+        return new Promise((resolve, reject) => {
+            geocoder.geocode({ address }, (results, status) => {
+                if (status === "OK") {
+                    resolve({ results, status });
+                } else {
+                    reject(new Error("Geocode was not successful for the following reason: " + status));
+                }
+            });
+        });
     }
-   async function initMap() {
-        var geocoder = new window.google.maps.Geocoder();
-        var address = `${addressVal} ${cityVal} ${stateVal}`;
-
+    async function initMap() {
         try {
 
             const { results, status } = await geocodeAddress(geocoder, address);
@@ -90,7 +103,7 @@ const TestRestaurant = () => {
                 });
 
                 // The marker, positioned at the restaurant location
-                const marker = new window.google.maps.Marker({
+                marker = new window.google.maps.Marker({
                     map: map,
                     position: position,
                     title: "Restaurant",
@@ -101,66 +114,57 @@ const TestRestaurant = () => {
             console.log("An error occurred during geocoding:", error);
         }
     }
-    function geocodeAddress(geocoder, address) {
-        return new Promise((resolve, reject) => {
-            geocoder.geocode({ address }, (results, status) => {
-                if (status === "OK") {
-                    resolve({ results, status });
-                } else {
-                    reject(new Error("Geocode was not successful for the following reason: " + status));
-                }
-            });
-        });
-    }
-async function allArguments (){
-initMap();
-}
-allArguments()
-    function routeSuccess(position){
-        var directionsService = new window.google.maps.DirectionsService();
-        var directionsDisplay = new window.google.maps.DirectionsRenderer();
-        var trafficLayer = new window.google.maps.TrafficLayer()
-        var myLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-        const iceCreamShop = `${addressVal} ${cityVal} ${stateVal}`;
-        const mapElement = document.getElementById("map");
-        const routeOptions = {
-            zoom:12,
-            center: { lat: 37.8272, lng: 122.2913 },
 
-        }
-        const map = new window.google.maps.Map(mapElement, routeOptions);
-        directionsDisplay.setMap(map);
-        trafficLayer.setMap(map)
+    // function routeSuccess(position) {
+    //     var directionsService = new window.google.maps.DirectionsService();
+    //     var directionsDisplay = new window.google.maps.DirectionsRenderer();
+    //     var trafficLayer = new window.google.maps.TrafficLayer()
+    //     var myLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+    //     const iceCreamShop = `${addressVal} ${cityVal} ${stateVal}`;
+    //     const mapElement = document.getElementById("map2");
+    //     const routeOptions = {
+    //         zoom: 12,
+    //         center: { lat: 37.8272, lng: 122.2913 },
 
-        map.setCenter(myLocation);
+    //     }
+    //     const map = new window.google.maps.Map(mapElement, routeOptions);
+    //     directionsDisplay.setMap(map);
+    //     trafficLayer.setMap(map)
 
-        var routeRequest = {
-            origin: myLocation,
-            destination: iceCreamShop,
-            travelMode: 'DRIVING'
-        }
-        directionsService.route(routeRequest, function(result, status){
-            if (status == window.google.maps.DirectionsStatus.OK)
-            directionsDisplay.setDirections(result)
-        })
+    //     map.setCenter(myLocation);
+
+    //     var routeRequest = {
+    //         origin: myLocation,
+    //         destination: iceCreamShop,
+    //         travelMode: 'DRIVING'
+    //     }
+    //     directionsService.route(routeRequest, function (result, status) {
+    //         if (status == window.google.maps.DirectionsStatus.OK)
+    //             directionsDisplay.setDirections(result)
+    //     })
+
+    // }
+    // function routeError() {
+    //     alert("Couldn't get location");
+    // }
+
+    async function allArguments() {
+        await initMap();
 
     }
-    function routeError() {
-        alert("Couldn't get location");
-    }
+    allArguments()
+
 
     useEffect(() => {
 
 
+        dispatch(restaurantDetails(restaurantId));
+        dispatch(getReviews(restaurantId));
         setLoading(true);
 
         setTimeout(() => {
             setLoading(false);
-        }, 2500);
-
-        dispatch(restaurantDetails(restaurantId));
-        dispatch(getReviews(restaurantId));
-
+        }, 2000);
     }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
 
     return (
@@ -168,7 +172,19 @@ allArguments()
 
             {loading ?
                 <div className='loading-icon'>
-                    <PacmanLoader color={'#fdd541'} loading={loading} size={100} />
+                    {/* <PacmanLoader color={'#fdd541'} loading={loading} size={100} /> */}
+                    <div class="page-wrapper" size={200} >
+                        <div class="loader">
+                            <div class="jelly">
+                                <div class="body"></div>
+                                <div class="stick"></div>
+                                <div class="eye"></div>
+                                <div class="eye"></div>
+                                <div class="mouth"></div>
+                            </div>
+                            <div class="shadow"></div>
+                        </div>
+                    </div>
                 </div>
                 :
                 <section>
@@ -185,117 +201,45 @@ allArguments()
                                 })}
 
                                 <div className='restaurant-item-info-container'>
-                                    <div>
+                                    <div className='restaurant-info-inner-container'>
                                         <h1>{restaurant?.title}</h1>
                                         {currentUser && (currentUser?.id === restaurant?.userId) ?
                                             <span>
                                                 <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
                                                 <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
                                             : <></>}
+                                        <h3></h3>
+                                        <div className='restaurant-avgRating'>
+                                            <h2>
+                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : (2 > avgRating && avgRating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
+                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                                <span className='restaurant-star-rating'><span> {starRating > 0 ? starRating:'No reviews yet'}</span>
+                                                    <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
+                                                    <div className='rest-address'>{restaurant?.address}</div>
+                                                    <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
+                                                </span>
+                                            </h2>
 
 
+                                        </div>
                                     </div>
-                                    <h3></h3>
-                                    <div className='restaurant-avgRating'>
-                                        <h2>
-                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : (2 > avgRating && avgRating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
-                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                            <span className='restaurant-star-rating'><span>  {starRating}</span>
-                                                <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
-                                                <div className='rest-address'>{restaurant?.address}</div>
-                                                <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
-                                            </span>
 
-                                        </h2>
-
-
-                                    </div>
                                 </div>
-
                             </div>
 
                         </div>
                     </div>
+
                     <div id="map-container">
                         <div style={{ width: '50%', height: '50%' }}>
+                            <section className='directions-reset-container'>
+                            <div className='location-title'>Location</div>
+                            </section>
                             <div id="map"></div>
-                            <button onClick={routeSuccess}>Directions</button>
-                        </div>
-                    </div>
-                    <div className='restaurant-item-content'>
-                        <div className='restaurant-item-reviews-feed'>
-                            <div className='write-a-review'>{currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}</div>
-
-
-                            <div className='container-swipe-feed'>
-                                <Swiper
-
-                                    grabCursor={true}
-                                    slidesPerView={5}
-                                    pagination={true}
-                                    spaceBetween={0}
-                                    className="mySwiper"
-                                >
-                                    <div className='swiping-corner-feed'>
-                                        <>
-                                            <mySwiper>
-
-                                                {reviews?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))?.map((review) => {
-                                                    const rating = review?.rating
-                                                    return (
-                                                        <>
-                                                            <SwiperSlide className='pictures-slide-feed' key={review?.id} >
-                                                                <div key={review?.id} className='item-feed'>
-                                                                    <div className=' reviews-card'>
-                                                                        <div className='reviews-card-content'>
-                                                                            <div className='reviews-card-image'>
-                                                                                <img src={review?.previewImage} alt='preview-unavailable' />
-                                                                            </div>
-                                                                            <div className='reviews-rating'>
-
-                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
-                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                                <i style={(rating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                                                <span>{review?.User?.username}</span>
-                                                                            </div>
-
-                                                                            <p className='reviews-description'>{review?.description}</p>
-                                                                            {currentUser?.id === review?.userId ?
-                                                                                <div className='reviews-update-delete-buttons'>
-
-                                                                                    <OpenModalButton buttonText='Delete' modalComponent={<DeleteReview reviewId={review?.id} />} />
-                                                                                    <OpenModalButton buttonText='Update' modalComponent={<UpdateReview review={review} />} />
-
-
-                                                                                </div> : <></>}
-                                                                        </div>
-
-                                                                    </div>
-
-
-                                                                </div>
-                                                            </SwiperSlide>
-
-                                                        </>
-
-                                                    )
-
-                                                }
-
-                                                )
-
-                                                }
-                                            </mySwiper>
-                                        </>
-                                    </div>
-                                </Swiper>
-                            </div>
-
+                                <Directions restaurantId={restaurantId} />
                         </div>
                     </div>
                 </section>

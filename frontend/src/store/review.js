@@ -154,7 +154,7 @@ let newState;
     switch(action.type){
         case GET_REVIEWS_FOR_RESTAURANT:
         newState={}
-        action?.reviews?.Reviews?.forEach(review => {
+        action?.reviews?.Reviews.forEach(review => {
             newState[review.id] = review
         })
         return newState

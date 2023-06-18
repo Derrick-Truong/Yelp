@@ -35,7 +35,6 @@ flex-direction: column;
     text-align: center;
     color: #453c3c;
     font-weight: 600;
-    font-family: 'Anonymous Pro', sans-serif;
 }
 
 a{
@@ -46,7 +45,6 @@ a{
     color: rgb(80 121 215);
     cursor: pointer;
     padding-bottom: 20px;
-    font-family: 'DAYSANS', sans-serif;
 }
 
 .DropdownPhotos:hover{
@@ -57,7 +55,6 @@ a{
     .title-update-form{
         margin-top: 21px;
         margin-bottom: 15px;
-        font-family: 'DAYSANS', sans-serif;
         font-size: 25px;
         text-align: center;
         color: #68a5da;
