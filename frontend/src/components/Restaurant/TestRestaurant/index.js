@@ -29,9 +29,9 @@ import "swiper/css/pagination";
 import './TestRestaurant.css'
 
 
-SwiperCore.use([EffectCoverflow, Pagination]);
 
 const TestRestaurant = () => {
+    SwiperCore.use([EffectCoverflow, Pagination]);
 
     // const [selected, setSelected] = useState(null)
     // const { isLoaded } = useLoadScript({

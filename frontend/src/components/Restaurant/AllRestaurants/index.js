@@ -15,13 +15,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import {Navigation} from 'swiper';
 import banner from '../../../assets/banner-derrick.jpg'
 
-SwiperCore.use([EffectCoverflow, Pagination]);
-
-
-
-
-
+// SwiperCore.use([EffectCoverflow, Pagination]);
 const AllRestaurants = () => {
+    SwiperCore.use([EffectCoverflow, Pagination]);
     const dispatch = useDispatch()
     const history = useHistory()
     const restaurants = useSelector(state => state?.restaurants)
