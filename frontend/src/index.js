@@ -7,7 +7,6 @@ import { ModalProvider, Modal } from "./Context/Modal";
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
-import * as restaurantActions from "./store/restaurants"
 import App from "./App";
 
 import "./index.css";
@@ -20,8 +19,6 @@ if (process.env.NODE_ENV !== "production") {
   window.csrfFetch = csrfFetch;
   window.store = store;
   window.sessionActions = sessionActions;
-  window.restaurantActions = restaurantActions
-
 }
 
 // Wrap the application with the Modal provider and render the Modal component

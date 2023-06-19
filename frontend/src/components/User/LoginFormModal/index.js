@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../Context/Modal";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import "./LoginFormModal.css";
 import * as sessionActions from "../../../store/session"
@@ -10,12 +11,13 @@ import OpenModalButton from "../../../OpenModalButton";
 
 
 function LoginFormModal() {
+    const history = useHistory()
+    const {closeModal} = useModal()
     const dispatch = useDispatch();
-    const [credential, setCredential] = useState("");
-    const [password, setPassword] = useState("");
+    const [credential, setCredential] = useState('');
+    const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    const { closeModal } = useModal();
 
     var docs = document.getElementById('img');
     docs?.setAttribute('src', 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQ2OGY0MDEwYWY3NGU0MGUyMmZiMDZiMzg4M2E4ZWNhZmNhN2VkMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oz8xwKBsHNlZ6UvMA/giphy.gif')
@@ -24,24 +26,38 @@ function LoginFormModal() {
         e.preventDefault();
         setErrors([]);
         try {
-            await dispatch(sessionActions.login({ credential, password }));
+            dispatch(sessionActions.login({ credential, password }));
             closeModal();
 
         } catch (res) {
             if (res.status === 401) {
                 setErrors(["User not found. Please check your credentials."]);
             } else {
-                const data = await res?.json();
+                const data = res?.json();
                 if (data && data.errors) setErrors(data.errors);
             }
         }
     };
 
-    const demoSignIn = async (e) => {
-        e.preventDefault();
+    // const demoSignIn = async (e) => {
+    //     e.preventDefault();
+    //     const credential = 'Bill';
+    //     const password = 'password'
+    //     return dispatch(sessionActions.login({ credential, password})).then(closeModal)
+    // }
+      const demoSignIn = async (e) => {
+    e.preventDefault();
+    const password = "password";
+    const credential = "Bill@user.io";
 
-        return dispatch(sessionActions.login({ credential: "Bill", password: "password" })).then(closeModal)
+    try {
+      await dispatch(sessionActions.login({ credential, password }));
+      closeModal();
+      history.push('/');
+    } catch (error) {
+      console.log(error);
     }
+  };
 
     return (
         <>

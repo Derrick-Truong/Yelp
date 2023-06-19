@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const csurf = require('csurf');
 const { environment } = require('./config');
+const { ValidationError } = require('sequelize');
 const helmet = require('helmet');
 // const multer = require('multer')
 const cookieParser = require('cookie-parser');
@@ -41,6 +42,7 @@ const isProduction = environment === 'production';
 // })
 
 const app = express();
+app.use(express.json());
 
 
 
@@ -118,6 +120,11 @@ if (!isProduction) {
 }
 
 // helmet helps set a variety of headers to better secure your app
+app.use(
+    helmet.crossOriginResourcePolicy({
+        policy: "cross-origin"
+    })
+);
 
 
 
@@ -146,14 +153,37 @@ app.use((_req, _res, next) => {
     next(err);
 });
 
+app.use((err, _req, _res, next) => {
+    // check if error is a Sequelize error:
+    if (err instanceof ValidationError) {
+        let errors = {};
+        for (let error of err.errors) {
+            errors[error.path] = error.message;
+        }
+        err.title = 'Validation error';
+        err.errors = errors;
+    }
+    next(err);
+});
+// Phase 2 | Error Formatter Error-Handler | formatting all the errors b4 returning a JSON res
+// Error formatter
+app.use((err, _req, res, _next) => {
+    res.status(err.status || 500);
+    console.error(err);
+    res.json({
+        title: err.title || 'Server Error',
+        message: err.message,
+        errors: err.errors,
+        stack: isProduction ? null : err.stack
+    });
+});
 // backend/app.js
 // ...
-const { ValidationError } = require('sequelize');
 
 // ...
 
 // Process sequelize errors
-app.use((err, _req, _res, next) => {
+// app.use((err, _req, _res, next) => {
     // check if error is a Sequelize error:
     // if (err instanceof ValidationError) {
     //     let errors = {};
@@ -163,23 +193,23 @@ app.use((err, _req, _res, next) => {
     //     err.title = 'Validation error';
     //     err.errors = errors;
     // }
-    if (err instanceof ValidationError) {
-        err.errors = err.errors.map((e) => e.message)
-    }
+//     if (err instanceof ValidationError) {
+//         err.errors = err.errors.map((e) => e.message)
+//     }
 
-    next(err);
-});
+//     next(err);
+// });
 
-app.use((err, _req, res, _next) => {
-    res.status(err.status || 500);
-    console.error(err);
-    res.json({
-        title: err.title || 'Server Error',
-        message: err.message,
-        errors: err.errors,
+// app.use((err, _req, res, _next) => {
+//     res.status(err.status || 500);
+//     console.error(err);
+//     res.json({
+//         title: err.title || 'Server Error',
+//         message: err.message,
+//         errors: err.errors,
         // stack: isProduction ? null : err.stack
-    });
-});
+//     });
+// });
 
 
 // backend/app.js

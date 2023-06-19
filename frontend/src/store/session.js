@@ -18,14 +18,31 @@ const removeUser = () => {
 };
 
 
-export const login = (user) => async (dispatch) => {
-    const { credential, password } = user;
+// export const login = (user) => async (dispatch) => {
+//     console.log("Backend", user)
+//     const {credential, password } = user;
+//     const response = await csrfFetch('/api/session', {
+//         method: 'POST',
+//         // headers: { 'Content-Type': 'application/json' },
+//         headers: { 'Content-Type': 'application/json; charset=utf-8' },
+//         body: JSON.stringify({
+//            credential,
+//            password
+//     }),
+//     });
+//     const data = await response.json();
+//     dispatch(setUser(data.user));
+//     return response;
+// };
+export const login = (user) => async dispatch => {
+    console.log("Backend", user);
+    const {credential, password} = user
     const response = await csrfFetch('/api/session', {
         method: 'POST',
-        headers:{'Content-Type':'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             credential,
-            password,
+            password
         }),
     });
     const data = await response.json();
@@ -44,7 +61,7 @@ export const signup = (user) => async (dispatch) => {
     const { username, firstName, lastName, email, password } = user;
     const response = await csrfFetch("/api/users", {
         method: "POST",
-        headers:{'Content-Type':'application/json'},
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: JSON.stringify({
             username,
             firstName,
@@ -61,6 +78,7 @@ export const signup = (user) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     const response = await csrfFetch('/api/session', {
         method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
     });
     dispatch(removeUser());
     return response;
