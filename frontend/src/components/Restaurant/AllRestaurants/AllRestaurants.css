@@ -31,6 +31,7 @@
     .home-page-restaurant-card {
         height: 275px;
         margin: 27px;
+        width: 275px;
         /* overflow: auto; */
 
     }
