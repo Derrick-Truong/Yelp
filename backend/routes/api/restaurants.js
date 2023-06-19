@@ -229,7 +229,6 @@ router.get('/', async (req, res, next) => {
                     model: RestaurantImage
                 }
             ],
-        attributes:['randomNum']
         });
 
         if (!restaurants) {

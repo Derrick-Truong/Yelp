@@ -148,11 +148,11 @@ const TestRestaurant = () => {
     //     alert("Couldn't get location");
     // }
 
-    async function allArguments() {
-        await initMap();
+    // async function allArguments() {
+    //     await initMap();
 
-    }
-    allArguments()
+    // }
+   initMap()
 
 
     useEffect(() => {
