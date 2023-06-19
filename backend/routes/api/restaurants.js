@@ -481,8 +481,7 @@ router.post('/upload', requireAuth, upload.fields([
             city,
             price,
             title,
-            description,
-            randomNum: randomGenerator()
+            description
         });
 
 
@@ -504,11 +503,12 @@ router.post('/upload', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-
+                    let userIdString = success?.userId.toString()
+                    let restaurantIdString = success?.id.toString()
                     // res.json(success);
                     await RestaurantImage.create({
                         restaurantId: success.id,
-                        url: success.randomNum + file.originalname
+                        url: userIdString + success.User.firstName + success.User.lastName + restaurantIdString +file.originalname
                     })
 
                 }
@@ -646,11 +646,12 @@ router.put('/:id', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-
+                    let userIdString = success?.userId.toString()
+                    let restaurantIdString = success?.id.toString()
                     // res.json(success);
                     await RestaurantImage.create({
                         restaurantId: success.id,
-                        url: success.randomNum + file.originalname
+                        url: userIdString + success.User.firstName + success.User.lastName + restaurantIdString + file.originalname
                     })
 
                 }

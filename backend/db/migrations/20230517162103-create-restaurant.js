@@ -49,10 +49,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      randomNum: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

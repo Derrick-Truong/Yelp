@@ -62,7 +62,7 @@ const AllRestaurants = () => {
                             {restaurantsValues?.sort((a, b) => b.avgRating - a.avgRating)?.map(restaurant => {
                                 const rating = restaurant?.avgRating;
                                 const imageUrl =
-                                        'https://yelp-capstone.s3.us-west-1.amazonaws.com/'+ restaurant?.previewImage
+                                    'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + restaurant?.previewImage
                                 // const imageUrl = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + restaurant?.objects[0]?.key
                                 return (
                                     <SwiperSlide className='pictures-slide' key={restaurant.id}>

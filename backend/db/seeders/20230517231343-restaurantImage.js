@@ -13,29 +13,29 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         restaurantId: 1,
-        url: "2b4e7d6a8f9c1e50c3f0b2d1895a6e7falex-robert-Xpt4_HgZSjw-unsplash.jpg"
+        url: "1DerrickTruong1alex-robert-Xpt4_HgZSjw-unsplash+(1).jpg"
       },
       {
         restaurantId: 1,
-        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7falp-allen-altiner-gdUSE2gJx14-unsplash.jpg',
+        url: '1DerrickTruong1brianna-tucker-zPWnbj_xXE8-unsplash (1).jpg',
 
       },
       {
         restaurantId: 1,
-        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7fbrianna-tucker-zPWnbj_xXE8-unsplash.jpg',
+        url: '1DerrickTruong1dylan-ferreira-0cv08T71zL0-unsplash+(1).jpg',
 
       },
       {
         restaurantId: 1,
-        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7fdylan-ferreira-0cv08T71zL0-unsplash.jpg'
+        url: '1DerrickTruong1erwan-hesry-kwrOLRHjxZc-unsplash+(1).jpg'
       },
       {
         restaurantId: 1,
-        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7ferwan-hesry-kwrOLRHjxZc-unsplash.jpg'
+        url: '1DerrickTruong1erwan-hesry-kwrOLRHjxZc-unsplash (1).jpg'
       },
       {
         restaurantId: 1,
-        url: '2b4e7d6a8f9c1e50c3f0b2d1895a6e7feugene-zhyvchik-oieodYZhMEQ-unsplash.jpg'
+        url: '1DerrickTruong1eugene-zhyvchik-oieodYZhMEQ-unsplash+(1).jpg'
       },
       {
         restaurantId: 2,
