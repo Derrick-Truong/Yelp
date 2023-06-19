@@ -13,138 +13,138 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         restaurantId: 1,
-        url: "1DerrickTruong1alex-robert-Xpt4_HgZSjw-unsplash+(1).jpg"
+        url: "1Demo1alex-robert-Xpt4_HgZSjw-unsplash+(1).jpg"
       },
       {
         restaurantId: 1,
-        url: '1DerrickTruong1brianna-tucker-zPWnbj_xXE8-unsplash (1).jpg',
-
-      },
-      {
-        restaurantId: 1,
-        url: '1DerrickTruong1dylan-ferreira-0cv08T71zL0-unsplash+(1).jpg',
+        url: '1Demo1brianna-tucker-zPWnbj_xXE8-unsplash (1).jpg',
 
       },
       {
         restaurantId: 1,
-        url: '1DerrickTruong1erwan-hesry-kwrOLRHjxZc-unsplash+(1).jpg'
+        url: '1Demo1dylan-ferreira-0cv08T71zL0-unsplash+(1).jpg',
+
       },
       {
         restaurantId: 1,
-        url: '1DerrickTruong1erwan-hesry-kwrOLRHjxZc-unsplash (1).jpg'
+        url: '1Demo1erwan-hesry-kwrOLRHjxZc-unsplash+(1).jpg'
       },
       {
         restaurantId: 1,
-        url: '1DerrickTruong1eugene-zhyvchik-oieodYZhMEQ-unsplash+(1).jpg'
+        url: '1Demo1erwan-hesry-kwrOLRHjxZc-unsplash (1).jpg'
+      },
+      {
+        restaurantId: 1,
+        url: '1Demo1eugene-zhyvchik-oieodYZhMEQ-unsplash+(1).jpg'
       },
       {
         restaurantId: 2,
-        url: "d2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7alex-robert-Xpt4_HgZSjw-unsplash (1).jpg",
+        url: "2Bill2alex-robert-Xpt4_HgZSjw-unsplash (2).jpg",
 
       },
       {
         restaurantId: 2,
-        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7handy-wicaksono-grFOVo_kEEQ-unsplash.jpg'
+        url: '2Bill2bill-alexy-1vDN-XW6yow-unsplash.jpg'
       },
       {
         restaurantId: 2,
-        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7jeswin-thomas-x2iJB6i4u0A-unsplash.jpg'
+        url: '2Bill2dylan-ferreira-0cv08T71zL0-unsplash (2).jpg'
       },
       {
         restaurantId: 2,
-        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7katie-smetherman-etr1gzkVpuQ-unsplash.jpg'
+        url: '2Bill2emmy-gaddy-wkjODwoMV88-unsplash.jpg'
       },
       {
         restaurantId: 2,
-        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7nick-karvounis-7sf0vmckvz4-unsplash (1).jpg'
+        url: '2Bill2erwan-hesry-OlQ-NaEyVmQ-unsplash (1).jpg'
       },
       {
         restaurantId: 2,
-        url: 'd2e6b9c4f5a8e9d1c3b7f4e6a9d8c3b7sincerely-media-udbcIP_f6kA-unsplash (1).jpg'
+        url: '2Bill2eugene-zhyvchik-PtndqvBs8ls-unsplash.jpg'
       },
       {
         restaurantId: 3,
-        url: "7e83f92d5a1c6b8f4d0e97b65c32a1f7mister-james-_5VeIJiqFK4-unsplash.jpg",
+        url: "3Derrick3ferran-feixas-_T3cl6Wuc2U-unsplash (1).jpg",
       },
       {
         restaurantId: 3,
-        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7najlacam-f8TajCVv4s8-unsplash.jpg'
+        url: '3Derrick3ferran-feixas-_T3cl6Wuc2U-unsplash.jpg'
       },
       {
         restaurantId: 3,
-        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7paulina-ponce-Z0ZvJwk8ZoY-unsplash.jpg'
+        url: '3Derrick3handy-wicaksono-grFOVo_kEEQ-unsplash (1).jpg'
       },
       {
         restaurantId: 3,
-        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7photo-1473213110592-19430a217c0e.avif'
-
-      },
-      {
-
-        restaurantId: 3,
-        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7photo-1560008581-09826d1de69e.avif'
+        url: '3Derrick3heather-barnes-bqafVjHkcAQ-unsplash.jpg'
 
       },
       {
 
         restaurantId: 3,
-        url: '7e83f92d5a1c6b8f4d0e97b65c32a1f7photo-1560269507-9495cdfcadca.avif'
+        url: '3Derrick3jason-leung-BxkMhxgdOh8-unsplash (1).jpg'
+
+      },
+      {
+
+        restaurantId: 3,
+        url: '3Derrick3jason-leung-BxkMhxgdOh8-unsplash (2).jpg'
 
       },
       {
         restaurantId: 4,
-        url: "f1a0c8b7e9d4621530b46d34e62ef9c2photo-1560801530-34efebfecba8.avif",
+        url: "1Demo4jeswin-thomas-TyV8uETpfOg-unsplash(1).jpg",
       },
       {
         restaurantId: 4,
-        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1582076653774-5476ea5db60e.avif'
-
-      },
-      {
-        restaurantId: 4,
-        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1597041505347-26a27f87b914.avif'
-      },
-      {
-        restaurantId: 4,
-        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1602296750425-f025b045f355.avif'
+        url: '1Demo4katie-smetherman-etr1gzkVpuQ-unsplash (2).jpg'
 
       },
       {
         restaurantId: 4,
-        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1602296751203-b9aa27fe9426.avif'
+        url: '1Demo4katie-smetherman-etr1gzkVpuQ-unsplash(1).jpg'
+      },
+      {
+        restaurantId: 4,
+        url: '1Demo4katie-smetherman-j7hiE_Ob0do-unsplash.jpg'
 
       },
       {
         restaurantId: 4,
-        url: 'f1a0c8b7e9d4621530b46d34e62ef9c2photo-1602296751259-edfb8274b682.avif'
+        url: '1Demo4kawai-so-hLGIWfPsVJs-unsplash(1).jpg'
+
+      },
+      {
+        restaurantId: 4,
+        url: '1Demo4kenta-kikuchi-LZ6BTZnizD8-unsplash.jpg'
 
       },
       {
         restaurantId: 5,
-        url: "8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1637695282790-ddfb2d7c90b9.avif",
+        url: "2Bill5megan-lee-IydLHeNaFuw-unsplash.jpg",
       },
       {
         restaurantId: 5,
-        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1640184713819-69d3195f0b92.avif'
+        url: '2Bill5narate-vongserewattana-7iVg2gj2BVQ-unsplash (1).jpg'
 
       },
       {
         restaurantId: 5,
-        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1641417670713-1a0023152194.avif'
+        url: '2Bill5narate-vongserewattana-7iVg2gj2BVQ-unsplash.jpg'
 
       },
       {
         restaurantId: 5,
-        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1650155585218-ee113644a333.avif'
+        url: '2Bill5narate-vongserewattana-7iVg2gj2BVQ-unsplash.jpg'
       },
       {
         restaurantId: 5,
-        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1656218505247-4fa1f2a6684a.avif'
+        url: '2Bill5nick-karvounis-7sf0vmckvz4-unsplash (1).jpg'
 
       },
       {
         restaurantId: 5,
-        url: '8f1e3a4b7c6d2f5a9d8c3b1e7f4d6a5photo-1680448934566-f3021ce20c91.avif'
+        url: '2Bill5nick-karvounis-7sf0vmckvz4-unsplash (2).jpg'
 
       },
 

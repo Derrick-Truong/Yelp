@@ -138,78 +138,77 @@ const Test1 = () => {
 
         console.log('Entries', Object.fromEntries(form))
 
-
+        if (Object.keys(errors).length < 1){
         await dispatch(createNewRestaurant(form))
             .then(closeModal)
             .then(history.push('/'))
-            .catch((error) => {
-                // Handle the error here
-                console.error(error);
-            });
 
         // console.log('Front end data part 2', form)
 
-
+        }
     }
     return (
         <section className="create-restaurant-page">
-            <div className="title-update-form">Create Shop</div>
+            <div className="title-update-form">Create An Ice Cream Shop Listing</div>
             <form encType="multipart/form-data" className="create-restaurant-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
+                    className="input"
+
                     name='country'
                     placeholder="Country"
                     value={country}
                     onChange={e => setCountry(e.target.value)}
                 />
-                <h4></h4>
-                <br></br>
+
                 {errors?.country && <span className="error">{errors?.country}</span>}
 
-                <h4></h4>
+
                 <input
+                    className="input"
+
                     type="text"
                     name='state'
                     placeholder="State"
                     value={state}
                     onChange={e => setState(e.target.value)}
                 />
-                <h4></h4>
+
                 {errors?.state && <span className="error">{errors?.state}</span>}
-                <br></br>
-                <h4></h4>
+
                 <input
+                    className="input"
+
                     type="text"
                     name='address'
                     placeholder="Address"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                 />
-                <h4></h4>
                 {errors?.address && <span className="error">{errors?.address}</span>}
-                <br></br>
-                <h4></h4>
+
                 <input
+                    className="input"
+
                     type="text"
                     name='city'
                     placeholder="City"
                     value={city}
                     onChange={e => setCity(e.target.value)}
                 />
-                <h4></h4>
                 {errors?.city && <span className="error">{errors?.city}</span>}
-                <br></br>
                 <input
+                    className="input"
+
                     type="text"
                     name='price'
                     placeholder="Price"
                     value={price}
                     onChange={e => setPrice(e.target.value)}
                 />
-                <h4></h4>
                 {errors?.price && <span className="error">{errors?.price}</span>}
-                <br></br>
                 <input
+                    className="input"
 
                     type="text"
                     name='title'
@@ -217,11 +216,9 @@ const Test1 = () => {
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
-                <h4></h4>
                 {errors?.title && <span className="error">{errors?.title}</span>}
-                <br></br>
                 <textarea
-                    rows="8" cols="60"
+                    rows="8" cols="52"
                     name='description'
                     maxLength={100}
                     type="text"
@@ -229,18 +226,15 @@ const Test1 = () => {
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 />
-                <h4></h4>
                 {errors?.description && <span className="error">{errors?.description}</span>}
-                <br></br>
-                <br></br>
-                Add more photos!
-                <input onChange={handleFile1Change} name='image1' accept="image/*" type="file"/>
-                <input onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
-                <input onChange={handleFile3Change} name='image3' accept="image/*" type="file" />
-                <input onChange={handleFile4Change} name='image4' accept="image/*" type="file" />
-                <input onChange={handleFile5Change} name='image5' accept="image/*" type="file" />
-                <input onChange={handleFile6Change} name='image6' accept="image/*" type="file" />
-                <button type="submit" className="create-button">Create Shop</button>
+                <div> Add photos of your ice cream shop!</div>
+                <input className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file" />
+                <input className="upload" onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
+                <input className="upload" onChange={handleFile3Change} name='image3' accept="image/*" type="file" />
+                <input className="upload" onChange={handleFile4Change} name='image4' accept="image/*" type="file" />
+                <input className="upload" onChange={handleFile5Change} name='image5' accept="image/*" type="file" />
+                <input className="upload" onChange={handleFile6Change} name='image6' accept="image/*" type="file" />
+                <button type="submit" className="create-restaurant-button">Create</button>
             </form>
         </section>
     )

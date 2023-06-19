@@ -486,7 +486,7 @@ router.post('/upload', requireAuth, upload.fields([
 
 
             const images = [image1, image2, image3, image4, image5, image6];
-        if(images && images.length > 0){
+        if(success && images && images.length > 0){
             for (let i = 0; i < images.length; i++) {
                 const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
 
@@ -495,7 +495,7 @@ router.post('/upload', requireAuth, upload.fields([
 
                     const params = {
                         Bucket: process.env.BUCKET,
-                        Key: success.randomNum + file.originalname,
+                        Key: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                         Body: fileBuffer,
                         ContentType: file.mimetype
                     };
@@ -503,12 +503,12 @@ router.post('/upload', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-                    let userIdString = success?.userId.toString()
-                    let restaurantIdString = success?.id.toString()
+                    // let userIdString = success.userId.toString()
+                    // let restaurantIdString = success.id.toString()
                     // res.json(success);
                     await RestaurantImage.create({
                         restaurantId: success.id,
-                        url: userIdString + success.User.firstName + success.User.lastName + restaurantIdString +file.originalname
+                        url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                     })
 
                 }
@@ -629,7 +629,7 @@ router.put('/:id', requireAuth, upload.fields([
             description
         });
         const images = [image1, image2, image3, image4, image5, image6];
-        if (images && images.length > 0) {
+        if (success && images && images.length > 0) {
             for (let i = 0; i < images.length; i++) {
                 const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
 
@@ -638,7 +638,7 @@ router.put('/:id', requireAuth, upload.fields([
 
                     const params = {
                         Bucket: process.env.BUCKET,
-                        Key: success.randomNum + file.originalname,
+                        Key: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                         Body: fileBuffer,
                         ContentType: file.mimetype
                     };
@@ -646,12 +646,11 @@ router.put('/:id', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-                    let userIdString = success?.userId.toString()
-                    let restaurantIdString = success?.id.toString()
+                
                     // res.json(success);
                     await RestaurantImage.create({
                         restaurantId: success.id,
-                        url: userIdString + success.User.firstName + success.User.lastName + restaurantIdString + file.originalname
+                        url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                     })
 
                 }

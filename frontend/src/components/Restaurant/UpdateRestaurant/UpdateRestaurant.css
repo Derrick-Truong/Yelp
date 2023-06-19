@@ -1,53 +1,90 @@
 textarea {
     resize: none;
     border: 1px solid;
-    border-color:transparent;
+    border-color: transparent;
     border-radius: 10px;
     padding: 10px;
     font-weight: 600;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
-.update-restaurant-page {
+
+.create-restaurant-page {
     max-width: 800px;
     margin: 0 auto;
     padding: 30px;
-    height: 752px;
+    height: 530px;
     overflow-y: auto;
     background-color: #c0e6ff4a;
     border-radius: 20px;
 }
-.file-upload-button{
-background-color: transparent;
-}
-.update-restaurant-form {
+
+.create-restaurant-form {
     flex-direction: column;
     gap: 20px;
     width: 500px;
     text-align: center;
+    height: 100%;
 
 }
 
-.update-restaurant-page button {
+/* .create-restaurant-button {
+    padding-bottom: 20px;
+} */
+
+.create-restaurant-form textarea {
+    /* margin-left: 20px; */
+    background-color: #FDE0E6;
+    font-weight: 600;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.create-restaurant-page button {
     margin: 13px;
 }
 
-.update-restaurant-form input {
-    width: 95%;
+.create-restaurant-form .input {
+    width: 75%;
     margin: 13px;
     height: 20px;
     padding: 20px;
     border: 1px solid #ebebeb;
-    color: #FF69B4;
-    border-radius: 25px;
+    background-color: #FDE0E6;
+    border-radius: 4px;
     font-size: 16px;
     text-align: center;
     color: #453c3c;
-
-
-
+    font-weight: 600;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
+.upload {
+    margin-right: 80px;
+}
+
+.upload-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #68a5da;
+    font-weight: 600;
+}
+
+/* background-color: #f5b8c4;
+        border: none;
+        color: #FF69B4;
+        padding: 12px 24px;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        box-shadow: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+        margin-top: 10px;? */
 a {
     text-decoration: none;
 }
@@ -56,7 +93,6 @@ a {
     color: rgb(80 121 215);
     cursor: pointer;
     padding-bottom: 20px;
-
 }
 
 .DropdownPhotos:hover {
@@ -64,9 +100,9 @@ a {
     cursor: pointer;
 }
 
-.title-update-form{
-    margin-top: 21px;
-    margin-bottom: 15px;
+.title-update-form {
+    /* margin-top: 21px;
+        margin-bottom: 15px; */
     font-size: 25px;
     text-align: center;
     color: #68a5da;

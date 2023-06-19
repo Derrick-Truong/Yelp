@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 30px;
-    height: 752px;
+    height: 600px;
     overflow-y: auto;
     background-color: #c0e6ff4a;
     border-radius: 20px;
@@ -13,30 +13,50 @@ flex-direction: column;
     gap: 20px;
     width: 500px;
     text-align: center;
+    height: 100%;
 
 }
-
+.create-restaurant-button{
+    padding-bottom: 10px;
+}
 .create-restaurant-form textarea{
+    /* margin-left: 20px; */
     background-color: #FDE0E6;
     font-weight: 600;
+    padding-bottom: 10px;
 }
 .create-restaurant-page button {
     margin: 13px;
 }
-.create-restaurant-form input {
-    width: 95%;
+.create-restaurant-form .input {
+    width: 75%;
     margin: 13px;
     height: 20px;
     padding: 20px;
     border: 1px solid #ebebeb;
     background-color: #FDE0E6;
-    border-radius: 25px;
+    border-radius: 4px;
     font-size: 16px;
     text-align: center;
     color: #453c3c;
     font-weight: 600;
+    box-sizing: border-box;
+    cursor: pointer;
 }
-
+        /* background-color: #f5b8c4;
+        border: none;
+        color: #FF69B4;
+        padding: 12px 24px;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        box-shadow: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+        margin-top: 10px;? */
 a{
     text-decoration: none;
 }
@@ -53,8 +73,8 @@ a{
     }
 
     .title-update-form{
-        margin-top: 21px;
-        margin-bottom: 15px;
+        /* margin-top: 21px;
+        margin-bottom: 15px; */
         font-size: 25px;
         text-align: center;
         color: #68a5da;
