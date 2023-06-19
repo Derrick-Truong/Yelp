@@ -229,6 +229,7 @@ router.get('/', async (req, res, next) => {
                     model: RestaurantImage
                 }
             ],
+        attributes:['randomNum']
         });
 
         if (!restaurants) {
@@ -327,7 +328,7 @@ router.get('/', async (req, res, next) => {
 // Restaurants.push(restaurantDetails);
 //         }
 
-    
+
 
 router.get('/:id', async (req, res, next) => {
     try {
