@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import CreateReview from '../../Reviews/CreateReview';
 import { getReviews } from '../../../store/review';
 import './Directions.css'
+import UpdateReview from '../../Reviews/UpdateReview';
+import DeleteReview from '../../Reviews/DeleteReview';
 const Directions = ({ restaurantId }) => {
     const dispatch = useDispatch()
     const restaurants = useSelector((state) => state?.restaurants);
@@ -205,6 +207,7 @@ const Directions = ({ restaurantId }) => {
                     return (
                         <>
                             <div className="reviews-card-container">
+                                {currentUser && (currentUser.id === review?.userId) ? <span><div className="delete-review-button-container"><OpenModalButton buttonText="Delete" modalComponent={<DeleteReview reviewId={review?.id} />} /></div><div className="update-review-button-container"><OpenModalButton buttonText="Update" modalComponent={<UpdateReview review={review} />} /></div></span>:<></>}
                                 <div className="reviews-box">
                                     <div className="reviews-card-top">
                                         <div className="user">

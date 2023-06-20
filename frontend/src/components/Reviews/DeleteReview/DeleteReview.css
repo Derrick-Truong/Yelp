@@ -1,9 +1,41 @@
 .form-div-delete{
- display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background-color: pink;
-  border-radius: 20px;
+    align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20px auto auto;
+        width: 400px;
   }
+.title{
+    text-align: center;
+        font-family: Roboto, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+}
+.cancel-delete-button{
+    color: white;
+background-color: #a9a8a8;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 900;
+    height: 50px;
+    margin: 10px;
+    transition: all .3s;
+    width: 150px;
+}
+.submit-delete-button{
+    background-color: #ff5a5f;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 700;
+        height: 50px;
+        margin: 10px;
+        text-transform: uppercase;
+        transition: all .3s;
+        width: 150px;
+}

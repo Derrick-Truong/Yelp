@@ -10,7 +10,19 @@
     /* justify-content: center; */
 }
 
-
+.delete-review-button-container button, .update-review-button-container button{
+    font-weight: 700;
+    font-size: 13px;
+    width:65px;
+    padding:6px;
+}
+.reviews-card-container span{
+    margin-bottom: 15px;
+}
+.delete-review-button-container button{
+    color: black;
+    background-color: red;
+}
 .restaurant-hours span+span {
     padding-left: 15px;
 }
@@ -21,9 +33,11 @@
 }
 .open{
     color: green;
+        font-weight: 800;
 }
 #restaurant-closed{
     color: red;
+    font-weight: 800;
 }
 .restaurant-hours {
     display: flex;

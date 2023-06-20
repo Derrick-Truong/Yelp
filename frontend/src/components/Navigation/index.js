@@ -16,18 +16,16 @@ function Navigation({ isLoaded }) {
     return (
         <div className='navigation-bar'>
             <div className='nav-innerdiv'>
-                <a href="/"><img src={Yelp} height='70px' width='80px' alt='Ice Cream' /></a>
+                <a href="/"><img src={Yelp} height='60px' width='80px' alt='Ice Cream' /></a>
             <div className="left-nav-bar">
 
       </div>
                     {isLoaded && (
                             <div className='right-nav-div'>
-                                <span>
                             {sessionUser ? <span className='nav-create-shop'><OpenModalButton  buttonText='Create Shop' modalComponent={<Test1 />} /></span> : <></>}
-                                </span>
-                                <span className='profile-button'>
+                                <div className='profile-button'>
                                     <ProfileButton user={sessionUser} />
-                                </span>
+                                </div>
                             </div>
                     )}
             </div>

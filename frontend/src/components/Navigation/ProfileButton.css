@@ -15,6 +15,21 @@
 
 } */
 
+.hidden {
+    display: none;
+}
+.profile-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #484848;
+    width: 50px;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    size-adjust: 1.5%;
+}
 
 /* .no-spots #ManageSpots {
     display: none;
@@ -22,22 +37,34 @@
 
 .profile-dropdown {
 
-        position: absolute;
+        /* position: absolute;
             top: 50px;
             /* transition: .4s ease-in;
             z-index: 1; */
-            width: 200px;
+            /* width: 200px;
             background-color: white;
             border: 1px solid #EBEBEB;
-            border-radius: 8px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             z-index: 2;
             list-style-type: none;
-            text-align: center;
+            text-align: center */
+                background-color: #fff;
+                    border: 1px solid #ebebeb;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+                    list-style-type: none;
+                    padding: 20px;
+                    position: absolute;
+                    text-align: center;
+                    top: 50px;
+                    width: 200px;
+                    z-index:2;
+                    /* z-index: 2; */
         }
 
-      
+
 
 /* .profile-dropdown::before,
 .profile-dropdown::after{
@@ -69,14 +96,19 @@
 
 .sign-out-button {
     background-color: #ddd;
-    color: #333;
+    border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 10px 20px;
+    /* color: #333;
     border: none;
-    border-radius: 20px;
+    border-radius: 4px;
     position: relative;
     padding: 10px 20px;
     z-index: 2;
     font-size: 15px;
-    cursor: pointer;
+    cursor: pointer; */
 }
 
 .sign-out-button:hover {
@@ -85,17 +117,28 @@
 }
 
 .profile-button-container {
-    margin-top: 10px;
-    display: flex;
+    /* display: flex;
+        align-items: center;
+    /* margin-top: 10px; */
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 30px;
+    width: 70px;
+    height: 45px;
     background-color: rgb(244, 225, 194);
     color: white;
     cursor: pointer;
     border-radius: 15px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
+        display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1000px;
+            height: 30px;
+            background-color: rgb(212, 212, 228);
+            color: white;
+            cursor: pointer;
+            border-radius: 15px;
 }
 
 

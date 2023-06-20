@@ -195,7 +195,7 @@ const TestRestaurant = () => {
                             <div className='restaurant-item-images-container-slider-track'>
                                 {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
-                                  
+
                                     return (
                                         image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                     )

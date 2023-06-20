@@ -26,7 +26,7 @@ const CreateReview = ({ restaurantId }) => {
 
     const valid = () => {
         let newErrors = [];
-        if (description.length < 1) {
+        if (!description) {
             newErrors.description = 'Description is required'
         }
         if (!rating) {
@@ -49,8 +49,8 @@ const CreateReview = ({ restaurantId }) => {
     const onSubmit = async (e) => {
         e.preventDefault()
         valid()
-        if (errors?.length > 0) {
-            return setErrors([])
+        if (Object.keys(errors).length > 0) {
+            return
         }
         const review = {
             rating: rating,
@@ -61,7 +61,7 @@ const CreateReview = ({ restaurantId }) => {
             url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
         }
 
-        if(!errors.length){
+        if (!Object.keys(errors).length < 1){
         await dispatch(createOneReview(review, image, restaurantId)).then(closeModal)
 
         }
@@ -71,7 +71,7 @@ const CreateReview = ({ restaurantId }) => {
     }
     return (
         <section>
-            <form className='create-review-container'>
+            <form  className='create-review-container'>
                 <h1 className='create-review-title'>How was your experience?</h1>
                 <br></br>
                 <div className='create-review-rating'>
@@ -95,11 +95,11 @@ const CreateReview = ({ restaurantId }) => {
                 </div>
                 {errors?.description && <span className="error">{errors?.description}</span>}
                 <br></br>
-                <h3 className='create-review-upload-pic'>Any Picture You Want To Upload?</h3>
+                {/* <h3 className='create-review-upload-pic'>Any Picture You Want To Upload?</h3>
                 <br></br>
                 <input className='create-review-photo-url-input' placeholder='                           Pic please!' value={url} onChange={(e) => setUrl(e.target.value)} />
 
-                <h4></h4>
+                <h4></h4> */}
                 {errors?.url && <span className="error">{errors?.url}</span>}
 
                 <br></br>
