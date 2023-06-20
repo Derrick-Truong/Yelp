@@ -158,7 +158,7 @@ export const createNewRestaurant = (formData) => async (dispatch) => {
 
         if (response.ok) {
             const data = await response.json();
-            dispatch(createOneRestaurant(data));
+            await dispatch(createOneRestaurant(data));
             return data
         }
     } catch (error) {
