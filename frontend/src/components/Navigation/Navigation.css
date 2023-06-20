@@ -7,6 +7,7 @@
     height: 85px;
     position: sticky;
     box-sizing: border-box;
+    z-index:2;
     /* top: 0px; */
     background-color: rgb(206, 122, 122);
     border: 1px solid rgb(206, 122, 122);

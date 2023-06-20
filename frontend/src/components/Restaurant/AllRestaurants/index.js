@@ -74,20 +74,16 @@ const AllRestaurants = () => {
                                                         alt='preview-image'
                                                     />
                                                     <div className='home-page-restaurant-card-content'>
-                                                        <h4>
-                                                            <span className='home-page-restaurant-title'>{restaurant?.title}</span> </h4>
+                                                        <div className="restaurant-card-title">
+                                                            <span>{restaurant?.title}</span><span>{restaurant?.city},{restaurant?.state}</span></div>
+                                                            <div className="restaurant-card-rating-price">
                                                             <span>  <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : (2 > rating && rating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
                                                                 <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : (3 > rating && rating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
                                                                 <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : (4 > rating && rating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
                                                                 <i style={(rating >= 5) ? { color: '#43a700' } : (5 > rating && rating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
                                                                 <i style={(rating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i></span>
-
-
-
-                                                        <div className='hidden-message-home'>
-                                                        <p className='hidden-message-home'>{restaurant?.description}</p>
+                                                                <span>${restaurant.price}/scoop</span>
                                                         </div>
-
                                                     </div>
                                                 </span>
                                             </div>
