@@ -86,7 +86,7 @@ const Test1 = () => {
         e.preventDefault();
         valid()
         if (Object.keys(errors).length > 0) {
-            return 
+            return
         }
         const form = new FormData();
 
@@ -137,10 +137,11 @@ const Test1 = () => {
         // formData.append('newlisting', newListing)
 
         const newSpot = await dispatch(createNewRestaurant(form))
+           if(newSpot){
             closeModal()
         history.push(`/restaurants/${newSpot?.id}`);
 
-
+           }
 
     }
     return (

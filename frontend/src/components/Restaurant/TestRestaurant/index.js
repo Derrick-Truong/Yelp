@@ -165,7 +165,7 @@ const TestRestaurant = () => {
         // setTimeout(() => {
         //     setLoading(false);
         // }, 1500);
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(restaurantId), JSON.stringify(reviews)]);
 
     return (
         <>
