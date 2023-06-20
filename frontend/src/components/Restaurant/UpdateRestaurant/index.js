@@ -21,7 +21,7 @@ const UpdateRestaurant = ({restaurant}) => {
     const [country, setCountry] = useState(restaurant?.country);
     const [title, setTitle] = useState(restaurant?.title);
     const [address, setAddress] = useState(restaurant?.address);
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState([])
     const [description, setDescription] = useState(restaurant?.description);
     const [price, setPrice] = useState(restaurant?.price);
     const [files1, setFile1] = useState(null);
@@ -223,7 +223,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 />
                 {errors?.title && <span className="error">{errors?.title}</span>}
                 <textarea
-                    rows="8" cols="52"
+                    rows="8" cols="48"
                     name='description'
                     maxLength={100}
                     type="text"
@@ -239,7 +239,7 @@ const UpdateRestaurant = ({restaurant}) => {
                 <input className="upload" onChange={handleFile4Change} name='image4' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile5Change} name='image5' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile6Change} name='image6' accept="image/*" type="file" />
-                <button type="submit" className="create-restaurant-button">Create</button>
+                <button type="submit" className="create-restaurant-button">Update</button>
             </form>
         </section>
     )

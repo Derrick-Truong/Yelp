@@ -13,6 +13,8 @@ textarea {
     resize: none;
     border: 1px solid;
     border-color: rgb(19, 19, 19);
+    font-weight:700;
+    padding:5px;
 }
 
 .update-review-title {
@@ -46,6 +48,7 @@ span .fa-solid.fa-thumbs-up {
     background-color: pink;
     display: flex;
     justify-content: center;
+    padding-top:10px;
 }
 
 .update-review-thumbs-up-down span .fa-solid.fa-thumbs-up {

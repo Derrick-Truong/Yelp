@@ -25,6 +25,8 @@ const handleCancel = (e) => {
 
 
     return (
+        <>
+        <section>
         <div className="form-div-delete">
             <h1 className="title">Are you sure you want to delete this beautiful review?</h1>
             {/* {errors.length > 0 && (
@@ -43,6 +45,8 @@ const handleCancel = (e) => {
                 </button>
             </form>
         </div>
+            </section>
+        </>
     );
 }
 

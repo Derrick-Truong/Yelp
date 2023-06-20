@@ -1,41 +1,42 @@
-.form-div-delete{
+.form-div-delete {
     align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 20px auto auto;
-        width: 400px;
-  }
-.title{
-    text-align: center;
-        font-family: Roboto, Helvetica, sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin: 20px auto auto; */
+    height:200px;
+    width: 400px;
+    background-color: #ffd4e9;
 }
-.cancel-delete-button{
-    color: white;
-background-color: #a9a8a8;
-    border: none;
-    border-radius: 5px;
+
+.title {
+    text-align: center;
+    font-family: Roboto, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cancel-delete-button {
     font-size: 16px;
-    font-weight: 900;
+    font-weight: 700;
     height: 50px;
     margin: 10px;
     transition: all .3s;
     width: 150px;
 }
-.submit-delete-button{
-    background-color: #ff5a5f;
-        border: none;
-        border-radius: 5px;
-        color: #fff;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 700;
-        height: 50px;
-        margin: 10px;
-        text-transform: uppercase;
-        transition: all .3s;
-        width: 150px;
+
+.submit-delete-button {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    height: 50px;
+    margin: 10px;
+    text-transform: uppercase;
+    transition: all .3s;
+    width: 150px;
+}
+
+.submit-delete-button:hover{
+    background-color:#ef4d52;
 }

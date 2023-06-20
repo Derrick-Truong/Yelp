@@ -22,5 +22,5 @@
 
 #modal-content {
     position: absolute;
-    background-color: white;
+            background-color: inherit;
 }

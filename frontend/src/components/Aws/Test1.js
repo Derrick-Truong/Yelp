@@ -65,7 +65,7 @@ const Test1 = () => {
             newErrors.country = "Country is required."
         }
         if (!price) {
-            newErrors.price = "Price per night is required."
+            newErrors.price = "Price is required."
         }
         if (!description) {
             newErrors.description = "Description is required."
@@ -76,7 +76,7 @@ const Test1 = () => {
             newErrors.title = "Title is required."
         }
         if (price && !(parseInt(price))) {
-            newErrors.price = "Price is required needs to be a number."
+            newErrors.price = "Price must be a number."
         }
         setErrors(newErrors)
         console.log('NewErrors', newErrors)
@@ -86,15 +86,15 @@ const Test1 = () => {
         e.preventDefault();
         valid()
         if (Object.keys(errors).length > 0) {
-            return
+            return 
         }
         const form = new FormData();
 
-    //     if(files && files.length > 0){
-    //     for (let i = 0; i < files.length; i++) {
-    //         form.append('image', files[i])
-    //     }
-    // }
+        //     if(files && files.length > 0){
+        //     for (let i = 0; i < files.length; i++) {
+        //         form.append('image', files[i])
+        //     }
+        // }
         form.append('country', country)
         form.append('state', state)
         form.append('address', address)
@@ -102,29 +102,29 @@ const Test1 = () => {
         form.append('price', price.toString())
         form.append('title', title)
         form.append('description', description)
-    if(files1){
-        form.append('image1', files1)
-    }
+        if (files1) {
+            form.append('image1', files1)
+        }
 
-    if(files2){
-        form.append('image2', files2)
-    }
+        if (files2) {
+            form.append('image2', files2)
+        }
 
-    if(files3){
-        form.append('image3', files3)
-    }
+        if (files3) {
+            form.append('image3', files3)
+        }
 
-    if(files4){
-        form.append('image4', files4)
-    }
+        if (files4) {
+            form.append('image4', files4)
+        }
 
-    if(files5){
-        form.append('image5', files5)
-    }
+        if (files5) {
+            form.append('image5', files5)
+        }
 
-    if(files6){
-        form.append('image6', files6)
-    }
+        if (files6) {
+            form.append('image6', files6)
+        }
         // const newListing = {
         //     country: country,
         //     description: description,
@@ -136,98 +136,105 @@ const Test1 = () => {
         // }
         // formData.append('newlisting', newListing)
 
-        console.log('Entries', Object.fromEntries(form))
+        const newSpot = await dispatch(createNewRestaurant(form))
+            closeModal()
+        history.push(`/restaurants/${newSpot?.id}`);
 
-        if (Object.keys(errors).length < 1){
-        await dispatch(createNewRestaurant(form))
-            .then(closeModal)
-            .then(history.push('/'))
 
-        // console.log('Front end data part 2', form)
 
-        }
     }
     return (
         <section className="create-restaurant-page">
             <div className="title-update-form">Create An Ice Cream Shop Listing</div>
-            <form encType="multipart/form-data" className="create-restaurant-form" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    className="input"
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className="create-restaurant-form">
+                <div>
+                    <input
+                        type="text"
+                        className="input"
+                        name='country'
+                        placeholder="Country"
+                        value={country}
+                        onChange={e => setCountry(e.target.value)}
+                    />
+                </div>
+                {errors?.country && <div className="error"><div>{errors?.country}</div></div>}
+                <div>
+                    <input
+                        className="input"
+                        type="text"
+                        name='state'
+                        placeholder="State"
+                        value={state}
+                        onChange={e => setState(e.target.value)}
+                    />
+                </div>
+                {errors?.state && <div className="error"><div>{errors?.state}</div></div>}
+                <div>
+                    <input
+                        className="input"
+                        type="text"
+                        name='address'
+                        placeholder="Address"
+                        value={address}
+                        onChange={e => setAddress(e.target.value)}
+                    />
+                </div>
+                {errors?.address && <div className="error"><div>{errors?.address}</div></div>}
+                <div>
 
-                    name='country'
-                    placeholder="Country"
-                    value={country}
-                    onChange={e => setCountry(e.target.value)}
-                />
+                    <input
+                        className="input"
 
-                {errors?.country && <span className="error">{errors?.country}</span>}
+                        type="text"
+                        name='city'
+                        placeholder="City"
+                        value={city}
+                        onChange={e => setCity(e.target.value)}
+                    />
+                </div>
 
+                {errors?.city && <div className="error"><div>{errors?.city}</div></div>}
+                <div>
 
-                <input
-                    className="input"
+                    <input
+                        className="input"
 
-                    type="text"
-                    name='state'
-                    placeholder="State"
-                    value={state}
-                    onChange={e => setState(e.target.value)}
-                />
+                        type="text"
+                        name='price'
+                        placeholder="Price per cone"
+                        value={price}
+                        onChange={e => setPrice(e.target.value)}
+                    />
+                </div>
+                {errors?.price && <div className="error"><div>{errors?.price}</div></div>}
+                <div>
 
-                {errors?.state && <span className="error">{errors?.state}</span>}
+                    <input
+                        className="input"
 
-                <input
-                    className="input"
+                        type="text"
+                        name='title'
+                        placeholder="Title"
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                </div>
 
-                    type="text"
-                    name='address'
-                    placeholder="Address"
-                    value={address}
-                    onChange={e => setAddress(e.target.value)}
-                />
-                {errors?.address && <span className="error">{errors?.address}</span>}
+                {errors?.title && <div className="error"><div>{errors?.title}</div></div>}
+                <div className="create-restaurant-textarea">
 
-                <input
-                    className="input"
+                    <textarea
+                        rows="8" cols="48"
+                        name='description'
+                        type="text"
+                        placeholder=" Write a summary of your wonderful ice cream shop..."
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                    />
+                </div>
 
-                    type="text"
-                    name='city'
-                    placeholder="City"
-                    value={city}
-                    onChange={e => setCity(e.target.value)}
-                />
-                {errors?.city && <span className="error">{errors?.city}</span>}
-                <input
-                    className="input"
-
-                    type="text"
-                    name='price'
-                    placeholder="Price"
-                    value={price}
-                    onChange={e => setPrice(e.target.value)}
-                />
-                {errors?.price && <span className="error">{errors?.price}</span>}
-                <input
-                    className="input"
-
-                    type="text"
-                    name='title'
-                    placeholder="Title"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
-                {errors?.title && <span className="error">{errors?.title}</span>}
-                <textarea
-                    rows="8" cols="52"
-                    name='description'
-                    maxLength={100}
-                    type="text"
-                    placeholder="Write a summary of your wonderful ice cream shop...(100 characters max)"
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                />
-                {errors?.description && <span className="error">{errors?.description}</span>}
-                <div> Add photos of your ice cream shop!</div>
+                {errors?.description && <div className="error"><div>{errors?.description}</div></div>}
+                <div className="add-photos-title"> Add photos of your ice cream shop!</div>
                 <input className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile3Change} name='image3' accept="image/*" type="file" />

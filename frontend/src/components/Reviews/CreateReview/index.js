@@ -10,7 +10,6 @@ import Yelp from "../../../assets/Yelp.jpg"
 import './CreateReview.css'
 
 const CreateReview = ({ restaurantId }) => {
-
     const dispatch = useDispatch()
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState('');
@@ -25,7 +24,7 @@ const CreateReview = ({ restaurantId }) => {
 
 
     const valid = () => {
-        let newErrors = [];
+        let newErrors = {}
         if (!description) {
             newErrors.description = 'Description is required'
         }
@@ -61,10 +60,9 @@ const CreateReview = ({ restaurantId }) => {
             url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
         }
 
-        if (!Object.keys(errors).length < 1){
-        await dispatch(createOneReview(review, image, restaurantId)).then(closeModal)
+        await dispatch(createOneReviewNoPic(review, restaurantId)).then(closeModal)
 
-        }
+        
 
         // dispatch(getReviews(restaurantId))
 
@@ -100,7 +98,7 @@ const CreateReview = ({ restaurantId }) => {
                 <input className='create-review-photo-url-input' placeholder='                           Pic please!' value={url} onChange={(e) => setUrl(e.target.value)} />
 
                 <h4></h4> */}
-                {errors?.url && <span className="error">{errors?.url}</span>}
+                {/* {errors?.url && <span className="error">{errors?.url}</span>} */}
 
                 <br></br>
                 <div className='create-review-thumbs-up-down'><span><i onClick={onSubmit} style={{ color: '#05e13c' }} className="fa-solid fa-thumbs-up"></i></span><span><i onClick={handleCancel} style={{ color: '#e10505' }} className="fa-solid fa-thumbs-down"></i></span></div>

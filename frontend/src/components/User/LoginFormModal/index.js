@@ -61,6 +61,7 @@ function LoginFormModal() {
 
     return (
         <>
+        <div className="login-form-container">
             <div className="frog-login-video">
             </div>
             <div className="log-in-form-below-frog">
@@ -72,7 +73,7 @@ function LoginFormModal() {
                     playsInline
                     src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQ2OGY0MDEwYWY3NGU0MGUyMmZiMDZiMzg4M2E4ZWNhZmNhN2VkMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oz8xwKBsHNlZ6UvMA/giphy.gif'
                     width="200"
-                    height="170"
+                    height="160"
                 />
                 <h5 className='log-in-form-title'>Enter Credentials And Password</h5>
                 <form className="form-log-in" onSubmit={handleSubmit}>
@@ -104,9 +105,8 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-
+                        <h2></h2>
                     <button className='login-log-in-button' type="submit">Log In</button>
-
                     <div className="signup-link-in-login-form">
                         Don't have an account yet?
                         <br></br>
@@ -114,7 +114,8 @@ function LoginFormModal() {
                             <span className='sign-up-modal-button'>
                                 <OpenModalButton
                                     buttonText="Sign Up"
-                                    modalComponent={<SignupFormModal/>}/></span>
+                                    modalComponent={<SignupFormModal/>}/>
+                                    </span>
                             <button onClick={demoSignIn} className="demo-sign-in-button" id='demo-user-button'>
                                 Demo User
                             </button>
@@ -122,6 +123,7 @@ function LoginFormModal() {
                     </div>
 
                 </form>
+            </div>
             </div>
         </>
     );

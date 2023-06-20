@@ -19,56 +19,7 @@ const validateLogin = [
     handleValidationErrors
 ];
 const router = express.Router();
-// // backend/routes/api/session.js
-// // ...
 
-// // Log in
-// router.post('/', validateLogin, async (req, res, next) => {
-
-//     try {
-//         console.log('req.body:', req.body);
-
-//         const { credential, password } = req.body;
-
-//         const user = await User.unscoped().findOne({
-//             where: {
-//                 [Op.or]: {
-//                     username: credential,
-//                     email: credential
-//                 }
-//             }
-//         });
-
-//         console.log('user:', user);
-//         console.log('password:', password);
-
-//         if (!user || (password !== user.password)) {
-//             const err = new Error('Login failed');
-//             err.status = 401;
-//             err.title = 'Login failed';
-//             err.errors = { credential: 'The provided credentials were invalid.' };
-//             console.log('Error:', err);
-//             return next(err);
-//         }
-
-//         const safeUser = {
-//             id: user.id,
-//             email: user.email,
-//             username: user.username,
-//         };
-
-//         await setTokenCookie(res, safeUser);
-
-//         console.log('safeUser:', safeUser);
-
-//         return res.json({
-//             user: safeUser
-//         });
-//     } catch (error) {
-//         console.error('Error:', error);
-//         return next(error);
-//     }
-// });
 
 router.post(
     '/',

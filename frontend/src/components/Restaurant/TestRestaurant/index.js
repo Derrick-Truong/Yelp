@@ -160,20 +160,20 @@ const TestRestaurant = () => {
 
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-        setLoading(true);
+        // setLoading(true);
 
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
+        // setTimeout(() => {
+        //     setLoading(false);
+        // }, 1500);
     }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
 
     return (
         <>
-
+{/*
             {loading ?
                 <div className='loading-icon'>
                     {/* <PacmanLoader color={'#fdd541'} loading={loading} size={100} /> */}
-                    <div class="page-wrapper" size={200} >
+                    {/* <div class="page-wrapper" size={200} >
                         <div class="loader">
                             <div class="jelly">
                                 <div class="body"></div>
@@ -186,7 +186,7 @@ const TestRestaurant = () => {
                         </div>
                     </div>
                 </div>
-                :
+                :  */}
                 <section>
                     <div className='restaurant-item-images-container'>
 
@@ -244,7 +244,7 @@ const TestRestaurant = () => {
                         </div>
                     </div>
                 </section>
-            }
+            {/* // } */}
         </>
 
     )

@@ -2,11 +2,10 @@
 import { useModal } from "../../../Context/Modal"
 import { createOneReview } from "../../../store/review"
 import { useState } from "react"
-import { updateOneReview } from "../../../store/review"
+import { updateOneReviewNoPic } from "../../../store/review"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { restaurantDetails } from "../../../store/restaurants"
-import { updateOneReviewNoPic } from "../../../store/review"
 import { getReviews } from "../../../store/review"
 import Yelp from "../../../assets/Yelp.jpg"
 import './UpdateReview.css'
@@ -27,29 +26,30 @@ useEffect(() => {
    setRating(review?.rating)
    setUrl(review?.previewImage)
 
-},[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description), JSON.stringify(review?.previewImage)])
+},[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description)])
 
 
     const valid = () => {
-        let newErrors = [];
+        let newErrors = {}
         if (!description.length) {
             newErrors.description = 'Description is required'
         }
         if (rating > 5 || rating < 1) {
             newErrors.rating = 'Rating must be between 1 and 5'
         }
-        if (url) {
-            if (!
-                (
-                   url.endsWith('png') ||
-                   url.endsWith('.jpg') ||
-                   url.endsWith('.jpg')
-                )) {
-                newErrors.url = 'Preview must end in .png, .jpg, or .jpeg'
-            }
+        // if (url) {
+        //     if (!
+        //         (
+        //            url.endsWith('png') ||
+        //            url.endsWith('.jpg') ||
+        //            url.endsWith('.jpg')
+        //         )) {
+        //         newErrors.url = 'Preview must end in .png, .jpg, or .jpeg'
+        //     }
 
-        }
+        // }
         setErrors(newErrors)
+        console.log('Errors', newErrors)
     }
 
 const handleCancel = (e) => {
@@ -60,27 +60,27 @@ const handleCancel = (e) => {
         e.preventDefault()
 
         valid()
-        if (errors?.length > 0) {
-           setErrors([])
+        if (Object.keys(errors).length > 0) {
+          return
         }
         const review = {
             rating: rating,
             description: description
         }
 
-        const image = {
-            url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
-        }
+        // const image = {
+        //     url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
+        // }
 
-if(!errors.length){
-          await dispatch(updateOneReview(review, image, reviewId)).then(closeModal)
-}
+
+        await dispatch(updateOneReviewNoPic(review, reviewId)).then(closeModal)
+
 
 
     }
     return (
         <section>
-            <form className='update-review-container' onSubmit={onSubmit}>
+            <form className='update-review-container'>
                 <h1 className='update-review-title'>How was your experience?</h1>
                 <br></br>
                 <div className='update-review-rating'>
@@ -102,9 +102,9 @@ if(!errors.length){
                 </div>
                 {errors?.description && <span className="error">{errors?.description}</span>}
 
-                <h3 className='update-review-upload-pic'>Didn't Like the Pic You Took Huh?</h3>
+                {/* <h3 className='update-review-upload-pic'>Didn't Like the Pic You Took Huh?</h3> */}
 
-                <input className='update-review-photo-url-input' placeholder={review?.previewImage} value={url} onChange={(e) => setUrl(e.target.value)}/>
+                {/* <input className='update-review-photo-url-input' placeholder={review?.previewImage} value={url} onChange={(e) => setUrl(e.target.value)}/> */}
 
                 <h4>{errors?.url && <span className="error">{errors?.url}</span>}</h4>
 

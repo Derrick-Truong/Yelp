@@ -42,7 +42,7 @@ export const getReviews = (restaurantId) => async dispatch => {
     }
 }
 
-export const updateOneReview = (review, reviewImage, reviewId ) => async dispatch => {
+export const updateOneReview = (review, reviewId ) => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: {
@@ -53,21 +53,21 @@ export const updateOneReview = (review, reviewImage, reviewId ) => async dispatc
 
     if (response.ok) {
         const response2 = await response.json()
-        const successImage = await csrfFetch(`/api/reviews/${reviewId}/pictures`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(reviewImage)
-        })
+    //     const successImage = await csrfFetch(`/api/reviews/${reviewId}/pictures`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(reviewImage)
+    //     })
 
-        if (successImage.ok) {
-            const previewImage = await successImage.json()
-            response2.previewImage = previewImage.url
-        }
+    //     if (successImage.ok) {
+    //         const previewImage = await successImage.json()
+    //         response2.previewImage = previewImage.url
+    //     }
 
-       await dispatch(updateReview(response2))
-
+    //    await dispatch(updateReview(response2))
+        await dispatch(updateReview(response2))
         return response2
     }
 }

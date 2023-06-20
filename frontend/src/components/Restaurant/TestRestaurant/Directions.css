@@ -20,20 +20,30 @@
     margin-bottom: 15px;
 }
 .delete-review-button-container button{
-    color: black;
-    background-color: red;
+height:30px;
+
 }
 .restaurant-hours span+span {
     padding-left: 15px;
 }
 
-.restaurant-hours span li {
-    padding-bottom: 10px;
-    font-weight: 500;
+.restaurant-create-review button{
+background-color: #FF69B4;
+color: white;
+
 }
+.update-review-button-container button{
+height: 30px;
+}
+.restaurant-hours span li {
+
+    padding-bottom: 10px;
+    font-weight: 700;
+}
+
 .open{
     color: green;
-        font-weight: 800;
+    padding-bottom: 10px;
 }
 #restaurant-closed{
     color: red;
@@ -59,7 +69,7 @@
 .restaurant-hours-title {
     padding-bottom: 10px;
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .directions-buttons-container {
@@ -76,7 +86,7 @@
 .restaurant-reviews-title {
     /* padding-bottom: 20px; */
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .reviews-card-container {
@@ -118,7 +128,9 @@
     align-items: center;
     margin-bottom: 20px;
 }
-
+.weekday, .weektime, .open, .none{
+    font-size:20px;
+}
 .review-description p{
 font-size: 0.9rem;
 color: #4b4b4b;
