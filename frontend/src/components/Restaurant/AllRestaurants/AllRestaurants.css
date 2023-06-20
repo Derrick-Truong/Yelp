@@ -21,7 +21,9 @@
     min-height: 275px;
 
 }
-
+.instructions{
+    font-weight: bold;;
+}
 
 .home-page-restaurant-card {
     height: 275px;
