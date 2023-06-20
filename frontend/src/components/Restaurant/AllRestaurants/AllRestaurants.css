@@ -15,25 +15,21 @@
 
 
     .home-page-restaurant-container {
-        background-color: #E8E0C5;
         display: flex;
         justify-content: space-around;
         /* box-shadow: 0 0 5px rgba(0, 0, 0, .5); */
         /* min-width: 275px;
         min-height: 275px */
-        min-width: 275px;
-    min-height: 275px;
-
+        min-width: 412.5px;
+        min-height: 275px;
 
     }
 
 
     .home-page-restaurant-card {
         height: 275px;
-        margin: 27px;
-        width: 275px;
-        /* overflow: auto; */
-
+        /* margin: 27px; */
+        min-width: 412.5px;
     }
 
     /* .home-page-restaurant-card{
@@ -48,9 +44,7 @@ padding: 60px;
 } */
     .all-restaurants-preview-image {
         height: 275px;
-        width: 275px;
-        /* width: 192.5px; */
-
+        min-width: 412.5px;
         border-radius: 3px;
         /* width: 352px; */
     }
