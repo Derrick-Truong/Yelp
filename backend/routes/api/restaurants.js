@@ -516,10 +516,10 @@ router.post('/upload', requireAuth, upload.fields([
 
             }
 
-            // console.log('Successfully loaded images');
+            console.log('Successfully loaded images');
 
         }
-    res.json(success)
+    return res.json(success)
 
     } catch (error) {
         console.error('Error occurred:', error);
