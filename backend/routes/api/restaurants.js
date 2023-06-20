@@ -466,9 +466,9 @@ router.post('/upload', requireAuth, upload.fields([
     { name: 'image6', maxCount: 1 },
 ]), async (req, res) => {
     try {
-        if (!req.files) {
-            return res.status(400).json({ error: 'No files were uploaded' });
-        }
+        // if (!req.files) {
+        //     return res.status(400).json({ error: 'No files were uploaded' });
+        // }
 
         const { image1, image2, image3, image4, image5, image6 } = req.files;
         const { address, description, price, title, city, state, country } = req.body;
@@ -516,7 +516,6 @@ router.post('/upload', requireAuth, upload.fields([
 
             }
 
-            console.log('Successfully loaded images');
 
         }
     return res.json(success)
