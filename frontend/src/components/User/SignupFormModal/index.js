@@ -59,6 +59,8 @@ function SignupFormPage() {
     return (
         <>
             <form className='sign-up-form-container' onSubmit={handleSubmit}>
+
+                <h1>Sign Up</h1>
                 {errors.length > 0 && (
                     <ul className="error-messages-signup">
                         {errors.map((error, idx) => (
@@ -66,12 +68,11 @@ function SignupFormPage() {
                         ))}
                     </ul>
                 )}
-                <h1>Sign Up</h1>
                 <br></br>
                 <label>
                     <input
                         type="text"
-                        placeholder='               Email'
+                        placeholder='Email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -81,7 +82,7 @@ function SignupFormPage() {
                 <label>
                     <input
                         type="text"
-                        placeholder='            Username'
+                        placeholder='Username'
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -91,7 +92,7 @@ function SignupFormPage() {
                 <label>
                     <input
                         type="text"
-                        placeholder='            First Name'
+                        placeholder='First Name'
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
@@ -101,7 +102,7 @@ function SignupFormPage() {
                 <label>
                     <input
                         type="text"
-                        placeholder='            Last Name'
+                        placeholder='Last Name'
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
@@ -111,7 +112,7 @@ function SignupFormPage() {
                 <label>
                     <input
                         type="password"
-                        placeholder='            Password'
+                        placeholder='Password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -121,7 +122,7 @@ function SignupFormPage() {
                 <label>
                     <input
                         type="password"
-                        placeholder='     Confirm Password'
+                        placeholder='Confirm Password'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required

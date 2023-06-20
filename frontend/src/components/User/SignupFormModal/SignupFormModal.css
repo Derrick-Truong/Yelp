@@ -3,10 +3,11 @@ margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+        background-color: #faf3f3;
     text-align: center;
     align-items: center;
-    width: 350px;
-    height: 550px;
+    width: 450px;
+    height: 650px;
     background-image: url('https: //cdn.dribbble.com/users/7854/screenshots/15330807/media/bf124c1c799e852a4d260cf9fce92e7a.gif'); background-repeat:repeat
 }
 .sign-up-form-container button {
@@ -17,6 +18,8 @@ margin: auto;
     list-style: none;
     color: red;
     padding: 5px;
+    font-weight: bold;
+
 }
 
 #myImage{
