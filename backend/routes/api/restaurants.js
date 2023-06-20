@@ -517,8 +517,8 @@ router.post('/upload', requireAuth, upload.fields([
             }
 
             // console.log('Successfully loaded images');
-            res.json(success);
         }
+        res.json(success);
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ error: 'An error occurred during image upload' });
@@ -646,7 +646,7 @@ router.put('/:id', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-                
+
                     // res.json(success);
                     await RestaurantImage.create({
                         restaurantId: success.id,

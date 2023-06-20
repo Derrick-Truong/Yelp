@@ -62,6 +62,20 @@ const TestRestaurant = () => {
     };
     var map;
     var marker;
+    useEffect(() => {
+
+
+        dispatch(restaurantDetails(restaurantId));
+        dispatch(getReviews(restaurantId));
+        // setLoading(true);
+
+        // setTimeout(() => {
+        //     setLoading(false);
+        // }, 1500);
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    if (!restaurant) {
+        return <div>Loading...</div>;
+    }
 
     // async function directions(){
     //     try{
@@ -155,17 +169,7 @@ const TestRestaurant = () => {
    initMap()
 
 
-    useEffect(() => {
 
-
-        dispatch(restaurantDetails(restaurantId));
-        dispatch(getReviews(restaurantId));
-        // setLoading(true);
-
-        // setTimeout(() => {
-        //     setLoading(false);
-        // }, 1500);
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(restaurantId), JSON.stringify(reviews)]);
 
     return (
         <>
@@ -193,13 +197,13 @@ const TestRestaurant = () => {
                         <div className='restaurant-item-images-container-slider'>
 
                             <div className='restaurant-item-images-container-slider-track'>
-                                {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                                {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                     return (
                                         image && <img key={image.key} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                     )
-                                })}
+                                }) : <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" alt="image" className="restaurant-item-restaurant-photos"/>}
 
                                 <div className='restaurant-item-info-container'>
                                     <div className='restaurant-info-inner-container'>
