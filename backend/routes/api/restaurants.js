@@ -486,7 +486,7 @@ router.post('/upload', requireAuth, upload.fields([
 
 
             const images = [image1, image2, image3, image4, image5, image6];
-        if(success && images && images.length > 0){
+        if(images && images.length > 0){
             for (let i = 0; i < images.length; i++) {
                 const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
 
@@ -517,10 +517,10 @@ router.post('/upload', requireAuth, upload.fields([
             }
 
             // console.log('Successfully loaded images');
-            res.json(success);
-        }else{
-            res.json(success)
+
         }
+    res.json(success)
+
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ error: 'An error occurred during image upload' });
