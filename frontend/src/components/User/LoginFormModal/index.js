@@ -26,9 +26,8 @@ function LoginFormModal() {
         e.preventDefault();
         setErrors([]);
         try {
-            dispatch(sessionActions.login({ credential, password }));
-            closeModal();
-
+            await dispatch(sessionActions.login({ credential, password }))
+            .then(closeModal)
         } catch (res) {
             if (res.status === 401) {
                 setErrors(["User not found. Please check your credentials."]);
@@ -76,7 +75,7 @@ function LoginFormModal() {
                     height="160"
                 />
                 <h5 className='log-in-form-title'>Enter Credentials And Password</h5>
-                <form className="form-log-in" onSubmit={handleSubmit}>
+                <form className="form-log-in">
                     {errors.length > 0 && (
                         <ul className="error-messages">
                             {errors.map((error, idx) => (
@@ -106,7 +105,7 @@ function LoginFormModal() {
                         />
                     </label>
                         <h2></h2>
-                    <button className='login-log-in-button' type="submit">Log In</button>
+                    <button className='login-log-in-button' onClick={handleSubmit} type="submit">Log In</button>
                     <div className="signup-link-in-login-form">
                         Don't have an account yet?
                         <br></br>
