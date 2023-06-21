@@ -53,8 +53,8 @@ const TestRestaurant = () => {
     const addressVal = restaurant?.address
     const cityVal = restaurant?.city
     const stateVal = restaurant?.state
-    const restaurantImages = restaurant?.RestauntImages
     var starRating = Number(avgRating)?.toFixed(1)
+    var geocoder = new window.google.maps.Geocoder();
     // var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
     const openMenu = () => {
@@ -64,9 +64,27 @@ const TestRestaurant = () => {
     var map;
     var marker;
     useEffect(() => {
+        // setLoading(true);
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(restaurantImages), JSON.stringify(reviews)]);
+        // setLoading(true);
+        // setTimeout(() => {
+        //     setLoading(false);
+        // }, 5000);
+
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+
+
+    // async function directions(){
+    //     try{
+    //     if (navigator.geolocation) {
+    //        navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
+    //     }
+    // }
+    // catch(error){
+    //        console.log("Geolocation not supported", error);
+    //     }
+    // }
 
     async function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
@@ -81,16 +99,15 @@ const TestRestaurant = () => {
     }
     async function initMap() {
         try {
-            const { Map } = await window.google.maps.importLibrary("maps");
-            var geocoder = new window.google.maps.Geocoder();
             const { results, status } = await geocodeAddress(geocoder, address);
 
             if (status === "OK" && results.length > 0) {
                 const location = results[0].geometry.location;
                 const position = { lat: location.lat(), lng: location.lng() };
+
                 // The map, centered at the restaurant location
                 const mapElement = document.getElementById("map");
-                map = new Map(mapElement, {
+                map = new window.google.maps.Map(mapElement, {
                     zoom: 12,
                     center: position,
 
@@ -168,7 +185,6 @@ const TestRestaurant = () => {
 
     return (
         <>
-            {/* {loading ? */}
                 {/* <div className='loading-icon'>
                     <div class="page-wrapper" size={200} >
                         <div class="loader">
@@ -190,13 +206,14 @@ const TestRestaurant = () => {
                         <div className='restaurant-item-images-container-slider'>
 
                             <div className='restaurant-item-images-container-slider-track'>
-                                {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                                {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                     return (
                                         image && <img key={image.id} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                     )
-                                })}
+                                }) : <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" alt="image" className="restaurant-item-restaurant-photos"/>}
+
                                 <div className='restaurant-item-info-container'>
                                     <div className='restaurant-info-inner-container'>
                                         <h1>{restaurant?.title}</h1>
@@ -231,19 +248,17 @@ const TestRestaurant = () => {
                     </div>
 
                     <div id="map-container">
-                    {/* {currentUser.id === restaurant.userId ? <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span> : <></>} */}
                         <div style={{ width: '50%', height: '50%' }}>
-                            <section className='directions-reset-container'>
+                            {/* <section className='directions-reset-container'>
                             <div className='location-title'>Location</div>
-                            </section>
+                            </section> */}
                             <div id="map">
-
                             </div>
                                 <Directions restaurantId={restaurantId} />
                         </div>
                     </div>
                 </section>
-            {/* } */}
+
         </>
 
     )
