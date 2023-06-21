@@ -99,7 +99,9 @@ const TestRestaurant = () => {
                 // The marker, positioned at the restaurant location
                 marker = new window.google.maps.Marker({
                     map: map,
-                    position: position
+                    position: position,
+                    optimized: false
+
                 });
             }
 

@@ -44,6 +44,8 @@ const Directions = ({ restaurantId }) => {
     const hours = addZero(today.getHours());
     const minutes = addZero(today.getMinutes());
     const seconds = addZero(today.getSeconds());
+    
+    let marker;
 async function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
@@ -78,10 +80,10 @@ async function geocodeAddress(geocoder, address) {
                 });
 
                 // The marker, positioned at the restaurant location
-                const marker = new window.google.maps.Marker({
+                marker = new window.google.maps.Marker({
                     map: map,
                     position: position,
-                    title: "Restaurant",
+                    optimized: false
                 });
             }
 
