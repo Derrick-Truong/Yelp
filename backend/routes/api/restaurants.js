@@ -625,8 +625,8 @@ router.put('/:id', requireAuth, upload.fields([
 ]), async (req, res) => {
     let s3 = new S3Client({
         credentials: {
-            secretAccessKey: secretKey,
-            accessKeyId: accessKey
+            secretAccessKey: 'oj+Tqq/P2eiHr632DYa84YncRlNY/xHQYTzibtX8',
+            accessKeyId: 'AKIAWYAF37VP3YKW2Q4C'
         },
         region: 'us-west-1'
     })
@@ -658,16 +658,26 @@ router.put('/:id', requireAuth, upload.fields([
             description
         });
         const images = [image1, image2, image3, image4, image5, image6];
-        if (success && images && images.length > 0) {
+        if (images && images.length > 0) {
             for (let i = 0; i < images.length; i++) {
                 const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
 
                 if (file) {
                     const fileBuffer = await sharp(file.buffer).resize({ width: 400, height: 370, fit: 'cover' }).toBuffer();
+                    const newPic = await success.createRestaurantImage({
+                        restaurantId: success.id,
+                        url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
+                    })
 
+                    // const params = {
+                    //     Bucket: process.env.BUCKET,
+                    //     Key: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
+                    //     Body: fileBuffer,
+                    //     ContentType: file.mimetype
+                    // };
                     const params = {
-                        Bucket: process.env.BUCKET,
-                        Key: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
+                        Bucket: 'icecreamfinder',
+                        Key: newPic.url,
                         Body: fileBuffer,
                         ContentType: file.mimetype
                     };
@@ -675,21 +685,15 @@ router.put('/:id', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-
-                    // res.json(success);
-                    await RestaurantImage.create({
-                        restaurantId: success.id,
-                        url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
-                    })
-
+                 
                 }
 
 
             }
 
-            // console.log('Successfully loaded images');
+
         }
-        res.json(success)
+        return res.json(success)
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ error: 'An error occurred during image upload' });
