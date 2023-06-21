@@ -471,7 +471,7 @@ router.post('/upload', requireAuth, upload.fields([
             accessKeyId: accessKey
         },
         region: 'us-west-1',
-
+        bucket: 'icecreamfinder'
     })
     try {
         // if (!req.files) {
