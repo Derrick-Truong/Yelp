@@ -41,11 +41,9 @@ const Directions = ({ restaurantId }) => {
     const month = today.getMonth()+ 1;
     const year = today.getFullYear();
     const date = today.getDate();
-    // console.log('current date', current_date)
     const hours = addZero(today.getHours());
     const minutes = addZero(today.getMinutes());
     const seconds = addZero(today.getSeconds());
-    console.log('Current day', currentDay)
     const handleReset = async() => {
         setShowDirections(false); // Set show directions to false
         // Clear the map container
