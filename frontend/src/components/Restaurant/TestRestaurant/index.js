@@ -72,7 +72,7 @@ const TestRestaurant = () => {
         // setTimeout(() => {
         //     setLoading(false);
         // }, 1500);
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(restaurantId), JSON.stringify(reviews)]);
     if (!restaurant) {
         return <div>Loading...</div>;
     }
@@ -201,7 +201,7 @@ const TestRestaurant = () => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                     return (
-                                        image && <img key={image} className="restaurant-item-restaurant-photos" src={url} alt='image' />
+                                        image && <img key={image.id} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                     )
                                 }) : <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" alt="image" className="restaurant-item-restaurant-photos"/>}
 
