@@ -534,7 +534,7 @@ router.post('/upload', requireAuth, upload.fields([
         }
     // return res.json(success)
         // res.json(success)
-        res.json(success)
+        return res.json(success)
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ error: 'An error occurred during image upload' });
