@@ -126,9 +126,9 @@ const Directions = ({ restaurantId }) => {
     function routeError() {
         alert("Couldn't get location");
     }
-    useEffect(() => {
-        // dispatch(getReviews(restaurantId));
-    }, [JSON.stringify(current_time), JSON.stringify(today), JSON.stringify(currentDay), JSON.stringify(startDate), JSON.stringify(endDate)])
+    // useEffect(() => {
+    //     // dispatch(getReviews(restaurantId));
+    // }, [JSON.stringify(current_time), JSON.stringify(today), JSON.stringify(currentDay), JSON.stringify(startDate), JSON.stringify(endDate)])
     return (
         <>
             <div>
