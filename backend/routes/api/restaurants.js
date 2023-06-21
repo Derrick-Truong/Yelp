@@ -484,7 +484,7 @@ router.post('/upload', requireAuth, upload.fields([
             description
         });
 
-        res.json(success)
+        // res.json(success)
             const images = [image1, image2, image3, image4, image5, image6];
         if(images && images.length > 0){
             for (let i = 0; i < images.length; i++) {
@@ -506,11 +506,14 @@ router.post('/upload', requireAuth, upload.fields([
                     // let userIdString = success.userId.toString()
                     // let restaurantIdString = success.id.toString()
                     // res.json(success);
-                    await RestaurantImage.create({
+                    // await RestaurantImage.create({
+                    //     restaurantId: success.id,
+                    //     url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
+                    // })
+                    await success.createRestaurantImage({
                         restaurantId: success.id,
                         url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                     })
-
                 }
 
 
@@ -519,7 +522,7 @@ router.post('/upload', requireAuth, upload.fields([
 
         }
     // return res.json(success)
-
+        res.json(success)
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ error: 'An error occurred during image upload' });
