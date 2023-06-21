@@ -42,7 +42,7 @@ const s3 = new S3Client({
         secretAccessKey: secretKey,
         accessKeyId: accessKey
     },
-    region: region
+    Region: region
 })
 const storage = multer.memoryStorage();
 // const storage = multer.memoryStorage()
@@ -506,7 +506,6 @@ router.post('/upload', requireAuth, upload.fields([
                         Bucket: process.env.BUCKET,
                         Key: newPic.url,
                         Body: fileBuffer,
-                        Region: region,
                         ContentType: file.mimetype
                     };
 
