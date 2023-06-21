@@ -470,7 +470,8 @@ router.post('/upload', requireAuth, upload.fields([
             secretAccessKey: secretKey,
             accessKeyId: accessKey
         },
-        region: 'us-west-1'
+        region: 'us-west-1',
+
     })
     try {
         // if (!req.files) {
@@ -510,7 +511,7 @@ router.post('/upload', requireAuth, upload.fields([
                     //     ContentType: file.mimetype
                     // };
                     const params = {
-                        Bucket: process.env.BUCKET,
+                        Bucket: bucket,
                         Key: newPic.url,
                         Body: fileBuffer,
                         ContentType: file.mimetype
