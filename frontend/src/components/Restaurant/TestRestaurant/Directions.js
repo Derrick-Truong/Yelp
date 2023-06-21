@@ -44,6 +44,17 @@ const Directions = ({ restaurantId }) => {
     const hours = addZero(today.getHours());
     const minutes = addZero(today.getMinutes());
     const seconds = addZero(today.getSeconds());
+async function geocodeAddress(geocoder, address) {
+        return new Promise((resolve, reject) => {
+            geocoder.geocode({ address }, (results, status) => {
+                if (status === "OK") {
+                    resolve({ results, status });
+                } else {
+                    reject(new Error("Geocode was not successful for the following reason: " + status));
+                }
+            });
+        });
+    }
     const handleReset = async() => {
         setShowDirections(false); // Set show directions to false
         // Clear the map container
@@ -79,17 +90,7 @@ const Directions = ({ restaurantId }) => {
         }
         // Any other map initialization code can be added here
     };
-    async function geocodeAddress(geocoder, address) {
-        return new Promise((resolve, reject) => {
-            geocoder.geocode({ address }, (results, status) => {
-                if (status === "OK") {
-                    resolve({ results, status });
-                } else {
-                    reject(new Error("Geocode was not successful for the following reason: " + status));
-                }
-            });
-        });
-    }
+
 
     function routeSuccess(position) {
         const directionsService = new window.google.maps.DirectionsService();

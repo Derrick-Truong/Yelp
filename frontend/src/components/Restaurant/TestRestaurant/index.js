@@ -53,6 +53,7 @@ const TestRestaurant = () => {
     const addressVal = restaurant?.address
     const cityVal = restaurant?.city
     const stateVal = restaurant?.state
+    const restaurantImages = restaurant?.RestauntImages
     var starRating = Number(avgRating)?.toFixed(1)
     // var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
@@ -65,7 +66,7 @@ const TestRestaurant = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(restaurantImages), JSON.stringify(reviews)]);
 
     async function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
