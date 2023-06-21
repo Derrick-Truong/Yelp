@@ -39,8 +39,8 @@ const urlencodedParser = bodyParser.urlencoded({
 
 let s3 = new S3Client({
     credentials: {
-        secretAccessKey: secretKey,
-        accessKeyId: accessKey
+        secretAccessKey: 'oj+Tqq/P2eiHr632DYa84YncRlNY/xHQYTzibtX8',
+        accessKeyId: 'AKIAWYAF37VP3YKW2Q4C'
     },
     region: 'us-west-1'
 })
@@ -467,8 +467,8 @@ router.post('/upload', requireAuth, upload.fields([
 ]), async (req, res) => {
     let s3 = new S3Client({
         credentials: {
-            secretAccessKey: secretKey,
-            accessKeyId: accessKey
+            secretAccessKey: 'oj+Tqq/P2eiHr632DYa84YncRlNY/xHQYTzibtX8',
+            accessKeyId: 'AKIAWYAF37VP3YKW2Q4C'
         },
         region: 'us-west-1'
     })
