@@ -187,7 +187,7 @@ const TestRestaurant = () => {
                         <div className='restaurant-item-images-container-slider'>
 
                             <div className='restaurant-item-images-container-slider-track'>
-                                {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                                {restaurant?.RestaurantImages?.length ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                     return (
