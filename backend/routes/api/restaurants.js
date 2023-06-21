@@ -506,6 +506,7 @@ router.post('/upload', requireAuth, upload.fields([
                         Bucket: process.env.BUCKET,
                         Key: newPic.url,
                         Body: fileBuffer,
+                        Region: region,
                         ContentType: file.mimetype
                     };
 
