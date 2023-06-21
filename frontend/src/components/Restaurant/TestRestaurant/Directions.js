@@ -56,7 +56,7 @@ const Directions = ({ restaurantId }) => {
             const { results, status } = await geocodeAddress(geocoder, address);
             if (status === "OK" && results.length > 0) {
                 const location = results[0].geometry.location;
-                const position = { lat: location.lat(), lng: location.lng() };
+                var position = { lat: location.lat(), lng: location.lng() };
 
                 // The map, centered at the restaurant location
                 const mapElement = document.getElementById("map");
@@ -103,7 +103,7 @@ const Directions = ({ restaurantId }) => {
         const mapElement = document.getElementById("map");
         const routeOptions = {
             zoom: 12,
-            center: { lat: 37.8272, lng: 122.2913 },
+            center: position,
         };
         const map = new window.google.maps.Map(mapElement, routeOptions);
         directionsDisplay.setMap(map);

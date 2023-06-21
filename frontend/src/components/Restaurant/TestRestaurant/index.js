@@ -63,29 +63,16 @@ const TestRestaurant = () => {
     var map;
     var marker;
     useEffect(() => {
-        setLoading(true);
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-        // setLoading(true);
+        setLoading(true);
         setTimeout(() => {
             setLoading(false);
         }, 3000);
 
     }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
 
-
-    // async function directions(){
-    //     try{
-    //     if (navigator.geolocation) {
-    //        navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
-    //     }
-    // }
-    // catch(error){
-    //        console.log("Geolocation not supported", error);
-    //     }
-    // }
-
-    async function geocodeAddress(geocoder, address) {
+    function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
                 if (status === "OK") {
@@ -105,7 +92,6 @@ const TestRestaurant = () => {
             if (status === "OK" && results.length > 0) {
                 const location = results[0].geometry.location;
                 const position = { lat: location.lat(), lng: location.lng() };
-
                 // The map, centered at the restaurant location
                 const mapElement = document.getElementById("map");
                 map = new Map(mapElement, {
@@ -184,7 +170,7 @@ const TestRestaurant = () => {
 
     return (
         <>
-            {loading && !restaurant ?
+            {loading ?
                 <div className='loading-icon'>
                     <div class="page-wrapper" size={200} >
                         <div class="loader">
