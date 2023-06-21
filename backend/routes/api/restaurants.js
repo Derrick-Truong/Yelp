@@ -37,12 +37,12 @@ const urlencodedParser = bodyParser.urlencoded({
     parameterLimit: 50000
 });
 
-const s3 = new S3Client({
+let s3 = new S3Client({
     credentials: {
         secretAccessKey: secretKey,
         accessKeyId: accessKey
     },
-    Region: region
+    region: 'us-west-1'
 })
 const storage = multer.memoryStorage();
 // const storage = multer.memoryStorage()
@@ -465,6 +465,13 @@ router.post('/upload', requireAuth, upload.fields([
     { name: 'image5', maxCount: 1 },
     { name: 'image6', maxCount: 1 },
 ]), async (req, res) => {
+    let s3 = new S3Client({
+        credentials: {
+            secretAccessKey: secretKey,
+            accessKeyId: accessKey
+        },
+        region: 'us-west-1'
+    })
     try {
         // if (!req.files) {
         //     return res.status(400).json({ error: 'No files were uploaded' });
@@ -616,6 +623,13 @@ router.put('/:id', requireAuth, upload.fields([
     { name: 'image5', maxCount: 1 },
     { name: 'image6', maxCount: 1 },
 ]), async (req, res) => {
+    let s3 = new S3Client({
+        credentials: {
+            secretAccessKey: secretKey,
+            accessKeyId: accessKey
+        },
+        region: 'us-west-1'
+    })
     try {
         let success = await Restaurant.findOne({
             where: {
