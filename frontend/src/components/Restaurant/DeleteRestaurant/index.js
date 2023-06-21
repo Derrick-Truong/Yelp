@@ -12,7 +12,9 @@ const {closeModal} = useModal()
 
 const handleDelete = async(e) => {
     e.preventDefault();
-    dispatch(removeRestaurant(restaurantId)).then(closeModal).then(history.push('/'))
+    dispatch(removeRestaurant(restaurantId))
+    closeModal()
+    history.push('/')
 }
 
     const handleCancel = (e) => {
