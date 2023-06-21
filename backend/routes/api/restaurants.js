@@ -492,7 +492,10 @@ router.post('/upload', requireAuth, upload.fields([
 
                 if (file) {
                     const fileBuffer = await sharp(file.buffer).resize({ width: 400, height: 370, fit: 'cover' }).toBuffer();
-
+                    await success.createRestaurantImage({
+                        restaurantId: success.id,
+                        url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
+                    })
                     const params = {
                         Bucket: process.env.BUCKET,
                         Key: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
@@ -510,10 +513,10 @@ router.post('/upload', requireAuth, upload.fields([
                     //     restaurantId: success.id,
                     //     url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                     // })
-                    await success.createRestaurantImage({
-                        restaurantId: success.id,
-                        url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
-                    })
+                    // await success.createRestaurantImage({
+                    //     restaurantId: success.id,
+                    //     url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
+                    // })
                 }
 
 
