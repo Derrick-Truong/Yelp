@@ -54,7 +54,7 @@ const TestRestaurant = () => {
     const cityVal = restaurant?.city
     const stateVal = restaurant?.state
     var starRating = Number(avgRating)?.toFixed(1)
-    var geocoder = new window.google.maps.Geocoder();
+    // var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
     const openMenu = () => {
         if (showMenu) return;
@@ -63,19 +63,16 @@ const TestRestaurant = () => {
     var map;
     var marker;
     useEffect(() => {
-
-
+        setLoading(true);
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
         // setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 3000);
 
-        // setTimeout(() => {
-        //     setLoading(false);
-        // }, 1500);
     }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
-    if (!restaurant) {
-        return <div>Loading...</div>;
-    }
+
 
     // async function directions(){
     //     try{
@@ -101,7 +98,8 @@ const TestRestaurant = () => {
     }
     async function initMap() {
         try {
-
+            const { Map } = await window.google.maps.importLibrary("maps");
+            var geocoder = new window.google.maps.Geocoder();
             const { results, status } = await geocodeAddress(geocoder, address);
 
             if (status === "OK" && results.length > 0) {
@@ -110,7 +108,7 @@ const TestRestaurant = () => {
 
                 // The map, centered at the restaurant location
                 const mapElement = document.getElementById("map");
-                const map = new window.google.maps.Map(mapElement, {
+                map = new Map(mapElement, {
                     zoom: 12,
                     center: position,
 
@@ -119,8 +117,7 @@ const TestRestaurant = () => {
                 // The marker, positioned at the restaurant location
                 marker = new window.google.maps.Marker({
                     map: map,
-                    position: position,
-                    title: "Restaurant",
+                    position: position
                 });
             }
 
@@ -128,7 +125,7 @@ const TestRestaurant = () => {
             console.log("An error occurred during geocoding:", error);
         }
     }
-
+    initMap()
     // function routeSuccess(position) {
     //     var directionsService = new window.google.maps.DirectionsService();
     //     var directionsDisplay = new window.google.maps.DirectionsRenderer();
@@ -166,18 +163,30 @@ const TestRestaurant = () => {
     //     await initMap();
 
     // }
-   initMap()
-
+    // if (!restaurant) {
+    //     return <div className='loading-icon'>
+    //         <div class="page-wrapper" size={200}>
+    //             <div class="loader">
+    //                 <div class="jelly">
+    //                     <div class="body"></div>
+    //                     <div class="stick"></div>
+    //                     <div class="eye"></div>
+    //                     <div class="eye"></div>
+    //                     <div class="mouth"></div>
+    //                 </div>
+    //                 <div class="shadow"></div>
+    //             </div>
+    //         </div>
+    //     </div>;
+    // }
 
 
 
     return (
         <>
-{/*
-            {loading ?
+            {loading && !restaurant ?
                 <div className='loading-icon'>
-                    {/* <PacmanLoader color={'#fdd541'} loading={loading} size={100} /> */}
-                    {/* <div class="page-wrapper" size={200} >
+                    <div class="page-wrapper" size={200} >
                         <div class="loader">
                             <div class="jelly">
                                 <div class="body"></div>
@@ -190,7 +199,7 @@ const TestRestaurant = () => {
                         </div>
                     </div>
                 </div>
-                :  */}
+                :
                 <section>
                     <div className='restaurant-item-images-container'>
 
@@ -243,12 +252,14 @@ const TestRestaurant = () => {
                             <section className='directions-reset-container'>
                             <div className='location-title'>Location</div>
                             </section>
-                            <div id="map"></div>
+                            <div id="map">
+
+                            </div>
                                 <Directions restaurantId={restaurantId} />
                         </div>
                     </div>
                 </section>
-            {/* // } */}
+            }
         </>
 
     )

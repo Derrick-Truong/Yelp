@@ -7,7 +7,6 @@
     width: 100%;
     height: 624.67px;
     display: flex;
-    /* justify-content: center; */
 }
 
 .delete-review-button-container button, .update-review-button-container button{

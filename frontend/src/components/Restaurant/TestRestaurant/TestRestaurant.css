@@ -327,7 +327,6 @@
     width: calc(100% / 2 * 2);
     padding-top: 10px;
     margin-top: 32px;
-    /* padding-bottom:50px; */
     display: flex;
     justify-content: center;
 }

@@ -21,7 +21,7 @@ const Directions = ({ restaurantId }) => {
     const currentUser = useSelector(state => state.session.user)
     const [showDirections, setShowDirections] = useState(false);
 
-
+    let map;
     const handleDirectionsClick = () => {
         setShowDirections(true);
         navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
@@ -47,20 +47,20 @@ const Directions = ({ restaurantId }) => {
     const handleReset = async() => {
         setShowDirections(false); // Set show directions to false
         // Clear the map container
-        var geocoder = new window.google.maps.Geocoder();
-        // You may need to reinitialize the map with the desired options
-        var address = `${addressVal} ${cityVal} ${stateVal}`;
+
         try {
-
+            const { Map } = await window.google.maps.importLibrary("maps");
+            var geocoder = new window.google.maps.Geocoder();
+            // You may need to reinitialize the map with the desired options
+            var address = `${addressVal} ${cityVal} ${stateVal}`;
             const { results, status } = await geocodeAddress(geocoder, address);
-
             if (status === "OK" && results.length > 0) {
                 const location = results[0].geometry.location;
                 const position = { lat: location.lat(), lng: location.lng() };
 
                 // The map, centered at the restaurant location
                 const mapElement = document.getElementById("map");
-                const map = new window.google.maps.Map(mapElement, {
+                map = new Map(mapElement, {
                     zoom: 12,
                     center: position,
 
@@ -79,7 +79,7 @@ const Directions = ({ restaurantId }) => {
         }
         // Any other map initialization code can be added here
     };
-    function geocodeAddress(geocoder, address) {
+    async function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
                 if (status === "OK") {
