@@ -170,8 +170,8 @@ const TestRestaurant = () => {
 
     return (
         <>
-            {loading ?
-                <div className='loading-icon'>
+            {/* {loading ? */}
+                {/* <div className='loading-icon'>
                     <div class="page-wrapper" size={200} >
                         <div class="loader">
                             <div class="jelly">
@@ -185,7 +185,7 @@ const TestRestaurant = () => {
                         </div>
                     </div>
                 </div>
-                :
+                : */}
                 <section>
                     <div className='restaurant-item-images-container'>
 
@@ -245,7 +245,7 @@ const TestRestaurant = () => {
                         </div>
                     </div>
                 </section>
-            }
+            {/* } */}
         </>
 
     )
