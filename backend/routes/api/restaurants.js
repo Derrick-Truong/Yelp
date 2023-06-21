@@ -484,7 +484,7 @@ router.post('/upload', requireAuth, upload.fields([
             description
         });
 
-
+        res.json(success)
             const images = [image1, image2, image3, image4, image5, image6];
         if(images && images.length > 0){
             for (let i = 0; i < images.length; i++) {
@@ -518,7 +518,7 @@ router.post('/upload', requireAuth, upload.fields([
 
 
         }
-    return res.json(success)
+    // return res.json(success)
 
     } catch (error) {
         console.error('Error occurred:', error);
