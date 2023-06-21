@@ -229,7 +229,7 @@ const TestRestaurant = () => {
                     </div>
 
                     <div id="map-container">
-                    {currentUser.id === restaurant.userId ? <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span> : <></>}
+                    {/* {currentUser.id === restaurant.userId ? <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span> : <></>} */}
                         <div style={{ width: '50%', height: '50%' }}>
                             <section className='directions-reset-container'>
                             <div className='location-title'>Location</div>
