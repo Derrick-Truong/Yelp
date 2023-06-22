@@ -14,7 +14,6 @@ import './UpdateReview.css'
 
 
 const UpdateReview = ({review, restaurantId}) => {
-    const {restaurantId} = useParams()
     const reviewId = review?.id
     const dispatch = useDispatch()
     const [description, setDescription] = useState(review.description);
