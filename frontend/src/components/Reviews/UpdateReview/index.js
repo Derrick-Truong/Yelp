@@ -17,18 +17,18 @@ const UpdateReview = ({review}) => {
     const {restaurantId} = useParams()
     const reviewId = review?.id
     const dispatch = useDispatch()
-    const [description, setDescription] = useState('');
-    const [rating, setRating] = useState('');
+    const [description, setDescription] = useState(review.description);
+    const [rating, setRating] = useState(review.rating);
     const [url, setUrl] = useState('')
     const [errors, setErrors] = useState([])
     const { closeModal } = useModal();
 
-useEffect(() => {
-   setDescription(review?.description)
-   setRating(review?.rating)
-   setUrl(review?.previewImage)
+// useEffect(() => {
+//    setDescription(review?.description)
+//    setRating(review?.rating)
+//    setUrl(review?.previewImage)
 
-},[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description)])
+// },[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description)])
 
 
     const valid = () => {
