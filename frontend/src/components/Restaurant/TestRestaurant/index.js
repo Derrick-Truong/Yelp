@@ -120,6 +120,8 @@ const TestRestaurant = () => {
             });
         });
     }
+    var mapElement = document.getElementById("map");
+
     async function initMap() {
         if (mapInitialized) {
             return; // Map already initialized, exit the function
@@ -133,7 +135,6 @@ const TestRestaurant = () => {
                 const position = { lat: location.lat(), lng: location.lng() };
 
                 // The map, centered at the restaurant location
-                const mapElement = document.getElementById("map");
                 map = new window.google.maps.Map(mapElement, {
                     zoom: 12,
                     center: position,
