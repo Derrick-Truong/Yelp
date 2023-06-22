@@ -58,7 +58,49 @@ const TestRestaurant = () => {
     var starRating = Number(avgRating)?.toFixed(1)
     var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
+    const [showDirections, setShowDirections] = useState(false);
 
+
+    const handleDirectionsClick = async() => {
+        setShowDirections(true);
+        navigator.geolocation.getCurrentPosition(routeSuccess, locationError);
+    };
+
+
+    function routeSuccess(position) {
+        const directionsService = new window.google.maps.DirectionsService();
+        const directionsDisplay = new window.google.maps.DirectionsRenderer();
+        const trafficLayer = new window.google.maps.TrafficLayer();
+        const myLocation = new window.google.maps.LatLng(
+            position.coords.latitude,
+            position.coords.longitude
+        );
+
+        const mapElement = document.getElementById("map");
+        const routeOptions = {
+            zoom: 12,
+            center: position,
+        };
+        const map = new window.google.maps.Map(mapElement, routeOptions);
+        directionsDisplay.setMap(map);
+        trafficLayer.setMap(map);
+        map.setCenter(myLocation);
+
+        const routeRequest = {
+            origin: myLocation,
+            destination: address,
+            travelMode: 'DRIVING',
+        };
+        directionsService.route(routeRequest, function (result, status) {
+            if (status === window.google.maps.DirectionsStatus.OK)
+                directionsDisplay.setDirections(result);
+        });
+    }
+
+
+    function locationError() {
+        alert("Couldn't get location");
+    }
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -189,8 +231,7 @@ const TestRestaurant = () => {
                         </div>
                         <div>
                 <section className="directions-buttons-container">
-               <Routes restaurantId={restaurant?.id}/>
-                <button className="reset-button">Reset</button>
+                <button onClick={handleDirectionsClick}>Directions</button>
             </section>
                         </div>
                         <Directions restaurantId={restaurant?.id} />
