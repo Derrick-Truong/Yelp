@@ -68,7 +68,7 @@ const TestRestaurant = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
@@ -145,7 +145,7 @@ const TestRestaurant = () => {
                                 const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                 return (
-                                    image && <img key={image.id} className="restaurant-item-restaurant-photos" src={url} alt='image' />
+                                    image && <img key={image} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                 )
                             })}
                             <div className='restaurant-item-info-container'>

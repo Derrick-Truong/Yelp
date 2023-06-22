@@ -195,7 +195,7 @@ const Directions = ({ restaurantId }) => {
                 </ul>
             </section>
             <section className="restaurant-reviews-border">
-                {reviews.length > 0 ? <div className="restaurant-reviews-title">Reviews</div> : <div className="restaurant-reviews-title">No reviews yet</div>}
+                {reviews?.length > 0 ? <div className="restaurant-reviews-title">Reviews</div> : <div className="restaurant-reviews-title">No reviews yet</div>}
                 <div className="restaurant-create-review">
                     {currentUser && currentUser?.id !== restaurant?.userId ? <OpenModalButton buttonText="Write A Review" modalComponent={<CreateReview restaurantId={restaurant?.id} />} /> : <></>}
                 </div>
