@@ -322,6 +322,10 @@
     padding-bottom: 10px;
 }
 
+.directions-buttons-container {
+    padding-bottom: 20px;
+}
+
 #map-container {
     box-sizing: border-box;
     width: calc(100% / 2 * 2);

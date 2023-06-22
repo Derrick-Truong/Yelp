@@ -41,7 +41,6 @@ const Directions = ({ restaurantId }) => {
     const month = today.getMonth()+ 1;
     const year = today.getFullYear();
     const date = today.getDate();
-    // console.log('current date', current_date)
     const hours = addZero(today.getHours());
     const minutes = addZero(today.getMinutes());
     const seconds = addZero(today.getSeconds());
@@ -105,7 +104,7 @@ const Directions = ({ restaurantId }) => {
         const mapElement = document.getElementById("map");
         const routeOptions = {
             zoom: 12,
-            center: { lat: 37.8272, lng: 122.2913 },
+            center: position,
         };
         const map = new window.google.maps.Map(mapElement, routeOptions);
         directionsDisplay.setMap(map);
@@ -131,12 +130,11 @@ const Directions = ({ restaurantId }) => {
     // }, [JSON.stringify(current_time), JSON.stringify(today), JSON.stringify(currentDay), JSON.stringify(startDate), JSON.stringify(endDate)])
     return (
         <>
-            <div>
-            </div>
-            <section className="directions-buttons-container">
+
+            {/* <section className="directions-buttons-container">
                 <button className="directions-button" onClick={handleDirectionsClick}>Directions</button>
                 <button className="reset-button" onClick={handleReset}>Reset</button>
-            </section>
+            </section> */}
             <section className="restaurant-hours-border">
                 <div className="restaurant-hours-title">Hours</div>
                 <ul className="restaurant-hours">

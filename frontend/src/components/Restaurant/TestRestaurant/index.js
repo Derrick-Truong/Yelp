@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import OpenModalButton from '../../../OpenModalButton';
 import { getReviews } from '../../../store/review';
 import DeleteRestaurant from '../DeleteRestaurant';
+import Routes from "./Routes";
 import { useParams } from 'react-router-dom';
 import { restaurantDetails } from '../../../store/restaurants';
 import DeleteReview from '../../Reviews/DeleteReview';
@@ -57,6 +58,7 @@ const TestRestaurant = () => {
     var starRating = Number(avgRating)?.toFixed(1)
     var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
+
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -72,9 +74,7 @@ const TestRestaurant = () => {
         //     setLoading(false);
         // }, 5000);
 
-    }, [dispatch, JSON.stringify(address), JSON.stringify(restaurant), JSON.stringify(restaurantImages), JSON.stringify(reviews)]);
-
-
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
@@ -117,13 +117,9 @@ const TestRestaurant = () => {
         }
     }
     initMap()
-
-
-
-
     return (
         <>
-                {/* <div className='loading-icon'>
+            {/* <div className='loading-icon'>
                     <div class="page-wrapper" size={200} >
                         <div class="loader">
                             <div class="jelly">
@@ -138,13 +134,13 @@ const TestRestaurant = () => {
                     </div>
                 </div>
                 : */}
-                <section>
-                    <div className='restaurant-item-images-container'>
+            <section>
+                <div className='restaurant-item-images-container'>
 
-                        <div className='restaurant-item-images-container-slider'>
+                    <div className='restaurant-item-images-container-slider'>
 
-                            <div className='restaurant-item-images-container-slider-track'>
-                                {/* {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                        <div className='restaurant-item-images-container-slider-track'>
+                            {/* {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                     return (
@@ -157,51 +153,56 @@ const TestRestaurant = () => {
                                 return (
                                     image && <img key={image.id} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                 )
-                            }) }
-                                <div className='restaurant-item-info-container'>
-                                    <div className='restaurant-info-inner-container'>
-                                        <h1>{restaurant?.title}</h1>
-                                        {currentUser && (currentUser?.id === restaurant?.userId) ?
-                                            <span>
-                                                <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
-                                                <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
-                                            : <></>}
-                                        <h3></h3>
-                                        <div className='restaurant-avgRating'>
-                                            <h2>
-                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : (2 > avgRating && avgRating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
-                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
-                                                <span className='restaurant-star-rating'><span> {starRating > 0 ? starRating:'No reviews yet'}</span>
-                                                    <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
-                                                    <div className='rest-address'>{restaurant?.address}</div>
-                                                    <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
-                                                </span>
-                                            </h2>
+                            })}
+                            <div className='restaurant-item-info-container'>
+                                <div className='restaurant-info-inner-container'>
+                                    <h1>{restaurant?.title}</h1>
+                                    {currentUser && (currentUser?.id === restaurant?.userId) ?
+                                        <span>
+                                            <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
+                                            <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
+                                        : <></>}
+                                    <h3></h3>
+                                    <div className='restaurant-avgRating'>
+                                        <h2>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : (2 > avgRating && avgRating >= 1) ? { color: '#d11b0a' } : { color: '#fff' }} className="fa-solid fa-ice-cream" ></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : (3 > avgRating && avgRating >= 2) ? { color: '#f19812' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : (4 > avgRating && avgRating >= 3) ? { color: '#f1ed12' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : (5 > avgRating && avgRating >= 4) ? { color: '#6aff07' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <i style={(avgRating >= 5) ? { color: '#43a700' } : { color: '#fff' }} className="fa-solid fa-ice-cream"></i>
+                                            <span className='restaurant-star-rating'><span> {starRating > 0 ? starRating : 'No reviews yet'}</span>
+                                                <span>{reviews?.length === 1 ? <span><span> ({reviews.length} </span><span>Review)</span></span> : reviews?.length > 1 ? <span><span> ({reviews.length} </span><span>Reviews)</span></span> : <></>}</span>
+                                                <div className='rest-address'>{restaurant?.address}</div>
+                                                <div className='rest-city'>{restaurant?.city}, {restaurant?.state}</div>
+                                            </span>
+                                        </h2>
 
 
-                                        </div>
                                     </div>
-
                                 </div>
+
                             </div>
-
                         </div>
-                    </div>
 
-                    <div id="map-container">
-                        <div style={{ width: '50%', height: '50%' }}>
-                            <section className='directions-reset-container'>
+                    </div>
+                </div>
+                <div id="map-container">
+                    <div style={{ width: '50%', height: '50%' }}>
+                        <section className='directions-reset-container'>
                             <div className='location-title'>Location</div>
-                            </section>
-                            <div id="map">
-                            </div>
-                                {/* <Directions restaurantId={restaurantId} /> */}
+                        </section>
+                        <div id="map">
                         </div>
+                        <div>
+                <section className="directions-buttons-container">
+               <Routes restaurantId={restaurant?.id}/>
+                <button className="reset-button">Reset</button>
+            </section>
+                        </div>
+                        <Directions restaurantId={restaurant?.id} />
                     </div>
-                </section>
+                </div>
+            </section>
 
         </>
 

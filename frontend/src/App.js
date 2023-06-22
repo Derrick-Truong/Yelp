@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import CreateReview from "./components/Reviews/CreateReview";
 import Test1 from "./components/Aws/Test1";
 import TestRestaurant from "./components/Restaurant/TestRestaurant";
+import Routes from "./components/Restaurant/TestRestaurant/Routes";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,15 +26,12 @@ function App() {
         <Route exact path="/">
           <AllRestaurants/>
         </Route>
-        <Route exact path="/Test1">
-          <Test1/>
-        </Route>
           <Route exact path="/restaurants/:restaurantId">
             <TestRestaurant/>
           </Route>
-        <Route exact path='/createreview'>
-          <CreateReview/>
-        </Route>
+          <Route exact path="/restaurants/routes/:restaurantId">
+            <Routes />
+          </Route>
       </Switch>
     )
    }
