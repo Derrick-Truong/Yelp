@@ -3,6 +3,7 @@ import { useModal } from "../../../Context/Modal"
 import { createOneReview } from "../../../store/review"
 import { useState } from "react"
 import { updateOneReviewNoPic } from "../../../store/review"
+import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { restaurantDetails } from "../../../store/restaurants"
@@ -13,6 +14,7 @@ import './UpdateReview.css'
 
 
 const UpdateReview = ({review}) => {
+    const {restaurantId} = useParams()
     const reviewId = review?.id
     const dispatch = useDispatch()
     const [description, setDescription] = useState('');
@@ -74,7 +76,7 @@ const handleCancel = (e) => {
 
 
         await dispatch(updateOneReviewNoPic(review, reviewId)).
-        then(dispatch(restaurantDetails(review.restaurantId))).
+        then(dispatch(getReviews(restaurantId))).
         then(closeModal)
 
 
