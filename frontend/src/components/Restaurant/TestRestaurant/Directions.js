@@ -203,7 +203,7 @@ const Directions = ({ restaurantId }) => {
                     const avgRating = review?.rating
                     return (
                         <>
-                            <div className="reviews-card-container">
+                            <div key={review.id} className="reviews-card-container">
                                 {currentUser && (currentUser.id === review?.userId) ? <span><div className="delete-review-button-container"><OpenModalButton buttonText="Delete" modalComponent={<DeleteReview reviewId={review?.id} />} /></div><div className="update-review-button-container"><OpenModalButton buttonText="Update" modalComponent={<UpdateReview review={review} />} /></div></span>:<></>}
                                 <div className="reviews-box">
                                     <div className="reviews-card-top">
