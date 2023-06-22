@@ -213,7 +213,7 @@ const Directions = ({ restaurantId }) => {
                                             </div>
                                             <div className="user-name">
                                                 <div className="user-name-inner">
-                                                    {review?.User?.firstName}
+                                                    {review?.userName}
                                                 </div>
                                             </div>
                                         </div>

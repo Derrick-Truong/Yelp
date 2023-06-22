@@ -528,7 +528,7 @@ router.post('/upload', requireAuth, upload.fields([
 
 
         }
-  
+
         return res.json(success)
     } catch (error) {
         console.error('Error occurred:', error);
@@ -760,6 +760,10 @@ router.get('/:id/reviews', async(req, res, next) => {
     })
 
     Reviews.forEach(review => {
+    review.firstName = review.User.firstName
+    review.lastName = review.User.lastName
+    review.userName = review.User.username
+    delete review.User
         if(review.ReviewImage){
         review.previewImage = review.ReviewImage.url
         delete review.ReviewImage
