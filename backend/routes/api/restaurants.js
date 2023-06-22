@@ -467,8 +467,8 @@ router.post('/upload', requireAuth, upload.fields([
 ]), async (req, res) => {
     let s3 = new S3Client({
         credentials: {
-            secretAccessKey: process.env.SECRET_KEY,
-            accessKeyId: process.env.ACCESS_KEY
+            secretAccessKey: 'Pjhv0p4PW0QaSh5gCXar3LFNBqIrIJ8tDsSxb3oi',
+            accessKeyId: 'AKIAWYAF37VP2BOHSUFW'
         },
         region: 'us-west-1'
     })
@@ -614,8 +614,8 @@ router.put('/:id', requireAuth, upload.fields([
 ]), async (req, res) => {
     let s3 = new S3Client({
         credentials: {
-            secretAccessKey: process.env.SECRET_KEY,
-            accessKeyId: process.env.ACCESS_KEY
+            secretAccessKey: 'Pjhv0p4PW0QaSh5gCXar3LFNBqIrIJ8tDsSxb3oi',
+            accessKeyId: 'AKIAWYAF37VP2BOHSUFW'
         },
         region: 'us-west-1'
     })
