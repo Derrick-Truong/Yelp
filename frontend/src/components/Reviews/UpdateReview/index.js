@@ -13,7 +13,7 @@ import './UpdateReview.css'
 
 
 
-const UpdateReview = ({review}) => {
+const UpdateReview = ({review, restaurantId}) => {
     const {restaurantId} = useParams()
     const reviewId = review?.id
     const dispatch = useDispatch()
@@ -76,7 +76,7 @@ const handleCancel = (e) => {
 
 
         await dispatch(updateOneReviewNoPic(review, reviewId))
-        await dispatch(restaurantDetails(restaurantId)).then(closeModal)
+        await dispatch(getReviews(restaurantId)).then(closeModal)
 
 
 
