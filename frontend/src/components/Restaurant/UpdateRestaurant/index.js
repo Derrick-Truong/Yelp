@@ -142,7 +142,6 @@ const UpdateRestaurant = ({restaurant}) => {
 
 
         await dispatch(updateOneRestaurant(form, restaurantId))
-        await dispatch(restaurantDetails(restaurantId))
             .then(closeModal)
             .catch((error) => {
                 // Handle the error here

@@ -161,7 +161,7 @@ const TestRestaurant = () => {
         if (mapElement) {
             initMap();
         }
-    }, [dispatch, mapElement, restaurantId]);
+    }, [dispatch, mapElement, restaurantId, reviews]);
     return (
         <>
             {/* <div className='loading-icon'>
