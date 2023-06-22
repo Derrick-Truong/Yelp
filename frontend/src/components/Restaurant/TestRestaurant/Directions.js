@@ -21,7 +21,7 @@ const Directions = ({ restaurantId }) => {
     const currentUser = useSelector(state => state.session.user)
     const [showDirections, setShowDirections] = useState(false);
 
-    let map;
+
     const handleDirectionsClick = () => {
         setShowDirections(true);
         navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
@@ -41,11 +41,47 @@ const Directions = ({ restaurantId }) => {
     const month = today.getMonth()+ 1;
     const year = today.getFullYear();
     const date = today.getDate();
+    // console.log('current date', current_date)
     const hours = addZero(today.getHours());
     const minutes = addZero(today.getMinutes());
     const seconds = addZero(today.getSeconds());
+    console.log('Current day', currentDay)
+    const handleReset = async() => {
+        setShowDirections(false); // Set show directions to false
+        // Clear the map container
+        var geocoder = new window.google.maps.Geocoder();
+        // You may need to reinitialize the map with the desired options
+        var address = `${addressVal} ${cityVal} ${stateVal}`;
+        try {
 
-async function geocodeAddress(geocoder, address) {
+            const { results, status } = await geocodeAddress(geocoder, address);
+
+            if (status === "OK" && results.length > 0) {
+                const location = results[0].geometry.location;
+                const position = { lat: location.lat(), lng: location.lng() };
+
+                // The map, centered at the restaurant location
+                const mapElement = document.getElementById("map");
+                const map = new window.google.maps.Map(mapElement, {
+                    zoom: 12,
+                    center: position,
+
+                });
+
+                // The marker, positioned at the restaurant location
+                const marker = new window.google.maps.Marker({
+                    map: map,
+                    position: position,
+                    title: "Restaurant",
+                });
+            }
+
+        } catch (error) {
+            console.log("An error occurred during geocoding:", error);
+        }
+        // Any other map initialization code can be added here
+    };
+    function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
                 if (status === "OK") {
@@ -56,42 +92,6 @@ async function geocodeAddress(geocoder, address) {
             });
         });
     }
-    const handleReset = async() => {
-        setShowDirections(false); // Set show directions to false
-        // Clear the map container
-
-        try {
-            const { Map } = await window.google.maps.importLibrary("maps");
-            var geocoder = new window.google.maps.Geocoder();
-            // You may need to reinitialize the map with the desired options
-            var address = `${addressVal} ${cityVal} ${stateVal}`;
-            const { results, status } = await geocodeAddress(geocoder, address);
-            if (status === "OK" && results.length > 0) {
-                const location = results[0].geometry.location;
-                var position = { lat: location.lat(), lng: location.lng() };
-
-                // The map, centered at the restaurant location
-                const mapElement = document.getElementById("map");
-                map = new Map(mapElement, {
-                    zoom: 12,
-                    center: position,
-
-                });
-
-                // The marker, positioned at the restaurant location
-                const marker = new window.google.maps.Marker({
-                    map: map,
-                    position: position,
-                    optimized: false
-                });
-            }
-
-        } catch (error) {
-            console.log("An error occurred during geocoding:", error);
-        }
-        // Any other map initialization code can be added here
-    };
-
 
     function routeSuccess(position) {
         const directionsService = new window.google.maps.DirectionsService();

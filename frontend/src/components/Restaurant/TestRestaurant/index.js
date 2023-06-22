@@ -53,9 +53,9 @@ const TestRestaurant = () => {
     const addressVal = restaurant?.address
     const cityVal = restaurant?.city
     const stateVal = restaurant?.state
+    const restaurantImages = restaurant?.RestaurantImages
     var starRating = Number(avgRating)?.toFixed(1)
     var geocoder = new window.google.maps.Geocoder();
-    // var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
     const openMenu = () => {
         if (showMenu) return;
@@ -72,21 +72,10 @@ const TestRestaurant = () => {
         //     setLoading(false);
         // }, 5000);
 
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, JSON.stringify(address), JSON.stringify(restaurant), JSON.stringify(restaurantImages), JSON.stringify(reviews)]);
 
 
-    // async function directions(){
-    //     try{
-    //     if (navigator.geolocation) {
-    //        navigator.geolocation.getCurrentPosition(routeSuccess, routeError);
-    //     }
-    // }
-    // catch(error){
-    //        console.log("Geolocation not supported", error);
-    //     }
-    // }
-
-    async function geocodeAddress(geocoder, address) {
+    function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
                 if (status === "OK") {
@@ -99,6 +88,7 @@ const TestRestaurant = () => {
     }
     async function initMap() {
         try {
+            // var geocoder = new window.google.maps.Geocoder();
             const { results, status } = await geocodeAddress(geocoder, address);
 
             if (status === "OK" && results.length > 0) {
@@ -127,59 +117,7 @@ const TestRestaurant = () => {
         }
     }
     initMap()
-    // function routeSuccess(position) {
-    //     var directionsService = new window.google.maps.DirectionsService();
-    //     var directionsDisplay = new window.google.maps.DirectionsRenderer();
-    //     var trafficLayer = new window.google.maps.TrafficLayer()
-    //     var myLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-    //     const iceCreamShop = `${addressVal} ${cityVal} ${stateVal}`;
-    //     const mapElement = document.getElementById("map2");
-    //     const routeOptions = {
-    //         zoom: 12,
-    //         center: { lat: 37.8272, lng: 122.2913 },
 
-    //     }
-    //     const map = new window.google.maps.Map(mapElement, routeOptions);
-    //     directionsDisplay.setMap(map);
-    //     trafficLayer.setMap(map)
-
-    //     map.setCenter(myLocation);
-
-    //     var routeRequest = {
-    //         origin: myLocation,
-    //         destination: iceCreamShop,
-    //         travelMode: 'DRIVING'
-    //     }
-    //     directionsService.route(routeRequest, function (result, status) {
-    //         if (status == window.google.maps.DirectionsStatus.OK)
-    //             directionsDisplay.setDirections(result)
-    //     })
-
-    // }
-    // function routeError() {
-    //     alert("Couldn't get location");
-    // }
-
-    // async function allArguments() {
-    //     await initMap();
-
-    // }
-    // if (!restaurant) {
-    //     return <div className='loading-icon'>
-    //         <div class="page-wrapper" size={200}>
-    //             <div class="loader">
-    //                 <div class="jelly">
-    //                     <div class="body"></div>
-    //                     <div class="stick"></div>
-    //                     <div class="eye"></div>
-    //                     <div class="eye"></div>
-    //                     <div class="mouth"></div>
-    //                 </div>
-    //                 <div class="shadow"></div>
-    //             </div>
-    //         </div>
-    //     </div>;
-    // }
 
 
 
@@ -206,14 +144,20 @@ const TestRestaurant = () => {
                         <div className='restaurant-item-images-container-slider'>
 
                             <div className='restaurant-item-images-container-slider-track'>
-                                {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                                {/* {restaurant?.RestaurantImages?.length > 0 ? restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                     const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
                                     return (
                                         image && <img key={image.id} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                     )
-                                }) : <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" alt="image" className="restaurant-item-restaurant-photos"/>}
+                                }) : <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" alt="image" className="restaurant-item-restaurant-photos"/>} */}
+                            {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
+                                const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
 
+                                return (
+                                    image && <img key={image.id} className="restaurant-item-restaurant-photos" src={url} alt='image' />
+                                )
+                            }) }
                                 <div className='restaurant-item-info-container'>
                                     <div className='restaurant-info-inner-container'>
                                         <h1>{restaurant?.title}</h1>
@@ -249,12 +193,12 @@ const TestRestaurant = () => {
 
                     <div id="map-container">
                         <div style={{ width: '50%', height: '50%' }}>
-                            {/* <section className='directions-reset-container'>
+                            <section className='directions-reset-container'>
                             <div className='location-title'>Location</div>
-                            </section> */}
+                            </section>
                             <div id="map">
                             </div>
-                                <Directions restaurantId={restaurantId} />
+                                {/* <Directions restaurantId={restaurantId} /> */}
                         </div>
                     </div>
                 </section>
