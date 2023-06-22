@@ -137,7 +137,7 @@ const Test1 = () => {
         // formData.append('newlisting', newListing)
 
         const newSpot = await dispatch(createNewRestaurant(form))
-        await history.push(`/restaurant/${newSpot?.id}`).then(closeModal)
+        history.push(`/restaurant/${newSpot?.id}`).then(closeModal)
 
         // if (newSpot.id) {
         //     await closeModal()
