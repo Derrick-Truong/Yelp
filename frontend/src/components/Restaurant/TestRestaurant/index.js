@@ -62,7 +62,7 @@ const TestRestaurant = () => {
     let mapInitialized = false;
 
 
-    const handleDirectionsClick = async() => {
+    const handleDirectionsClick = () => {
         setShowDirections(true);
         navigator.geolocation.getCurrentPosition(routeSuccess, locationError);
     };
@@ -108,10 +108,7 @@ const TestRestaurant = () => {
     };
     var map;
     var marker;
-    useEffect(() => {
-        dispatch(restaurantDetails(restaurantId));
-        dispatch(getReviews(restaurantId));
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
@@ -160,7 +157,10 @@ const TestRestaurant = () => {
     if (mapElement) {
         initMap();
     }
-
+    useEffect(() => {
+        dispatch(restaurantDetails(restaurantId));
+        dispatch(getReviews(restaurantId));
+    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
     return (
         <>
             {/* <div className='loading-icon'>
@@ -193,9 +193,8 @@ const TestRestaurant = () => {
                                 }) : <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" alt="image" className="restaurant-item-restaurant-photos"/>} */}
                             {restaurant?.RestaurantImages?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(image => {
                                 const url = 'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + image?.url
-
                                 return (
-                                    image && <img key={image} className="restaurant-item-restaurant-photos" src={url} alt='image' />
+                                    image && <img key={image.url} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                 )
                             })}
                             <div className='restaurant-item-info-container'>
