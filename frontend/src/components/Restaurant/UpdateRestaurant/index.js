@@ -142,8 +142,7 @@ const UpdateRestaurant = ({restaurant}) => {
 
 
         await dispatch(updateOneRestaurant(form, restaurantId))
-        .then(dispatch(restaurantDetails(restaurantId)))
-        .then(closeModal)
+        await (dispatch(restaurantDetails(restaurantId))).then(closeModal)
     }
     return (
         <section className="create-restaurant-page">
