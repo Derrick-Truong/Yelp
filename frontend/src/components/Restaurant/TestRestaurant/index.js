@@ -56,7 +56,6 @@ const TestRestaurant = () => {
     const stateVal = restaurant?.state
     const restaurantImages = restaurant?.RestaurantImages
     var starRating = Number(avgRating)?.toFixed(1)
-    var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
     const [showDirections, setShowDirections] = useState(false);
     let mapInitialized = false;
@@ -108,6 +107,7 @@ const TestRestaurant = () => {
     };
     var map;
     var marker;
+    var geocoder;
 
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
@@ -125,7 +125,7 @@ const TestRestaurant = () => {
             return; // Map already initialized, exit the function
         }
         try {
-            // var geocoder = new window.google.maps.Geocoder();
+            var geocoder = new window.google.maps.Geocoder();
             const { results, status } = await geocodeAddress(geocoder, address);
 
             if (status === "OK" && results.length > 0) {
@@ -153,14 +153,14 @@ const TestRestaurant = () => {
             console.log("An error occurred during geocoding:", error);
         }
     }
-    const mapElement = document.getElementById("map");
-    if (mapElement) {
-        initMap();
-    }
+
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+        if (mapElement) {
+            initMap();
+        }
+    }, [dispatch, mapElement, JSON.stringify(restaurant), JSON.stringify(reviews)]);
     return (
         <>
             {/* <div className='loading-icon'>
