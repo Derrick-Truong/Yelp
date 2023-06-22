@@ -66,14 +66,8 @@ const TestRestaurant = () => {
     var map;
     var marker;
     useEffect(() => {
-        // setLoading(true);
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-        // setLoading(true);
-        // setTimeout(() => {
-        //     setLoading(false);
-        // }, 5000);
-
     }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
