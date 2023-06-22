@@ -138,8 +138,9 @@ const Test1 = () => {
 
         const newSpot = await dispatch(createNewRestaurant(form))
 
-        await history.push(`/restaurant/${newSpot?.id}`).then(closeModal)
-
+        if(newSpot){
+        history.push(`/restaurant/${newSpot?.id}`).then(closeModal)
+        }
         // if (newSpot.id) {
         //     await closeModal()
         //     await history.push(`/restaurants/${newSpot?.id}`)
@@ -249,6 +250,8 @@ const Test1 = () => {
                 <input className="upload" onChange={handleFile5Change} name='image5' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile6Change} name='image6' accept="image/*" type="file" />
                 <button type="submit" className="create-restaurant-button">Create</button>
+                <div className="create-button-bottom">Will be routed to your ice cream page upon creation</div>
+                <br></br>
             </form>
         </section>
     )
