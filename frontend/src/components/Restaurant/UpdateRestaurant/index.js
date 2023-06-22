@@ -142,15 +142,7 @@ const UpdateRestaurant = ({restaurant}) => {
 
 
         await dispatch(updateOneRestaurant(form, restaurantId))
-            .then(closeModal)
-            .catch((error) => {
-                // Handle the error here
-                console.error(error);
-            });
-
-        // console.log('Front end data part 2', form)
-
-
+        await dispatch(restaurantDetails(restaurantId))
     }
     return (
         <section className="create-restaurant-page">
