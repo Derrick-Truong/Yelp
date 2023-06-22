@@ -136,9 +136,9 @@ const Test1 = () => {
         // }
         // formData.append('newlisting', newListing)
 
-        await dispatch(createNewRestaurant(form))
+        const newSpot = await dispatch(createNewRestaurant(form))
         closeModal()
-        history.push('/')
+        history.push(`/restaurant/${newSpot.id}`)
         // if (newSpot.id) {
         //     await closeModal()
         //     await history.push(`/restaurants/${newSpot?.id}`)
