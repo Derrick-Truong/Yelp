@@ -59,6 +59,7 @@ const TestRestaurant = () => {
     var geocoder = new window.google.maps.Geocoder();
     var address = `${addressVal} ${cityVal} ${stateVal}`;
     const [showDirections, setShowDirections] = useState(false);
+    let mapInitialized = false;
 
 
     const handleDirectionsClick = async() => {
@@ -123,6 +124,9 @@ const TestRestaurant = () => {
         });
     }
     async function initMap() {
+        if (mapInitialized) {
+            return; // Map already initialized, exit the function
+        }
         try {
             // var geocoder = new window.google.maps.Geocoder();
             const { results, status } = await geocodeAddress(geocoder, address);
@@ -152,7 +156,11 @@ const TestRestaurant = () => {
             console.log("An error occurred during geocoding:", error);
         }
     }
-    initMap()
+    const mapElement = document.getElementById("map");
+    if (mapElement) {
+        initMap();
+    }
+
     return (
         <>
             {/* <div className='loading-icon'>

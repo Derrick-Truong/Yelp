@@ -473,9 +473,6 @@ router.post('/upload', requireAuth, upload.fields([
         region: 'us-west-1'
     })
     try {
-        // if (!req.files) {
-        //     return res.status(400).json({ error: 'No files were uploaded' });
-        // }
 
         const { image1, image2, image3, image4, image5, image6 } = req.files;
         const { address, description, price, title, city, state, country } = req.body;
@@ -502,13 +499,6 @@ router.post('/upload', requireAuth, upload.fields([
                         restaurantId: success.id,
                         url: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
                     })
-
-                    // const params = {
-                    //     Bucket: process.env.BUCKET,
-                    //     Key: success.userId.toString() + req.user.username + success.id.toString() + file.originalname,
-                    //     Body: fileBuffer,
-                    //     ContentType: file.mimetype
-                    // };
                     const params = {
                         Bucket: 'icecreamfinder',
                         Key: newPic.url,
@@ -538,8 +528,7 @@ router.post('/upload', requireAuth, upload.fields([
 
 
         }
-    // return res.json(success)
-        // res.json(success)
+  
         return res.json(success)
     } catch (error) {
         console.error('Error occurred:', error);
@@ -685,7 +674,7 @@ router.put('/:id', requireAuth, upload.fields([
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
                     console.log('Successfully loaded images');
-                 
+
                 }
 
 
