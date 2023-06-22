@@ -68,7 +68,7 @@ const TestRestaurant = () => {
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
-    }, [dispatch, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, JSON.stringify(restaurantId), JSON.stringify(restaurant), JSON.stringify(reviews)]);
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
