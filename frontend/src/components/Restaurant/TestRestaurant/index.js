@@ -161,7 +161,7 @@ const TestRestaurant = () => {
         if (mapElement) {
             initMap();
         }
-    }, [dispatch, mapElement, JSON.stringify(restaurant), JSON.stringify(reviews)]);
+    }, [dispatch, mapElement, restaurantId]);
     return (
         <>
             {/* <div className='loading-icon'>
