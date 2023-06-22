@@ -60,10 +60,9 @@ const CreateReview = ({ restaurantId }) => {
             url: url || 'https://as1.ftcdn.net/v2/jpg/04/66/51/96/1000_F_466519636_dq4qvu88Lbn9BUF1Pgz9KZp5JnIdEzDX.jpg'
         }
 
-        await dispatch(createOneReviewNoPic(review, restaurantId)).then(closeModal)
-
-        
-
+        await dispatch(createOneReviewNoPic(review, restaurantId))
+        await dispatch(getReviews(restaurantId)).then(closeModal)
+      
         // dispatch(getReviews(restaurantId))
 
     }
