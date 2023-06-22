@@ -73,7 +73,9 @@ const handleCancel = (e) => {
         // }
 
 
-        await dispatch(updateOneReviewNoPic(review, reviewId)).then(closeModal)
+        await dispatch(updateOneReviewNoPic(review, reviewId)).
+        then(dispatch(restaurantDetails(review.restaurantId))).
+        then(closeModal)
 
 
 
