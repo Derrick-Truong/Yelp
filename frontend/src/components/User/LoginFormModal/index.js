@@ -30,7 +30,7 @@ function LoginFormModal() {
             .then(closeModal)
         } catch (res) {
             if (res.status === 401) {
-                setErrors(["User not found. Please check your credentials."]);
+                setErrors(["Incorrect log-in information"]);
             } else {
                 const data = res?.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -74,7 +74,7 @@ function LoginFormModal() {
                     width="200"
                     height="160"
                 />
-                <h5 className='log-in-form-title'>Enter Credentials And Password</h5>
+                <h3 className='log-in-form-title'>Log in to IceCreamFinder</h3>
                 <form className="form-log-in">
                     {errors.length > 0 && (
                         <ul className="error-messages">
@@ -87,7 +87,7 @@ function LoginFormModal() {
                     <label>
                         <input className="credential-and-password-form"
                             type="text"
-                            placeholder="credentials"
+                            placeholder="email or username"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
                             required
@@ -104,8 +104,9 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-                        <h2></h2>
+                    <div className="login-log-in-button-container">
                     <button className='login-log-in-button' onClick={handleSubmit} type="submit">Log In</button>
+                        </div>
                     <div className="signup-link-in-login-form">
                         Don't have an account yet?
                         <br></br>

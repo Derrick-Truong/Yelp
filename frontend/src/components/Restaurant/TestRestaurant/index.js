@@ -202,7 +202,7 @@ const TestRestaurant = () => {
                                 <div className='restaurant-info-inner-container'>
                                     <h1>{restaurant?.title}</h1>
                                     {currentUser && (currentUser?.id === restaurant?.userId) ?
-                                        <span>
+                                        <span className="delete-update-restaurant-container">
                                             <span><OpenModalButton buttonText='Update' modalComponent={<UpdateRestaurant restaurant={restaurant} />} /></span>
                                             <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteRestaurant restaurantId={restaurant?.id} />} /></span></span>
                                         : <></>}
@@ -239,7 +239,7 @@ const TestRestaurant = () => {
                         </div>
                         <div>
                 <section className="directions-buttons-container">
-                <button onClick={handleDirectionsClick}>Directions</button>
+                <button className="directions-button" onClick={handleDirectionsClick}>Directions</button>
             </section>
                         </div>
                         <Directions restaurantId={restaurant?.id} />
