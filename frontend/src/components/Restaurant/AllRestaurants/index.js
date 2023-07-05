@@ -22,7 +22,6 @@ const AllRestaurants = () => {
     const history = useHistory()
     const restaurants = useSelector(state => state?.restaurants)
     const restaurantsValues = Object?.values(restaurants)
-    console.log('Restaurants', restaurantsValues)
 
     useEffect(() => {
         dispatch(getRestaurants())
@@ -64,7 +63,7 @@ const AllRestaurants = () => {
                                     'https://icecreamfinder.s3.us-west-1.amazonaws.com/' + restaurant?.previewImage
                                 // const imageUrl = "https://yelp-capstone.s3.us-west-1.amazonaws.com/" + restaurant?.objects[0]?.key
                                 return (
-                                    <SwiperSlide className='pictures-slide' key={restaurant.id}>
+                                    <SwiperSlide className='pictures-slide' key={restaurant?.id}>
                                         <NavLink exact to={`/restaurants/${restaurant?.id}`}>
                                             <div className='home-page-restaurant-container'>
                                                 <span className='home-page-restaurant-card'>

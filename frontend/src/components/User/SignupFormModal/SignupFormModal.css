@@ -2,12 +2,10 @@
 margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-        background-color: #faf3f3;
+     background-color: #faf3f3;
     text-align: center;
     align-items: center;
     width: 450px;
-    height: 650px;
     background-image: url('https: //cdn.dribbble.com/users/7854/screenshots/15330807/media/bf124c1c799e852a4d260cf9fce92e7a.gif'); background-repeat:repeat
 }
 .sign-up-form-container button {
@@ -21,7 +19,23 @@ margin: auto;
     font-weight: bold;
 
 }
-
+.sign-up-form-container label button{
+    background-color: #faf3f3;
+        color: #FF69B4;
+        border: none;
+        padding: 12px 24px;
+        height: 44px;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        box-shadow: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+        width: 213px;
+}
 #myImage{
     position: fixed;
     top: 0;

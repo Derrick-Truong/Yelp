@@ -37,13 +37,13 @@ const urlencodedParser = bodyParser.urlencoded({
     parameterLimit: 50000
 });
 
-let s3 = new S3Client({
-    credentials: {
-        secretAccessKey: process.env.SECRET_KEY,
-        accessKeyId: process.env.ACCESS_KEY
-    },
-    region: 'us-west-1'
-})
+// let s3 = new S3Client({
+//     credentials: {
+//         secretAccessKey: process.env.SECRET_KEY,
+//         accessKeyId: process.env.ACCESS_KEY
+//     },
+//     region: 'us-west-1'
+// })
 const storage = multer.memoryStorage();
 // const storage = multer.memoryStorage()
 const upload = multer({ storage: storage,
@@ -275,6 +275,67 @@ router.get('/', async (req, res, next) => {
         next(error);
     }
 });
+
+router.get('/current', async (req, res, next) => {
+    try {
+        let restaurants = await Restaurant.findAll({
+            where:{
+                userId: req.user.id
+            },
+            include: [
+                {
+                    model: Review,
+                },
+                {
+                    model: RestaurantImage
+                }
+            ],
+        });
+
+        if (!restaurants) {
+            res.status(404);
+            return res.json({
+                message: "Restaurant couldn't be found",
+            });
+        }
+
+        let Restaurants = [];
+        restaurants.forEach(restaurant => {
+            Restaurants.push(restaurant.toJSON())
+        });
+
+        Restaurants.forEach(restaurant => {
+            let adder = 0;
+            let i = 0;
+
+            restaurant.Reviews.forEach(review => {
+                i++;
+                adder = adder + review.rating;
+            });
+
+            restaurant.avgRating = adder / i;
+
+            if (restaurant.RestaurantImages.length > 0) {
+                const mostRecentImage = restaurant.RestaurantImages.reduce((prevImage, currImage) => {
+                    if (new Date(currImage.createdAt) > new Date(prevImage.createdAt)) {
+                        return currImage;
+                    } else {
+                        return prevImage;
+                    }
+                });
+
+                restaurant.previewImage = mostRecentImage.url;
+            }
+
+            delete restaurant.Reviews;
+            delete restaurant.RestaurantImages;
+        });
+
+        res.json({ Restaurants });
+    } catch (error) {
+        next(error);
+    }
+});
 //         delete restaurant.Reviews
         // for (const restaurant of restaurants) {
         //     let restaurantDetails = restaurant.toJSON();
@@ -467,8 +528,9 @@ router.post('/upload', requireAuth, upload.fields([
 ]), async (req, res) => {
     let s3 = new S3Client({
         credentials: {
-            secretAccessKey: 'Pjhv0p4PW0QaSh5gCXar3LFNBqIrIJ8tDsSxb3oi',
-            accessKeyId: 'AKIAWYAF37VP2BOHSUFW'
+
+            secretAccessKey: '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',
+            accessKeyId: 'AKIAWYAF37VPRHF5AK7T'
         },
         region: 'us-west-1'
     })
@@ -489,7 +551,7 @@ router.post('/upload', requireAuth, upload.fields([
         });
 
             const images = [image1, image2, image3, image4, image5, image6];
-        if(images && images.length > 0){
+        if(images && images.length !== 0){
             for (let i = 0; i < images.length; i++) {
                 const file = images[i] ? images[i][0] : null; // Access the file from the array if it exists
 
@@ -529,7 +591,7 @@ router.post('/upload', requireAuth, upload.fields([
 
         }
 
-        return res.json(success)
+        res.json(success);
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ error: 'An error occurred during image upload' });
@@ -602,7 +664,6 @@ router.post('/upload', requireAuth, upload.fields([
 
 
 
-
 //Edit Restaurant
 router.put('/:id', requireAuth, upload.fields([
     { name: 'image1', maxCount: 1 },
@@ -614,8 +675,8 @@ router.put('/:id', requireAuth, upload.fields([
 ]), async (req, res) => {
     let s3 = new S3Client({
         credentials: {
-            secretAccessKey: 'Pjhv0p4PW0QaSh5gCXar3LFNBqIrIJ8tDsSxb3oi',
-            accessKeyId: 'AKIAWYAF37VP2BOHSUFW'
+            secretAccessKey: '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',
+            accessKeyId: 'AKIAWYAF37VPRHF5AK7T'
         },
         region: 'us-west-1'
     })

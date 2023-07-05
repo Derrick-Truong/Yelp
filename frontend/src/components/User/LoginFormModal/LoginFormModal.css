@@ -20,18 +20,20 @@ margin: auto;
     font-weight: 600;
 }
 .demo-sign-in-button {
-    border:none;
-    font-size: 13px;
-    width: 85px;
-    height: 44px;
-    padding:5px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    cursor: pointer;
-    margin-left: 5px;
+    height: 30px;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        color: black;
+        padding-top: 5px;
+        padding-bottom: 25px;
+        width: 211px;
+        cursor: pointer;
 }
-
+.demo-sign-in-button:hover{
+background-color: #FF69B4;
+    color: #FFFFFF;
+}
 .sign-up-modal-button button{
 
             font-size: 13px;
@@ -79,6 +81,7 @@ margin: auto;
 
 .signup-link-in-login-form {
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 .form-log-in {
@@ -93,17 +96,24 @@ margin: auto;
 }
 .login-log-in-button-container{
     align-items: center;
-    padding-bottom:5px;
+    padding-top: 10px;
+    padding-bottom:10px;
 }
 .login-log-in-button{
-    height: 20px;
+    height: 30px;
     background-color: aquamarine;
     font-weight: bold;
     border: none;
     border-radius: 4px;
     color: black;
+    padding-top:5px;
     padding-bottom: 25px;
     width:211px;
+    cursor: pointer;
+
+}
+.login-log-in-button:hover{
+    background-color: rgb(78, 229, 179);
 }
 label {
     margin-bottom: 0.5rem;

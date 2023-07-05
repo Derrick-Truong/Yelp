@@ -10,6 +10,7 @@ import CreateReview from "./components/Reviews/CreateReview";
 import Test1 from "./components/Aws/Test1";
 import TestRestaurant from "./components/Restaurant/TestRestaurant";
 import Routes from "./components/Restaurant/TestRestaurant/Routes";
+import Profile from "./components/User/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
         </Route>
           <Route exact path="/restaurants/:restaurantId">
             <TestRestaurant/>
+          </Route>
+          <Route exact path="/profile">
+            <Profile/>
           </Route>
           <Route exact path="/restaurants/routes/:restaurantId">
             <Routes />

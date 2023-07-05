@@ -130,8 +130,14 @@ export const restaurantDetails = (restaurantId) => async dispatch => {
 //         // Handle the error as needed
 //     }
 // };
+export const getUsersRestaurants = () => async dispatch => {
+    const response = await fetch('/api/restaurants')
+    if (response.ok) {
+        const list = await response.json();
+        dispatch(homeRestaurants(list))
+    }
+}
 export const updateOneRestaurant = (formData, restaurantId) => async (dispatch) => {
-    console.log('Data store', formData)
     try {
         const response = await csrfFetch(`/api/restaurants/${restaurantId}`, {
             method: 'PUT',
@@ -149,11 +155,10 @@ export const updateOneRestaurant = (formData, restaurantId) => async (dispatch) 
     }
 };
 export const createNewRestaurant = (formData) => async (dispatch) => {
-    console.log('Data store', formData)
-    try {
+
         const response = await csrfFetch('/api/restaurants/upload', {
             method: 'POST',
-            body: formData,
+            body: formData
         });
 
         if (response.ok) {
@@ -161,10 +166,8 @@ export const createNewRestaurant = (formData) => async (dispatch) => {
             await dispatch(createOneRestaurant(data));
             return data
         }
-    } catch (error) {
-        console.error('Error:Upload unsccessful', error);
-        // Handle the error as needed
-    }
+
+
 };
 
 export const removeRestaurant = (restaurantId) => async dispatch => {

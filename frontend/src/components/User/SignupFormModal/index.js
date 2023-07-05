@@ -52,7 +52,7 @@ function SignupFormPage() {
                 })
                 .then(history.push("/"));
         }
-        setErrors(["Confirm Password field must be the same as the Password field."]);
+        setErrors(["Confirm Password must be the same as the Password."]);
 
     };
 
@@ -128,8 +128,9 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                <br></br>
+                <label>
                 <button type="submit">Sign Up</button>
+                </label>
             </form>
         </>
     );

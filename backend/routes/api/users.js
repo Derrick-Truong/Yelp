@@ -3,9 +3,39 @@ const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { Restaurant, RestaurantImage, Review, ReviewImage, User } = require('../../db/models');
 const router = express.Router();
 
+// async function prepareData() {
+//     try {
+//         console.log('Restaurant', Restaurant)
+
+//         const restaurantData = await Restaurant.findAll();
+//         const restaurantImageData = await RestaurantImage.findAll();
+//         const reviewData = await Review.findAll();
+//         const reviewImageData = await ReviewImage.findAll();
+//         const userData = await User.findAll();
+
+//         return {
+//             Restaurant: restaurantData,
+//             RestaurantImage: restaurantImageData,
+//             Review: reviewData,
+//             ReviewImage: reviewImageData,
+//             User: userData
+//         };
+//     } catch (error) {
+//         console.error('Error while preparing data:', error);
+//         throw error;
+//     }
+// }
+
+// prepareData()
+//     .then((data) => {
+//         console.log(JSON.stringify(data));
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
 
 const validateSignup = [
     check('email')

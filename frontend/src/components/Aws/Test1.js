@@ -1,7 +1,8 @@
 import React from "react";
 import { createNewRestaurant } from "../../store/restaurants";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../Context/Modal";
 import { submitData } from "../../store/restaurants";
@@ -47,7 +48,8 @@ const Test1 = () => {
     const handleFile6Change = (e) => {
         setFile6(e.target.files[0]);
     };
-    const valid = () => {
+    const valid = async() => {
+
         let newErrors = {}
         if (!address) {
             newErrors.address = "Address is required."
@@ -84,17 +86,12 @@ const Test1 = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        valid()
+        await valid();
         if (Object.keys(errors).length > 0) {
-            return
+            return; // Prevent form submission if there are errors
         }
         const form = new FormData();
 
-        //     if(files && files.length > 0){
-        //     for (let i = 0; i < files.length; i++) {
-        //         form.append('image', files[i])
-        //     }
-        // }
         form.append('country', country)
         form.append('state', state)
         form.append('address', address)
@@ -125,28 +122,20 @@ const Test1 = () => {
         if (files6) {
             form.append('image6', files6)
         }
-        // const newListing = {
-        //     country: country,
-        //     description: description,
-        //     price: price,
-        //     title: title,
-        //     address: address,
-        //     city: city,
-        //     state: state
-        // }
-        // formData.append('newlisting', newListing)
+
 
         const newSpot = await dispatch(createNewRestaurant(form))
-        history.push(`/restaurant/${newSpot?.id}`).then(closeModal)
 
+        if(newSpot?.id){
+        history.push(`/restaurants/${newSpot?.id}`)
+        closeModal()
+        }
         // if (newSpot.id) {
         //     await closeModal()
         //     await history.push(`/restaurants/${newSpot?.id}`)
         // }
 
         // const newSpot = await dispatch(createNewRestaurant(form)).then(closeModal).then(history.push(`/restaurants/${newSpot?.id}`))history.push(`/restaurants/${newSpot?.id}`);
-
-
 
     }
     return (
@@ -161,9 +150,10 @@ const Test1 = () => {
                         placeholder="Country"
                         value={country}
                         onChange={e => setCountry(e.target.value)}
+        required
                     />
                 </div>
-                {errors?.country && <div className="error"><div>{errors?.country}</div></div>}
+                <div>{errors.country && <div className="error">{errors.country}</div>}</div>
                 <div>
                     <input
                         className="input"
@@ -172,9 +162,10 @@ const Test1 = () => {
                         placeholder="State"
                         value={state}
                         onChange={e => setState(e.target.value)}
+                        required
                     />
                 </div>
-                {errors?.state && <div className="error"><div>{errors?.state}</div></div>}
+                <div>{errors.state && <div className="error">{errors.state}</div>}</div>
                 <div>
                     <input
                         className="input"
@@ -183,9 +174,10 @@ const Test1 = () => {
                         placeholder="Address"
                         value={address}
                         onChange={e => setAddress(e.target.value)}
+                        required
                     />
                 </div>
-                {errors?.address && <div className="error"><div>{errors?.address}</div></div>}
+                <div>{errors.address && <div className="error">{errors.address}</div>}</div>
                 <div>
 
                     <input
@@ -196,23 +188,24 @@ const Test1 = () => {
                         placeholder="City"
                         value={city}
                         onChange={e => setCity(e.target.value)}
+                        required
                     />
                 </div>
 
-                {errors?.city && <div className="error"><div>{errors?.city}</div></div>}
+                <div>{errors.city && <div className="error">{errors.city}</div>}</div>
                 <div>
 
                     <input
                         className="input"
-
-                        type="text"
+                        type="number"
                         name='price'
                         placeholder="Price per cone"
                         value={price}
                         onChange={e => setPrice(e.target.value)}
+                        required
                     />
                 </div>
-                {errors?.price && <div className="error"><div>{errors?.price}</div></div>}
+                <div>{errors.price && <div className="error">{errors.price}</div>}</div>
                 <div>
 
                     <input
@@ -223,10 +216,11 @@ const Test1 = () => {
                         placeholder="Title"
                         value={title}
                         onChange={e => setTitle(e.target.value)}
+                        required
                     />
                 </div>
 
-                {errors?.title && <div className="error"><div>{errors?.title}</div></div>}
+                <div>{errors.title && <div className="error">{errors.title}</div>}</div>
                 <div className="create-restaurant-textarea">
 
                     <textarea
@@ -236,12 +230,12 @@ const Test1 = () => {
                         placeholder=" Write a summary of your wonderful ice cream shop..."
                         value={description}
                         onChange={e => setDescription(e.target.value)}
+                        required
                     />
                 </div>
-
-                {errors?.description && <div className="error"><div>{errors?.description}</div></div>}
-                <div className="add-photos-title"> Add photos of your ice cream shop!</div>
-                <input className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file" />
+                <div>{errors.description && <div className="error">{errors.description}</div>}</div>
+                <div className="add-photos-title"> Add at least 1 photo of your shop!</div>
+                <input className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file"/>
                 <input className="upload" onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile3Change} name='image3' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile4Change} name='image4' accept="image/*" type="file" />

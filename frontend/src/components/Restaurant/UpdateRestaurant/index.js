@@ -138,7 +138,6 @@ const UpdateRestaurant = ({restaurant}) => {
         // }
         // formData.append('newlisting', newListing)
 
-        console.log('Entries', Object.fromEntries(form))
 
 
         await dispatch(updateOneRestaurant(form, restaurantId))
@@ -156,6 +155,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     placeholder="Country"
                     value={country}
                     onChange={e => setCountry(e.target.value)}
+                    required
                 />
 
                 {errors?.country && <span className="error">{errors?.country}</span>}
@@ -169,6 +169,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     placeholder="State"
                     value={state}
                     onChange={e => setState(e.target.value)}
+                    required
                 />
 
                 {errors?.state && <span className="error">{errors?.state}</span>}
@@ -181,6 +182,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     placeholder="Address"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
+                    required
                 />
                 {errors?.address && <span className="error">{errors?.address}</span>}
 
@@ -192,16 +194,18 @@ const UpdateRestaurant = ({restaurant}) => {
                     placeholder="City"
                     value={city}
                     onChange={e => setCity(e.target.value)}
+                    required
                 />
                 {errors?.city && <span className="error">{errors?.city}</span>}
                 <input
                     className="input"
 
-                    type="text"
+                    type="number"
                     name='price'
                     placeholder="Price"
                     value={price}
                     onChange={e => setPrice(e.target.value)}
+                    required
                 />
                 {errors?.price && <span className="error">{errors?.price}</span>}
                 <input
@@ -212,6 +216,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     placeholder="Title"
                     value={title}
                     onChange={e => setTitle(e.target.value)}
+                    required
                 />
                 {errors?.title && <span className="error">{errors?.title}</span>}
                 <textarea
@@ -222,6 +227,7 @@ const UpdateRestaurant = ({restaurant}) => {
                     placeholder="Write a summary of your wonderful ice cream shop...(100 characters max)"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
+                    required
                 />
                 {errors?.description && <span className="error">{errors?.description}</span>}
                 <div className="upload-title"> Add photos of your shop!</div>

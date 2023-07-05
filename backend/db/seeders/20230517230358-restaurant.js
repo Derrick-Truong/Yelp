@@ -68,7 +68,7 @@ module.exports = {
     options.tableName = 'Restaurants';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      city: { [Op.in]: ["Milbbrae", "Daly City", "San Mateo", "Berkeley", "Oakland", "7e83f92d5a1c6b8f4d0e97b65c32a1f7"] }
+      city: { [Op.in]: ["Milbbrae", "Daly City", "San Mateo", "Berkeley", "Oakland"] }
     }, options);
 
   }

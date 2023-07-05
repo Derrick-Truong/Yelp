@@ -93,7 +93,7 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-                   <br></br>
+                        <br></br>
                     <label>
 
                         <input className="credential-and-password-form"
@@ -108,18 +108,9 @@ function LoginFormModal() {
                     <button className='login-log-in-button' onClick={handleSubmit} type="submit">Log In</button>
                         </div>
                     <div className="signup-link-in-login-form">
-                        Don't have an account yet?
-                        <br></br>
-                        <div className="submit-button-log-in">
-                            <span className='sign-up-modal-button'>
-                                <OpenModalButton
-                                    buttonText="Sign Up"
-                                    modalComponent={<SignupFormModal/>}/>
-                                    </span>
                             <button onClick={demoSignIn} className="demo-sign-in-button" id='demo-user-button'>
                                 Demo User
                             </button>
-                        </div>
                     </div>
 
                 </form>

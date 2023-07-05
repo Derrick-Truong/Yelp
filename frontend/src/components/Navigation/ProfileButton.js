@@ -3,11 +3,10 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalButton from "../../OpenModalButton";
 import LoginFormModal from "../User/LoginFormModal";
-
+import SignupFormPage from "../User/SignupFormModal";
+import Profile from "../User/Profile";
 import { useHistory } from "react-router-dom";
 import './ProfileButton.css'
-
-
 import { NavLink } from "react-router-dom";
 
 
@@ -75,16 +74,14 @@ function ProfileButton({ user }) {
                 <i className="fa-solid fa-ice-cream"></i>
             </div>
 
-            <ul className={ulClassName} ref={ulRef}>
+            <div className={ulClassName} ref={ulRef}>
                 {user ? (
                     <>
-                        <div className="profile-list">
-                            <li>Hello, {user?.username}</li>
-                            <li>{user?.email}</li>
-                            <hr class="new1"></hr>
-                            <li> <hr class="new1"></hr>
-                                <button className="sign-out-button" onClick={logout}>Log Out</button>
-                            </li>
+                        <div className="log-sign-up-name">
+                            Hello, {user?.username}</div>
+                        <hr class="new1"></hr>
+                        <div className="log-sign-up">
+                            <button className="sign-out-button" onClick={logout}>Log Out</button>
                         </div>
                     </>
 
@@ -93,13 +90,18 @@ function ProfileButton({ user }) {
                         <div className="log-sign-up">
                             <OpenModalButton className="button-for-login"
                                 buttonText="Log In"
-                                onItemClick={closeMenu}
-                                modalComponent={<LoginFormModal/>}
+                                modalComponent={<LoginFormModal />}
+                            />
+                        </div>
+                        <div className="log-sign-up">
+                            <OpenModalButton
+                                buttonText="Sign Up"
+                                modalComponent={<SignupFormPage />}
                             />
                         </div>
                     </>
                 )}
-            </ul>
+            </div>
         </>
     );
 }

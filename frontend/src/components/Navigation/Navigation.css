@@ -50,6 +50,29 @@
         padding-top: 10px;
         text-align: center;
         width: 150px;
+
+}
+
+.nav-create-shop button{
+    background-color: #faf3f3;
+        color: #FF69B4;
+        border: none;
+        padding: 12px 24px;
+        height: 44px;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        box-shadow: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+}
+
+.nav-create-shop button:hover{
+            background-color: #FF69B4;
+            color: #FFFFFF;
 }
 /* .nav-create-shop button{
 
