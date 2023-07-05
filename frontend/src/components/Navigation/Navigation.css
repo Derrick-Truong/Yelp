@@ -74,6 +74,36 @@
             background-color: #FF69B4;
             color: #FFFFFF;
 }
+.footer-links{
+position: sticky;
+    display: flex;
+    font-size: 15px;
+    flex-direction: row;
+    justify-content: space-around;
+    text-orientation: sideways;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    margin: -15px;
+    border: solid 1px #b9b2b2;
+    background-color: #fff;
+    text-align: center;
+    z-index: 1;
+    height: 45px;
+    color: black;
+}
+
+.linkedin,
+.github,
+.portfolio,
+.email
+{
+    color: black;
+    margin-right: 15vw;
+}
 /* .nav-create-shop button{
 
     width: 130px;
