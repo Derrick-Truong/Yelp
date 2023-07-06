@@ -165,9 +165,8 @@ const TestRestaurant = () => {
                 });
 
                 // Open the info window when the marker is clicked
-                marker.addListener("click", function () {
-                    infoWindow.open(map, marker);
-                });
+                infoWindow.open(map, marker);
+
             } else {
                 // Info window content for an invalid address
                 const infoWindowContent = "Invalid address!";
