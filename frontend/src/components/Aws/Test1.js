@@ -235,7 +235,7 @@ const Test1 = () => {
                 </div>
                 <div>{errors.description && <div className="error">{errors.description}</div>}</div>
                 <div className="add-photos-title"> Add at least 1 photo of your shop!</div>
-                <input className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file"/>
+                <input className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file" required/>
                 <input className="upload" onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile3Change} name='image3' accept="image/*" type="file" />
                 <input className="upload" onChange={handleFile4Change} name='image4' accept="image/*" type="file" />
