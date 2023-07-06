@@ -109,19 +109,19 @@ const TestRestaurant = () => {
     var map;
     var marker;
     var geocoder;
+    var mapElement = document.getElementById("map");
 
     function geocodeAddress(geocoder, address) {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
-                if (status === "OK") {
+                // if (status === "OK") {
                     resolve({ results, status });
-                } else {
-                    reject(new Error("Geocode was not successful for the following reason: " + status));
-                }
+                // } else {
+                //     reject(new Error("Geocode was not successful for the following reason: " + status));
+                // }
             });
         });
     }
-    var mapElement = document.getElementById("map");
 
     async function initMap() {
         if (mapInitialized) {
@@ -131,30 +131,60 @@ const TestRestaurant = () => {
             var geocoder = new window.google.maps.Geocoder();
             const { results, status } = await geocodeAddress(geocoder, address);
 
-            if (status === "OK" && results.length > 0) {
+            // The map, centered at the default location
+            map = new window.google.maps.Map(mapElement, {
+                zoom: 12,
+                center: { lat: 37.7749, lng: -122.4194 }, // Default coordinates (San Francisco)
+            });
+
+            // The marker for the default location
+            marker = new window.google.maps.Marker({
+                map: map,
+                position: { lat: 37.7749, lng: -122.4194 },
+                optimized: false,
+            });
+
+            // Validate the address and set the isValidAddress variable
+            const isValidAddress = status === "OK" && results.length > 0;
+
+            // Check the geocoding status
+            if (isValidAddress) {
                 const location = results[0].geometry.location;
                 const position = { lat: location.lat(), lng: location.lng() };
 
-                // The map, centered at the restaurant location
-                map = new window.google.maps.Map(mapElement, {
-                    zoom: 12,
-                    center: position,
+                // Update map center and marker position for valid address
+                map.setCenter(position);
+                marker.setPosition(position);
 
+                // Info window content for a valid address
+                const infoWindowContent = "Hello, this is a valid address!";
+
+                // Create the info window with the appropriate content
+                const infoWindow = new window.google.maps.InfoWindow({
+                    content: infoWindowContent,
                 });
 
-                // The marker, positioned at the restaurant location
-                marker = new window.google.maps.Marker({
-                    map: map,
-                    position: position,
-                    optimized: false
-
+                // Open the info window when the marker is clicked
+                marker.addListener("click", function () {
+                    infoWindow.open(map, marker);
                 });
+            } else {
+                // Info window content for an invalid address
+                const infoWindowContent = "Invalid address!";
+
+                // Create the info window with the appropriate content
+                const infoWindow = new window.google.maps.InfoWindow({
+                    content: infoWindowContent,
+                });
+
+                // Open the info window when the marker is clicked
+                infoWindow.open(map, marker);
             }
-
         } catch (error) {
             console.log("An error occurred during geocoding:", error);
         }
     }
+
     useEffect(() => {
         dispatch(restaurantDetails(restaurantId));
         dispatch(getReviews(restaurantId));
@@ -162,6 +192,7 @@ const TestRestaurant = () => {
             initMap();
         }
     }, [dispatch, mapElement, restaurantId]);
+
 
     return (
         <>
