@@ -81,7 +81,6 @@ const UpdateRestaurant = ({restaurant}) => {
             newErrors.price = "Price is required needs to be a number."
         }
         setErrors(newErrors)
-        console.log('NewErrors', newErrors)
     }
 
     const handleSubmit = async (e) => {

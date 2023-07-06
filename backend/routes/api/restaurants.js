@@ -570,7 +570,6 @@ router.post('/upload', requireAuth, upload.fields([
 
                     const command = new PutObjectCommand(params);
                     await s3.send(command);
-                    console.log('Successfully loaded images');
                     // res.json(newPic)
                     // let userIdString = success.userId.toString()
                     // let restaurantIdString = success.id.toString()

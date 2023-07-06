@@ -22,7 +22,7 @@ margin: auto;
 .sign-up-form-container label button{
     background-color: #faf3f3;
         color: #FF69B4;
-        border: none;
+        border: 1px solid;
         padding: 12px 24px;
         height: 44px;
         font-size: 13px;
@@ -35,6 +35,10 @@ margin: auto;
         transition: background-color 0.3s ease;
         margin-top: 10px;
         width: 213px;
+}
+.sign-up-form-container label button:hover{
+    color: #faf3f3;
+        background-color: #FF69B4;
 }
 #myImage{
     position: fixed;

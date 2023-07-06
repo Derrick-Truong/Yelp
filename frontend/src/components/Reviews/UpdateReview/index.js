@@ -50,7 +50,6 @@ const UpdateReview = ({review, restaurantId}) => {
 
         // }
         setErrors(newErrors)
-        console.log('Errors', newErrors)
     }
 
 const handleCancel = (e) => {

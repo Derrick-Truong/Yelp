@@ -81,7 +81,6 @@ const Test1 = () => {
             newErrors.price = "Price must be a number."
         }
         setErrors(newErrors)
-        console.log('NewErrors', newErrors)
     }
 
     const handleSubmit = async (e) => {
