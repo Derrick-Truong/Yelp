@@ -157,7 +157,7 @@ const TestRestaurant = () => {
                 marker.setPosition(position);
 
                 // Info window content for a valid address
-                const infoWindowContent = "Hello, this is a valid address!";
+                const infoWindowContent = address;
 
                 // Create the info window with the appropriate content
                 const infoWindow = new window.google.maps.InfoWindow({
