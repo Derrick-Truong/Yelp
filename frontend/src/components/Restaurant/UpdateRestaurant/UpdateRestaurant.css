@@ -10,6 +10,36 @@
 
 }
 
+.create-restaurant-textarea {
+    padding-top: 15px;
+}
+
+.gallery {
+    display: flex;
+    height: 300px;
+    width: 400px;
+    flex-direction: column;
+    overflow: auto;
+    scroll-behavior: smooth;
+    margin-left: 50px;
+}
+
+.preview-images-title {
+    font-weight: 700;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+
+.gallery img {
+    scroll-snap-align: start;
+    height: 100%;
+    width: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+
+}
+
 .create-restaurant-page {
     max-width: 800px;
     margin: 0 auto;
@@ -27,6 +57,39 @@
     text-align: center;
     height: 100%;
 
+}
+
+.add-photos-title {
+    font-weight: 700;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.update-create-restaurant-button {
+    background-color: #faf3f3;
+    color: #FF69B4;
+    border: none;
+    /* padding: 12px 24px; */
+    width: 75%;
+    height: 44px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* margin-top: 10px; */
+}
+.update-create-button-container{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.update-create-restaurant-button:hover {
+    color: #faf3f3;
+    background-color: #FF69B4;
 }
 
 /* .create-restaurant-button {
@@ -57,7 +120,7 @@
     font-size: 16px;
     color: black;
     font-weight: 700;
-        box-sizing: border-box;
+    box-sizing: border-box;
     cursor: pointer;
 }
 
@@ -107,4 +170,8 @@ a {
     font-size: 23px;
     text-align: center;
     color: #68a5da;
+}
+
+.create-button-bottom {
+    font-weight: bold;
 }

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../Context/Modal";
 import { submitData } from "../../store/restaurants";
+import white from "../../assets/white.jpg"
 import './CreateRestaurant.css'
 const Test1 = () => {
     const { closeModal } = useModal()
@@ -261,19 +262,15 @@ const Test1 = () => {
                         name='title'
                         placeholder="Title"
                         value={title}
-                        onChange={e =>
-
-                            setTitle(e.target.value)
-
-                        }
+                        onChange={e =>setTitle(e.target.value)}
                         required
                     />
                 </div>
-
                 <div>{errors.title && <div className="error">{errors.title}</div>}</div>
                 <div className="create-restaurant-textarea">
 
                     <textarea
+
                         rows="8" cols="48"
                         name='description'
                         type="text"
@@ -285,8 +282,6 @@ const Test1 = () => {
                 </div>
                 <div>{errors.description && <div className="error">{errors.description}</div>}</div>
                 <div className="add-photos-title"> Add at least 1 photo of your shop!</div>
-
-
                 <input id="input" className="upload" onChange={handleFile1Change} name='image1' accept="image/*" type="file" required/>
                 <input id="input2" className="upload" onChange={handleFile2Change} name='image2' accept="image/*" type="file" />
                 <input id="input3" className="upload" onChange={handleFile3Change} name='image3' accept="image/*" type="file" />
@@ -295,12 +290,12 @@ const Test1 = () => {
                 <input id="input6" className="upload" onChange={handleFile6Change} name='image6' accept="image/*" type="file" />
                 <div className="preview-images-title">Preview of Images</div>
                 <div className="gallery">
-                    <img ref={imgRef1} src="https://i.pinimg.com/564x/04/54/7c/04547c2b354abb70a85ed8a2d1b33e5f.jpg" alt="" />
-                    <img ref={imgRef2} src="https://i.pinimg.com/564x/04/54/7c/04547c2b354abb70a85ed8a2d1b33e5f.jpg" alt="" />
-                    <img ref={imgRef3} src="https://i.pinimg.com/564x/04/54/7c/04547c2b354abb70a85ed8a2d1b33e5f.jpg" alt="" />
-                    <img ref={imgRef4} src="https://i.pinimg.com/564x/04/54/7c/04547c2b354abb70a85ed8a2d1b33e5f.jpg" alt="" />
-                    <img ref={imgRef5} src="https://i.pinimg.com/564x/04/54/7c/04547c2b354abb70a85ed8a2d1b33e5f.jpg" alt="" />
-                    <img ref={imgRef6} src="https://i.pinimg.com/564x/04/54/7c/04547c2b354abb70a85ed8a2d1b33e5f.jpg" alt="" />
+                    <img ref={imgRef1} src={white} alt="" />
+                    <img ref={imgRef2} src={white} alt="" />
+                    <img ref={imgRef3} src={white} alt="" />
+                    <img ref={imgRef4} src={white} alt="" />
+                    <img ref={imgRef5} src={white} alt="" />
+                    <img ref={imgRef6} src={white} alt="" />
                 </div>
                 <button type="submit" className="create-restaurant-button">Create</button>
                 <div className="create-button-bottom">Will be routed to your ice cream page upon creation</div>
