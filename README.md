@@ -42,7 +42,7 @@ IceCreamFinder offers a range of features designed to enhance the ice cream disc
 - Displaying a feed of ice cream shops shared by users.
 - Users can scroll through the carousel of ice cream shops and click on any of them that will navigate them to each shop's detail page.
 
-![ice-feed](https://github.com/Derrick-Truong/Ice-Cream-Delight/assets/111938093/a63c4838-3ae4-4ba4-9ddd-e6d3a4c790de)
+![ice-feed-part2](https://github.com/Derrick-Truong/Ice-Cream-Delight/assets/111938093/0b1fdbe5-c647-43c6-a8fd-1b9dc060ee46)
 
 ### Create Ice Cream Shop
 - Users can create and share new ice cream shops.
