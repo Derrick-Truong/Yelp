@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     /* margin: 20px auto auto; */
-    height:200px;
+    height: 200px;
     width: 400px;
     background-color: #ffd4e9;
 }
@@ -37,6 +37,6 @@
     width: 150px;
 }
 
-.submit-delete-button:hover{
-    background-color:#ef4d52;
+.submit-delete-button:hover {
+    background-color: #ef4d52;
 }

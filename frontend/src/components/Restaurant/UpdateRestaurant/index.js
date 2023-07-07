@@ -10,9 +10,9 @@ import './UpdateRestaurant.css';
 import { restaurantDetails } from "../../../store/restaurants";
 
 
-const UpdateRestaurant = ({restaurant}) => {
+const UpdateRestaurant = ({ restaurant }) => {
     const [files, setFiles] = useState([])
-    const {closeModal} = useModal()
+    const { closeModal } = useModal()
     const restaurantId = restaurant?.id
     const history = useHistory();
     const dispatch = useDispatch();

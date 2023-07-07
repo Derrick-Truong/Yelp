@@ -115,7 +115,7 @@ const TestRestaurant = () => {
         return new Promise((resolve, reject) => {
             geocoder.geocode({ address }, (results, status) => {
                 // if (status === "OK") {
-                    resolve({ results, status });
+                resolve({ results, status });
                 // } else {
                 //     reject(new Error("Geocode was not successful for the following reason: " + status));
                 // }
@@ -127,61 +127,59 @@ const TestRestaurant = () => {
         if (mapInitialized) {
             return; // Map already initialized, exit the function
         }
-        try {
-            var geocoder = new window.google.maps.Geocoder();
-            const { results, status } = await geocodeAddress(geocoder, address);
 
-            // The map, centered at the default location
-            map = new window.google.maps.Map(mapElement, {
-                zoom: 12,
-                center: { lat: 37.7749, lng: -122.4194 }, // Default coordinates (San Francisco)
+        var geocoder = new window.google.maps.Geocoder();
+        const { results, status } = await geocodeAddress(geocoder, address);
+
+        // The map, centered at the default location
+        map = new window.google.maps.Map(mapElement, {
+            zoom: 12,
+            center: { lat: 37.7749, lng: -122.4194 }, // Default coordinates (San Francisco)
+        });
+
+        // The marker for the default location
+        marker = new window.google.maps.Marker({
+            map: map,
+            position: { lat: 37.7749, lng: -122.4194 },
+            optimized: false,
+        });
+
+        // Validate the address and set the isValidAddress variable
+        const isValidAddress = status === "OK" && results.length > 0;
+
+        // Check the geocoding status
+        if (isValidAddress) {
+            const location = results[0].geometry.location;
+            const position = { lat: location.lat(), lng: location.lng() };
+
+            // Update map center and marker position for valid address
+            map.setCenter(position);
+            marker.setPosition(position);
+
+            // Info window content for a valid address
+            const infoWindowContent = address;
+
+            // Create the info window with the appropriate content
+            const infoWindow = new window.google.maps.InfoWindow({
+                content: infoWindowContent,
             });
 
-            // The marker for the default location
-            marker = new window.google.maps.Marker({
-                map: map,
-                position: { lat: 37.7749, lng: -122.4194 },
-                optimized: false,
+            // Open the info window when the marker is clicked
+            infoWindow.open(map, marker);
+
+        } else {
+            // Info window content for an invalid address
+            const infoWindowContent = "Invalid address!";
+
+            // Create the info window with the appropriate content
+            const infoWindow = new window.google.maps.InfoWindow({
+                content: infoWindowContent,
             });
 
-            // Validate the address and set the isValidAddress variable
-            const isValidAddress = status === "OK" && results.length > 0;
-
-            // Check the geocoding status
-            if (isValidAddress) {
-                const location = results[0].geometry.location;
-                const position = { lat: location.lat(), lng: location.lng() };
-
-                // Update map center and marker position for valid address
-                map.setCenter(position);
-                marker.setPosition(position);
-
-                // Info window content for a valid address
-                const infoWindowContent = address;
-
-                // Create the info window with the appropriate content
-                const infoWindow = new window.google.maps.InfoWindow({
-                    content: infoWindowContent,
-                });
-
-                // Open the info window when the marker is clicked
-                infoWindow.open(map, marker);
-
-            } else {
-                // Info window content for an invalid address
-                const infoWindowContent = "Invalid address!";
-
-                // Create the info window with the appropriate content
-                const infoWindow = new window.google.maps.InfoWindow({
-                    content: infoWindowContent,
-                });
-
-                // Open the info window when the marker is clicked
-                infoWindow.open(map, marker);
-            }
-        } catch (error) {
-            console.log("An error occurred during geocoding:", error);
+            // Open the info window when the marker is clicked
+            infoWindow.open(map, marker);
         }
+
     }
 
     useEffect(() => {
@@ -221,7 +219,7 @@ const TestRestaurant = () => {
                                 return (
                                     image && <img key={image.url} className="restaurant-item-restaurant-photos" src={url} alt='image' />
                                 )
-                            }):<></>}
+                            }) : <></>}
                             {/* <div className='restaurant-item-info-container'>
                                 <div className='restaurant-info-inner-container'>
                                     <h1>{restaurant?.title}</h1>

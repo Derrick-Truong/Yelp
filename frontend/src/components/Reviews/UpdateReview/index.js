@@ -13,7 +13,7 @@ import './UpdateReview.css'
 
 
 
-const UpdateReview = ({review, restaurantId}) => {
+const UpdateReview = ({ review, restaurantId }) => {
     const reviewId = review?.id
     const dispatch = useDispatch()
     const [description, setDescription] = useState(review.description);
@@ -22,12 +22,12 @@ const UpdateReview = ({review, restaurantId}) => {
     const [errors, setErrors] = useState([])
     const { closeModal } = useModal();
 
-// useEffect(() => {
-//    setDescription(review?.description)
-//    setRating(review?.rating)
-//    setUrl(review?.previewImage)
+    // useEffect(() => {
+    //    setDescription(review?.description)
+    //    setRating(review?.rating)
+    //    setUrl(review?.previewImage)
 
-// },[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description)])
+    // },[JSON.stringify(review), JSON.stringify(review?.rating), JSON.stringify(review?.description)])
 
 
     const valid = () => {
@@ -52,7 +52,7 @@ const UpdateReview = ({review, restaurantId}) => {
         setErrors(newErrors)
     }
 
-const handleCancel = (e) => {
+    const handleCancel = (e) => {
         e.preventDefault();
         closeModal();
     };
@@ -61,7 +61,7 @@ const handleCancel = (e) => {
 
         valid()
         if (Object.keys(errors).length > 0) {
-          return
+            return
         }
         const review = {
             rating: rating,

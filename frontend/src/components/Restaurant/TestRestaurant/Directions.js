@@ -50,7 +50,7 @@ const Directions = ({ restaurantId }) => {
         var geocoder = new window.google.maps.Geocoder();
         // You may need to reinitialize the map with the desired options
         var address = `${addressVal} ${cityVal} ${stateVal}`;
-        try {
+
 
             const { results, status } = await geocodeAddress(geocoder, address);
 
@@ -74,9 +74,7 @@ const Directions = ({ restaurantId }) => {
                 });
             }
 
-        } catch (error) {
-            console.log("An error occurred during geocoding:", error);
-        }
+      
         // Any other map initialization code can be added here
     };
     function geocodeAddress(geocoder, address) {

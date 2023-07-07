@@ -1,35 +1,37 @@
-
-
-.create-review-container{
+.create-review-container {
     display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 15px;
-        background-color: pink;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: pink;
 }
 
-.error{
+.error {
     color: red;
     font-weight: bold;
 }
+
 textarea {
     resize: none;
     border: 1px solid;
     border-color: rgb(19, 19, 19);
 }
 
-.create-review-title{
+.create-review-title {
     text-align: center;
     color: rgb(6, 6, 6);
 }
-span .fa-solid.fa-thumbs-up{
+
+span .fa-solid.fa-thumbs-up {
     margin-left: -5px;
 }
-.create-review-photo-url-input{
+
+.create-review-photo-url-input {
     width: 100%
 }
-.create-review-rating{
+
+.create-review-rating {
     display: flex;
     font-size: 40px;
     text-align: center;
@@ -38,26 +40,28 @@ span .fa-solid.fa-thumbs-up{
     align-items: center;
 
 }
-.create-review-thumbs-up-down{
+
+.create-review-thumbs-up-down {
     display: flex;
     justify-content: center;
 }
 
-.create-review-thumbs-up-down span .fa-solid.fa-thumbs-up{
-  margin-right: 130px;
-  font-size: 50px;
-  cursor:pointer
-
+.create-review-thumbs-up-down span .fa-solid.fa-thumbs-up {
+    margin-right: 130px;
+    font-size: 50px;
+    cursor: pointer
 }
 
-.create-review-thumbs-up-down span .fa-solid.fa-thumbs-down{
-font-size: 50px;
-cursor:pointer;
+.create-review-thumbs-up-down span .fa-solid.fa-thumbs-down {
+    font-size: 50px;
+    cursor: pointer;
 }
-.create-review-upload-pic{
+
+.create-review-upload-pic {
     text-align: center;
 
 }
+
 /* .fa-solid.fa-ice-cream{
     color: #fff;
 }

@@ -43,7 +43,6 @@ const CreateReview = ({ restaurantId }) => {
             }
         }
         setErrors(newErrors)
-        console.log('NewErrors', newErrors)
     }
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -62,13 +61,13 @@ const CreateReview = ({ restaurantId }) => {
 
         await dispatch(createOneReviewNoPic(review, restaurantId))
         await dispatch(getReviews(restaurantId)).then(closeModal)
-      
+
         // dispatch(getReviews(restaurantId))
 
     }
     return (
         <section>
-            <form  className='create-review-container'>
+            <form className='create-review-container'>
                 <h1 className='create-review-title'>How was your experience?</h1>
                 <br></br>
                 <div className='create-review-rating'>
