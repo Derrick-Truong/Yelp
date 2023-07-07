@@ -1,4 +1,4 @@
- IceCreamFinder
+# IceCreamFinder
 
 Welcome to IceCreamFinder, a web application that allows users to discover and share their favorite ice cream shops. With IceCreamFinder, you can find delicious ice cream spots near you, leave reviews, and get directions to your favorite sweet treats.
 
