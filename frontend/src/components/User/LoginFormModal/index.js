@@ -49,13 +49,11 @@ function LoginFormModal() {
     const password = "password";
     const credential = "Bill@user.io";
 
-    try {
+  
       await dispatch(sessionActions.login({ credential, password }));
       closeModal();
       history.push('/');
-    } catch (error) {
-      console.log(error);
-    }
+
   };
 
     return (

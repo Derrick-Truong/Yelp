@@ -246,6 +246,7 @@ const Test1 = () => {
 
                         className="input"
                         type="number"
+                        min="0"
                         name='price'
                         placeholder="Price per cone"
                         value={price}
